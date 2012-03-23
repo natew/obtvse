@@ -5,6 +5,7 @@ gem 'sqlite3'
 gem 'rdiscount'
 gem 'stringex', :git => 'git://github.com/rsl/stringex.git'
 gem 'kaminari'
+gem 'capistrano'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
