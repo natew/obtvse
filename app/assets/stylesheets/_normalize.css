@@ -172,9 +172,9 @@ strong {
 }
 
 blockquote {
-    margin: 1em 0;
-    padding: 0 40px;
-    border-left: 4px solid lightblue;
+    margin: 1em;
+    padding: 0 30px;
+    border-left: 8px solid lightblue;
 }
 
 /*
