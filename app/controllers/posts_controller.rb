@@ -5,7 +5,7 @@ class PostsController < ApplicationController
   layout :choose_layout
 
   def index
-    @posts = Post.page(params[:page]).per(20)
+    @posts = Post.page(params[:page]).page(params[:page]).per(10)
     @posts = @posts.where(draft:false) if !session[:admin]
 
     respond_to do |format|
