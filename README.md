@@ -10,3 +10,9 @@ TODO
 - Make preview button work
 - Pagination
 - Kudos ;)
+
+SCREENSHOTS
+===========
+![Admin](http://i.imgur.com/OVr7q.png)
+![New](http://i.imgur.com/MTm2c.png)
+![Edit](http://i.imgur.com/VSR7M.png)
