@@ -16,7 +16,7 @@
     <div class="contain">
       <div class="left">
         <a href="/admin">&laquo; Admin</a>
-        <a href="/new">Preview</a>
+        <%= link_to 'Preview', @post, :target => '_blank' %>
         <%= f.label :aside %>
         <%= f.check_box :aside %>
       </div>
