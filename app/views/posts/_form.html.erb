@@ -1,0 +1,30 @@
+<%= form_for @post do |f| %>
+  <div class="contain">
+    <%- if @post.errors.any? -%>
+      <%- @post.errors.full_messages.each do |msg| -%>
+          <li><%= msg %></li>
+      <%- end -%>
+    <%- end -%>
+
+    <%= f.text_field :title, :placeholder => 'Title here' %>
+
+    <fieldset class="markdown">
+      <%= f.text_area :content, :placeholder => 'Write post here' %>
+    </fieldset>
+  </div>
+  <div id="publish-bar">
+    <div class="contain">
+      <div class="left">
+        <a href="/admin">&laquo; Admin</a>
+        <a href="/new">Preview</a>
+        <%= f.label :aside %>
+        <%= f.check_box :aside %>
+      </div>
+      <div class="right">
+        <%= f.label :draft %>
+        <%= f.check_box :draft %>
+        <%= f.submit 'Save' %>
+      </div>
+    </div>
+  </div>
+<% end %>
