@@ -323,3 +323,14 @@ header {
       color: #ccc;
       font-weight: normal;
     }
+
+  nav.pagination {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    font-size: 16px;
+    font-weight: 900;
+    text-transform: uppercase;
+    margin: 0;
+    padding: 0;
+  }
