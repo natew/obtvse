@@ -51,9 +51,6 @@ header {
 		display: block;
 		overflow: hidden;
 		margin: 53px 0 30px 0;
-		        border-radius: 100px;
-		   -moz-border-radius: 100px;
-		-webkit-border-radius: 100px;
 	}
 
 	header span {
@@ -77,12 +74,9 @@ header {
 		}
 
 		header li a {
-			padding: 8px 15px;
+			padding: 8px;
 			color: #888;
-			border: 2px solid #eee;
-			        border-radius: 25px;
-			   -moz-border-radius: 25px;
-			-webkit-border-radius: 25px;
+			border-bottom: 2px solid #eee;
 		}
 
 			header li a:hover {
@@ -101,7 +95,7 @@ header {
 		text-transform: uppercase;
 		font-weight: 900;
 		font-size: 12px;
-		border-bottom: 1px solid #ddd;
+		background: #eee;
 	}
 
 	#content {
