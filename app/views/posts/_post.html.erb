@@ -1,17 +1,17 @@
 <section id="post-<%= post.id %>">
-	<div class="post contain">
-		<h1<% if post.aside? %> class="aside"<% end %>><% if @post %><%= post.title %><% else %><%= link_to post.title, post %><% end %></h1>
-	  <% if post.content %><%= RDiscount.new(post.content).to_html.html_safe %><% end %>
+  <div class="post contain">
+    <h1<% if post.aside? %> class="aside"<% end %>><% if @post %><%= post.title %><% else %><%= link_to post.title, post %><% end %></h1>
+    <% if post.content %><%= RDiscount.new(post.content).to_html.html_safe %><% end %>
 
-	  <%- if is_admin? -%>
-		  <ul class="actions">
-		    <li><%= 'Not' if post.draft? %> Published</li>
-		    <li><%= link_to 'Show', post %></li>
-		    <li><%= link_to 'Edit', '/edit/' + post.id.to_s %></li>
-		    <li><%= link_to 'Destroy', post, :confirm => 'Are you sure?', :method => :delete %></li>
-		  </ul>
-		<%- end -%>
-	</div>
+    <%- if is_admin? -%>
+      <ul class="actions">
+        <li><%= 'Not' if post.draft? %> Published</li>
+        <li><%= link_to 'Show', post %></li>
+        <li><%= link_to 'Edit', '/edit/' + post.id.to_s %></li>
+        <li><%= link_to 'Destroy', post, :confirm => 'Are you sure?', :method => :delete %></li>
+      </ul>
+    <%- end -%>
+  </div>
 
-	<% if @show %><a class="button space-top" href="<%= CONFIG['url'] %>">Back to Blog</a><% end %>
+  <% if @show %><a class="button space-top" href="<%= CONFIG['url'] %>">Back to Blog</a><% end %>
 </section>

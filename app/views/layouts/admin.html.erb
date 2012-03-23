@@ -8,11 +8,11 @@
 </head>
 
 <body>
-	<div id="admin">
-		<% if notice %><span class="notice"><%= notice %></span><% end %>
-		<%= yield %>
-	</div>
+  <div id="admin">
+    <% if notice %><span class="notice"><%= notice %></span><% end %>
+    <%= yield %>
+  </div>
 
-	<%= javascript_include_tag 'application' %>
+  <%= javascript_include_tag 'application' %>
 </body>
 </html>
