@@ -5,9 +5,8 @@ class PostsController < ApplicationController
 	layout :choose_layout
 
 	def index
-		no_drafts = !session[:admin] ? true : false
 		@posts = Post.page(params[:page]).per(20)
-		@posts = @posts.where(draft:no_drafts) if no_drafts
+		@posts = @posts.where(draft:false) if !session[:admin]
 
 		respond_to do |format|
 			format.html
