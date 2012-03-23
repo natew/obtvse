@@ -12,6 +12,7 @@ body, textarea, input {
   font-family: 'Lato', Helvetica, sans-serif;
   line-height: 1.8em;
   font-size: 16px;
+  font-weight: 400;
 }
 
 h1,h2,h3,h4,h5 {
@@ -43,22 +44,9 @@ header {
   padding:   20px 40px;
 }
 
-  header .circle {
-    background: #000 url(/assets/obtuse.png) no-repeat center center;
-    width: 70px;
-    height: 70px;
-    text-indent: -3000em;
-    display: block;
-    overflow: hidden;
-    margin: 53px 0 30px 0;
-            border-radius: 100px;
-       -moz-border-radius: 100px;
-    -webkit-border-radius: 100px;
-  }
-
   header span {
     color: #888;
-    font-weight: 300;
+    font-weight: 500;
   }
 
     header span.powered-by {
@@ -73,16 +61,13 @@ header {
   }
 
     header li {
-      margin: 0 0 20px 0;
+      margin: 0 0 12px 0;
     }
 
     header li a {
-      padding: 8px 15px;
+      padding: 8px 0;
       color: #888;
-      border: 2px solid #eee;
-              border-radius: 25px;
-         -moz-border-radius: 25px;
-      -webkit-border-radius: 25px;
+      border-bottom: 2px solid #eee;
     }
 
       header li a:hover {
@@ -101,7 +86,7 @@ header {
     text-transform: uppercase;
     font-weight: 900;
     font-size: 12px;
-    border-bottom: 1px solid #ddd;
+    background: #eee;
   }
 
   #content {
@@ -205,6 +190,7 @@ header {
         #drafts h1 a:hover,
         .button:hover {
           background: red;
+          color: #fff;
         }
 
         .button.space-top {
@@ -330,4 +316,10 @@ header {
 
     .col ul li h3 a {
       border: none;
+    }
+
+    .delete {
+      float: right;
+      color: #ccc;
+      font-weight: normal;
     }
