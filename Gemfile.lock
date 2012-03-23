@@ -70,6 +70,7 @@ GEM
     net-ssh (2.3.0)
     net-ssh-gateway (1.1.0)
       net-ssh (>= 1.99.1)
+    pg (0.12.2)
     polyglot (0.3.3)
     rack (1.4.1)
     rack-cache (1.2)
@@ -124,6 +125,7 @@ DEPENDENCIES
   capistrano
   jquery-rails
   kaminari
+  pg
   rails (= 3.2.0)
   rdiscount
   sass-rails (~> 3.2.3)
