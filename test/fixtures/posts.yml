@@ -4,8 +4,14 @@
 # model remove the '{}' from the fixture names and add the columns immediately
 # below each fixture, per the syntax in the comments below
 #
-one: {}
-# column: value
-#
-two: {}
-#  column: value
+codename-obtvse:
+  title: "Codename: Obtvse"
+  slug: "codename-obtvse"
+  content: "Earlier today I was browsing Hacker News and was a bit let down by a post I ran across by recent HN front-pager"
+  draft: false
+
+a-modest-proposal:
+  title: "A Modest Proposal"
+  slug: "a-modest-proposal"
+  content: "...for Preventing the Children of Poor People From Being a Burden on Their Parents or Country, and for Making Them Beneficial to the Publick"
+  draft: true
