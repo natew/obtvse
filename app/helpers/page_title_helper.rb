@@ -13,6 +13,6 @@ module PageTitleHelper
   end
 
   def linked_title
-    link_to CONFIG['title'], CONFIG['url']
+    link_to CONFIG['title'], root_url
   end
 end
