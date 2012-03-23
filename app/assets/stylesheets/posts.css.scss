@@ -71,11 +71,11 @@ header {
 	}
 
 		header li {
-			margin: 0 0 20px 0;
+			margin: 0 0 12px 0;
 		}
 
 		header li a {
-			padding: 8px;
+			padding: 8px 0;
 			color: #888;
 			border-bottom: 2px solid #eee;
 		}
@@ -200,6 +200,7 @@ header {
 				#drafts h1 a:hover,
 				.button:hover {
 					background: red;
+                                        color: #fff;
 				}
 
 				.button.space-top {
