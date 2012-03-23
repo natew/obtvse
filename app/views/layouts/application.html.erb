@@ -25,7 +25,7 @@
 <body class="<%= controller_name %> <%= action_name %>">
 	<% unless @no_header %>
 	<header>
-		<h1><%= CONFIG['title'] %></h1>
+		<h1><%= link_to CONFIG['title'], CONFIG['url'] %></h1>
 		<ul>
 			<li><%= link_to '@' + CONFIG['twitter'], 'http://twitter.com/'+CONFIG['twitter'] %>
 			<li><%= link_to 'github', CONFIG['github'] %>
