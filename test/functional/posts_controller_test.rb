@@ -1,6 +1,23 @@
 require 'test_helper'
 
 class PostsControllerTest < ActionController::TestCase
+
+  # Redefine authenticate for this request.  Useful for stubbing
+  # out authentication behavior that you may not want to test.
+  def as_an_admin
+    def @controller.authenticate
+      session[:admin] = true
+    end
+  end
+  
+  def valid_post_attributes
+    {
+      slug: 'a-tale-of-two-cities',
+      title: 'A Tale of Two Cities',
+      content: 'It was the best of times',
+      draft: false
+    }
+  end
   
   def test_anyone_can_list_the_posts
     get :index
@@ -47,4 +64,41 @@ class PostsControllerTest < ActionController::TestCase
     assert_response :unauthorized
   end
   
+  def test_admin_can_get_the_admin_action
+    as_an_admin
+    get :admin
+    assert_response :ok
+  end
+  
+  def test_admin_can_new_a_post
+    as_an_admin
+    get :new
+    assert_response :ok
+  end
+  
+  def test_admin_can_create_a_post
+    as_an_admin
+    post :create, { post: valid_post_attributes }
+    assert_response :redirect
+  end
+  
+  def test_admin_can_edit_a_post
+    as_an_admin
+    post = posts('a-modest-proposal')
+    get :edit, id: post.id
+    assert_response :ok
+  end
+  
+  def test_admin_can_update_a_post
+    as_an_admin
+    put :update, { slug: 'a-modest-proposal', content: 'It is a melancholy object to those, who walk through this great town, or travel in the country' }
+    assert_response :redirect
+  end
+  
+  def test_admin_can_delete_a_post
+    as_an_admin
+    delete :destroy, slug: 'a-modest-proposal'
+    assert_response :found
+  end
+    
 end
