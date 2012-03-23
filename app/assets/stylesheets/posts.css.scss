@@ -56,6 +56,12 @@ header {
 		font-weight: 300;
 	}
 
+		header span.powered-by {
+			position: absolute;
+			bottom: 20px;
+			font-size: 11px;
+		}
+
 	header ul {
 		padding: 0;
 		margin: 50px 0;
