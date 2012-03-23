@@ -31,7 +31,6 @@ class PostsController < ApplicationController
 		@show = true
 		no_drafts = !session[:admin] ? true : false
 		@post = Post.find_by_slug(params[:slug])
-		@post = @post.where(draft:no_drafts) if no_drafts
 
 		respond_to do |format|
 			format.html
