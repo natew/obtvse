@@ -16,9 +16,11 @@
 		<span><%= CONFIG['tagline'] %></span>
 		<ul>
 			<li><%= link_to '@' + CONFIG['twitter'], 'http://twitter.com/'+CONFIG['twitter'] %>
-			<li><%= link_to 'say whats up', 'mailto:&#110;&#097;&#116;&#101;&#119;&#105;&#101;&#110;&#101;&#114;&#116;&#064;&#103;&#109;&#097;&#105;&#108;&#046;&#099;&#111;&#109;?subject:whats up!' %></li>
+			<li><%= link_to 'github', CONFIG['github'] %>
+			<li><%= link_to 'say hi', 'mailto:&#110;&#097;&#116;&#101;&#119;&#105;&#101;&#110;&#101;&#114;&#116;&#064;&#103;&#109;&#097;&#105;&#108;&#046;&#099;&#111;&#109;?subject:whats up!' %></li>
 			<li><%= link_to 'rss feed', '/posts.xml' %></li>
 		</ul>
+		<span class="powered-by">Powered by <a href="http://github.com/NateW/obtvse.git">Obtvse</a></span>
 	</header>
 	<% end %>
 
