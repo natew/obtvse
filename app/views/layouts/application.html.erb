@@ -11,8 +11,7 @@
 <body class="<%= controller_name %> <%= action_name %>">
   <% unless @no_header %>
   <header>
-    <%= link_to CONFIG['title'], root_url, :class => 'circle' %>
-    <h1><%= CONFIG['title'] %></h1>
+    <h1><%= CONFIG['title'], root_url %></h1>
     <span><%= CONFIG['tagline'] %></span>
     <ul>
       <li><%= link_to '@' + CONFIG['twitter'], 'http://twitter.com/'+CONFIG['twitter'] %>
