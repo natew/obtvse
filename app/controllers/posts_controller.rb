@@ -5,9 +5,8 @@ class PostsController < ApplicationController
 	layout :choose_layout
 
 	def index
-		no_drafts = !session[:admin] ? true : false
-		@posts = Post.page(params[:page]).per(20)
-		@posts = @posts.where(draft:no_drafts) if no_drafts
+		@posts = Post.page(params[:page]).per(10)
+		@posts = @posts.where(draft:false) if !session[:admin]
 
 		respond_to do |format|
 			format.html
@@ -29,13 +28,15 @@ class PostsController < ApplicationController
 
 	def show
 		@show = true
-		no_drafts = !session[:admin] ? true : false
-		@post = Post.find_by_slug(params[:slug])
-		@post = @post.where(draft:no_drafts) if no_drafts
+		@post = Post.find_by_slug_and_draft(params[:slug], false)
 
 		respond_to do |format|
-			format.html
-			format.xml { render :xml => @post }
+			if @post.present?
+				format.html
+				format.xml { render :xml => @post }
+			else
+				format.any { head status: :not_found  }
+			end
 		end
 	end
 
@@ -88,7 +89,7 @@ class PostsController < ApplicationController
 		@post.destroy
 
 		respond_to do |format|
-			format.html { redirect_to posts_url }
+			format.html { redirect_to '/admin' }
 			format.xml { head :ok }
 		end
 	end
