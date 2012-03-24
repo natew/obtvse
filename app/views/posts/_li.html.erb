@@ -1,1 +1,9 @@
-<li id="post-<%= li.id %>"><h3><%= link_to li.title, '/edit/' + li.id.to_s %><%= link_to 'x', li, :confirm => 'Are you sure?', :method => :delete, :class => 'delete' %></h3></li>
+<li id="post-<%= li.id %>">
+	<h3>
+		<%= link_to li.title, '/edit/' + li.id.to_s %>
+		<span class="links">
+			<%= link_to 'view', li, :class => 'admin-view' %>
+			<%= link_to 'x', li, :confirm => 'Are you sure?', :method => :delete, :class => 'admin-delete' %>
+		</span>
+	</h3>
+</li>
