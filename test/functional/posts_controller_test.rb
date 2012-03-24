@@ -21,11 +21,15 @@ class PostsControllerTest < ActionController::TestCase
   
   def test_anyone_can_list_the_posts
     get :index
+    published = posts('codename-obtvse')
+    assert assigns(:posts).include?(published), 'Posts should include published posts'
     assert_response :ok
   end
   
   def test_spies_cannot_spy_by_listing_drafts
     get :index
+    draft = posts('a-modest-proposal')
+    assert ! assigns(:posts).include?(draft), 'Posts should not include drafts'
     assert_response :ok
   end
   
