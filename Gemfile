@@ -19,4 +19,8 @@ group :production do
   gem 'pg'
 end
 
+group :test do
+  gem "sqlite3", :platform => [:ruby, :mswin, :mingw]
+end
+
 gem 'jquery-rails'
