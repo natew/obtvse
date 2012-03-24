@@ -4,5 +4,6 @@ tagline: Tagline!
 twitter: natebirdman
 github: http://github.com/natew
 email: your@email.com
+google_analytics_id: UA-XXXXXXXX-X
 login: username
 password: password
