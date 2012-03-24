@@ -11,7 +11,7 @@
 <body class="<%= controller_name %> <%= action_name %>">
   <% unless @no_header %>
   <header>
-    <%= link_to CONFIG['title'], CONFIG['url'], :class => 'circle' %>
+    <%= link_to CONFIG['title'], root_url, :class => 'circle' %>
     <h1><%= CONFIG['title'] %></h1>
     <span><%= CONFIG['tagline'] %></span>
     <ul>
