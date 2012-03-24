@@ -14,5 +14,4 @@
 /log/*.log
 /tmp
 
-deploy.rb
 database.yml
