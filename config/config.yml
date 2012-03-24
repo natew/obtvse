@@ -5,5 +5,6 @@ tagline: Tagline!
 twitter: comeatmebro
 github: http://github.com/natew
 email: your@email.com
+google_analytics_id: UA-XXXXXXXX-X
 login: username
 password: password
