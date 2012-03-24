@@ -12,7 +12,7 @@
 <body class="<%= controller_name %> <%= action_name %>">
   <% unless @no_header %>
   <header>
-    <h1><%= CONFIG['title'], root_url %></h1>
+    <h1><%= link_to CONFIG['title'], root_url %></h1>
     <span><%= CONFIG['tagline'] %></span>
     <ul>
       <li><%= link_to '@' + CONFIG['twitter'], 'http://twitter.com/'+CONFIG['twitter'] %>
@@ -27,7 +27,10 @@
   <div id="container">
     <% unless @no_header %>
       <% if is_admin? %>
-        <a class="admin-new" href="/new">New Post</a>
+        <ul class="admin-links">
+          <li><a href="/new">New Post</a></li>
+          <li><a href="/admin">Admin</a></li>
+        </ul>
       <% end %>
       <time><% if @post %>Posted <%= @post.created_at.to_formatted_s(:day_month_year) %><% else %><%= Time.now.to_formatted_s(:day_month_year) %><% end %></time>
     <% end %>
@@ -39,6 +42,7 @@
 
   <%= javascript_include_tag 'application' %>
 
+  <!-- Google Analytics -->
   <script>
     var _gaq=[['_setAccount','<%= CONFIG['google_analytics_id'] %>'],['_trackPageview']];
     (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
