@@ -10,20 +10,6 @@
 </head>
 
 <body class="<%= controller_name %> <%= action_name %>">
-<<<<<<< HEAD
-	<% unless @no_header %>
-	<header>
-		<h1><%= link_to CONFIG['title'], CONFIG['url'] %></h1>
-		<ul>
-			<li><%= link_to '@' + CONFIG['twitter'], 'http://twitter.com/'+CONFIG['twitter'] %>
-			<li><%= link_to 'github', CONFIG['github'] %>
-			<li><%= link_to 'say hi', "mailto:#{CONFIG['email']}?subject:whats up!" %></li>
-			<li><%= link_to 'rss feed', '/posts.rss' %></li>
-		</ul>
-		<span class="powered-by">Powered by <a href="http://github.com/natew/obtvse.git">Obtvse</a></span>
-	</header>
-	<% end %>
-=======
   <% unless @no_header %>
   <header>
     <h1><%= link_to CONFIG['title'], root_url %></h1>
@@ -37,7 +23,6 @@
     <span class="powered-by">Powered by <a href="http://github.com/natew/obtvse.git">Obtvse</a></span>
   </header>
   <% end %>
->>>>>>> 648e9a1a9c6dd4982ea0dd68aa205012dbe6541a
 
   <div id="container">
     <% unless @no_header %>
