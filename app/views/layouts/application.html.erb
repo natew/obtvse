@@ -4,40 +4,51 @@
   <title><%= html_title yield(:title) %></title>
   <%= csrf_meta_tag %>
   <%= stylesheet_link_tag 'application' %>
+  <meta name="author" content="<%= CONFIG['name'] %>">
   <link href="/posts.rss" rel="alternate" title="RSS" type="application/rss+xml" />
   <link href='http://fonts.googleapis.com/css?family=Lato:300,900' rel='stylesheet' type='text/css' />
 </head>
 
 <body class="<%= controller_name %> <%= action_name %>">
-	<% unless @no_header %>
-	<header>
-		<%= link_to CONFIG['title'], CONFIG['url'], :class => 'circle' %>
-		<h1><%= CONFIG['title'] %></h1>
-		<span><%= CONFIG['tagline'] %></span>
-		<ul>
-			<li><%= link_to '@' + CONFIG['twitter'], 'http://twitter.com/'+CONFIG['twitter'] %>
-			<li><%= link_to 'github', CONFIG['github'] %>
-			<li><%= link_to 'say hi', "mailto:#{CONFIG['email']}?subject:whats up!" %></li>
-			<li><%= link_to 'rss feed', '/posts.rss' %></li>
-		</ul>
-		<span class="powered-by">Powered by <a href="http://github.com/natew/obtvse.git">Obtvse</a></span>
-	</header>
-	<% end %>
+  <% unless @no_header %>
+  <header>
+    <h1><%= link_to CONFIG['title'], root_url %></h1>
+    <span><%= CONFIG['tagline'] %></span>
+    <ul>
+      <li><%= link_to '@' + CONFIG['twitter'], 'http://twitter.com/'+CONFIG['twitter'] %>
+      <li><%= link_to 'github', CONFIG['github'] %>
+      <li><%= link_to 'say hi', "mailto:#{CONFIG['email']}?subject:whats up!" %></li>
+      <li><%= link_to 'rss feed', '/posts.rss' %></li>
+    </ul>
+    <span class="powered-by">Powered by <a href="http://github.com/natew/obtvse.git">Obtvse</a></span>
+  </header>
+  <% end %>
 
-	<div id="container">
-		<% unless @no_header %>
-			<% if is_admin? %>
-				<a class="admin-new" href="/new">New Post</a>
-			<% end %>
-			<time><% if @post %>Posted <%= @post.created_at.to_formatted_s(:day_month_year) %><% else %><%= Time.now.to_formatted_s(:day_month_year) %><% end %></time>
-		<% end %>
-		<div id="content">
-			<% if notice %><span class="notice"><%= notice %></span><% end %>
-			<%= yield %>
-		</div>
-	</div>
+  <div id="container">
+    <% unless @no_header %>
+      <% if is_admin? %>
+        <ul class="admin-links">
+          <li><a href="/new">New Post</a></li>
+          <li><a href="/admin">Admin</a></li>
+        </ul>
+      <% end %>
+      <time><% if @post %>Posted <%= @post.created_at.to_formatted_s(:day_month_year) %><% else %><%= Time.now.to_formatted_s(:day_month_year) %><% end %></time>
+    <% end %>
+    <div id="content">
+      <% if notice %><span class="notice"><%= notice %></span><% end %>
+      <%= yield %>
+    </div>
+  </div>
 
-	<%= javascript_include_tag 'application' %>
+  <%= javascript_include_tag 'application' %>
+
+  <!-- Google Analytics -->
+  <script>
+    var _gaq=[['_setAccount','<%= CONFIG['google_analytics_id'] %>'],['_trackPageview']];
+    (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+    g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g,s)}(document,'script'));
+  </script>
 
 </body>
 </html>

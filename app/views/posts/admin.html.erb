@@ -1,16 +1,16 @@
 <div id="drafts" class="col">
-	<h1>Ideas <a href="/new">New Idea</a></h1>
-	<%= form_for @post do |f| %>
-    <%= f.text_field :title, :placeholder => 'Start typing an idea here...' %>
-	<% end %>
-	<ul>
-	<%= render :partial => 'li', :collection => @drafts %>
-	</ul>
+  <h1>Drafts <a href="/new">New Draft</a></h1>
+  <%= form_for @post do |f| %>
+    <%= f.text_field :title, :placeholder => 'Start typing your title here...' %>
+  <% end %>
+  <ul>
+  <%= render :partial => 'li', :collection => @drafts %>
+  </ul>
 </div>
 
 <div id="published" class="col">
-	<h2>Published</h2>
-	<ul>
-		<%= render :partial => 'li', :collection => @published %>
-	</ul>
+  <h2>Published <%= link_to 'Home', root_url %></h2>
+  <ul>
+    <%= render :partial => 'li', :collection => @published %>
+  </ul>
 </div>

@@ -1,5 +1,5 @@
 module PageTitleHelper
-	def html_title(content)
+  def html_title(content)
     if content.present?
       [content,CONFIG['title']].join(' - ')
     else
@@ -8,11 +8,11 @@ module PageTitleHelper
   end
 
   def page_title(content)
-		@title = content || CONFIG['title']
-		render 'shared/title'
+    @title = content || CONFIG['title']
+    render 'shared/title'
   end
 
   def linked_title
-  	link_to CONFIG['title'], CONFIG['url']
+    link_to CONFIG['title'], root_url
   end
 end
