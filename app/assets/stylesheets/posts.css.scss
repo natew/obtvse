@@ -1,7 +1,7 @@
 aside {position:relative; display:block;}
 ul {list-style-type:none;}
 .hide {visibility:hidden; height:1px; clip:rect(0 0 0 0); position:absolute;}
-input, textarea {outline:none;}
+input, textarea {outline:none; background:none;}
 
 body {
   background: #fff;
@@ -161,6 +161,7 @@ header {
     border: none;
     width: 100%;
     position: relative;
+    margin: 0 0 80px 0;
   }
 
   #publish-bar {
@@ -176,11 +177,13 @@ header {
 
     #publish-bar .contain {
       margin: 0 auto;
+      width: 700px;
     }
 
       #publish-bar input[type=submit],
       #publish-bar a,
-      #drafts h1 a,
+      .col h1 a,
+      .col h2 a,
       .button {
         display: inline-block;
         background: #000;
@@ -195,7 +198,8 @@ header {
 
         #publish-bar input[type=submit]:hover,
         #publish-bar a:hover,
-        #drafts h1 a:hover,
+        .col h1 a:hover,
+        .col h2 a:hover,
         .button:hover {
           background: red;
           color: #fff;
@@ -239,10 +243,12 @@ header {
     margin: 0 20px 0 0;
   }
 
-  .admin-new {
+  .admin-links {
     position: absolute;
-    top: 28px;
-    right: 30px;
+    text-align: right;
+    top: 20px;
+    right: 20px;
+    margin: 0;
   }
 
   .notice {
@@ -256,12 +262,15 @@ header {
   #admin {
     width: 808px;
     margin: 0 auto;
+    position: relative;
   }
 
     #admin #drafts {
       float: left;
       border: 4px solid #000;
       border-top: none;
+      background: #fff;
+      margin: 0 0 20px 0;
     }
 
       #drafts form {
@@ -278,11 +287,13 @@ header {
         border-bottom: 1px solid #ddd;
       }
 
-      #drafts h1 {
+      .col h1,
+      .col h2 {
         position: relative;
       }
 
-      #drafts h1 a {
+      .col h1 a,
+      .col h2 a {
         position: absolute;
         top: 0;
         right: 0;
@@ -295,7 +306,11 @@ header {
     }
 
       #published h2 {
-        color: #ccc;
+        color: #999;
+      }
+
+      .col h2 a {
+        background: #999;
       }
 
     .col {
@@ -315,21 +330,45 @@ header {
     .col ul li {
       border-bottom: 1px solid #ddd;
       padding: 15px 20px;
+      position: relative;
     }
 
     .col ul li h3 {
       margin: 0;
       font-size: 16px;
+      max-width: 100%;
+      text-overflow: ellipsis;
+      overflow: hidden;
     }
 
     .col ul li h3 a {
       border: none;
     }
 
-    .delete {
-      float: right;
-      color: #ccc;
-      font-weight: normal;
+    .col li:hover .links {
+      visibility: visible;
+    }
+
+    .col li .links {
+      position: absolute;
+      right: 0;
+      top: 14px;
+      background: #fff;
+      padding: 1px 8px;
+      visibility: hidden;
+    }
+
+      .col li .links a {
+                border-radius: 5px;
+           -moz-border-radius: 5px;
+        -webkit-border-radius: 5px;
+      }
+
+    .admin-view {
+      font-size: 11px;
+      margin: 0 10px 2px 0;
+      font-weight: 900;
+      text-transform: uppercase;
     }
 
   nav.pagination {
