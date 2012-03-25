@@ -1,7 +1,10 @@
 <section id="post-<%= post.id %>">
   <div class="post contain">
     <h1<% if post.aside? %> class="aside"<% end %>><% if @post %><%= post.title %><% else %><%= link_to post.title, post %><% end %></h1>
-    <% if post.content %><%= RDiscount.new(post.content).to_html.html_safe %><% end %>
+    <% if post.content %>
+    <div class="post-content">
+      <%= RDiscount.new(post.content).to_html.html_safe %><% end %>
+    </div>
 
     <%- if is_admin? -%>
       <ul class="actions">
