@@ -107,7 +107,7 @@ header li a {
 
 #content {
   section {
-    padding: 0 0 100px;
+    padding: 0;
     position: relative;
     line-height: .5em;
   }
@@ -115,6 +115,10 @@ header li a {
   h1.aside {
     font-size: 18px;
   }
+}
+
+.post-content {
+  margin-bottom: 100px;
 }
 
 .show #content section {
