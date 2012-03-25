@@ -19,7 +19,7 @@ test:
   timeout: 5000
 
 production:
-    adapter: postgres
+    adapter: postgresql
     encoding: utf8
     database: natewienert
     username: dbadmin
