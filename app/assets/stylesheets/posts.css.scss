@@ -191,8 +191,6 @@ fieldset.markdown {
 
 #publish-bar input[type=submit],
 #publish-bar a,
-.col h1 a,
-.col h2 a,
 .button {
   display: inline-block;
   background: #000;
@@ -205,11 +203,11 @@ fieldset.markdown {
   -webkit-border-radius: 5px;
 }
 
-  .button.secondary {
-    padding: 2px 5px;
-    background: #aaa;
-    font-size: 12px;
-  }
+.button.secondary {
+  padding: 0 5px;
+  background: #aaa;
+  font-size: 12px;
+}
 
 #publish-bar input[type=submit]:hover,
 #publish-bar a:hover,
@@ -289,6 +287,7 @@ label {
     border-top: none;
     background: #fff;
     margin: 0 0 20px 0;
+    padding-top: 10px;
 
     form {
        margin: 20px 0 20px -20px;
@@ -308,9 +307,8 @@ label {
   #published {
     float: right;
 
-    h2 {
-      color: #999;
-    }
+    h2 {color: #999;}
+    h2 a {margin-top: -2px;}
   }
 
   .col h1,
@@ -326,6 +324,8 @@ label {
     right: 0;
     font-size: 12px;
     padding: 2px 10px;
+    line-height: 2.7em;
+    margin: 5px 0 0;
   }
 
   .col {
@@ -345,7 +345,7 @@ label {
 
       li {
         border-bottom: 1px solid #ddd;
-        padding: 15px 20px;
+        padding: 15px;
         position: relative;
 
         &:hover .links {

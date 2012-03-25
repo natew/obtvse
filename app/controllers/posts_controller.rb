@@ -1,12 +1,12 @@
 require 'rdiscount'
 
 class PostsController < ApplicationController
-	before_filter :authenticate, except: [:index, :show]
+	before_filter :authenticate, :except => [:index, :show]
+	before_filter :check_admin, :only => [:index, :show]
 	layout :choose_layout
 
 	def index
-		@posts = Post.page(params[:page]).per(10)
-		@posts = @posts.where(draft:false) if !session[:admin]
+		@posts = Post.page(params[:page]).per(10).where(draft:false)
 
 		respond_to do |format|
 			format.html
@@ -95,6 +95,10 @@ class PostsController < ApplicationController
 	end
 
 	private
+
+	def check_admin
+		session[:admin] = true if authenticate
+	end
 
 	def choose_layout
 		if ['admin', 'new', 'edit'].include? action_name
