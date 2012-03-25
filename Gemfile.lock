@@ -70,9 +70,8 @@ GEM
     net-ssh (2.3.0)
     net-ssh-gateway (1.1.0)
       net-ssh (>= 1.99.1)
-    pg (0.12.2)
+    pg (0.13.2)
     polyglot (0.3.3)
-    postgres-pr (0.6.3)
     rack (1.4.1)
     rack-cache (1.2)
       rack (>= 0.4)
@@ -99,6 +98,8 @@ GEM
     rdiscount (1.6.8)
     rdoc (3.12)
       json (~> 1.4)
+    ruby-pg (0.8.0)
+      pg (~> 0)
     sass (3.1.15)
     sass-rails (3.2.5)
       railties (~> 3.2.0)
@@ -126,10 +127,9 @@ DEPENDENCIES
   capistrano
   jquery-rails
   kaminari
-  pg
-  postgres-pr
   rails (= 3.2.0)
   rdiscount
+  ruby-pg
   sass-rails (~> 3.2.3)
   sqlite3
   stringex!
