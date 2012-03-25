@@ -9,12 +9,28 @@ Username: username
 Password: password
 
 
+Installation
+============
+
+`git clone git://github.com/NateW/obtvse.git
+cd obtvse
+bundle install
+rake db:migrate
+mv config/config.yml.example config/config.yml
+rails s`
+
+Edit settings config/config.yml.  Be sure to set your username and password.
+
+Go to [0.0.0.0:3000](http://0.0.0.0:3000/)
+Go to [0.0.0.0:3000/admin](http://0.0.0.0:3000/admin)
+
+
 TODO
 ====
-- Preview drafts
-- Simple post save history
+- Easy deployment
+- Draft preview and post save history
 - Caching
-- Refactor
+- Architecture decisions ()
 
 
 SCREENSHOTS
