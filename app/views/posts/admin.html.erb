@@ -1,5 +1,5 @@
 <div id="drafts" class="col">
-  <h1>Drafts <a href="/new">New Draft</a></h1>
+  <h1>Drafts <%= link_to 'New Draft', '/new', :class => 'button' %></h1>
   <%= form_for @post do |f| %>
     <%= f.text_field :title, :placeholder => 'Start typing your title here...' %>
   <% end %>
@@ -9,7 +9,11 @@
 </div>
 
 <div id="published" class="col">
+<<<<<<< HEAD
   <h1>Published <%= link_to 'Home', root_url %></h1>
+=======
+  <h2>Published <%= link_to 'Home', root_url, :class => 'button' %></h2>
+>>>>>>> master
   <ul>
     <%= render :partial => 'li', :collection => @published %>
   </ul>
