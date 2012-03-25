@@ -9,7 +9,6 @@ input, textarea {outline:none; background:none;}
 body {
   background: #fff;
   color: #222;
-  padding: 40px 0;
 }
 
 body, textarea, pre, input {
@@ -60,7 +59,11 @@ a:hover {
 }
 
 header {
-  display: none;
+  width: 200px;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  padding: 20px 40px;
 
   span {
     color: #888;
@@ -86,7 +89,6 @@ header li {
 header li a {
   padding: 2px 0;
   color: #888;
-  border-bottom: 2px solid #eee;
 
   &:hover {
     border-color: #777;
@@ -95,19 +97,19 @@ header li a {
 }
 
 #container {
-  margin: 0 auto;
-  max-width: 600px;
-  padding: 15px;
+  margin-left: 250px;
   position: relative;
 
   time {
-    display: none;
+    padding: 50px 0 28px;
+    display: block;
   }
 }
 
 #content {
   section {
     padding: 0;
+    margin: 0 0 50px 0;
     position: relative;
     line-height: .5em;
   }
@@ -115,10 +117,6 @@ header li a {
   h1.aside {
     font-size: 18px;
   }
-}
-
-.post-content {
-  margin-bottom: 100px;
 }
 
 .show #content section {
@@ -135,7 +133,7 @@ code {
 
 .contain,
 #new_post, .edit_post {
-  width: 580px;
+  max-width: 580px;
 }
 
 .contain img {
@@ -155,7 +153,7 @@ fieldset.markdown {
   padding: 0;
 }
 
-.markdown::before {
+.markdown:before {
   display: block;
   content: "";
   width: 39px;
@@ -197,8 +195,6 @@ fieldset.markdown {
 
 #publish-bar input[type=submit],
 #publish-bar a,
-.col h1 a,
-.col h2 a,
 .button {
   display: inline-block;
   padding: 10px;
@@ -207,9 +203,9 @@ fieldset.markdown {
   text-decoration: none;
 }
 
-  .button.secondary {
-    color: #999;
-  }
+.button.secondary {
+  color: #999;
+}
 
 .button.space-top {
   margin-top: 100px;
@@ -278,6 +274,7 @@ label {
     border-top: none;
     background: #fff;
     margin: 0 0 20px 0;
+    padding-top: 10px;
 
     form {
        margin: 20px 0 20px -20px;
@@ -296,8 +293,9 @@ label {
 
   #published {
     float: right;
-    h1 {color: #999;}
-    h3 a {color: #999;}
+
+    h2 {color: #999;}
+    h2 a {margin-top: -2px;}
   }
 
   .col h1,
@@ -313,6 +311,8 @@ label {
     right: 0;
     font-size: 12px;
     padding: 2px 10px;
+    line-height: 2.7em;
+    margin: 5px 0 0;
   }
 
   .col {

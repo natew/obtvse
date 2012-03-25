@@ -6,6 +6,7 @@ gem 'stringex', :git => 'git://github.com/rsl/stringex.git'
 gem 'kaminari'
 gem 'pg'
 gem 'jquery-rails'
+gem 'dalli'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'

@@ -9,10 +9,7 @@
 
     <%- if is_admin? -%>
       <ul class="actions">
-        <li><%= 'Not' if post.draft? %> Published</li>
-        <li><%= link_to 'Show', post %></li>
         <li><%= link_to 'Edit', '/edit/' + post.id.to_s %></li>
-        <li><%= link_to 'Destroy', post, :confirm => 'Are you sure?', :method => :delete %></li>
       </ul>
     <%- end -%>
   </div>
