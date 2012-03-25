@@ -9,7 +9,7 @@ set :domain, "199.36.105.18"
 set :repository,  "ssh://nwienert@199.36.105.18/var/git/#{application}.git"
 set :deploy_to, "/var/www/#{application}.com/web"
 set :scm, :git
-set :branch, '1.1'
+set :branch, '1.2'
 set :scm_verbose, true
 set :rails_env, "production"
 set :keep_releases, 2
