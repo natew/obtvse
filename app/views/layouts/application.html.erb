@@ -15,8 +15,12 @@
     <h1><%= link_to CONFIG['title'], root_url %></h1>
     <span><%= CONFIG['tagline'].html_safe %></span>
     <ul>
-      <li><%= link_to '@' + CONFIG['twitter'], 'http://twitter.com/'+CONFIG['twitter'] %>
-      <li><%= link_to 'github', CONFIG['github'] %>
+      <% if CONFIG['twitter'] %>
+        <li><%= link_to '@' + CONFIG['twitter'], 'http://twitter.com/' + CONFIG['twitter'] %></li>
+      <% end %>
+      <% if CONFIG['github'] %>
+        <li><%= link_to 'github', CONFIG['github'] %></li>
+      <% end %>
       <li><%= link_to 'say hi', "mailto:#{CONFIG['email']}?subject:whats up!" %></li>
       <li><%= link_to 'rss feed', '/posts.rss' %></li>
     </ul>
@@ -43,13 +47,14 @@
 
   <%= javascript_include_tag 'application' %>
 
-  <!-- Google Analytics -->
-  <script>
-    var _gaq=[['_setAccount','<%= CONFIG['google_analytics_id'] %>'],['_trackPageview']];
-    (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
-    g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
-    s.parentNode.insertBefore(g,s)}(document,'script'));
-  </script>
-
+  <% if CONFIG['google_analytics_id'] %>
+    <!-- Google Analytics -->
+    <script>
+      var _gaq=[['_setAccount','<%= CONFIG['google_analytics_id'] %>'],['_trackPageview']];
+      (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+      g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+      s.parentNode.insertBefore(g,s)}(document,'script'));
+    </script>
+  <% end %>
 </body>
 </html>
