@@ -19,9 +19,9 @@ test:
   timeout: 5000
 
 production:
-    adapter: postgresql
+    adapter:
     encoding: utf8
-    database: natewienert
-    username: dbadmin
-    password: NoPostage6668
+    database:
+    username:
+    password:
     host: localhost
