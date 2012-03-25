@@ -19,8 +19,9 @@ Installation
     cd obtvse
     bundle install
     rake db:migrate
+    cp config/config.example.yml config/config.yml
 
-Edit settings config/config.yml.  Be sure to set your username and password.
+Edit `config/config.yml`.  Be sure to set your own admin username and password.
 
 
 Start the local server:
