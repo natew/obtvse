@@ -3,7 +3,9 @@ Codename: Obtvse
 Clean, simple blog.  Inspired by [Svbtle](http://svbtle.com).
 
 **Demo**
+
 http://obtvse.herokuapp.com
+
 http://obtvse.herokuapp.com/admin
 
 Username: username
