@@ -1,6 +1,6 @@
-Codename: Obtvse
+Obtvse
 ================
-Clean, simple blog.  Inspired by [Svbtle](http://svbtle.com).
+A clean and simple markdown blog.  Inspired by [Svbtle](http://svbtle.com).
 
 **[Demo](http://obtvse.herokuapp.com) | [Demo Admin](http://obtvse.herokuapp.com/admin)**
 
