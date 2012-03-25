@@ -2,13 +2,12 @@ Codename: Obtvse
 ================
 Clean, simple blog.  Inspired by [Svbtle](http://svbtle.com).
 
-**Demo**
-
-[Demo](http://obtvse.herokuapp.com) | [Demo Admin](http://obtvse.herokuapp.com/admin)
+**[Demo](http://obtvse.herokuapp.com) | [Demo Admin](http://obtvse.herokuapp.com/admin)**
 
 Username: username
 
 Password: password
+
 
 
 Installation
@@ -28,16 +27,16 @@ Start the local server:
 
     rails s
 
-Go to [0.0.0.0:3000](http://0.0.0.0:3000/)
-Go to [0.0.0.0:3000/admin](http://0.0.0.0:3000/admin)
+Go to [0.0.0.0:3000](http://0.0.0.0:3000/), to administrate you go to [/admin](http://0.0.0.0:3000/admin)
+
 
 
 TODO
 ====
 - Easy deployment
 - Draft preview and post save history
-- Caching
-- Refine!
+- Lots of refactoring, cleanup and refinements
+
 
 
 SCREENSHOTS
