@@ -4,6 +4,7 @@ gem 'rails', '3.2.0'
 gem 'rdiscount'
 gem 'stringex', :git => 'git://github.com/rsl/stringex.git'
 gem 'kaminari'
+gem 'dalli'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
