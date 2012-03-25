@@ -7,7 +7,6 @@ ul {list-style-type:none;}
 input, textarea {outline:none; background:none;}
 
 body {
-  display: none;
   background: #fff;
   color: #222;
   padding: 40px 0;
@@ -16,13 +15,14 @@ body {
 body, textarea, pre, input {
   font-family: 'Average', Georgia, sans-serif;
   line-height: 1.8em;
-  font-size: 16px;
-  font-weight: 400;
+  font-size: 14px;
 }
 
 h1,h2,h3,h4,h5 {
   word-wrap: break-word;
   font-weight: 300;
+  line-height: 1.7em;
+
 }
 
 h1 a,
@@ -44,13 +44,13 @@ h2 {font-size: 16px;}
 h3 {font-size: 14px;}
 
 p {
-  color: #555;
+  color: #444;
 }
 
 a,
 a:visited
 a:active {
-  color: #000;
+  color: #444;
 }
 
 a:hover {
@@ -70,25 +70,25 @@ header {
       font-size: 11px;
     }
   }
+}
 
-  ul {
-    padding: 0;
-    margin: 50px 0;
-  }
+header ul {
+  padding: 0;
+  margin: 50px 0;
+}
 
-  li {
-    margin: 0 0 3px 0;
+header li {
+  margin: 0 0 3px 0;
+}
 
-    a {
-      padding: 2px 0;
-      color: #888;
-      border-bottom: 2px solid #eee;
+header li a {
+  padding: 2px 0;
+  color: #888;
+  border-bottom: 2px solid #eee;
 
-      &:hover {
-        border-color: #777;
-        color: #444;
-      }
-    }
+  &:hover {
+    border-color: #777;
+    color: #444;
   }
 }
 
@@ -107,7 +107,7 @@ header {
   section {
     padding: 0 0 100px;
     position: relative;
-    line-height: 1.5em;
+    line-height: .5em;
   }
 
   h1.aside {
