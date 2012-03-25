@@ -20,6 +20,8 @@ body, textarea, pre, input {
 
 h1,h2,h3,h4,h5 {
   font-weight: 900;
+  word-wrap: break-word;
+  line-height: 1.3em;
 }
 
 h1,
@@ -101,7 +103,7 @@ header {
 
 #content {
   section {
-    padding: 38px 0 40px 50px;
+    padding: 26px 0 40px 50px;
     border-bottom: 1px solid #ddd;
     position: relative;
   }
@@ -203,11 +205,18 @@ fieldset.markdown {
   -webkit-border-radius: 5px;
 }
 
+  .button.secondary {
+    padding: 2px 5px;
+    background: #aaa;
+    font-size: 12px;
+  }
+
 #publish-bar input[type=submit]:hover,
 #publish-bar a:hover,
 .col h1 a:hover,
 .col h2 a:hover,
-.button:hover {
+.button:hover,
+.button.secondary:hover {
   background: $linkhover;
   color: #fff;
 }
@@ -253,9 +262,12 @@ label {
 .admin-links {
   position: absolute;
   text-align: right;
-  top: 20px;
+  top: 18px;
   right: 20px;
   margin: 0;
+
+  li {float: left; margin-left: 6px;}
+  a {float: left;}
 }
 
 .notice {
