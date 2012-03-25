@@ -1,9 +1,10 @@
-title: Title
-name: Full Name
-tagline: Tagline here
-twitter: twitterhandle
-github: http://github.com/
-email: your@email.com
-google_analytics_id: UA-XXXXXXXX-X
-login: username
-password: password
+---
+title:               Title of Your Blog
+tagline:             Clever tagline.
+login:               CHANGE_ME
+password:            CHANGE_ME_123
+name:                Your Name
+twitter:             your_twitter_handle
+github:              your_github_handle
+email:               address@example.com
+google_analytics_id: YOUR_GA_ID

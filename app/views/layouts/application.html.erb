@@ -24,19 +24,16 @@
       <li><%= link_to 'say hi', "mailto:#{CONFIG['email']}?subject:whats up!" %></li>
       <li><%= link_to 'rss feed', '/posts.rss' %></li>
     </ul>
-    <span class="powered-by">Powered by <a href="http://github.com/natew/obtvse.git">Obtvse</a><br />(With love from Durham, NC)</span>
+    <span class="powered-by">
+      Powered by <a href="http://github.com/natew/obtvse.git">Obtvse</a> &nbsp;&middot;&nbsp;
+      <% if is_admin? %><a href="/admin">Admin</a><% end %>
+  </span>
 
   </header>
   <% end %>
 
   <div id="container">
     <% unless @no_header %>
-      <% if is_admin? %>
-        <ul class="admin-links">
-          <li><a href="/new" class="button secondary">New Post</a></li>
-          <li><a href="/admin" class="button secondary">Admin</a></li>
-        </ul>
-      <% end %>
       <time><% if @post %>Posted <%= @post.created_at.to_formatted_s(:day_month_year) %><% else %><%= Time.now.to_formatted_s(:day_month_year) %><% end %></time>
     <% end %>
     <div id="content">
