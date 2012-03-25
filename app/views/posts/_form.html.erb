@@ -6,10 +6,16 @@
       <%- end -%>
     <%- end -%>
 
-    <%= f.text_field :title, :placeholder => 'Title here' %>
+    <div class="expandingArea text-title">
+      <pre><span></span><br></pre>
+      <%= f.text_area :title, :rows => 1, :placeholder => 'Title here' %>
+    </div>
 
     <fieldset class="markdown">
-      <%= f.text_area :content, :placeholder => 'Write post here' %>
+      <div class="expandingArea text-content">
+        <pre><span></span><br></pre>
+        <%= f.text_area :content, :placeholder => 'Write post here' %>
+      </div>
     </fieldset>
   </div>
   <div id="publish-bar">

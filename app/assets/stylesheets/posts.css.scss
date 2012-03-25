@@ -1,3 +1,6 @@
+$linkhover: red;
+
+
 aside {position:relative; display:block;}
 ul {list-style-type:none;}
 .hide {visibility:hidden; height:1px; clip:rect(0 0 0 0); position:absolute;}
@@ -8,7 +11,7 @@ body {
   color: #222;
 }
 
-body, textarea, input {
+body, textarea, pre, input {
   font-family: 'Lato', Helvetica, sans-serif;
   line-height: 1.8em;
   font-size: 16px;
@@ -17,6 +20,13 @@ body, textarea, input {
 
 h1,h2,h3,h4,h5 {
   font-weight: 900;
+}
+
+h1,
+.expandingArea.text-title pre,
+.expandingArea.text-title textarea {
+  font-weight: 900;
+  font-size: 35px;
 }
 
 p {
@@ -32,7 +42,7 @@ a:active {
 }
 
 a:hover {
-  color: red;
+  color: $linkhover;
 }
 
 header {
@@ -150,9 +160,7 @@ fieldset.markdown {
   width: 100%;
   border: none;
   background: none;
-  font-size: 35px;
   line-height: 45px;
-  font-weight: 900;
   margin: 0 0 20px 0;
 }
 
@@ -200,7 +208,7 @@ fieldset.markdown {
 .col h1 a:hover,
 .col h2 a:hover,
 .button:hover {
-  background: red;
+  background: $linkhover;
   color: #fff;
 }
 
@@ -314,6 +322,10 @@ label {
 
     h2 a {
       background: #999;
+
+      &:hover {
+        background: $linkhover;
+      }
     }
 
     ul {
@@ -337,9 +349,14 @@ label {
           visibility: hidden;
 
           a {
+            color: #999;
                     border-radius: 5px;
                -moz-border-radius: 5px;
             -webkit-border-radius: 5px;
+
+            &:hover {
+              color: $linkhover;
+            }
           }
         }
 
@@ -356,6 +373,59 @@ label {
         }
       }
     }
+  }
+
+  textarea,pre {
+    margin: 0;
+    padding: 0;
+    outline: 0;
+    border: 0;
+  }
+
+  .expandingArea {
+    position: relative;
+  }
+
+  .expandingArea > textarea,
+  .expandingArea > pre {
+    background: transparent;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+  }
+
+  .expandingArea > textarea {
+    /* The border-box box model is used to allow
+     * padding whilst still keeping the overall width
+     * at exactly that of the containing element.
+     */
+    -webkit-box-sizing: border-box;
+       -moz-box-sizing: border-box;
+        -ms-box-sizing: border-box;
+            box-sizing: border-box;
+    width: 100%;
+    /* This height is used when JS is disabled */
+    height: 100px;
+  }
+
+  .expandingArea.active > textarea {
+    /* Hide any scrollbars */
+    overflow: hidden;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    /* Remove WebKit user-resize widget */
+    resize: none;
+  }
+
+  .expandingArea > pre {
+    display: none;
+  }
+
+  .expandingArea.active > pre {
+    display: block;
+    /* Hide the text; just using it for sizing */
+    visibility: hidden;
   }
 }
 
