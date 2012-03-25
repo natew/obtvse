@@ -9,10 +9,10 @@ module PageTitleHelper
 
   def page_title(content)
     @title = content || CONFIG['title']
-    render 'shared/title'
+    render partial: 'title'
   end
 
   def linked_title
-    link_to CONFIG['title'], root_url
+    link_to CONFIG['title'], root_path
   end
 end
