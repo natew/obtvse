@@ -11,8 +11,10 @@ Password: password
 
 TODO
 ====
-- Make preview button work
-- Pagination
+- Preview drafts
+- Simple post save history
+- Caching
+- Refactor
 
 
 SCREENSHOTS
