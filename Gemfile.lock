@@ -72,6 +72,7 @@ GEM
       net-ssh (>= 1.99.1)
     pg (0.12.2)
     polyglot (0.3.3)
+    postgres-pr (0.6.3)
     rack (1.4.1)
     rack-cache (1.2)
       rack (>= 0.4)
@@ -126,6 +127,7 @@ DEPENDENCIES
   jquery-rails
   kaminari
   pg
+  postgres-pr
   rails (= 3.2.0)
   rdiscount
   sass-rails (~> 3.2.3)
