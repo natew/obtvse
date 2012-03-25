@@ -28,8 +28,8 @@
     <% unless @no_header %>
       <% if is_admin? %>
         <ul class="admin-links">
-          <li><a href="/new">New Post</a></li>
-          <li><a href="/admin">Admin</a></li>
+          <li><a href="/new" class="button secondary">New Post</a></li>
+          <li><a href="/admin" class="button secondary">Admin</a></li>
         </ul>
       <% end %>
       <time><% if @post %>Posted <%= @post.created_at.to_formatted_s(:day_month_year) %><% else %><%= Time.now.to_formatted_s(:day_month_year) %><% end %></time>

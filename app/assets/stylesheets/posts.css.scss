@@ -1,3 +1,6 @@
+$linkhover: red;
+
+
 aside {position:relative; display:block;}
 ul {list-style-type:none;}
 .hide {visibility:hidden; height:1px; clip:rect(0 0 0 0); position:absolute;}
@@ -8,7 +11,7 @@ body {
   color: #222;
 }
 
-body, textarea, input {
+body, textarea, pre, input {
   font-family: 'Lato', Helvetica, sans-serif;
   line-height: 1.8em;
   font-size: 16px;
@@ -17,6 +20,15 @@ body, textarea, input {
 
 h1,h2,h3,h4,h5 {
   font-weight: 900;
+  word-wrap: break-word;
+  line-height: 1.3em;
+}
+
+h1,
+.expandingArea.text-title pre,
+.expandingArea.text-title textarea {
+  font-weight: 900;
+  font-size: 35px;
 }
 
 p {
@@ -32,7 +44,7 @@ a:active {
 }
 
 a:hover {
-  color: red;
+  color: $linkhover;
 }
 
 header {
@@ -41,343 +53,408 @@ header {
   position: fixed;
   top: 0;
   bottom: 0;
-  padding:   20px 40px;
-}
+  padding: 20px 40px;
 
-  header span {
+  span {
     color: #888;
     font-weight: 500;
-  }
 
-    header span.powered-by {
+    &.powered-by {
       position: absolute;
       bottom: 20px;
       font-size: 11px;
     }
+  }
 
-  header ul {
+  ul {
     padding: 0;
     margin: 50px 0;
   }
 
-    header li {
-      margin: 0 0 12px 0;
-    }
+  li {
+    margin: 0 0 3px 0;
 
-    header li a {
-      padding: 8px 0;
+    a {
+      padding: 2px 0;
       color: #888;
       border-bottom: 2px solid #eee;
-    }
 
-      header li a:hover {
+      &:hover {
         border-color: #777;
         color: #444;
       }
+    }
+  }
+}
 
 #container {
   margin-left: 240px;
   position: relative;
+
+  time {
+    display: block;
+    padding: 20px 0 20px 50px;
+    text-transform: uppercase;
+    font-weight: 900;
+    font-size: 12px;
+    border-bottom: 1px solid #ddd;
+  }
 }
 
-  #container time {
-    display: block;
-    padding: 40px 0 40px 50px;
-    text-transform: uppercase;
-    font-weight: 900;
-    font-size: 12px;
-    background: #eee;
-  }
-
-  #content {
-  }
-
-    #content section {
-      padding: 38px 0 40px 50px;
-      border-bottom: 1px solid #ddd;
-      position: relative;
-    }
-
-      .show #content section {
-        border-bottom: none;
-      }
-
-      code {
-      	font-size: 13px;
-      	background: #F2F2F2;
-      	padding: 20px;
-      	margin: 20px;
-      	display: block;
-      }
-
-    h1.aside {
-      font-size: 18px;
-    }
-
-    .contain,
-    #new_post, .edit_post {
-      width: 580px;
-    }
-
-    .contain img {
-      max-width: 100%;
-      height: auto;
-    }
-
-  #new_post, .edit_post {
-    padding: 40px 0;
-    margin: 0 auto;
-  }
-
-  fieldset.markdown {
+#content {
+  section {
+    padding: 26px 0 40px 50px;
+    border-bottom: 1px solid #ddd;
     position: relative;
-    border: none;
-    margin: 0;
-    padding: 0;
   }
 
-    .markdown::before {
-      display: block;
-      content: "";
-      width: 39px;
-      height: 24px;
-      position: absolute;
-      top: 4px;
-      left: -60px;
-      background: url(/assets/markdown.png) no-repeat top left;
-    }
+  h1.aside {
+    font-size: 18px;
+  }
+}
 
-  #post_title {
-    width: 100%;
-    border: none;
-    background: none;
-    font-size: 35px;
-    line-height: 45px;
-    font-weight: 900;
+.show #content section {
+  border-bottom: none;
+}
+
+code {
+	font-size: 13px;
+	background: #F2F2F2;
+	padding: 20px;
+	margin: 20px;
+	display: block;
+}
+
+.contain,
+#new_post, .edit_post {
+  width: 580px;
+}
+
+.contain img {
+  max-width: 100%;
+  height: auto;
+}
+
+#new_post, .edit_post {
+  padding: 40px 0;
+  margin: 0 auto;
+}
+
+fieldset.markdown {
+  position: relative;
+  border: none;
+  margin: 0;
+  padding: 0;
+}
+
+.markdown::before {
+  display: block;
+  content: "";
+  width: 39px;
+  height: 24px;
+  position: absolute;
+  top: 4px;
+  left: -60px;
+  background: url(/assets/markdown.png) no-repeat top left;
+}
+
+#post_title {
+  width: 100%;
+  border: none;
+  background: none;
+  line-height: 45px;
+  margin: 0 0 20px 0;
+}
+
+#post_content {
+  border: none;
+  width: 100%;
+  position: relative;
+  margin: 0 0 80px 0;
+}
+
+#publish-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  background: #222;
+  color: #fff;
+  width: 100%;
+  text-align: center;
+  padding: 20px 0;
+
+  .contain {
+    margin: 0 auto;
+    width: 700px;
+  }
+}
+
+#publish-bar input[type=submit],
+#publish-bar a,
+.col h1 a,
+.col h2 a,
+.button {
+  display: inline-block;
+  background: #000;
+  padding: 10px;
+  font-weight: bold;
+  border: none;
+  color: #fff;
+          border-radius: 5px;
+     -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+}
+
+  .button.secondary {
+    padding: 2px 5px;
+    background: #aaa;
+    font-size: 12px;
+  }
+
+#publish-bar input[type=submit]:hover,
+#publish-bar a:hover,
+.col h1 a:hover,
+.col h2 a:hover,
+.button:hover,
+.button.secondary:hover {
+  background: $linkhover;
+  color: #fff;
+}
+
+.button.space-top {
+  margin-top: 100px;
+}
+
+.left {
+  float: left;
+}
+
+.right {
+  float: right;
+}
+
+.actions {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 12px;
+  margin: 0;
+  padding: 0;
+}
+
+.actions li {
+  display: inline-block;
+  margin: 0 10px 0 0;
+}
+
+label {
+  font-size: 20px;
+  color: #fff;
+  font-weight: bold;
+  margin: 0 4px 0 15px;
+}
+
+#post_draft {
+  position: relative;
+  margin: 0 20px 0 0;
+}
+
+.admin-links {
+  position: absolute;
+  text-align: right;
+  top: 18px;
+  right: 20px;
+  margin: 0;
+
+  li {float: left; margin-left: 6px;}
+  a {float: left;}
+}
+
+.notice {
+  background: lightYellow;
+  width: 100%;
+  display: block;
+  text-align: center;
+  padding: 6px 0;
+}
+
+#admin {
+  width: 808px;
+  margin: 0 auto;
+  position: relative;
+
+  #drafts {
+    float: left;
+    border: 4px solid #000;
+    border-top: none;
+    background: #fff;
     margin: 0 0 20px 0;
-  }
 
-  #post_content {
-    border: none;
-    width: 100%;
-    position: relative;
-    margin: 0 0 80px 0;
-  }
+    form {
+       margin: 20px 0 20px -20px;
+       padding: 0 0 0 20px;
+       border-left: 4px solid lightblue;
+     }
 
-  #publish-bar {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    background: #222;
-    color: #fff;
-    width: 100%;
-    text-align: center;
-    padding: 20px 0;
-  }
-
-    #publish-bar .contain {
-      margin: 0 auto;
-      width: 700px;
-    }
-
-      #publish-bar input[type=submit],
-      #publish-bar a,
-      .col h1 a,
-      .col h2 a,
-      .button {
-        display: inline-block;
-        background: #000;
-        padding: 10px;
-        font-weight: bold;
-        border: none;
-        color: #fff;
-                border-radius: 5px;
-           -moz-border-radius: 5px;
-        -webkit-border-radius: 5px;
-      }
-
-        #publish-bar input[type=submit]:hover,
-        #publish-bar a:hover,
-        .col h1 a:hover,
-        .col h2 a:hover,
-        .button:hover {
-          background: red;
-          color: #fff;
-        }
-
-        .button.space-top {
-          margin-top: 100px;
-        }
-
-      .left {
-        float: left;
-      }
-
-      .right {
-        float: right;
-      }
-
-  .actions {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    font-size: 12px;
-    margin: 0;
-    padding: 0;
-  }
-
-  .actions li {
-    display: inline-block;
-    margin: 0 10px 0 0;
-  }
-
-  label {
-    font-size: 20px;
-    color: #fff;
-    font-weight: bold;
-    margin: 0 4px 0 15px;
-  }
-
-  #post_draft {
-    position: relative;
-    margin: 0 20px 0 0;
-  }
-
-  .admin-links {
-    position: absolute;
-    text-align: right;
-    top: 20px;
-    right: 20px;
-    margin: 0;
-  }
-
-  .notice {
-    background: lightYellow;
-    width: 100%;
-    display: block;
-    text-align: center;
-    padding: 6px 0;
-  }
-
-  #admin {
-    width: 808px;
-    margin: 0 auto;
-    position: relative;
-  }
-
-    #admin #drafts {
-      float: left;
-      border: 4px solid #000;
-      border-top: none;
-      background: #fff;
-      margin: 0 0 20px 0;
-    }
-
-      #drafts form {
-        margin: 20px 0 20px -20px;
-        padding: 0 0 0 20px;
-        border-left: 4px solid lightblue;
-      }
-
-      #drafts #post_title {
-        width: 350px;
-        font-size: 16px;
-        font-weight: 400;
-        margin: 0;
-        border-bottom: 1px solid #ddd;
-      }
-
-      .col h1,
-      .col h2 {
-        position: relative;
-      }
-
-      .col h1 a,
-      .col h2 a {
-        position: absolute;
-        top: 0;
-        right: 0;
-        font-size: 12px;
-        padding: 2px 10px;
-      }
-
-    #admin #published {
-      float: right;
-    }
-
-      #published h2 {
-        color: #999;
-      }
-
-      .col h2 a {
-        background: #999;
-      }
-
-    .col {
-      width: 360px;
-      padding: 20px;
-    }
-
-    .col h1,
-    .col h2 {
-      text-transform: uppercase;
-    }
-
-    .col ul {
-      padding: 0;
-    }
-
-    .col ul li {
-      border-bottom: 1px solid #ddd;
-      padding: 15px 20px;
-      position: relative;
-    }
-
-    .col ul li h3 {
-      margin: 0;
+    #post_title {
+      width: 350px;
       font-size: 16px;
-      max-width: 100%;
-      text-overflow: ellipsis;
-      overflow: hidden;
+      font-weight: 400;
+      margin: 0;
+      border-bottom: 1px solid #ddd;
     }
+  }
 
-    .col ul li h3 a {
-      border: none;
+  #published {
+    float: right;
+
+    h2 {
+      color: #999;
     }
+  }
 
-    .col li:hover .links {
-      visibility: visible;
-    }
-
-    .col li .links {
-      position: absolute;
-      right: 0;
-      top: 14px;
-      background: #fff;
-      padding: 1px 8px;
-      visibility: hidden;
-    }
-
-      .col li .links a {
-                border-radius: 5px;
-           -moz-border-radius: 5px;
-        -webkit-border-radius: 5px;
-      }
-
-    .admin-view {
-      font-size: 11px;
-      margin: 0 10px 2px 0;
-      font-weight: 900;
-      text-transform: uppercase;
-    }
-
-  nav.pagination {
-    position: absolute;
-    bottom: 20px;
-    right: 20px;
-    font-size: 16px;
-    font-weight: 900;
+  .col h1,
+  .col h2 {
+    position: relative;
     text-transform: uppercase;
+  }
+
+  .col h1 a,
+  .col h2 a {
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-size: 12px;
+    padding: 2px 10px;
+  }
+
+  .col {
+    width: 360px;
+    padding: 20px;
+
+    h2 a {
+      background: #999;
+
+      &:hover {
+        background: $linkhover;
+      }
+    }
+
+    ul {
+      padding: 0;
+
+      li {
+        border-bottom: 1px solid #ddd;
+        padding: 15px 20px;
+        position: relative;
+
+        &:hover .links {
+          visibility: visible;
+        }
+
+        .links {
+          position: absolute;
+          right: 0;
+          top: 14px;
+          background: #fff;
+          padding: 1px 8px;
+          visibility: hidden;
+
+          a {
+            color: #999;
+                    border-radius: 5px;
+               -moz-border-radius: 5px;
+            -webkit-border-radius: 5px;
+
+            &:hover {
+              color: $linkhover;
+            }
+          }
+        }
+
+        h3 {
+          margin: 0;
+          font-size: 16px;
+          max-width: 100%;
+          text-overflow: ellipsis;
+          overflow: hidden;
+
+          a {
+            border: none;
+          }
+        }
+      }
+    }
+  }
+
+  textarea,pre {
     margin: 0;
     padding: 0;
+    outline: 0;
+    border: 0;
   }
+
+  .expandingArea {
+    position: relative;
+  }
+
+  .expandingArea > textarea,
+  .expandingArea > pre {
+    background: transparent;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+  }
+
+  .expandingArea > textarea {
+    /* The border-box box model is used to allow
+     * padding whilst still keeping the overall width
+     * at exactly that of the containing element.
+     */
+    -webkit-box-sizing: border-box;
+       -moz-box-sizing: border-box;
+        -ms-box-sizing: border-box;
+            box-sizing: border-box;
+    width: 100%;
+    /* This height is used when JS is disabled */
+    height: 100px;
+  }
+
+  .expandingArea.active > textarea {
+    /* Hide any scrollbars */
+    overflow: hidden;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    /* Remove WebKit user-resize widget */
+    resize: none;
+  }
+
+  .expandingArea > pre {
+    display: none;
+  }
+
+  .expandingArea.active > pre {
+    display: block;
+    /* Hide the text; just using it for sizing */
+    visibility: hidden;
+  }
+}
+
+.admin-view {
+  font-size: 11px;
+  margin: 0 10px 2px 0;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+nav.pagination {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  font-size: 16px;
+  font-weight: 900;
+  text-transform: uppercase;
+  margin: 0;
+  padding: 0;
+}
