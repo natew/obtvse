@@ -4,11 +4,10 @@ Clean, simple blog.  Inspired by [Svbtle](http://svbtle.com).
 
 **Demo**
 
-http://obtvse.herokuapp.com
-
-http://obtvse.herokuapp.com/admin
+[Demo](http://obtvse.herokuapp.com) | [Demo Admin](http://obtvse.herokuapp.com/admin)
 
 Username: username
+
 Password: password
 
 
@@ -21,7 +20,6 @@ If you are new to Rails development, check out guides for getting your developme
     cd obtvse
     bundle install
     rake db:migrate
-    cp config/config.example.yml config/config.yml
 
 Edit `config/config.yml`.  Be sure to set your own admin username and password.
 
