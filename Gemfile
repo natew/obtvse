@@ -16,8 +16,7 @@ group :development do
 end
 
 group :production do
-	gem 'postgres-pr'
-  gem 'pg'
+  gem 'ruby-pg'
 end
 
 group :test do
