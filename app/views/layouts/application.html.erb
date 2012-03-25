@@ -13,14 +13,15 @@
   <% unless @no_header %>
   <header>
     <h1><%= link_to CONFIG['title'], root_url %></h1>
-    <span><%= CONFIG['tagline'] %></span>
+    <span><%= CONFIG['tagline'].html_safe %></span>
     <ul>
       <li><%= link_to '@' + CONFIG['twitter'], 'http://twitter.com/'+CONFIG['twitter'] %>
       <li><%= link_to 'github', CONFIG['github'] %>
       <li><%= link_to 'say hi', "mailto:#{CONFIG['email']}?subject:whats up!" %></li>
       <li><%= link_to 'rss feed', '/posts.rss' %></li>
     </ul>
-    <span class="powered-by">Powered by <a href="http://github.com/natew/obtvse.git">Obtvse</a></span>
+    <span class="powered-by">Powered by <a href="http://github.com/natew/obtvse.git">Obtvse</a><br />(With love from Durham, NC)</span>
+
   </header>
   <% end %>
 
