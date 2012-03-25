@@ -20,7 +20,7 @@ body, textarea, pre, input {
 
 h1,h2,h3,h4,h5 {
   word-wrap: break-word;
-  font-weight: 300;
+  font-weight: bold;
   line-height: 1.7em;
 
 }
@@ -37,7 +37,7 @@ h1,
 .expandingArea.text-title pre,
 .expandingArea.text-title textarea {
   font-weight: 900;
-  font-size: 16px;
+  font-size: 18px;
 }
 
 h2 {font-size: 16px;}
@@ -45,6 +45,8 @@ h3 {font-size: 14px;}
 
 p {
   color: #444;
+  line-height: 1.4em;
+  margin: 1em 0;
 }
 
 a,
