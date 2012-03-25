@@ -13,11 +13,6 @@ TODO
 ====
 - Make preview button work
 - Pagination
-<<<<<<< HEAD
-- Kudos ;)
-=======
-
->>>>>>> 648e9a1a9c6dd4982ea0dd68aa205012dbe6541a
 
 SCREENSHOTS
 ===========
