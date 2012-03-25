@@ -15,11 +15,13 @@ Installation
 `git clone git://github.com/NateW/obtvse.git
 cd obtvse
 bundle install
-rake db:migrate
-mv config/config.yml.example config/config.yml
-rails s`
+rake db:migrate`
 
 Edit settings config/config.yml.  Be sure to set your username and password.
+
+To start the local server:
+
+`rails s`
 
 Go to [0.0.0.0:3000](http://0.0.0.0:3000/)
 Go to [0.0.0.0:3000/admin](http://0.0.0.0:3000/admin)
