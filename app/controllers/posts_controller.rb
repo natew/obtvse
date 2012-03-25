@@ -27,7 +27,11 @@ class PostsController < ApplicationController
 
 	def show
 		@show = true
-		@post = Post.find_by_slug_and_draft(params[:slug], false)
+		if session[:admin] == true
+			@post = Post.find_by_slug(params[:slug])
+		else
+			@post = Post.find_by_slug_and_draft(params[:slug], false)
+		end
 
 		respond_to do |format|
 			if @post.present?
