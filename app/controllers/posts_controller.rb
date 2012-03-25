@@ -1,11 +1,11 @@
 require 'rdiscount'
 
 class PostsController < ApplicationController
-	before_filter :authenticate, except: [:index, :show]
+	before_filter :authenticate, :except => [:index, :show]
 	layout :choose_layout
 
 	def index
-		@posts = Post.where(draft:false).page(params[:page]).per(10)
+		@posts = Post.page(params[:page]).per(10).where(draft:false)
 
 		respond_to do |format|
 			format.html

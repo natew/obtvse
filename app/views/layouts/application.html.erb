@@ -13,25 +13,29 @@
   <% unless @no_header %>
   <header>
     <h1><%= link_to CONFIG['title'], root_url %></h1>
-    <span><%= CONFIG['tagline'] %></span>
+    <% if CONFIG['tagline'] %>
+      <span><%= CONFIG['tagline'].html_safe %></span>
+    <% end %>
     <ul>
-      <li><%= link_to '@' + CONFIG['twitter'], 'http://twitter.com/'+CONFIG['twitter'] %>
-      <li><%= link_to 'github', CONFIG['github'] %>
+      <% if CONFIG['twitter'] %>
+        <li><%= link_to '@' + CONFIG['twitter'], 'http://twitter.com/' + CONFIG['twitter'] %></li>
+      <% end %>
+      <% if CONFIG['github'] %>
+        <li><%= link_to 'github', CONFIG['github'] %></li>
+      <% end %>
       <li><%= link_to 'say hi', "mailto:#{CONFIG['email']}?subject:whats up!" %></li>
       <li><%= link_to 'rss feed', '/posts.rss' %></li>
     </ul>
-    <span class="powered-by">Powered by <a href="http://github.com/natew/obtvse.git">Obtvse</a></span>
+    <span class="powered-by">
+      Powered by <a href="http://github.com/natew/obtvse.git">Obtvse</a>
+      <% if is_admin? %> &nbsp;&middot;&nbsp; <a href="/admin">Admin</a><% end %>
+  </span>
+
   </header>
   <% end %>
 
   <div id="container">
     <% unless @no_header %>
-      <% if is_admin? %>
-        <ul class="admin-links">
-          <li><a href="/new" class="button secondary">New Post</a></li>
-          <li><a href="/admin" class="button secondary">Admin</a></li>
-        </ul>
-      <% end %>
       <time><% if @post %>Posted <%= @post.created_at.to_formatted_s(:day_month_year) %><% else %><%= Time.now.to_formatted_s(:day_month_year) %><% end %></time>
     <% end %>
     <div id="content">
@@ -42,13 +46,14 @@
 
   <%= javascript_include_tag 'application' %>
 
-  <!-- Google Analytics -->
-  <script>
-    var _gaq=[['_setAccount','<%= CONFIG['google_analytics_id'] %>'],['_trackPageview']];
-    (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
-    g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
-    s.parentNode.insertBefore(g,s)}(document,'script'));
-  </script>
-
+  <% if CONFIG['google_analytics_id'] %>
+    <!-- Google Analytics -->
+    <script>
+      var _gaq=[['_setAccount','<%= CONFIG['google_analytics_id'] %>'],['_trackPageview']];
+      (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+      g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+      s.parentNode.insertBefore(g,s)}(document,'script'));
+    </script>
+  <% end %>
 </body>
 </html>
