@@ -98,8 +98,6 @@ GEM
     rdiscount (1.6.8)
     rdoc (3.12)
       json (~> 1.4)
-    ruby-pg (0.8.0)
-      pg (~> 0)
     sass (3.1.15)
     sass-rails (3.2.5)
       railties (~> 3.2.0)
@@ -127,9 +125,9 @@ DEPENDENCIES
   capistrano
   jquery-rails
   kaminari
+  pg
   rails (= 3.2.0)
   rdiscount
-  ruby-pg
   sass-rails (~> 3.2.3)
   sqlite3
   stringex!
