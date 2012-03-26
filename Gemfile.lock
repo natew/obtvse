@@ -1,5 +1,5 @@
 GIT
-  remote: git://github.com/rsl/stringex.git
+  remote: https://github.com/rsl/stringex.git
   revision: cdac489cb78de158dd52cfbfa388a3c9c3069e4e
   specs:
     stringex (1.3.2)

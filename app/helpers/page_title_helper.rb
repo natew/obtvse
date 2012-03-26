@@ -9,7 +9,7 @@ module PageTitleHelper
 
   def page_title(content)
     @title = content || CONFIG['title']
-    render partial: 'title'
+    render :partial => 'title'
   end
 
   def linked_title
