@@ -5,7 +5,7 @@ class PostsController < ApplicationController
 	layout :choose_layout
 
 	def index
-		@posts = Post.page(params[:page]).per(10).where(draft:false)
+		@posts = Post.page(params[:page]).per(10).where(:draft => false)
 
 		respond_to do |format|
 			format.html
@@ -17,8 +17,8 @@ class PostsController < ApplicationController
 	def admin
 		@no_header = true
 		@post = Post.new
-		@published = Post.where(draft:false).page(params[:page]).per(20)
-		@drafts = Post.where(draft:true).page(params[:page_draft]).per(20)
+		@published = Post.where(:draft => false).page(params[:page]).per(20)
+		@drafts = Post.where(:draft => true).page(params[:page_draft]).per(20)
 
 		respond_to do |format|
 			format.html
@@ -34,7 +34,7 @@ class PostsController < ApplicationController
 				format.html
 				format.xml { render :xml => @post }
 			else
-				format.any { head status: :not_found  }
+				format.any { head :status => :not_found  }
 			end
 		end
 	end
@@ -46,7 +46,7 @@ class PostsController < ApplicationController
 
 		respond_to do |format|
 			format.html
-			format.xml { render xml: @post }
+			format.xml { render :xml => @post }
 		end
 	end
 
@@ -61,7 +61,7 @@ class PostsController < ApplicationController
 		respond_to do |format|
 			if @post.save
 				format.html { redirect_to "/edit/#{@post.id}", :notice => "Post created successfully" }
-				format.xml { render :xml => @post, :status => :created, location: @post }
+				format.xml { render :xml => @post, :status => :created, :location => @post }
 			else
 				format.html { render :action => 'new' }
 				format.xml { render :xml => @post.errors, :status => :unprocessable_entity}
