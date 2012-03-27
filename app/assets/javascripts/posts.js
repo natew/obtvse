@@ -42,6 +42,15 @@ $(function() {
 	    form.target = '_self';
 		}
 
+		// Options menu
+		$('.menu').toggle(function(){
+			$(this).addClass('active');
+			$($(this).attr('href')).addClass('visible');
+		}, function() {
+			$(this).removeClass('active');
+			$($(this).attr('href')).removeClass('visible');
+		});
+
 		// Fade out save post notice
 		$('.notice').delay(2000).fadeOut(500);
 	}
