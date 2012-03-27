@@ -29,7 +29,7 @@
       <div class="right">
         <%= f.label :draft %>
         <%= f.check_box :draft %>
-        <%= link_to 'Preview', @post, :target => '_blank' %>
+        <%= f.submit 'Preview', :preview => true, :target => "_blank" %>
         <%= f.submit 'Save' %>
       </div>
     </div>
