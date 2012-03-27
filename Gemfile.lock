@@ -35,8 +35,6 @@ GEM
       i18n (~> 0.6)
       multi_json (~> 1.0)
     arel (3.0.2)
-    bcrypt-ruby (3.0.1)
-    bcrypt-ruby (3.0.1-x86-mingw32)
     builder (3.0.0)
     capybara (1.1.2)
       mime-types (>= 1.16)
@@ -56,7 +54,6 @@ GEM
     coffee-script-source (1.2.0)
     colored (1.2)
     daemons (1.1.8)
-    dalli (1.1.5)
     database_cleaner (0.7.2)
     diff-lcs (1.1.3)
     erubis (2.7.0)
@@ -103,7 +100,6 @@ GEM
     multi_json (1.1.0)
     nokogiri (1.5.2)
     nokogiri (1.5.2-x86-mingw32)
-    pg (0.12.2-x86-mingw32)
     pg (0.13.2)
     pg (0.13.2-x86-mingw32)
     polyglot (0.3.3)
@@ -205,10 +201,8 @@ PLATFORMS
   x86-mingw32
 
 DEPENDENCIES
-  bcrypt-ruby (~> 3)
   capybara (~> 1)
   coffee-rails (~> 3)
-  dalli (~> 1)
   database_cleaner (~> 0.7)
   factory_girl_rails (~> 1)
   faker (~> 1)
