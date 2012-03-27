@@ -34,7 +34,7 @@
 
   <div id="container">
     <% unless @no_header %>
-      <time><% if @post %>Posted <%= @post.created_at.to_formatted_s(:day_month_year) %><% else %><%= Time.now.to_formatted_s(:day_month_year) %><% end %></time>
+      <time><% if @post && @post.created_at %>Posted <%= @post.created_at.to_formatted_s(:day_month_year) %><% else %><%= Time.now.to_formatted_s(:day_month_year) %><% end %></time>
     <% end %>
     <div id="content">
       <% if notice %><span class="notice"><%= notice %></span><% end %>

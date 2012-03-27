@@ -1,3 +1,4 @@
+// Allows for auto expanding textareas
 function makeExpandingArea(container) {
   var area = container.querySelector('textarea'),
       span = container.querySelector('span');
@@ -17,4 +18,26 @@ function makeExpandingArea(container) {
 
  // Enable extra CSS
  container.className += ' active';
+}
+
+// Lets us get the caret position in textarea
+function getCaret(el) {
+  if (el.selectionStart) {
+    return el.selectionStart;
+  } else if (document.selection) {
+    el.focus();
+
+    var r = document.selection.createRange();
+    if (r == null) {
+      return 0;
+    }
+
+    var re = el.createTextRange(),
+        rc = re.duplicate();
+    re.moveToBookmark(r.getBookmark());
+    rc.setEndPoint('EndToStart', re);
+
+    return rc.text.length;
+  }
+  return 0;
 }

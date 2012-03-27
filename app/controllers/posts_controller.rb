@@ -2,20 +2,12 @@ require 'rdiscount'
 
 class PostsController < ApplicationController
 	before_filter :authenticate, :except => [:index, :show]
-    before_filter :preview
+	before_filter :preview
 	layout :choose_layout
-
-    def preview
-      @post = Post.find_by_slug params[:slug] || Post.new(params[:post])
-      if params[:commit] == "Preview"
-        respond_to do |format|
-          format.html { redirect_to "/#{@post.slug}" }
-        end
-      end
-    end
 
 	def index
 		@posts = Post.page(params[:page]).per(10).where(draft:false)
+		session[:test] = true
 
 		respond_to do |format|
 			format.html
@@ -23,6 +15,15 @@ class PostsController < ApplicationController
 			format.rss { render :layout => false }
 		end
 	end
+
+	def preview
+    @post = Post.find_by_slug params[:slug] || Post.new(params[:post])
+    if params[:commit] == "Preview"
+      respond_to do |format|
+        format.html { redirect_to "/#{@post.slug}" }
+      end
+    end
+  end
 
 	def admin
 		@no_header = true
@@ -37,7 +38,7 @@ class PostsController < ApplicationController
 
 	def show
 		@show = true
-		@post = Post.find_by_slug params[:slug]
+		@post = admin? ? Post.find_by_slug(params[:slug]) : Post.find_by_slug_and_draft(params[:slug],false)
 
 		respond_to do |format|
 			if @post.present?
@@ -104,6 +105,10 @@ class PostsController < ApplicationController
 	end
 
 	private
+
+	def admin?
+		session[:admin] == true
+	end
 
 	def choose_layout
 		if ['admin', 'new', 'edit'].include? action_name
