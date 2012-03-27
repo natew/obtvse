@@ -36,6 +36,7 @@ $(function() {
 		// Preview pops open new window
 		var form = document.getElementsByTagName('form')[0];
 		document.getElementById('preview-button').onclick = function() {
+			form.action = '/preview'
 	    form.target = '_blank';
 		}
 		document.getElementById('save-button').onclick = function() {
