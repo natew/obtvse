@@ -17,8 +17,8 @@ class PostsController < ApplicationController
 	end
 
 	def preview
-    @post = Post.find_by_slug params[:slug] || Post.new(params[:post])
-    if params[:commit] == "Preview"
+    @post = Post.find_by_slug(params[:slug]) || Post.new(params[:post])
+    if params[:commit] == "View"
       respond_to do |format|
         format.html { redirect_to "/#{@post.slug}" }
       end
@@ -37,7 +37,7 @@ class PostsController < ApplicationController
 	end
 
 	def show
-		@show = true
+		@single_post = true
 		@post = admin? ? Post.find_by_slug(params[:slug]) : Post.find_by_slug_and_draft(params[:slug],false)
 
 		respond_to do |format|
@@ -81,7 +81,7 @@ class PostsController < ApplicationController
 	end
 
 	def update
-		@post = Post.find_by_slug(params[:slug])
+		@post = Post.find(params[:id])
 
 		respond_to do |format|
 			if @post.update_attributes(params[:post])
