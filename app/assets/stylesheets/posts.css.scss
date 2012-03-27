@@ -19,11 +19,10 @@ body, textarea, pre, input, li {
   font-size: 15px;
 }
 
-h1,h2,h3,h4,h5 {
+h1,h2,h3,h4,h5,#text-title pre {
   word-wrap: break-word;
   font-weight: bold;
   line-height: 1.7em;
-
 }
 
 h1 a,
@@ -148,6 +147,7 @@ code {
 .contain,
 #new_post, .edit_post {
   max-width: 580px;
+  position: relative;
 }
 
 .contain img {
@@ -178,12 +178,15 @@ fieldset.markdown {
   background: url(/assets/markdown.png) no-repeat top left;
 }
 
+#text-title {
+  margin: 0 0 20px 0;
+}
+
 #post_title {
   width: 100%;
   border: none;
   background: none;
   line-height: 45px;
-  margin: 0 0 20px 0;
 }
 
 #post_content {
@@ -192,6 +195,14 @@ fieldset.markdown {
   position: relative;
   margin: 0 0 80px 0;
 }
+
+  form .permalink {
+   position: absolute;
+   left: -34px;
+   top: 12px;
+   border: none;
+   color: #ddd;
+  }
 
 #publish-bar {
   position: fixed;
@@ -205,7 +216,6 @@ fieldset.markdown {
   .contain {
     margin: 0 auto;
     width: 700px;
-    position: relative;
   }
 
   input[type=text] {
