@@ -41,3 +41,12 @@ function getCaret(el) {
   }
   return 0;
 }
+
+function validateTitle() {
+  if ($('#post_title').val() == '') {
+    alert('Please enter a title');
+    return false;
+  } else {
+    return true;
+  }
+}

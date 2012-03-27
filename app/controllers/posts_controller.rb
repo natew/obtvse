@@ -16,7 +16,7 @@ class PostsController < ApplicationController
 	end
 
 	def preview
-    @post = Post.find_by_slug(params[:post][:slug]) || Post.new(params[:post])
+    @post = Post.new(params[:post])
     respond_to do |format|
       format.html { render 'show' }
     end
@@ -78,7 +78,7 @@ class PostsController < ApplicationController
 	end
 
 	def update
-		@post = Post.find(params[:id])
+		@post = Post.find_by_slug(params[:slug])
 
 		respond_to do |format|
 			if @post.update_attributes(params[:post])
@@ -108,7 +108,7 @@ class PostsController < ApplicationController
 	end
 
 	def choose_layout
-		if ['admin', 'new', 'edit'].include? action_name
+		if ['admin', 'new', 'edit', 'create'].include? action_name
 			'admin'
 		else
 			'application'
