@@ -21,7 +21,7 @@
         <li><%= link_to '@' + CONFIG['twitter'], 'http://twitter.com/' + CONFIG['twitter'] %></li>
       <% end %>
       <% if CONFIG['github'] %>
-        <li><%= link_to 'github', CONFIG['github'] %></li>
+        <li><%= link_to 'github', 'https://github.com/' + CONFIG['github'] %></li>
       <% end %>
       <li><%= link_to 'say hi', "mailto:#{CONFIG['email']}?subject:whats up!" %></li>
       <li><%= link_to 'rss feed', '/posts.rss' %></li>
@@ -36,7 +36,7 @@
 
   <div id="container">
     <% unless @no_header %>
-      <time><% if @post %>Posted <%= @post.created_at.to_formatted_s(:day_month_year) %><% else %><%= Time.now.to_formatted_s(:day_month_year) %><% end %></time>
+      <time><% if @post && @post.created_at %>Posted <%= @post.created_at.to_formatted_s(:day_month_year) %><% else %><%= Time.now.to_formatted_s(:day_month_year) %><% end %></time>
     <% end %>
     <div id="content">
       <% if notice %><span class="notice"><%= notice %></span><% end %>
