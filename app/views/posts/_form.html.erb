@@ -6,13 +6,13 @@
       <%- end -%>
     <%- end -%>
 
-    <div class="expandingArea text-title">
+    <div id="text-title" class="expandingArea">
       <pre><span></span><br></pre>
       <%= f.text_area :title, :rows => 1, :placeholder => 'Title here' %>
     </div>
 
     <fieldset class="markdown">
-      <div class="expandingArea text-content">
+      <div id="text-content" class="expandingArea">
         <pre><span></span><br></pre>
         <%= f.text_area :content, :placeholder => 'Write post here' %>
       </div>
@@ -29,8 +29,8 @@
       <div class="right">
         <%= f.label :draft %>
         <%= f.check_box :draft %>
-        <%= f.submit 'Preview', :preview => true, :target => "_blank" %>
-        <%= f.submit 'Save' %>
+        <%= f.submit 'Preview', :id => 'preview-button', :preview => true, :target => "_blank" %>
+        <%= f.submit 'Save', :id => 'save-button' %>
       </div>
     </div>
   </div>
