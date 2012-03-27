@@ -36,11 +36,21 @@ $(function() {
 		// Preview pops open new window
 		var form = document.getElementsByTagName('form')[0];
 		document.getElementById('preview-button').onclick = function() {
+			form.action = '/preview'
 	    form.target = '_blank';
 		}
 		document.getElementById('save-button').onclick = function() {
 	    form.target = '_self';
 		}
+
+		// Options menu
+		$('.menu').toggle(function(){
+			$(this).addClass('active');
+			$($(this).attr('href')).addClass('visible');
+		}, function() {
+			$(this).removeClass('active');
+			$($(this).attr('href')).removeClass('visible');
+		});
 
 		// Fade out save post notice
 		$('.notice').delay(2000).fadeOut(500);
