@@ -27,7 +27,7 @@ class PostsController < ApplicationController
 
 	def show
 		@show = true
-		@post = Post.find_by_slug_and_draft(params[:slug], false)
+		@post = Post.find_by_slug params[:slug]
 
 		respond_to do |format|
 			if @post.present?
