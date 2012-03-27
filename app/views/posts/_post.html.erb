@@ -1,11 +1,15 @@
 <section id="post-<%= post.id %>">
   <div class="post contain">
-    <h1<% if post.aside? %> class="aside"<% end %>><% if @post %><%= post.title %><% else %><%= link_to post.title, post %><% end %></h1>
-    <% if post.content.length > 0 %>
-    <div class="post-content">
-      <%= RDiscount.new(post.content).to_html.html_safe %>
-    </div>
-    <% end %>
+    <%- if post.external? -%>
+      <h1 class="external">
+        <% if @single_post %><%= link_to post.title, post.url %><% else %><%= link_to post.title, post.url %><% end %>
+        <%= link_to '⚓', post.slug, :class => 'permalink' %>
+      </h1>
+    <%- else -%>
+      <h1><% if @single_post %><%= post.title %><% else %><%= link_to post.title, post.slug %><% end %></h1>
+    <%- end -%>
+
+    <% if post.content %><%= RDiscount.new(post.content).to_html.html_safe %><% end %>
 
     <%- if is_admin? -%>
       <ul class="actions">
@@ -14,5 +18,5 @@
     <%- end -%>
   </div>
 
-  <% if @show %><a class="button space-top" href="<%= root_url %>">Back to Blog</a><% end %>
+  <% if @single_post %><a class="button space-top" href="<%= root_url %>">Back to Blog</a><% end %>
 </section>

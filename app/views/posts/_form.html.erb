@@ -1,4 +1,4 @@
-<%= form_for @post do |f| %>
+<%= form_for @post, :url => "/update/#{@post.id}" do |f| %>
   <div class="contain">
     <%- if @post.errors.any? -%>
       <%- @post.errors.full_messages.each do |msg| -%>
@@ -23,13 +23,22 @@
       <div class="left">
         <a href="/admin">&laquo; Admin</a>
         <%= link_to 'Delete', @post, :confirm => 'Are you sure?', :method => :delete, :class => 'delete-bar' %>
-        <%= f.label :aside %>
-        <%= f.check_box :aside %>
+        <%= link_to 'Options', '#options', :class => 'menu' %>
+        <ul id="options" class="sub-menu">
+          <li>
+            <%= f.label :url, 'Slug' %>
+            <%= f.text_field :slug, :placeholder => 'Leave blank to automatically generate' %>
+          </li>
+          <li>
+            <%= f.label :url, 'URL' %>
+            <%= f.text_field :url, :placeholder => 'Optional external link' %>
+          </li>
+        </ul>
       </div>
       <div class="right">
         <%= f.label :draft %>
         <%= f.check_box :draft %>
-        <%= f.submit 'Preview', :id => 'preview-button', :preview => true, :target => "_blank" %>
+        <%= f.submit 'View', :id => 'preview-button', :preview => true, :target => "_blank" %>
         <%= f.submit 'Save', :id => 'save-button' %>
       </div>
     </div>
