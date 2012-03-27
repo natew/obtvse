@@ -19,7 +19,7 @@
         <li><%= link_to '@' + CONFIG['twitter'], 'http://twitter.com/' + CONFIG['twitter'] %></li>
       <% end %>
       <% if CONFIG['github'] %>
-        <li><%= link_to 'github', CONFIG['github'] %></li>
+        <li><%= link_to 'github', 'https://github.com/' + CONFIG['github'] %></li>
       <% end %>
       <li><%= link_to 'say hi', "mailto:#{CONFIG['email']}?subject:whats up!" %></li>
       <li><%= link_to 'rss feed', '/posts.rss' %></li>
