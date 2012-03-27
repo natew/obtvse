@@ -2,7 +2,6 @@ require 'rdiscount'
 
 class PostsController < ApplicationController
 	before_filter :authenticate, :except => [:index, :show]
-	before_filter :preview
 	layout :choose_layout
 
 	def index
@@ -17,11 +16,9 @@ class PostsController < ApplicationController
 	end
 
 	def preview
-    @post = Post.find_by_slug(params[:slug]) || Post.new(params[:post])
-    if params[:commit] == "View"
-      respond_to do |format|
-        format.html { redirect_to "/#{@post.slug}" }
-      end
+    @post = Post.find_by_slug(params[:post][:slug]) || Post.new(params[:post])
+    respond_to do |format|
+      format.html { render 'show' }
     end
   end
 
