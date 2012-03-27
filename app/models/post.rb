@@ -8,4 +8,8 @@ class Post < ActiveRecord::Base
   def to_param
     slug
   end
+
+  def external?
+  	!url.blank?
+  end
 end

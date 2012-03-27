@@ -120,8 +120,16 @@ header li a {
     line-height: .5em;
   }
 
-  h1.aside {
+  h1.external {
+    margin-top: 25px;
     font-size: 18px;
+
+    .permalink {
+      margin-left: 8px;
+      font-size: 19px;
+      color: #999;
+      border: none;
+    }
   }
 }
 
@@ -197,7 +205,43 @@ fieldset.markdown {
   .contain {
     margin: 0 auto;
     width: 700px;
+    position: relative;
   }
+
+  input[type=text] {
+    border: none;
+    border-bottom: 1px solid #333;
+    padding: 2px;
+    width: 220px;
+    font-size: 12px;
+    color: #999;
+  }
+
+  .menu.active {
+    background: #fff;
+    color: #000;
+  }
+
+  .sub-menu {
+    margin: 0;
+    background: #222;
+    padding: 20px;
+    position: absolute;
+    bottom: 0;
+    left: 60px;
+    visibility: hidden;
+            border-radius: 5px;
+       -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+
+    &.visible {
+      visibility: visible;
+    }
+  }
+
+    .sub-menu li {
+      margin: 0 0 15px 0;
+    }
 }
 
 #publish-bar input[type=submit],
@@ -246,7 +290,7 @@ label {
   font-size: 16px;
   color: #fff;
   font-weight: bold;
-  margin: 0 4px 0 15px;
+  margin: 0 8px 0 0;
 }
 
 #post_draft {
