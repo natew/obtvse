@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 gem 'rails', '~> 3'
 
-# gem 'dalli', '~> 1'
+gem 'dalli', '~> 1'
 
 # Extention libraries
 gem 'thin', '~> 1'
