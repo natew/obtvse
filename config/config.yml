@@ -1,9 +1,9 @@
 ---
-title:               Title of Your Blog
+title:               Title of your blog
 tagline:             Clever tagline.
-login:               CHANGE_ME
-password:            CHANGE_ME_123
-name:                Your Name
+login:               <%= ENV["blog_login"] ? ENV["blog_login"] : "user" %>
+password:            <%= ENV["blog_password"] ? ENV["blog_password"] : "password" %>
+name:                Your name
 twitter:             your_twitter_handle
 github:              your_github_handle
 email:               address@example.com
