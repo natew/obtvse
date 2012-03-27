@@ -1,3 +1,5 @@
+
+/* TODO: pull out coloring into variables */
 $linkhover: red;
 
 
@@ -33,8 +35,8 @@ h5 a {
 }
 
 h1,
-.expandingArea.text-title pre,
-.expandingArea.text-title textarea {
+#text-title pre,
+#text-title textarea {
   font-weight: 900;
   font-size: 26px;
 }
@@ -185,7 +187,8 @@ fieldset.markdown {
   left: 0;
   width: 100%;
   text-align: center;
-  padding: 20px 0;
+  padding: 15px 0 15px;
+  background: #eee;
 
   .contain {
     margin: 0 auto;
@@ -197,14 +200,16 @@ fieldset.markdown {
 #publish-bar a,
 .button {
   display: inline-block;
-  padding: 10px;
-  color: #999;
+  color: #888;
+  padding: 8px 12px;
+  font-weight: bold;
   border: none;
   text-decoration: none;
 }
 
 .button.secondary {
-  color: #999;
+  color: #888;
+  font-weight: normal;
 }
 
 .button.space-top {
@@ -234,7 +239,7 @@ fieldset.markdown {
 }
 
 label {
-  font-size: 20px;
+  font-size: 16px;
   color: #fff;
   font-weight: bold;
   margin: 0 4px 0 15px;
@@ -257,11 +262,14 @@ label {
 }
 
 .notice {
+  position: absolute;
+  top: 0;
   background: lightYellow;
   width: 100%;
   display: block;
   text-align: center;
-  padding: 6px 0;
+  padding: 3px 0;
+  font-size: 12px;
 }
 
 #admin {
@@ -373,6 +381,10 @@ label {
     padding: 0;
     outline: 0;
     border: 0;
+  }
+
+  #text-content {
+    margin: 0 0 100px 0;
   }
 
   .expandingArea {
