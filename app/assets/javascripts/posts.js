@@ -34,14 +34,28 @@ $(function() {
 		// },10000);
 
 		// Preview pops open new window
-		var form = document.getElementsByTagName('form')[0];
-		document.getElementById('preview-button').onclick = function() {
-			form.action = '/preview'
-	    form.target = '_blank';
-		}
-		document.getElementById('save-button').onclick = function() {
-	    form.target = '_self';
-		}
+		var $form = $('form:first'),
+				original_action = $form.attr('action');
+		$('#preview-button').click(function(e) {
+			if (validateTitle()) {
+				$form.attr('action', '/preview');
+	    	$form.attr('target', '_blank');
+	    	$form.submit();
+	    } else {
+	    	e.preventDefault();
+	    }
+		});
+
+		// Save button validates
+		$('#save-button').click(function(e) {
+  		if (validateTitle()) {
+      	$form.attr('target', '_self');
+      	$form.attr('action', original_action);
+      	$form.submit();
+      } else {
+      	e.preventDefault();
+      }
+		});
 
 		// Options menu
 		$('.menu').toggle(function(){

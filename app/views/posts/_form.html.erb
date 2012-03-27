@@ -1,11 +1,14 @@
-<%= form_for @post, :url => "/update/#{@post.id}" do |f| %>
+<%= form_for @post do |f| %>
   <div class="contain">
     <%- if @post.errors.any? -%>
+    <div class="notice">
       <%- @post.errors.full_messages.each do |msg| -%>
-          <li><%= msg %></li>
+        <%= msg %>
       <%- end -%>
+    </div>
     <%- end -%>
 
+    <%= link_to '⚓', @post, :class => 'permalink', :target => '_blank' if @post.slug %>
     <div id="text-title" class="expandingArea">
       <pre><span></span><br></pre>
       <%= f.text_area :title, :rows => 1, :placeholder => 'Title here' %>
@@ -38,7 +41,7 @@
       <div class="right">
         <%= f.label :draft %>
         <%= f.check_box :draft %>
-        <%= f.submit 'View', :id => 'preview-button', :preview => true, :target => "_blank" %>
+        <%= f.submit 'Preview', :id => 'preview-button', :preview => true, :target => "_blank" %>
         <%= f.submit 'Save', :id => 'save-button' %>
       </div>
     </div>

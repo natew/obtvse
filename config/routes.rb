@@ -3,9 +3,9 @@ Obtvse::Application.routes.draw do
   match '/admin', :to => 'posts#admin'
   match '/new', :to => 'posts#new'
   match '/edit/:id', :to => 'posts#edit'
+  put '/preview', :to => 'posts#preview'
   get '/:slug', :to => 'posts#show', :as => 'post'
   delete '/:slug', :to => 'posts#destroy', :as  => 'post'
-  put '/update/:id', :to => 'posts#update', :as  => 'post'
-  post '/preview', :to => 'posts#preview', :as => 'post'
-  root :to  =>'posts#index'
+  put '/:slug', :to => 'posts#update', :as  => 'post'
+  root :to => 'posts#index'
 end
