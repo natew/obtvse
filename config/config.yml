@@ -1,10 +1,10 @@
 ---
-title:               This is a blog.
-tagline:             This is not a clever tagline.
+title:               Title of your blog
+tagline:             Clever tagline.
 login:               <%= ENV["blog_login"] ? ENV["blog_login"] : "user" %>
 password:            <%= ENV["blog_password"] ? ENV["blog_password"] : "password" %>
-name:                Matthew DuVall
-twitter:             maskact
-github:              maskact
-email:               mduvall@berkeley.edu
+name:                Your name
+twitter:             your_twitter_handle
+github:              your_github_handle
+email:               address@example.com
 google_analytics_id: YOUR_GA_ID
