@@ -22,11 +22,10 @@ end
 
 group :development do
   # gem 'heroku', '~> 2'
-  # gem 'capistrano', '~> '
-  gem 'guard', '~> 1'
-  gem 'guard-rspec', '~> 0.6'
-  gem 'guard-spork', '~> 0.5'
-
+  # gem 'capistrano', '~> 2.9'
+  # gem 'guard', '~> 1'
+  # gem 'guard-rspec', '~> 0.6'
+  # gem 'guard-spork', '~> 0.5'
   gem 'rails_best_practices', '~> 1'
 end
 
@@ -39,7 +38,6 @@ end
 group :development, :test do
   gem 'foreman', '~> 0.40'
   gem 'sqlite3', '~> 1', platform: [:ruby, :mswin, :mingw]
-  gem 'rspec-rails', '~> 2'
   gem 'faker', '~> 1'
   gem 'factory_girl_rails', '~> 1'
 end
