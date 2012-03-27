@@ -1,15 +1,13 @@
-Codename: Obtvse
+Obtvse
 ================
-Clean, simple blog.  Inspired by [Svbtle](http://svbtle.com).
+A clean and simple markdown blog.  Inspired by [Svbtle](http://svbtle.com).
 
-**Demo**
-
-http://obtvse.herokuapp.com
-
-http://obtvse.herokuapp.com/admin
+**[Demo](http://obtvse.herokuapp.com) | [Demo Admin](http://obtvse.herokuapp.com/admin)**
 
 Username: username
+
 Password: password
+
 
 
 Installation
@@ -21,7 +19,6 @@ If you are new to Rails development, check out guides for getting your developme
     cd obtvse
     bundle install
     rake db:migrate
-    cp config/config.example.yml config/config.yml
 
 Edit `config/config.yml`.  Be sure to set your own admin username and password.
 
@@ -30,16 +27,16 @@ Start the local server:
 
     rails s
 
-Go to [0.0.0.0:3000](http://0.0.0.0:3000/)
-Go to [0.0.0.0:3000/admin](http://0.0.0.0:3000/admin)
+Go to [0.0.0.0:3000](http://0.0.0.0:3000/), to administrate you go to [/admin](http://0.0.0.0:3000/admin)
+
 
 
 TODO
 ====
 - Easy deployment
 - Draft preview and post save history
-- Caching
-- Refine!
+- Lots of refactoring, cleanup and refinements
+
 
 
 SCREENSHOTS
