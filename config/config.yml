@@ -1,8 +1,8 @@
 ---
 title:               This is a blog.
 tagline:             This is not a clever tagline.
-login:               <%= ENV["blog_login"] %>
-password:            <%= ENV["blog_password"] %>
+login:               <%= ENV["blog_login"] ? ENV["blog_login"] : "user" %>
+password:            <%= ENV["blog_password"] ? ENV["blog_password"] : "password" %>
 name:                Matthew DuVall
 twitter:             maskact
 github:              maskact
