@@ -13,7 +13,7 @@
 
     <%- if is_admin? -%>
       <ul class="actions">
-        <li><%= link_to 'Edit', '/edit/' + post.id.to_s %></li>
+        <li><%= link_to 'Edit', '/edit/' + post.id.to_s unless @preview %></li>
       </ul>
     <%- end -%>
   </div>
