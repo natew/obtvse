@@ -37,7 +37,7 @@ h1,
 #text-title pre,
 #text-title textarea {
   font-weight: 900;
-  font-size: 36px;
+  font-size: 42px;
 }
 
 h2 {font-size: 20px;}
@@ -60,23 +60,40 @@ a:hover {
 }
 
 header {
-  width: 200px;
   position: fixed;
+  width: 400px;
   top: 0;
-  bottom: 0;
-  padding: 20px 40px;
+  left: 0;
 
   h1 {
-    font-size: 26px;
+      margin: 0;
+      height: 500px;
+      overflow: hidden;
+
+    a {
+      background: red;
+      display: block;
+      padding: 0 20px 20px 0;
+      text-align: right;
+      font-weight: normal;
+      font-size: 600px;
+      line-height: 1em;
+      color: #fff;
+
+      &:hover {
+        color: #fff;
+        background: darkred;
+      }
+    }
   }
 
   span {
     color: #888;
-    font-weight: 500;
 
     &.powered-by {
       position: absolute;
-      bottom: 20px;
+      bottom: 0;
+      left: 50px;
       font-size: 11px;
     }
   }
@@ -84,7 +101,7 @@ header {
 
 header ul {
   padding: 0;
-  margin: 50px 0;
+  margin: 50px;
 }
 
 header li {
@@ -102,11 +119,12 @@ header li a {
 }
 
 #container {
-  margin-left: 250px;
+  margin-left: 400px;
+  padding-left: 30px;
   position: relative;
 
   time {
-    padding: 50px 0 18px;
+    padding: 20px 0 60px;
     display: block;
   }
 }
@@ -114,7 +132,7 @@ header li a {
 #content {
   section {
     padding: 0;
-    margin: 0 0 50px 0;
+    margin: 0 0 120px 0;
     position: relative;
     line-height: .5em;
   }
@@ -146,7 +164,7 @@ code {
 
 .contain,
 #new_post, .edit_post {
-  max-width: 580px;
+  width: 480px;
   position: relative;
 }
 
