@@ -19,9 +19,13 @@ If you are new to Rails development, check out guides for getting your developme
     cd obtvse
     bundle install
     rake db:migrate
+    cp config/config.example.yml config/config.yml
 
-Edit `config/config.yml`.  Be sure to set your own admin username and password.
+Edit `config/config.yml` to set up your site information.  To set up your admin username and password you will need to set your environment variables.
 
+On Heroku this is simply:
+
+    heroku config:add obtvse_login=<LOGIN> obtvse_password=<PASSWORD>
 
 Start the local server:
 
