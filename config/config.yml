@@ -1,7 +1,9 @@
 ---
 title:               Obtvse Demo
 tagline:             Clever tagline.
-name:                Your Name
+login:               <%= ENV["obtvse_login"] ? ENV["obtvse_login"] : "username" %>
+password:            <%= ENV["obtvse_password"] ? ENV["obtvse_password"] : "password" %>
+name:                Your name
 twitter:             your_twitter_handle
 github:              your_github_handle
 email:               address@example.com
