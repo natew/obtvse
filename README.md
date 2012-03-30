@@ -23,15 +23,20 @@ If you are new to Rails development, check out guides for getting your developme
 
 Edit `config/config.yml` to set up your site information.  To set up your admin username and password you will need to set your environment variables.
 
-On Heroku this is simply:
-
-    heroku config:add obtvse_login=<LOGIN> obtvse_password=<PASSWORD>
-
 Start the local server:
 
     rails s
 
 Go to [0.0.0.0:3000](http://0.0.0.0:3000/), to administrate you go to [/admin](http://0.0.0.0:3000/admin)
+
+For production, you will want to set your password in config.yml or with environment variables (preferred).  On Heroku this is simply:
+
+    heroku config:add obtvse_login=<LOGIN> obtvse_password=<PASSWORD>
+
+Or in your shell (~/.bashrc or ~/.zshrc for example)
+
+    export obtvse_login=<LOGIN>
+    export obtvse_passowrd=<PASSWORD>
 
 
 
