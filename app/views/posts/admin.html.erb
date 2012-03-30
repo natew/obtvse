@@ -6,6 +6,7 @@
   <ul>
   <%= render :partial => 'li', :collection => @drafts %>
   </ul>
+  <%= paginate @drafts, :param_name => "draft_page" %>
 </div>
 
 <div id="published" class="col">
@@ -13,4 +14,5 @@
   <ul>
     <%= render :partial => 'li', :collection => @published %>
   </ul>
+  <%= paginate @published, :param_name => "post_page" %>
 </div>

@@ -26,8 +26,8 @@ class PostsController < ApplicationController
 	def admin
 		@no_header = true
 		@post = Post.new
-		@published = Post.where(draft:false).page(params[:page]).per(20)
-		@drafts = Post.where(draft:true).page(params[:page_draft]).per(20)
+		@published = Post.where(draft:false).page(params[:post_page]).per(20)
+		@drafts = Post.where(draft:true).page(params[:draft_page]).per(20)
 
 		respond_to do |format|
 			format.html
