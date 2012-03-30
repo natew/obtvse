@@ -481,8 +481,6 @@ label {
         -ms-box-sizing: border-box;
             box-sizing: border-box;
     width: 100%;
-    /* This height is used when JS is disabled */
-    height: 100px;
   }
 
   .expandingArea.active > textarea {
