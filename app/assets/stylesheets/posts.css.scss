@@ -513,12 +513,14 @@ label {
 }
 
 nav.pagination {
-  position: absolute;
-  bottom: 20px;
-  right: 20px;
+  text-align: right;
   font-size: 16px;
   font-weight: 900;
   text-transform: uppercase;
   margin: 0;
   padding: 0;
 }
+
+  nav.pagination a {
+    margin-left: 10px;
+  }
