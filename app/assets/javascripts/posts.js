@@ -4,7 +4,7 @@ $(function() {
 	    content = document.getElementById('text-content');
 
 
-	$('.youtube_video').fitVids();
+	$('.post').fitVids();
 
 	// If we're on the edit page
 	if (title) {
