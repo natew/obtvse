@@ -351,6 +351,14 @@ label {
   margin: 0 auto;
   position: relative;
 
+  #save-button.saved {
+    color: #999;
+
+    &:hover {
+      cursor: normal;
+    }
+  }
+
   #drafts {
     float: left;
     border: 4px solid #000;

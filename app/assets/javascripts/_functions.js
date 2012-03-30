@@ -50,3 +50,12 @@ function validateTitle() {
     return true;
   }
 }
+
+function savePost() {
+  var form = $('.edit_post'),
+      action = form.attr('action');
+
+  $.post(action, form.serialize(), function() {
+    $('#save-button').val('Saved').addClass('saved');
+  });
+}
