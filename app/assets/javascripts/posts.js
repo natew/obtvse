@@ -3,6 +3,9 @@ $(function() {
 	var title = document.getElementById('text-title'),
 	    content = document.getElementById('text-content');
 
+
+	$('.youtube_video').fitVids();
+
 	// If we're on the edit page
 	if (title) {
 		// Auto expanding textareas.  See _functions.js
