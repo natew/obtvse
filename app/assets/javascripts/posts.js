@@ -3,11 +3,12 @@ $(function() {
 	var title = document.getElementById('text-title'),
 	    content = document.getElementById('text-content');
 
-
 	$('.post').fitVids();
 
 	// If we're on the edit page
 	if (title) {
+		var changed = false;
+
 		// Hide bar
 		$('#publish-bar').delay(1000).animate({
 			bottom: '-100px'
@@ -42,14 +43,22 @@ $(function() {
 		$('#post_content').css('min-height', $(window).height() - $('#post_title').height() - 130);
 
 		// Autosave
-		// setInterval(function(){
-		//   var form = $('.edit_post'),
-		//       action = form.attr('action');
+		$('#post_content,#post_title').bind('keyup', function(){
+			changed = true;
+			$('#save-button').val('Save').removeClass('saved');
+		});
 
-		//   $.post(action, form.serialize(), function(data){
-		//   	$('body').prepend('<span>Saved!</span>');
-		//   });
-		// },10000);
+		setInterval(function(){
+			if (changed) {
+				changed = false;
+				savePost();
+			}
+		},5000);
+
+		// Ajax save-button
+		$('#save-button').click(function(){
+			savePost();
+		});
 
 		// Preview pops open new window
 		var $form = $('form:first'),
