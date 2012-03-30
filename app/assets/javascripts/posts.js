@@ -8,6 +8,21 @@ $(function() {
 
 	// If we're on the edit page
 	if (title) {
+		// Hide bar
+		$('#publish-bar').delay(1000).animate({
+			bottom: '-100px'
+		});
+
+		$('#publish-bar-hover').hover(function() {
+			$('#publish-bar').animate({
+				bottom: '0'
+			});
+		}, function() {
+			$('#publish-bar').animate({
+				bottom: '-100px'
+			});
+		});
+
 		// Auto expanding textareas.  See _functions.js
 		makeExpandingArea(title);
 		makeExpandingArea(content);
