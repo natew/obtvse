@@ -1,3 +1,5 @@
+var showdown = new Showdown.converter();
+
 // Allows for auto expanding textareas
 function makeExpandingArea(container) {
   var area = container.querySelector('textarea'),
@@ -52,10 +54,14 @@ function validateTitle() {
 }
 
 function savePost() {
-  var form = $('.edit_post'),
+  var form = $('.edit_post,#new_post'),
       action = form.attr('action');
 
   $.post(action, form.serialize(), function() {
-    $('#save-button').val('Saved').addClass('saved');
+    $('#save-button').val('Saved').addClass('saved').attr('disabled','disabled');
   });
+}
+
+function updatePreview() {
+  $('#post-preview').html('<h1>'+$('#post_title').val()+'</h1>'+showdown.makeHtml($('#post_content').val()));
 }
