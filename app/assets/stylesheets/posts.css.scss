@@ -569,3 +569,12 @@ nav.pagination {
   nav.pagination a {
     margin-left: 10px;
   }
+
+span.experimental {
+  position: absolute;
+  top: 0;
+  right: 10px;
+  font-size: 11px;
+  color: #999;
+  z-index: 10000;
+}
