@@ -13,4 +13,4 @@
 //= require jquery
 //= require jquery_ujs
 //= require fitvids.js
-//= require_tree .
+//= require posts.js
