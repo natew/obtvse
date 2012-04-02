@@ -1,3 +1,8 @@
+@mixin transition($property: all, $type: linear, $time: 0.2s) {
+  -webkit-transition: $property $type $time;
+  -moz-transition: $property $type $time;
+  transition: $property $type $time;
+}
 
 /* TODO: pull out coloring into variables */
 $linkhover: red;
@@ -31,7 +36,7 @@ h1,
 #text-title pre,
 #text-title textarea {
   font-weight: 900;
-  font-size: 35px;
+  font-size: 30px;
 }
 
 p {
@@ -147,91 +152,6 @@ code {
   height: auto;
 }
 
-#publish-bar {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  background: #222;
-  color: #fff;
-  width: 100%;
-  text-align: center;
-  padding: 15px 0 15px;
-
-  .contain {
-    margin: 0 auto;
-    width: 600px;
-  }
-
-  input[type=text] {
-    border: none;
-    border-bottom: 1px solid #333;
-    padding: 2px;
-    width: 220px;
-    font-size: 12px;
-    color: #999;
-  }
-
-  .menu.active {
-    background: #fff;
-    color: #000;
-  }
-
-  .sub-menu {
-    margin: 0;
-    background: #222;
-    padding: 20px;
-    position: absolute;
-    bottom: 0;
-    left: 60px;
-    visibility: hidden;
-            border-radius: 5px;
-       -moz-border-radius: 5px;
-    -webkit-border-radius: 5px;
-
-    &.visible {
-      visibility: visible;
-    }
-  }
-
-    .sub-menu li {
-      margin: 0 0 15px 0;
-    }
-}
-
-#publish-bar input[type=submit],
-#publish-bar a,
-.button {
-  display: inline-block;
-  background: #000;
-  padding: 8px 12px;
-  font-weight: bold;
-  border: none;
-  color: #fff;
-          border-radius: 5px;
-     -moz-border-radius: 5px;
-  -webkit-border-radius: 5px;
-}
-
-.button.secondary {
-  padding: 0 5px;
-  background: #aaa;
-  font-size: 12px;
-}
-
-#publish-bar input[type=submit]:hover,
-#publish-bar a:hover,
-.col h1 a:hover,
-.col h2 a:hover,
-.button:hover,
-.button.secondary:hover {
-  background: $linkhover;
-  color: #fff;
-}
-
-.button.space-top {
-  margin-top: 100px;
-}
-
 .left {
   float: left;
 }
@@ -294,119 +214,89 @@ body.posts.new #admin {
 }
 
 #admin {
-  width: 808px;
-  margin: 0 auto;
-  position: relative;
+  &.editing {
+    #content-fieldset {
+      display: block;
+    }
 
-  #save-button.saved {
-    color: #999;
-
-    &:hover {
-      cursor: normal;
+    #posts {
+      display: none;
     }
   }
 
+  #posts {
+    position: absolute;
+    top: 92px;
+    left: 50%;
+    margin-left: -300px;
+    width: 600px;
+  }
+
   #drafts {
-    float: left;
-    border: 4px solid #000;
-    border-top: none;
-    background: #fff;
-    margin: 0 0 20px 0;
-    padding-top: 10px;
+    h2 {
+      background: #444;
+      color: #fff;
+    }
 
-    form {
-       margin: 20px 0 20px -20px;
-       padding: 0 0 0 20px;
-       border-left: 4px solid lightblue;
-     }
-
-    #post_title {
-      width: 350px;
-      font-size: 16px;
-      font-weight: 400;
-      margin: 0;
-      border-bottom: 1px solid #ddd;
+    ul li h3 a {
+      color: #444;
     }
   }
 
   #published {
-    float: right;
-
-    h2 {color: #999;}
-    h2 a {margin-top: -2px;}
-    h3 a {color: #999;}
   }
 
-  .col h1,
-  .col h2 {
-    position: relative;
-    text-transform: uppercase;
-  }
-
-  .col h1 a,
-  .col h2 a {
-    position: absolute;
-    top: 0;
-    right: 0;
-    font-size: 12px;
-    padding: 2px 10px;
-    line-height: 2.7em;
-    margin: 5px 0 0;
+  .contain {
+    margin: 0 auto;
   }
 
   .col {
-    width: 360px;
-    padding: 20px;
+    width: 260px;
+    float: left;
+    padding: 0 20px;
 
-    h2 a {
-      background: #999;
-
-      &:hover {
-        background: $linkhover;
-      }
+    h2 {
+      font-size: 12px;
+      padding: 8px 0;
+      text-transform: uppercase;
+      text-align: center;
+      background: #f2f2f2;
     }
 
     ul {
       padding: 0;
+      overflow: scroll;
 
       li {
-        border-bottom: 1px solid #ddd;
-        padding: 15px 0;
+        padding: 10px 0;
         position: relative;
+
+        &.hidden {
+          display: none;
+        }
+
+        &.selected h3 a {
+          font-weight: bold;
+          position: relative;
+        }
 
         &:hover .links {
           visibility: visible;
         }
 
-        .links {
-          position: absolute;
-          right: 0;
-          top: 14px;
-          background: #fff;
-          padding: 1px 8px;
-          visibility: hidden;
-
-          a {
-            color: #999;
-                    border-radius: 5px;
-               -moz-border-radius: 5px;
-            -webkit-border-radius: 5px;
-
-            &:hover {
-              color: $linkhover;
-            }
-          }
-        }
-
         h3 {
           margin: 0;
-          font-size: 16px;
+          font-size: 14px;
+          font-weight: normal;
           max-width: 100%;
           text-overflow: ellipsis;
-          overflow: hidden;
 
           a {
             border: none;
+            display: block;
+            color: #999;
+
+            &:hover {color: $linkhover;}
           }
         }
       }
@@ -484,14 +374,24 @@ fieldset.markdown {
 }
 
 #text-title {
-  margin: 23px 0;
+  margin: 20px 0 0;
 }
+
+  #text-title textarea,
+  #text-title pre {
+    padding: 10px 0;
+    line-height: 1.3em;
+  }
 
 #post_title {
   width: 100%;
   border: none;
   background: none;
   line-height: 45px;
+}
+
+#content-fieldset {
+  display: none;
 }
 
 #post_content {
@@ -510,44 +410,64 @@ form .permalink {
 }
 
 #split {
+  position: relative;
+
   #post-preview {
+    background: #f0f4fc;
+    border-left: 1px solid #dbe3f1;
+    right: 0;
+    left: auto;
     display: none;
   }
 
   #post-editor {
-    margin-left: -25%;
-    left: 50%;
+    position: fixed;
     width: 600px;
+    left: 50%;
+    margin-left: -300px;
+    top: 0;
+    bottom: 0;
   }
 }
 
 #split.preview {
-  #post-preview {display: block;}
+  #post-preview {display:block;}
   #post-editor {
     left: 0;
     margin: 0;
-    width: 50%;
   }
 }
 
 .split-section {
-  width: 50%;
   position: fixed;
+  width: 50%;
   left: 0;
   top: 0;
-  padding: 0 20px 100px;
+  padding: 0;
   height: 100%;
   overflow: scroll;
+  padding: 0 20px;
           box-sizing: border-box;
      -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
+
+  .inner {
+    position: relative;
+    height: 100%;
+  }
 }
 
-#post-preview {
-  background: #f0f4fc;
-  border-left: 1px solid #dbe3f1;
-  right: 0;
-  left: auto;
+#bar {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 80px;
+  padding: 0 20px;
+          box-sizing: border-box;
+     -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
 }
 
 .admin-view {

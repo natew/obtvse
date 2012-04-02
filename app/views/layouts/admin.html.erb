@@ -8,10 +8,7 @@
 </head>
 
 <body class="admin <%= controller_name %> <%= action_name %>">
-  <span class="experimental"><strong>Experimental branch</strong>!  Watch out for bugs!</span>
   <div id="admin">
-  	<div id="save"></div>
-    <% if notice %><span class="notice"><%= notice %></span><% end %>
     <%= yield %>
   </div>
 

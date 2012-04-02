@@ -14,25 +14,6 @@ class PostsController < ApplicationController
 		end
 	end
 
-	def preview
-    @post = Post.new(params[:post])
-    @preview = true
-    respond_to do |format|
-      format.html { render 'show' }
-    end
-  end
-
-	def admin
-		@no_header = true
-		@post = Post.new
-		@published = Post.where(draft:false).page(params[:post_page]).per(20)
-		@drafts = Post.where(draft:true).page(params[:draft_page]).per(20)
-
-		respond_to do |format|
-			format.html
-		end
-	end
-
 	def show
 		@single_post = true
 		@post = admin? ? Post.find_by_slug(params[:slug]) : Post.find_by_slug_and_draft(params[:slug],false)
@@ -49,12 +30,12 @@ class PostsController < ApplicationController
 
 	def new
 		@no_header = true
-		@posts = Post.page(params[:page]).per(20)
 		@post = Post.new
+		@published = Post.where(draft:false).page(params[:post_page])
+		@drafts = Post.where(draft:true).page(params[:draft_page])
 
 		respond_to do |format|
 			format.html
-			format.xml { render xml: @post }
 		end
 	end
 
