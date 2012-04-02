@@ -1,9 +1,5 @@
-<li id="post-<%= li.id %>">
+<li id="post-<%= li.id %>"<% if li.draft? %> class="draft"<% end %>>
 	<h3>
 		<%= link_to li.title, '/edit/' + li.id.to_s %>
-		<span class="links">
-			<%= link_to 'view', li, :class => 'admin-view' %>
-			<%= link_to 'x', li, :confirm => 'Are you sure?', :method => :delete, :class => 'admin-delete' %>
-		</span>
 	</h3>
 </li>
