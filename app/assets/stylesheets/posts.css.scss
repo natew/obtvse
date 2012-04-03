@@ -66,14 +66,13 @@ header {
   top: 0;
   left: 50%;
   margin-left: -290px;
-  padding: 15px 0 0;
+  padding: 5px 0 0;
   text-align: center;
   background: #fff;
   z-index: 10000;
-  border-bottom: 1px dotted #ddd;
 
   h1 {
-      margin: 0 0 20px 0;
+      margin: 0 0 10px 0;
       height: 23px;
       border-bottom: 1px dotted #ddd;
 
@@ -89,7 +88,7 @@ header {
 
 header ul {
   padding: 0;
-  margin: 15px 0;
+  margin: 10px 0;
   list-style-type:none;
 }
 
