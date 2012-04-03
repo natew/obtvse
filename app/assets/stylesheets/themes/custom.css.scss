@@ -1,2 +1,37 @@
 /* Insert your custom theme here */
 
+.ray {
+	position: absolute;
+	top: 15px;
+	right: 50px;
+	border-radius: 4px;
+	display: block;
+	width: 40px;
+	height: 40px;
+	background: black url(http://fast.svbtle.com/cargo/misc/down_arrow_tiny_white-bdff8e15395c44d000e8bb19d9043d4f.png) 50% 50% no-repeat;
+	z-index: 9999;
+	display: block;
+}
+.ray:hover {
+	background-color:red;
+	cursor: pointer;
+}
+.about-bar {
+	border: 1px solid darkGray;
+	border-radius: 5px;
+	background-color: white;
+	position: absolute;
+	top: 50px;
+	right: 40px;
+	width: 250px;
+	box-shadow: 0 0 3px #a9a9a9;
+	z-index: 999;
+	display: none;
+}
+.about-bar h1 {
+	font-size:35px;
+}
+.about-bar li {
+	padding:10px;
+
+}

@@ -1,0 +1,13 @@
+!!! 5
+%html
+  %head
+    %title= html_title yield(:title)
+    %meta{:name=>"author", :content=>CONFIG['name']}
+    = stylesheet_link_tag    "application"
+    = stylesheet_link_tag "http://fonts.googleapis.com/css?family=Lato:300,900"
+    = csrf_meta_tags
+    %link{:href=>"/posts.rss", :rel=>"alternate", :title=>"RSS", :type=>"application/rss+xml"}
+
+    
+  %body{:class=>"#{controller_name} #{action_name}"}
+    %h1= @posts

@@ -1,10 +1,10 @@
 ---
-title:               Obtvse Demo
-tagline:             Clever tagline.
-login:               <%= ENV["obtvse_login"] ? ENV["obtvse_login"] : "username" %>
-password:            <%= ENV["obtvse_password"] ? ENV["obtvse_password"] : "password" %>
-name:                Your name
-twitter:             your_twitter_handle
-github:              your_github_handle
-email:               address@example.com
-google_analytics_id: YOUR_GA_ID
+title:               Pablo's Log
+tagline:             No! Not another!
+login:               <%= ENV["obtvse_login"] ? ENV["obtvse_login"] : "pablo" %>
+password:            <%= ENV["obtvse_password"] ? ENV["obtvse_password"] : "pablo" %>
+name:                Pablo Merino
+twitter:             _pmerino
+github:              pablo-merino
+email:               
+google_analytics_id: UA-30566878-1

@@ -110,6 +110,8 @@ class PostsController < ApplicationController
 	def choose_layout
 		if ['admin', 'new', 'edit', 'create'].include? action_name
 			'admin'
+		elsif request.user_agent !=~ /.*\(iPhone|iPod|iPad;.*\)/
+      		'mobile'		
 		else
 			'application'
 		end

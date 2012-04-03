@@ -33,7 +33,11 @@
             = "Posted #{@post.created_at.to_formatted_s(:day_month_year)}"
           - else
             = Time.now.to_formatted_s(:day_month_year)
-        
+        .ray
+        %ul{:class=>"about-bar"}
+          %li
+            %h1 Pablo's Log
+          %li= link_to 'Login', '/login'
 
       #content
         - if notice
