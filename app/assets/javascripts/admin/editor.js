@@ -26,7 +26,8 @@ $(function() {
 	    drafts        = $('#drafts ul').data('items'),
 	    published     = $('#published ul').data('items'),
 	    selectedItem  = $('.col li:visible:first'),
-	    selectedIndex = 0;
+	    selectedIndex = 0,
+	    selectedCol   = 0;
 
 	function selectItem(selector) {
 		selectedItem.removeClass('selected');
@@ -71,10 +72,26 @@ $(function() {
 			// Right
 			case 39:
 				e.preventDefault();
+				if (selectedCol == 0) {
+					var item = $('#published li:visible:first');
+					if (item) {
+						selectItem(item);
+						selectedCol = 1;
+						selectedIndex = 0;
+					}
+				}
 				break;
 			// Left
 			case 37:
 				e.preventDefault();
+				if (selectedCol == 1) {
+					var item = $('#drafts li:visible:first');
+					if (item) {
+						selectItem(item);
+						selectedCol = 0;
+						selectedIndex = 0;
+					}
+				}
 				break;
 		}
 	}).keyup(function(e) {
