@@ -1,25 +1,25 @@
 source 'https://rubygems.org'
 
-gem 'rails', '~> 3'
+gem 'rails', '3.1.3'
 
 # Extention libraries
-gem 'thin', '~> 1'
+gem 'thin'
 
 # Rendering engines and vendor libraries
-gem 'jquery-rails', '~> 2'
+gem 'jquery-rails'
 gem 'rdiscount'
 gem 'haml'
 gem 'haml-rails'
 
 # Misc libraries
-# gem 'bcrypt-ruby', '~> 3', require: 'bcrypt'
-gem 'stringex', '~> 1', git: 'git://github.com/rsl/stringex.git'
-gem 'kaminari', '~> 0.13'
-
+# gem 'bcrypt-ruby'
+gem 'stringex'
+gem 'kaminari'
+gem 'therubyracer'
 group :production do
-  # gem 'newrelic_rpm', '~> 3'
-  # gem 'dalli', '~> 1'
-  gem 'pg', '~> 0.13'
+  # gem 'newrelic_rpm'
+  # gem 'dalli'
+  gem 'pg'
 end
 
 group :development do
