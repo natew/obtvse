@@ -39,6 +39,11 @@ class PostsController < ApplicationController
 		end
 	end
 
+	def get
+		@post = Post.find_by_id(params[:id])
+		render :text => @post.content
+	end
+
 	def edit
 		@no_header = true
 		@post = Post.find(params[:id])
