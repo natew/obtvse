@@ -14,12 +14,12 @@ input, textarea {outline:none; background:none;}
 
 body {
   background: #fff;
-  color: #444;
+  color: #555;
 }
 
 body, textarea, pre, input, li {
   font-family: 'Istok Web', Helvetica, Arial, sans-serif;
-  line-height: 1.9em;
+  line-height: 1.8em;
   font-size: 16px;
 }
 
@@ -42,7 +42,7 @@ h1,
 #text-title pre,
 #text-title textarea {
   font-weight: 900;
-  font-size: 42px;
+  font-size: 36px;
 }
 
 p {
@@ -52,7 +52,7 @@ p {
 a,
 a:visited
 a:active {
-  color: #666;
+  color: #333;
 }
 
 a:hover,
@@ -68,7 +68,7 @@ header {
   z-index: 10000;
 
   h1 {
-      margin: 15px 0;
+      margin: 15px 0 25px;
       height: 23px;
       border-bottom: 1px dotted #ddd;
 
@@ -114,8 +114,8 @@ header li a {
 
   time {
     padding: 30px 0;
-    font-size: 12px;
-    font-size: #999;
+    font-size: 13px;
+    color: #999;
     display: block;
     text-align: center;
   }
@@ -124,7 +124,7 @@ header li a {
 #content {
   section {
     padding: 0;
-    margin: 0 0 100px 0;
+    margin: 0 0 60px 0;
     position: relative;
   }
 
