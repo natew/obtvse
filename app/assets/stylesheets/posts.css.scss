@@ -1,5 +1,11 @@
 
 /* TODO: pull out coloring into variables */
+
+* {
+  font-smooth:always;-webkit-font-smoothing:antialiased;
+
+}
+
 $linkhover: red;
 
 div:before, div:after {content:''; display:table;}
@@ -15,7 +21,7 @@ body {
 }
 
 body, textarea, pre, input {
-  font-family: 'Lato', Helvetica, sans-serif;
+  font-family: 'HelveticaNeue', Arial;
   line-height: 1.8em;
   font-size: 16px;
   font-weight: 400;

@@ -1,0 +1,25 @@
+%section{:id=>"post-#{post.id.to_s}"}
+  %div{:class=>"post contain"}
+    - if post.external?
+      %h1{:class=>"external"}
+        - if @single_post
+          = link_to post.title, post.url 
+        - else
+          = link_to post.title, post.url
+        = link_to '⚓', post.slug, :class => 'permalink'
+    - else
+      %h1
+        - if @single_post
+          = post.title
+        - else
+          = link_to post.title, post.slug
+
+    -if post.content
+      = markdown(post.content).to_html.html_safe
+
+    - if is_admin?
+      %ul{:class=>"actions"}
+        %li= link_to 'Edit', "/edit/#{post.id.to_s}" unless @preview
+
+    - if @single_post
+      %a{:class=>"button space-top", :href=>"#{root_url}"}= "Back to Blog"

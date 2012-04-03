@@ -1,0 +1,16 @@
+!!! 5
+%html
+  %head
+    %title= html_title yield(:title) 
+    = stylesheet_link_tag    "application"
+    = stylesheet_link_tag "http://fonts.googleapis.com/css?family=Lato:300,900"
+    = csrf_meta_tags
+    
+    
+  %body{:class=>"admin #{controller_name} #{action_name}"}
+    #admin
+      #save
+      - if notice
+        %span{:class=>"notice"}= notice
+      = yield
+    = javascript_include_tag "application"

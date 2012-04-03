@@ -1,0 +1,49 @@
+!!! 5
+%html
+  %head
+    %title= html_title yield(:title)
+    %meta{:name=>"author", :content=>CONFIG['name']}
+    = stylesheet_link_tag    "application"
+    = stylesheet_link_tag "http://fonts.googleapis.com/css?family=Lato:300,900"
+    = csrf_meta_tags
+    %link{:href=>"/posts.rss", :rel=>"alternate", :title=>"RSS", :type=>"application/rss+xml"}
+
+    
+  %body{:class=>"#{controller_name} #{action_name}"}
+    - unless @no_header
+      %header
+        %h1= link_to CONFIG['title'], root_url
+        %span= CONFIG['tagline'].html_safe
+        %ul
+          - if CONFIG['twitter']
+            %li= link_to '@' + CONFIG['twitter'], 'http://twitter.com/' + CONFIG['twitter']
+          - if CONFIG['github']
+            %li= link_to 'github', 'https://github.com/' + CONFIG['github']
+          - if CONFIG['email']
+            %li= link_to 'say hi', "mailto:#{CONFIG['email']}?subject:whats up!"
+          %li= link_to 'rss feed', '/posts.rss'
+        %span{:class=>"powered-by"}
+          = 'Powered by <a href="http://github.com/natew/obtvse.git">Obtvse</a>'.html_safe
+          - if is_admin? 
+            = '&nbsp;&middot;&nbsp; <a href="/admin">Admin</a>'.html_safe
+    #container
+      - unless @no_header
+        %time
+          - if @post && @post.created_at
+            = "Posted #{@post.created_at.to_formatted_s(:day_month_year)}"
+          - else
+            = Time.now.to_formatted_s(:day_month_year)
+        
+
+      #content
+        - if notice
+          %span{:class=>"notice"}= notice
+        = yield
+    = javascript_include_tag "application"
+    - if CONFIG['google_analytics_id']
+      :javascript
+        var _gaq=[['_setAccount',"#{CONFIG['google_analytics_id']}"],['_trackPageview']];
+        (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+        g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+        s.parentNode.insertBefore(g,s)}(document,'script'));
+
