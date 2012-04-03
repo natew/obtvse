@@ -6,14 +6,16 @@
   <%= stylesheet_link_tag 'application' %>
   <meta name="author" content="<%= CONFIG['name'] %>">
   <link href="/posts.rss" rel="alternate" title="RSS" type="application/rss+xml" />
-  <link href='http://fonts.googleapis.com/css?family=Lato:300,900' rel='stylesheet' type='text/css' />
+  <link href='http://fonts.googleapis.com/css?family=Average' rel='stylesheet' type='text/css'>
 </head>
 
 <body class="<%= controller_name %> <%= action_name %>">
   <% unless @no_header %>
   <header>
     <h1><%= link_to CONFIG['title'], root_url %></h1>
-    <span><%= CONFIG['tagline'].html_safe %></span>
+    <% if CONFIG['tagline'] %>
+      <span><%= CONFIG['tagline'].html_safe %></span>
+    <% end %>
     <ul>
       <% if CONFIG['twitter'] %>
         <li><%= link_to '@' + CONFIG['twitter'], 'http://twitter.com/' + CONFIG['twitter'] %></li>

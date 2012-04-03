@@ -13,36 +13,46 @@ body {
   color: #222;
 }
 
-body, textarea, pre, input {
-  font-family: 'Lato', Helvetica, sans-serif;
+body, textarea, pre, input, li {
+  font-family: 'Average', Georgia, sans-serif;
   line-height: 1.8em;
-  font-size: 16px;
-  font-weight: 400;
+  font-size: 15px;
 }
 
 h1,h2,h3,h4,h5,#text-title pre {
-  font-weight: 900;
   word-wrap: break-word;
-  line-height: 1.3em;
+  font-weight: bold;
+  line-height: 1.7em;
+}
+
+h1 a,
+h2 a,
+h3 a,
+h4 a,
+h5 a {
+  text-decoration: none;
 }
 
 h1,
 #text-title pre,
 #text-title textarea {
   font-weight: 900;
-  font-size: 35px;
+  font-size: 42px;
 }
 
+h2 {font-size: 20px;}
+h3 {font-size: 20px;}
+
 p {
-  color: #555;
+  color: #444;
+  line-height: 1.6em;
+  margin: 1em 0;
 }
 
 a,
 a:visited
 a:active {
-  color: #000;
-  text-decoration: none;
-  border-bottom: 1px solid #ddd;
+  color: #444;
 }
 
 a:hover,
@@ -51,64 +61,81 @@ a:hover,
 }
 
 header {
-  width: 162px;
-  border-right: 1px solid #DDD;
   position: fixed;
+  width: 400px;
   top: 0;
-  bottom: 0;
-  padding: 20px 40px;
+  left: 0;
 
-  span {
-    color: #888;
-    font-weight: 500;
+  h1 {
+      margin: 0;
+      height: 500px;
+      overflow: hidden;
 
-    &.powered-by {
-      position: absolute;
-      bottom: 30px;
-      font-size: 11px;
+    a {
+      background: red;
+      display: block;
+      padding: 0 20px 20px 0;
+      text-align: right;
+      font-weight: normal;
+      font-size: 600px;
+      line-height: 1em;
+      color: #fff;
+
+      &:hover {
+        color: #fff;
+        background: darkred;
+      }
     }
   }
 
-  ul {
-    padding: 0;
-    margin: 50px 0;
-  }
+  span {
+    color: #888;
 
-  li {
-    margin: 0 0 3px 0;
-
-    a {
-      padding: 2px 0;
-      color: #888;
-      border-bottom: 2px solid #eee;
-
-      &:hover {
-        border-color: #777;
-        color: #444;
-      }
+    &.powered-by {
+      position: absolute;
+      bottom: 0;
+      left: 50px;
+      font-size: 11px;
     }
   }
 }
 
+header ul {
+  padding: 0;
+  margin: 50px;
+}
+
+header li {
+  margin: 0 0 3px 0;
+}
+
+header li a {
+  padding: 2px 0;
+  color: #888;
+
+  &:hover {
+    border-color: #777;
+    color: #444;
+  }
+}
+
 #container {
-  margin-left: 243px;
+  margin-left: 400px;
+  padding-left: 30px;
   position: relative;
 
   time {
+    padding: 20px 0 60px;
     display: block;
-    padding: 20px 0 20px 50px;
-    text-transform: uppercase;
-    font-weight: 900;
-    font-size: 12px;
-    border-bottom: 1px solid #ddd;
   }
 }
 
 #content {
   section {
-    padding: 26px 0 40px 50px;
-    border-bottom: 1px solid #ddd;
+    padding: 0;
+    margin: 0 0 120px 0;
     position: relative;
+    line-height: .5em;
   }
 
   h1.external {
@@ -138,7 +165,7 @@ code {
 
 .contain,
 #new_post, .edit_post {
-  width: 580px;
+  width: 480px;
   position: relative;
 }
 
@@ -200,11 +227,10 @@ fieldset.markdown {
   position: fixed;
   bottom: 0;
   left: 0;
-  background: #222;
-  color: #fff;
   width: 100%;
   text-align: center;
   padding: 15px 0 15px;
+  background: #eee;
 
   .contain {
     margin: 0 auto;
@@ -251,30 +277,16 @@ fieldset.markdown {
 #publish-bar a,
 .button {
   display: inline-block;
-  background: #000;
+  color: #888;
   padding: 8px 12px;
   font-weight: bold;
   border: none;
-  color: #fff;
-          border-radius: 5px;
-     -moz-border-radius: 5px;
-  -webkit-border-radius: 5px;
+  text-decoration: none;
 }
 
 .button.secondary {
-  padding: 0 5px;
-  background: #aaa;
-  font-size: 12px;
-}
-
-#publish-bar input[type=submit]:hover,
-#publish-bar a:hover,
-.col h1 a:hover,
-.col h2 a:hover,
-.button:hover,
-.button.secondary:hover {
-  background: $linkhover;
-  color: #fff;
+  color: #888;
+  font-weight: normal;
 }
 
 .button.space-top {
@@ -338,13 +350,12 @@ label {
 }
 
 #admin {
-  width: 808px;
+  width: 800px;
   margin: 0 auto;
   position: relative;
 
   #drafts {
     float: left;
-    border: 4px solid #000;
     border-top: none;
     background: #fff;
     margin: 0 0 20px 0;
@@ -395,56 +406,50 @@ label {
     padding: 20px;
 
     h2 a {
-      background: #999;
-
       &:hover {
         background: $linkhover;
       }
     }
+  }
 
-    ul {
-      padding: 0;
+.col ul {padding: 0;}
+.col li {
+    padding: 15px 0;
+    position: relative;
 
-      li {
-        border-bottom: 1px solid #ddd;
-        padding: 15px 0;
-        position: relative;
+    &:hover .links {
+      visibility: visible;
+    }
 
-        &:hover .links {
-          visibility: visible;
+    .links {
+      position: absolute;
+      right: 0;
+      top: 14px;
+      background: #fff;
+      padding: 1px 8px;
+      visibility: hidden;
+
+      a {
+        color: #999;
+                border-radius: 5px;
+           -moz-border-radius: 5px;
+        -webkit-border-radius: 5px;
+
+        &:hover {
+          color: $linkhover;
         }
+      }
+    }
 
-        .links {
-          position: absolute;
-          right: 0;
-          top: 14px;
-          background: #fff;
-          padding: 1px 8px;
-          visibility: hidden;
+    h3 {
+      margin: 0;
+      font-size: 16px;
+      max-width: 100%;
+      text-overflow: ellipsis;
+      overflow: hidden;
 
-          a {
-            color: #999;
-                    border-radius: 5px;
-               -moz-border-radius: 5px;
-            -webkit-border-radius: 5px;
-
-            &:hover {
-              color: $linkhover;
-            }
-          }
-        }
-
-        h3 {
-          margin: 0;
-          font-size: 16px;
-          max-width: 100%;
-          text-overflow: ellipsis;
-          overflow: hidden;
-
-          a {
-            border: none;
-          }
-        }
+      a {
+        border: none;
       }
     }
   }
@@ -515,12 +520,12 @@ label {
 nav.pagination {
   text-align: right;
   font-size: 16px;
-  font-weight: 900;
-  text-transform: uppercase;
   margin: 0;
   padding: 0;
+  font-weight: bold;
 }
 
   nav.pagination a {
-    margin-left: 10px;
+    text-decoration: none;
+    color: #999;
   }
