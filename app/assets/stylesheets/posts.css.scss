@@ -61,18 +61,14 @@ a:hover,
 }
 
 header {
-  position: fixed;
   width: 580px;
-  top: 0;
-  left: 50%;
-  margin-left: -290px;
-  padding: 5px 0 0;
+  margin: 0 auto;
   text-align: center;
   background: #fff;
   z-index: 10000;
 
   h1 {
-      margin: 0 0 10px 0;
+      margin: 0 0 15px 0;
       height: 23px;
       border-bottom: 1px dotted #ddd;
 
@@ -111,13 +107,15 @@ header li a {
 }
 
 #container {
-  padding: 100px 0 0;
+  padding: 0;
   margin: 0 auto;
   width: 480px;
   position: relative;
 
   time {
     padding: 30px 0;
+    font-size: 12px;
+    font-size: #999;
     display: block;
     text-align: center;
   }
