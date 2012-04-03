@@ -63,7 +63,6 @@ a:hover,
 header {
   width: 580px;
   margin: 0 auto;
-  text-align: center;
   background: #fff;
   z-index: 10000;
 
@@ -76,7 +75,7 @@ header {
       font-size: 30px;
       text-transform: uppercase;
       color: #000;
-      padding: 0 15px;
+      padding: 0 15px 0 0;
       background: #fff;
     }
   }
@@ -106,12 +105,15 @@ header li a {
   }
 }
 
+body.show #container time {display:block;}
+
 #container {
   padding: 0;
   margin: 0 auto;
   position: relative;
 
   time {
+    display: none;
     padding: 30px 0;
     font-size: 13px;
     color: #999;
