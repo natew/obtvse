@@ -109,7 +109,6 @@ header li a {
 #container {
   padding: 0;
   margin: 0 auto;
-  width: 480px;
   position: relative;
 
   time {
@@ -153,9 +152,11 @@ code {
 	display: block;
 }
 
+#container,
 .contain,
-#new_post, .edit_post {
-  width: 480px;
+#new_post,
+.edit_post {
+  width: 580px;
   position: relative;
 }
 
