@@ -72,6 +72,7 @@ header {
   padding: 15px 0 0;
   text-align: center;
   background: #fff;
+  z-index: 10000;
 
   h1 {
       margin: 0 0 20px 0;
@@ -102,11 +103,12 @@ header ul {
 header li {
   margin: 0 8px;
   display: inline;
+  font-size: 14px;
+  color: #ccc;
 }
 
 header li a {
   padding: 2px 0;
-  font-size: 14px;
   color: #999;
   text-decoration: none;
 
@@ -117,7 +119,7 @@ header li a {
 }
 
 #container {
-  padding: 150px 0 0;
+  padding: 100px 0 0;
   margin: 0 auto;
   width: 480px;
   position: relative;
