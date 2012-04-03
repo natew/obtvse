@@ -1,0 +1,21 @@
+!!! 5
+%html
+	%head
+		%title= html_title yield(:title)
+		%meta{:name=>"author", :content=>CONFIG['name']}
+		= stylesheet_link_tag    "mobile"
+		= csrf_meta_tags
+		%meta{:content=>"width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no", :name=>"viewport"}
+		%link{:href=>"/posts.rss", :rel=>"alternate", :title=>"RSS", :type=>"application/rss+xml"}
+		%meta{:name=>"apple-mobile-web-app-capable", :content=>"yes"}
+	%body
+		.container
+			.title
+				%h1= link_to CONFIG['title'], root_url
+				%hr/
+				%small=  CONFIG['tagline'].html_safe
+
+			= yield
+
+			= javascript_include_tag 'jquery'
+			= javascript_include_tag 'mobile'

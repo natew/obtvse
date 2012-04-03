@@ -1,0 +1,51 @@
+* {
+  font-smooth:always;-webkit-font-smoothing:antialiased;
+  font-family: "HelveticaNeue", sans-serif;
+}
+html, body {
+	margin:0;
+	padding:0;
+	background-image:url(./ptn.png);
+}
+.container {
+	max-width:480px;
+	padding:10px;
+}
+a {
+	text-decoration: none;
+}
+a:visited {
+	color:#1122CC;
+}
+.post {
+	border:1px solid #CCC;
+	border-radius:10px;
+	padding:10px;
+	margin-bottom:15px;
+	background-color: white;
+}
+.title {
+	border:1px solid #CCC;
+	padding:10px;
+	padding-left:0;
+	padding-right:0;
+	margin-bottom:15px;
+
+	border-radius:10px;
+	background-color: white;
+
+
+}
+.title h1, .title small {
+	margin:0;
+	padding-left:10px;
+}
+hr {
+	border:1px solid #CCC;
+	width:99.9%;
+	margin:0;
+	padding:0;
+}
+html, body, form, fieldset, p, div, h1, h2, h3, h4, h5, h6 {
+    -webkit-text-size-adjust:none;
+}
