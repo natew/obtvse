@@ -1,4 +1,4 @@
-%section{:id=>"post-#{post.id}"}
+%section{:id=>"post-#{post.id.to_s}"}
   %div{:class=>"post contain"}
     - if post.external?
       %h1{:class=>"external"}

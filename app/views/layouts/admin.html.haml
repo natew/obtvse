@@ -10,6 +10,7 @@
   %body{:class=>"admin #{controller_name} #{action_name}"}
     #admin
       #save
-      %span{:class=>"notice"}= notice
+      - if notice
+        %span{:class=>"notice"}= notice
       = yield
     = javascript_include_tag "application"

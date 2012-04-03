@@ -33,6 +33,8 @@
             = "Posted #{@post.created_at.to_formatted_s(:day_month_year)}"
           - else
             = Time.now.to_formatted_s(:day_month_year)
+        
+
       #content
         - if notice
           %span{:class=>"notice"}= notice
