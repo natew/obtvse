@@ -24,13 +24,13 @@
         <li><%= link_to 'github', 'https://github.com/' + CONFIG['github'] %></li>
       <% end %>
       <% if CONFIG['email'] %>
-        <li><%= link_to 'say hi', "mailto:#{CONFIG['email']}?subject:whats up!" %></li>
+        <li><%= link_to 'email', "mailto:#{CONFIG['email']}?subject:whats up!" %></li>
       <% end %>
-      <li><%= link_to 'rss feed', '/posts.rss' %></li>
+      <li><%= link_to 'rss', '/posts.rss' %></li>
+      <li>Powered by <a href="http://github.com/natew/obtvse.git">Obtvse</a></li>
+      <% if is_admin? %><li><a href="/admin">Admin</a></li><% end %>
     </ul>
     <span class="powered-by">
-      Powered by <a href="http://github.com/natew/obtvse.git">Obtvse</a>
-      <% if is_admin? %> &nbsp;&middot;&nbsp; <a href="/admin">Admin</a><% end %>
   </span>
 
   </header>
