@@ -68,7 +68,7 @@ header {
   z-index: 10000;
 
   h1 {
-      margin: 0 0 15px 0;
+      margin: 15px 0;
       height: 23px;
       border-bottom: 1px dotted #ddd;
 
@@ -268,7 +268,7 @@ fieldset.markdown {
 .button {
   display: inline-block;
   color: #888;
-  padding: 8px 12px;
+  padding: 8px 0;
   font-weight: bold;
   border: none;
   text-decoration: none;
