@@ -13,7 +13,7 @@ gem 'rdiscount'
 # gem 'bcrypt-ruby', '~> 3', require: 'bcrypt'
 gem 'stringex', '~> 1', git: 'git://github.com/rsl/stringex.git'
 gem 'kaminari', '~> 0.13'
-
+gem 'haml'
 group :production do
   # gem 'newrelic_rpm', '~> 3'
   # gem 'dalli', '~> 1'
