@@ -75,7 +75,6 @@ header {
 
   h1 {
       margin: 0 0 20px 0;
-      overflow: hidden;
       height: 16px;
       border-bottom: 1px dotted #ddd;
 
@@ -120,11 +119,13 @@ header li a {
 #container {
   padding: 150px 0 0;
   margin: 0 auto;
+  width: 480px;
   position: relative;
 
   time {
-    padding: 20px 0 60px;
+    padding: 30px 0;
     display: block;
+    text-align: center;
   }
 }
 
