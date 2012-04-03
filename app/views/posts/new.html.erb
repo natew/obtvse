@@ -5,7 +5,7 @@
 <%= render 'form' %>
 
 <div id="posts" class="contain">
-	<div id="drafts" class="col">
+	<div id="drafts" class="col active">
 		<h2>Drafts</h2>
 	  <ul data-items="<%= @drafts.to_json(:only => [:id, :title]) %>">
 	  <%= render :partial => 'li', :collection => @drafts %>
