@@ -1,3 +1,8 @@
+@font-face {
+  font-family: 'Geogrotesque-SemiBold';
+  src: url('/fonts/219E67_0_0.eot');
+  src: url('/fonts/219E67_0_0.eot?#iefix') format('embedded-opentype'), url('/fonts/219E67_0_0.woff') format('woff'), url('/fonts/219E67_0_0.ttf') format('truetype');
+}
 
 /* TODO: pull out coloring into variables */
 $linkhover: red;
@@ -70,6 +75,7 @@ header {
       margin: 0;
       height: 500px;
       overflow: hidden;
+      display: none;
 
     a {
       background: red;
