@@ -3,3 +3,18 @@
 <% end %>
 
 <%= render 'form' %>
+
+<div id="posts" class="contain">
+	<div id="drafts" class="col active">
+		<h2>Drafts</h2>
+	  <ul data-items="<%= @drafts.to_json(:only => [:id, :title]) %>">
+	  <%= render :partial => 'li', :collection => @drafts %>
+	  </ul>
+	</div>
+	<div id="published" class="col">
+		<h2>Published</h2>
+	  <ul data-items="<%= @published.to_json(:only => [:id, :title]) %>">
+	  <%= render :partial => 'li', :collection => @published %>
+	  </ul>
+	</div>
+</div>
