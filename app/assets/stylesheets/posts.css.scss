@@ -81,7 +81,9 @@ header {
 }
 
 header:before,
-header:after {
+header:after,
+.clearfix:before,
+.clearfix:after, {
   content:"";
   display:table;
 }
