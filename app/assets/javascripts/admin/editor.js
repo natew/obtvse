@@ -26,6 +26,8 @@ $(function() {
 	    preview        = false,
 	    changed        = false,
 	    editing        = false,
+	    disableNav     = false,
+	    disableKeys    = [91, 16, 17, 18],
 	    saveInterval   = 5000,
 	    draftsItems    = $('#drafts ul').data('items'),
 	    publishedItems = $('#published ul').data('items'),
@@ -44,7 +46,7 @@ $(function() {
 			admin.addClass('editing')
 		} else {
 			admin.removeClass('editing');
-			$('#post_title').val('');
+			$('#post_title').val('').focus();
 		}
 	}
 
@@ -54,7 +56,7 @@ $(function() {
 		$('#bar div').hover(function() {
 			$('#bar div').stop().animate({opacity:1});
 		}, function() {
-			$('#bar div').stop().delay(500).animate({opacity:0});
+			$('#bar div').delay(500).animate({opacity:0});
 		}).delay(1500).animate({opacity:0});
 		$.get('/get/'+id, function(data) {
 			$('#new_post').attr('action', '/edit/'+id);
@@ -86,7 +88,6 @@ $(function() {
 		if (!editing) {
 			// Selecting
 			if (selectedItem.length == 0 || selectedItem.is('.hidden')) {
-				console.log('reset');
 				selectItem($('.col li:visible:first'));
 				selectedIndex = 0;
 			}
@@ -120,7 +121,11 @@ $(function() {
 	// Movement on columns
 	$(window).keydown(function(e) {
 		console.log(e.which);
-		if (!editing) {
+
+		// Disable keyboard shortcuts for action keys
+		if ($.inArray(e.which,disableKeys) >= 0) disableNav = true;
+
+		if (!editing && !disableNav) {
 			switch (e.which) {
 				// Enter
 				case 13:
@@ -151,8 +156,8 @@ $(function() {
 					break;
 				// Right
 				case 39:
-					e.preventDefault();
 					if (selectedCol == 0) {
+						e.preventDefault();
 						var item = $('#published li:visible:first');
 						if (item) {
 							selectItem(item);
@@ -163,8 +168,8 @@ $(function() {
 					break;
 				// Left
 				case 37:
-					e.preventDefault();
 					if (selectedCol == 1) {
+						e.preventDefault();
 						var item = $('#drafts li:visible:first');
 						if (item) {
 							selectItem(item);
@@ -185,6 +190,9 @@ $(function() {
 					break;
 			}
 		}
+	}).keyup(function(e) {
+		// Stop disable
+		if ($.inArray(e.which,disableKeys) >= 0) disableNav = false;
 	});
 
 	// Edit a post on click
