@@ -16,7 +16,7 @@
     <% if CONFIG['tagline'] %>
       <span><%= CONFIG['tagline'].html_safe %></span>
     <% end %>
-    <ul>
+    <ul class="clearfix">
       <% if CONFIG['twitter'] %>
         <li><%= link_to '@' + CONFIG['twitter'], 'http://twitter.com/' + CONFIG['twitter'] %></li>
       <% end %>
