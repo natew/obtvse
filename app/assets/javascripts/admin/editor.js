@@ -43,8 +43,13 @@ $(function() {
 	}
 
 	function editSelectedItem() {
-		setEditing(true);
 		var id = selectedItem.attr('id').split('-')[1];
+		setEditing(true);
+		$('#bar div').hover(function() {
+			$('#bar div').stop().animate({opacity:1});
+		}, function() {
+			$('#bar div').stop().delay(500).animate({opacity:0});
+		}).delay(1500).animate({opacity:0});
 		$.get('/get/'+id, function(data) {
 			$('#new_post').attr('action', '/edit/'+id);
 			$('#post_title').val(selectedItem.find('a').html());
