@@ -44,7 +44,7 @@ $(function() {
 			admin.addClass('editing')
 		} else {
 			admin.removeClass('editing');
-			$('#post_title').val('');
+			$('#post_title').val('').focus();
 		}
 	}
 

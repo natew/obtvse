@@ -47,7 +47,7 @@ a:active {
 
 a:hover,
 #admin #published h3 a:hover {
-  color: $linkhover;
+  color: $linkhover !important;
 }
 
 header {
