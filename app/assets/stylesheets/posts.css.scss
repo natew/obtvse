@@ -62,7 +62,7 @@ a:hover,
 
 header {
   width: 580px;
-  margin: 0 auto;
+  margin: 0 auto 20px;
   background: #fff;
   z-index: 10000;
 
@@ -78,6 +78,12 @@ header {
       background: #fff;
     }
   }
+}
+
+header:before,
+header:after {
+  content:"";
+  display:table;
 }
 
 header ul {
@@ -124,6 +130,8 @@ body.show #container time {display:block;}
 }
 
 #content {
+  clear: both;
+
   section {
     padding: 0;
     margin: 0 0 60px 0;
