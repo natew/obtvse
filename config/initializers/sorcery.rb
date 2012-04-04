@@ -2,7 +2,7 @@
 # The default is nothing which will include only core features (password encryption, login/logout).
 # Available submodules are: :user_activation, :http_basic_auth, :remember_me,
 # :reset_password, :session_timeout, :brute_force_protection, :activity_logging, :external
-Rails.application.config.sorcery.submodules = [:remember_me, :reset_password]
+Rails.application.config.sorcery.submodules = []
 
 # Here you can configure each submodule's features.
 Rails.application.config.sorcery.configure do |config|
@@ -218,14 +218,14 @@ Rails.application.config.sorcery.configure do |config|
     # Default: `nil`
     #
     # user.user_activation_mailer =
-    
-    
+
+
     # when true sorcery will not automatically
     # email activation details and allow you to
     # manually handle how and when email is sent.
     # Default: `false`
     #
-    # user.activation_mailer_disabled = 
+    # user.activation_mailer_disabled =
 
 
     # activation needed email method on your mailer class.
@@ -247,6 +247,7 @@ Rails.application.config.sorcery.configure do |config|
 
 
     # -- reset_password --
+
     # reset password code attribute name.
     # Default: `:reset_password_token`
     #
@@ -282,17 +283,17 @@ Rails.application.config.sorcery.configure do |config|
     # manually handle how and when email is sent
     # Default: `false`
     #
-    # user.reset_password_mailer_disabled =                                      
+    # user.reset_password_mailer_disabled =
 
-                                                                          
-    # reset password email                                                                                   
+
+    # reset password email
     # method on your mailer
     # class.
     # Default: `:reset_password_email`
     #
-    # user.reset_password_email_method_name =                            
+    # user.reset_password_email_method_name =
 
-                                                                                         
+
     # how many seconds before the reset request expires. nil for never expires.
     # Default: `nil`
     #
