@@ -1,9 +1,3 @@
-@mixin transition($property: all, $type: linear, $time: 0.2s) {
-  -webkit-transition: $property $type $time;
-  -moz-transition: $property $type $time;
-  transition: $property $type $time;
-}
-
 /* TODO: pull out coloring into variables */
 $linkhover: red;
 
@@ -36,7 +30,7 @@ h1,
 #text-title pre,
 #text-title textarea {
   font-weight: 900;
-  font-size: 30px;
+  font-size: 27px;
 }
 
 p {
@@ -222,6 +216,10 @@ body.posts.new #admin {
     #posts {
       display: none;
     }
+
+    #bar {
+      display: block;
+    }
   }
 
   #posts {
@@ -370,7 +368,8 @@ fieldset.markdown {
 }
 
 #text-title {
-  margin: 20px 0 0;
+  margin: 20px 0;
+  border-bottom: 2px solid #eee;
 }
 
   #text-title textarea,
@@ -431,6 +430,7 @@ form .permalink {
   #post-editor {
     left: 0;
     margin: 0;
+    width: 50%;
   }
 }
 
@@ -456,14 +456,36 @@ form .permalink {
 #bar {
   display: none;
   position: fixed;
+  top: 0;
   bottom: 0;
   left: 0;
-  width: 100%;
-  height: 80px;
-  padding: 0 20px;
+  right: 0;
+  margin: 0;
+  pointer-events: none;
           box-sizing: border-box;
      -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
+
+  div {
+    position: absolute;
+    padding: 20px;
+    pointer-events: auto;
+
+    a {
+      display: inline;
+      margin-left: 30px;
+      color: #ccc;
+      border: none;
+      font-size: 0.01px;
+    }
+  }
+
+  $box_padding: 120px;
+
+  .top-left     {top: 0; left: 0; padding-right: $box_padding; padding-bottom: $box_padding;}
+  .top-right    {top: 0; right: 0; padding-left: $box_padding; padding-bottom: $box_padding;}
+  .bottom-left  {bottom: 0; left: 0; padding-right: $box_padding; padding-top: $box_padding;}
+  .bottom-right {bottom: 0; right: 0; padding-left: $box_padding; padding-top: $box_padding;}
 }
 
 .admin-view {
