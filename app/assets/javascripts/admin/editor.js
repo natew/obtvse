@@ -22,6 +22,7 @@ $(function() {
 	    content        = document.getElementById('text-content'),
 	    published      = $('#published'),
 	    drafts         = $('#drafts'),
+	    admin          = $('#admin'),
 	    preview        = false,
 	    changed        = false,
 	    editing        = false,
@@ -39,7 +40,12 @@ $(function() {
 
 	function setEditing(val) {
 		editing = val;
-		editing ? $('#admin').addClass('editing') : $('#admin').removeClass('editing');
+		if (editing) {
+			admin.addClass('editing')
+		} else {
+			admin.removeClass('editing');
+			$('#post_title').val('');
+		}
 	}
 
 	function editSelectedItem() {
@@ -202,6 +208,10 @@ $(function() {
 			$(window).scrollTop(bottom);
 		}
 	});
+
+	$('#back-button').click(function() {
+		if (editing) setEditing(false);
+	})
 
 	// Preview button
 	$('#preview-button').click(function(e){
