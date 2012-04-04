@@ -1,49 +1,65 @@
 <%= form_for @post do |f| %>
-  <div class="contain">
-    <%- if @post.errors.any? -%>
-    <div class="notice">
-      <%- @post.errors.full_messages.each do |msg| -%>
-        <%= msg %>
+
+<div id="split">
+  <div id="post-editor" class="split-section">
+    <div class="inner">
+      <%- if @post.errors.any? -%>
+      <div class="notice">
+        <%- @post.errors.full_messages.each do |msg| -%>
+          <%= msg %>
+        <%- end -%>
+      </div>
       <%- end -%>
-    </div>
-    <%- end -%>
 
-    <%= link_to '⚓', @post, :class => 'permalink', :target => '_blank' if @post.slug %>
-    <div id="text-title" class="expandingArea">
-      <pre><span></span><br></pre>
-      <%= f.text_area :title, :rows => 1, :placeholder => 'Title here' %>
-    </div>
-
-    <fieldset class="markdown">
-      <div id="text-content" class="expandingArea">
+      <%= link_to '⚓', @post, :class => 'permalink', :target => '_blank' if @post.slug %>
+      <div id="text-title" class="expandingArea">
         <pre><span></span><br></pre>
-        <%= f.text_area :content, :placeholder => 'Write post here' %>
+        <%= f.text_area :title, :rows => 1, :placeholder => 'Enter your idea...' %>
       </div>
-    </fieldset>
-  </div>
-  <div id="publish-bar">
-    <div class="contain">
-      <div class="left">
-        <a href="/admin">&laquo; Admin</a>
-        <%= link_to 'Delete', @post, :confirm => 'Are you sure?', :method => :delete, :class => 'delete-bar' %>
-        <%= link_to 'Options', '#options', :class => 'menu' %>
-        <ul id="options" class="sub-menu">
-          <li>
-            <%= f.label :url, 'Slug' %>
-            <%= f.text_field :slug, :placeholder => 'Leave blank to automatically generate' %>
-          </li>
-          <li>
-            <%= f.label :url, 'URL' %>
-            <%= f.text_field :url, :placeholder => 'Optional external link' %>
-          </li>
-        </ul>
-      </div>
-      <div class="right">
-        <%= f.label :draft %>
-        <%= f.check_box :draft %>
-        <%= f.submit 'Preview', :id => 'preview-button', :preview => true, :target => "_blank" %>
-        <%= f.submit 'Save', :id => 'save-button' %>
-      </div>
+
+      <fieldset id="content-fieldset" class="markdown">
+        <div id="text-content" class="expandingArea">
+          <pre><span></span><br></pre>
+          <%= f.text_area :content, :placeholder => 'Write post here' %>
+        </div>
+      </fieldset>
     </div>
   </div>
+  <div id="post-preview" class="split-section">
+  </div>
+</div>
+
+<div id="bar">
+  <div class="top-left">
+    <%= link_to 'Back', '#', :id => "back-button", :class => 'icon-arrow-left' %>
+  </div>
+
+  <div class="top-right">
+    <%= link_to 'Preview', '#', :id => 'preview-button', :target => "_blank", :class => 'icon-eye-open' %>
+  </div>
+
+  <div class="bottom-left">
+    <%= link_to 'Delete', @post, :confirm => 'Are you sure?', :method => :delete, :class => 'delete-bar' %>
+    <%= link_to 'Options', '#options', :class => 'menu' %>
+    <ul id="options" class="sub-menu">
+      <li>
+        <%= f.label :url, 'Slug' %>
+        <%= f.text_field :slug, :placeholder => 'Leave blank to automatically generate' %>
+      </li>
+      <li>
+        <%= f.label :url, 'URL' %>
+        <%= f.text_field :url, :placeholder => 'Optional external link' %>
+      </li>
+    </ul>
+  </div>
+
+  <div class="bottom-right">
+    <%= f.label :draft %>
+    <%= f.check_box :draft %>
+
+    <%= f.submit 'Save', :id => 'save-button' %>
+  </div>
+</div>
+
+
 <% end %>
