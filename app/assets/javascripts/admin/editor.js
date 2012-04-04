@@ -56,7 +56,7 @@ $(function() {
 		$('#bar div').hover(function() {
 			$('#bar div').stop().animate({opacity:1});
 		}, function() {
-			$('#bar div').stop().delay(500).animate({opacity:0});
+			$('#bar div').delay(500).animate({opacity:0});
 		}).delay(1500).animate({opacity:0});
 		$.get('/get/'+id, function(data) {
 			$('#new_post').attr('action', '/edit/'+id);
