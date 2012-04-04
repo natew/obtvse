@@ -67,14 +67,15 @@ header {
   z-index: 10000;
 
   h1 {
-      margin: 15px 0 25px;
+      margin: 15px 0 30px;
       height: 17px;
       border-bottom: 1px solid #ddd;
+      text-align: center;
 
     a {
       font-size: 24px;
       color: #999;
-      padding: 0 15px 0 0;
+      padding: 0 15px;
       background: #fff;
     }
   }
@@ -98,7 +99,7 @@ header li.right {float: right;}
 header li {
   margin: 0 8px;
   display: inline;
-  font-size: 13px;
+  font-size: 17px;
   color: #ccc;
   float: left;
 }
@@ -123,7 +124,7 @@ body.show #container time {display:block;}
 
   time {
     display: none;
-    padding: 30px 0;
+    margin: 0 0 30px 0;
     font-size: 13px;
     color: #999;
     text-align: center;
