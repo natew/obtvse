@@ -1,0 +1,21 @@
+- if !@single_post
+	- @posts.each do |p|
+		.post
+			- if p.external?
+				%h1{:class=>"external"}
+				- if @single_post
+					= link_to p.title, p.url 
+				- else
+					= link_to p.title, p.url
+				= link_to '⚓', p.slug, :class => 'permalink'
+			- else
+				%h1
+					- if @single_post
+						= p.title
+					- else
+						= link_to p.title, p.slug
+			%p= markdown(p.content).to_html.html_safe
+- else
+	.post
+		%h1= @posts.title
+		%p= markdown(@posts.content).to_html.html_safe

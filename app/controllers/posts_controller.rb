@@ -2,6 +2,7 @@ require 'rdiscount'
 
 class PostsController < ApplicationController
 	before_filter :authenticate, :except => [:index, :show]
+	before_filter :mobile
 	layout :choose_layout
 
 	def index
@@ -110,8 +111,25 @@ class PostsController < ApplicationController
 	def choose_layout
 		if ['admin', 'new', 'edit', 'create'].include? action_name
 			'admin'
+		elsif request.user_agent =~ /.*\(iPhone|iPod|iPad;.*\)/
+      		'mobile_layout'		
 		else
 			'application'
 		end
+	end
+
+	def mobile
+		if request.user_agent =~ /.*\(iPhone|iPod|iPad;.*\)/
+			if params[:slug]
+				@single_post = true
+				@posts = Post.find_by_slug(params[:slug])
+			else
+				@posts = Post.page(params[:page]).per(10).where(draft:false)
+
+				
+			end
+			render 'mobile'
+		end
+
 	end
 end

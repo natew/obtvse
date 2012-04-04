@@ -1,0 +1,40 @@
+= form_for @post do |f|
+  #split
+    %div{:class=>"split-section", :id=>"post-editor"}
+      - if @post.errors.any?
+        .notice
+          - @post.errors.full_messages.each do |msg|
+            = msg
+
+      = link_to '⚓', @post, :class => 'permalink', :target => '_blank' if @post.slug
+      %div{:class=>"expandingArea", :id=>"text-title"}
+        %pre
+          %span
+          %br/
+        = f.text_area :title, :rows => 1, :placeholder => 'Title here'
+      %fieldset{:class=>"markdown"}
+        %div{:class=>"expandingArea", :id=>"text-content"}
+          %pre
+            %span
+            %br/
+          = f.text_area :content, :placeholder => 'Write post here' 
+    %div{:id=>"post-preview", :class=>"split-section"}
+  #publish-bar-hover
+    #publish-bar
+      .contain
+        .left
+          %a{:href=>"/admin"}= "&laquo; Admin".html_safe
+          = link_to 'Delete', @post, :confirm => 'Are you sure?', :method => :delete, :class => 'delete-bar' 
+          = link_to 'Options', '#options', :class => 'menu'
+          %ul{:id=>"options", :class=>"sub-menu"}
+            %li
+              = f.label :url, 'Slug'
+              = f.text_field :slug, :placeholder => 'Leave blank to automatically generate'
+            %li
+              = f.label :url, 'URL'
+              = f.text_field :url, :placeholder => 'Optional external link'
+        .right
+          = f.label :draft
+          = f.check_box :draft
+          = f.submit 'Preview', :id => 'preview-button', :preview => true, :target => "_blank"
+          = f.submit 'Save', :id => 'save-button'

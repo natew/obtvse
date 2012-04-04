@@ -1,0 +1,5 @@
+.youtube_video
+	%object{:width=>"640", :height=>"365"}
+		%param{:name=>"movie", :value=>"http://www.youtube.com/v/#{video}&hl=en"}
+    	%param{:name=>"wmode", :value=>"transparent"}
+    	%embed{:src=>"http://www.youtube.com/v/#{video}&hl=en", :type=>"application/x-shockwave-flash", :wmode=>"transparent", :width=>"640", :height=>"365"}
