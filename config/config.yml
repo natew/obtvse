@@ -2,7 +2,7 @@
 title:               Pablo's Log
 tagline:             No! Not another!
 login:               <%= ENV["obtvse_login"] ? ENV["obtvse_login"] : "pablo" %>
-password:            <%= ENV["obtvse_password"] ? ENV["obtvse_password"] : "pablo" %>
+password:            <%= ENV["obtvse_password"] ? ENV["obtvse_password"] : "eea63d4a2ffd81b9c9810f0fa52b32174406f04e175899bb7963899ec75db94c00e438e24cfa8ac75c256bdd543bf0559ec55307b59f1732824de7b27efab2a7" %>
 name:                Pablo Merino
 twitter:             _pmerino
 github:              pablo-merino
