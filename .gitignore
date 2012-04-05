@@ -20,3 +20,10 @@
 
 deploy.rb
 .DS_Store
+
+/.idea/
+.idea/
+/.idea/*.*
+.idea/*.*
+/.idea/*
+.idea/*
