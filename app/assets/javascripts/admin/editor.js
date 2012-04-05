@@ -85,7 +85,7 @@ $(function() {
 	    post_slug      = $('#post_slug'),
 	    post_url       = $('#post_url'),
 	    post_draft     = $('#post_draft'),
-	    post_form       = $('#new_post,#edit_post'),
+	    post_form       = $('#new_post,.edit_post'),
 	    preview        = false,
 	    changed        = false,
 	    editing        = false,
@@ -121,7 +121,7 @@ $(function() {
   // FUNCTIONS
 
 	function savePost(id) {
-	  var form = $('.edit_post,#post_form'),
+	  var form = $('.edit_post,#new_post'),
 	      action = form.attr('action');
 
 	  // Update cache
