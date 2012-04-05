@@ -30,18 +30,20 @@
 </div>
 
 <div id="bar">
-  <div class="top"></div>
   <div class="top-left">
     <%= link_to 'Back', '#', :id => "back-button", :class => 'icon-arrow-left' %>
+    <%= link_to 'Delete', @post, :confirm => 'Are you sure?', :method => :delete, :class => 'icon-trash' %>
+    <%= link_to 'Options', '#options', :class => 'menu icon-cog' %>
   </div>
 
   <div class="top-right">
+    <%= link_to 'Save', '#', :id => 'save-button', :class => 'icon-asterisk' %>
     <%= link_to 'Preview', '#', :id => 'preview-button', :target => "_blank", :class => 'icon-eye-open' %>
+    <%= link_to 'Publish', '#', :id => 'publish-button', :class => 'icon-upload-alt' %>
+    <%= f.check_box :draft %>
   </div>
 
-  <div class="bottom-left">
-    <%= link_to 'Delete', @post, :confirm => 'Are you sure?', :method => :delete, :class => 'delete-bar' %>
-    <%= link_to 'Options', '#options', :class => 'menu' %>
+  <div class="hide">
     <ul id="options" class="sub-menu">
       <li>
         <%= f.label :url, 'Slug' %>
@@ -52,13 +54,6 @@
         <%= f.text_field :url, :placeholder => 'Optional external link' %>
       </li>
     </ul>
-  </div>
-
-  <div class="bottom-right">
-    <%= f.label :draft %>
-    <%= f.check_box :draft %>
-
-    <%= f.submit 'Save', :id => 'save-button' %>
   </div>
 </div>
 
