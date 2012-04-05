@@ -1,0 +1,16 @@
+<% @posts.each do |post| %>
+<section id="post-<%= post.id %>">
+  <div class="post excerpt contain">
+    <h1<% if post.aside? %> class="aside"<% end %>><% if @post %><%= post.title %><% else %><%= link_to post.title, post %><% end %></h1>
+    <% if post.content %><%= RDiscount.new(truncate(post.content, :length => 0, :separator => '<!--more-->', :omission => ' ')).to_html.html_safe %><% end %>
+
+    <%- if is_admin? -%>
+        <ul class="actions">
+          <li><%= link_to 'Edit', '/edit/' + post.id.to_s %></li>
+        </ul>
+    <%- end -%>
+  </div>
+
+  <% if @show %><a class="button space-top" href="<%= root_url %>">Back to Blog</a><% end %>
+</section>
+<% end %>
