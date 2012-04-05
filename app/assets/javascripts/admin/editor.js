@@ -73,7 +73,8 @@ function showOnly(context,selectors) {
 $(function() {
 
 	// VARIABLES
-
+			History        = window.History,
+			document       = window.document,
 	    title          = document.getElementById('text-title'),
 	    content        = document.getElementById('text-content'),
 	    published      = $('#published'),
@@ -84,7 +85,7 @@ $(function() {
 	    post_slug      = $('#post_slug'),
 	    post_url       = $('#post_url'),
 	    post_draft     = $('#post_draft'),
-	    new_post       = $('#new_post'),
+	    post_form       = $('#new_post,#edit_post'),
 	    preview        = false,
 	    changed        = false,
 	    editing        = false,
@@ -102,13 +103,25 @@ $(function() {
 	    colIndex       = 0,
 	    cache          = {},
 	    col_height     = 0,
-	    divTimeout     = null;
+	    divTimeout     = null,
+	    curPath        = window.location.pathname.split('/');
 
+  // Detect if we are in editing
+  if (curPath.length > 2) {
+  	setEditing(parseInt(curPath[2],10));
+  }
+
+	// History.js
+	// Bind to StateChange Event
+	History.Adapter.bind(window,'statechange',function(){
+	    var State = History.getState();
+	    History.log(State.data, State.title, State.url);
+	});
 
   // FUNCTIONS
 
 	function savePost(id) {
-	  var form = $('.edit_post,#new_post'),
+	  var form = $('.edit_post,#post_form'),
 	      action = form.attr('action');
 
 	  // Update cache
@@ -129,7 +142,7 @@ $(function() {
 		    	var id, slug = data.split(',');
 		    	console.log('got it', data);
 		    	editingId = data;
-		    	new_post.attr('action', '/edit/'+editingId);
+		    	post_form.attr('action', '/edit/'+editingId);
 		    	$('#post_slug').val(slug);
 		    	$('#drafts ul').prepend('<li id="post-'+editingId+'"><h3><a href="">'+$('#post_title').val()+'</a></li>');
 		    }
@@ -140,7 +153,7 @@ $(function() {
 	function setHeights() {
 		col_height = $(window).height() - 200;
 		$('.col ul').css('height', col_height);
-		post_content.css('min-height', $(window).height() - post_title.height() - 130);
+		post_content.css('min-height', $(window).height() - post_title.height() - 70);
 	}
 
 	function selectItem(selector) {
@@ -160,16 +173,18 @@ $(function() {
 			editing = true;
 			editingId = val;
 			admin.addClass('editing');
-			new_post.attr('action', '/posts');
+			post_form.attr('action', '/posts');
 		}
 	}
 
 	function load_post(id) {
+		var url = '/edit/'+id;
 		post_content.val(cache[id].content);
 		post_slug.val(cache[id].slug);
 		post_url.val(cache[id].url);
 		post_draft.attr('checked',cache[id].draft ? 'checked' : '');
-		new_post.attr('action', '/edit/'+id);
+		post_form.attr('action', url);
+		History.pushState(null, null, url);
 	}
 
 	function editSelectedItem() {
@@ -344,7 +359,7 @@ $(function() {
 		}
 	}).keyup(function(e) {
 		// Stop disable
-		if ($.inArray(e.which,disableKeys) >= 0) disableNav = false;
+		disableNav = false;
 	});
 
 	// Edit a post on click
@@ -379,8 +394,10 @@ $(function() {
 	});
 
 	// Back button
-	$('#back-button').click(function() {
+	$('#back-button').click(function(e) {
+		e.preventDefault();
 		if (editing) setEditing(false);
+		History.back();
 	});
 
 	// Preview button
@@ -388,10 +405,12 @@ $(function() {
 		e.preventDefault();
 		if (preview) {
 			$('#split').removeClass('preview');
+			$(this).removeClass('icon-eye-close').addClass('icon-eye-open');
 			preview = false;
 		} else {
 			updatePreview();
 			$('#split').addClass('preview');
+			$(this).removeClass('icon-eye-open').addClass('icon-eye-close');
 			preview = true;
 		}
 	});
@@ -409,7 +428,8 @@ $(function() {
 	}, saveInterval);
 
 	// Ajax save-button
-	$('#save-button').click(function(){
+	$('#save-button').click(function(e){
+		e.preventDefault();
 		savePost(editingId);
 	});
 
