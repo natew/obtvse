@@ -15,3 +15,7 @@
 /tmp
 
 deploy.rb
+
+.idea/*.xml
+/.idea/*.xml
+/app/assets/images/*
