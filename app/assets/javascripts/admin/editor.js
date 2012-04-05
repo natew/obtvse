@@ -53,36 +53,6 @@ function validateTitle() {
   }
 }
 
-function savePost(id) {
-  var form = $('.edit_post,#new_post'),
-      action = form.attr('action');
-
-  // Update cache
-  cache[id] = $('#post_content').val();
-
-  // POST
-  $.ajax({
-  	type: 'POST',
-  	url: action,
-  	data: form.serialize(),
-  	dataType: 'text',
-  	success: function(data) {
-	    $('#save-button').val('Saved').addClass('saved').attr('disabled','disabled');
-
-	    // If we saved for the first time
-	    console.log('saved', editingId);
-	    if (editingId == true) {
-	    	var id, slug = data.split(',');
-	    	console.log('got it', data);
-	    	editingId = data;
-	    	new_post.attr('action', '/edit/'+editingId);
-	    	$('#post_slug').val(slug);
-	    	$('#drafts ul').prepend('<li id="post-'+editingId+'"><h3><a href="">'+$('#post_title').val()+'</a></li>');
-	    }
-	  }
-  });
-}
-
 function updatePreview() {
   $('#post-preview').html('<h1>'+$('#post_title').val()+'</h1>'+showdown.makeHtml($('#post_content').val()));
 }
@@ -101,7 +71,9 @@ function showOnly(context,selectors) {
 }
 
 $(function() {
-	// Auto-expanding height for editor textareas
+
+	// VARIABLES
+
 	    title          = document.getElementById('text-title'),
 	    content        = document.getElementById('text-content'),
 	    published      = $('#published'),
@@ -109,11 +81,15 @@ $(function() {
 	    admin          = $('#admin'),
 	    post_title     = $('#post_title'),
 	    post_content   = $('#post_content'),
+	    post_slug      = $('#post_slug'),
+	    post_url       = $('#post_url'),
+	    post_draft     = $('#post_draft'),
 	    new_post       = $('#new_post'),
 	    preview        = false,
 	    changed        = false,
 	    editing        = false,
 	    editingId      = null,
+	    divOpacity     = 0,
 	    disableNav     = false,
 	    disableKeys    = [91, 16, 17, 18],
 	    saveInterval   = 5000,
@@ -125,7 +101,41 @@ $(function() {
 	    itemIndex      = 0,
 	    colIndex       = 0,
 	    cache          = {},
-	    col_height     = 0;
+	    col_height     = 0,
+	    divTimeout     = null;
+
+
+  // FUNCTIONS
+
+	function savePost(id) {
+	  var form = $('.edit_post,#new_post'),
+	      action = form.attr('action');
+
+	  // Update cache
+	  cache[id] = $('#post_content').val();
+
+	  // POST
+	  $.ajax({
+	  	type: 'POST',
+	  	url: action,
+	  	data: form.serialize(),
+	  	dataType: 'text',
+	  	success: function(data) {
+		    $('#save-button').val('Saved').addClass('saved').attr('disabled','disabled');
+
+		    // If we saved for the first time
+		    console.log('saved', editingId);
+		    if (editingId == true) {
+		    	var id, slug = data.split(',');
+		    	console.log('got it', data);
+		    	editingId = data;
+		    	new_post.attr('action', '/edit/'+editingId);
+		    	$('#post_slug').val(slug);
+		    	$('#drafts ul').prepend('<li id="post-'+editingId+'"><h3><a href="">'+$('#post_title').val()+'</a></li>');
+		    }
+		  }
+	  });
+	}
 
 	function setHeights() {
 		col_height = $(window).height() - 200;
@@ -155,7 +165,10 @@ $(function() {
 	}
 
 	function load_post(id) {
-		post_content.val(cache[id]);
+		post_content.val(cache[id].content);
+		post_slug.val(cache[id].slug);
+		post_url.val(cache[id].url);
+		post_draft.attr('checked',cache[id].draft ? 'checked' : '');
 		new_post.attr('action', '/edit/'+id);
 	}
 
@@ -168,7 +181,7 @@ $(function() {
 			load_post(id);
 		} else {
 			// Fetch post content
-			$.get('/get/'+id, function(data) {
+			$.getJSON('/get/'+id, function(data) {
 				cache[id] = data;
 				load_post(id);
 			});
@@ -188,6 +201,8 @@ $(function() {
 		selectedColUl = selectedCol.find('ul');
 	}
 
+
+
 	// Highlight items in list
 	selectItem($('.col li:visible:first'));
 
@@ -196,11 +211,13 @@ $(function() {
 	makeExpandingArea(content);
 
 	// Animations on editing interface
-	$('#bar div').hover(function() {
-		$('#bar div').stop().animate({opacity:1});
-	}, function() {
-		$('#bar div').delay(500).animate({opacity:0});
-	});
+	function hideDivs() { $('#bar div').animate({opacity:divOpacity}); }
+	$('#bar div')
+		.mouseenter(function() { clearTimeout(divTimeout); $('#bar div').stop().animate({opacity:1}); })
+		.mouseleave(function() { divTimeout = setTimeout(hideDivs, 1500); console.log('leave div'); });
+	$(document)
+		.mouseenter(function(){ divOpacity = 0; console.log('enter window'); })
+		.mouseleave(function(){ divOpacity = 1; console.log('exit window'); });
 
 	// Filtering and other functions with the title field
 	post_title.focus().keyup(function(e) {
@@ -347,7 +364,6 @@ $(function() {
 		var $this = $(this),
 		    bottom = $this.offset().top + $this.height();
 
-		changed = true;
 		$('#save-button').val('Save').removeClass('saved').attr('disabled','');
 		if (preview) updatePreview();
 
@@ -357,9 +373,15 @@ $(function() {
 		}
 	});
 
+	// Detect if we change anything
+	$('#post_draft,#post_content,#post_title,#post_slug,#post_url').on('change keyup', function(){
+		changed = true;
+	});
+
+	// Back button
 	$('#back-button').click(function() {
 		if (editing) setEditing(false);
-	})
+	});
 
 	// Preview button
 	$('#preview-button').click(function(e){
