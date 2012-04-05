@@ -72,9 +72,11 @@ function savePost(id) {
 	    // If we saved for the first time
 	    console.log('saved', editingId);
 	    if (editingId == true) {
-	    	console.log('got id', data);
+	    	var id, slug = data.split(',');
+	    	console.log('got it', data);
 	    	editingId = data;
 	    	new_post.attr('action', '/edit/'+editingId);
+	    	$('#post_slug').val(slug);
 	    	$('#drafts ul').prepend('<li id="post-'+editingId+'"><h3><a href="">'+$('#post_title').val()+'</a></li>');
 	    }
 	  }
