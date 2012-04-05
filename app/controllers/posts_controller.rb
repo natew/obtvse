@@ -56,9 +56,11 @@ class PostsController < ApplicationController
 			if @post.save
 				format.html { redirect_to "/edit/#{@post.id}", :notice => "Post created successfully" }
 				format.xml { render :xml => @post, :status => :created, location: @post }
+				format.text { render :text => @post.id }
 			else
 				format.html { render :action => 'new' }
 				format.xml { render :xml => @post.errors, :status => :unprocessable_entity}
+				format.text { render :status => 500 }
 			end
 		end
 	end
