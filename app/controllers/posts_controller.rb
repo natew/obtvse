@@ -41,7 +41,7 @@ class PostsController < ApplicationController
 
 	def get
 		@post = Post.find_by_id(params[:id])
-		render :text => @post.content
+		render :text => @post.to_json
 	end
 
 	def edit
