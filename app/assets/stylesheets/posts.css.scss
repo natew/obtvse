@@ -419,6 +419,7 @@ body.posts.new #admin {
     height: 100%;
     /* Remove WebKit user-resize widget */
     resize: none;
+    overflow: scroll;
   }
 
   .expandingArea > pre {
@@ -437,17 +438,6 @@ fieldset.markdown {
   border: none;
   margin: 0;
   padding: 0;
-}
-
-.markdown:before {
-  display: block;
-  content: "";
-  width: 39px;
-  height: 24px;
-  position: absolute;
-  top: 4px;
-  left: -60px;
-  background: url(/assets/markdown.png) no-repeat top left;
 }
 
 #text-title {
@@ -509,7 +499,11 @@ form .permalink {
 }
 
 #split.preview {
-  #post-preview {display:block;}
+  #post-preview {
+    display:block;
+    overflow: scroll;
+  }
+
   #post-editor {
     left: 0;
     margin: 0;
@@ -524,7 +518,6 @@ form .permalink {
   top: 0;
   padding: 0;
   height: 100%;
-  overflow: scroll;
   padding: 0 20px;
           box-sizing: border-box;
      -moz-box-sizing: border-box;
@@ -553,21 +546,22 @@ form .permalink {
     position: fixed;
     padding: 20px;
     pointer-events: auto;
+    width: 15%;
 
     a {
       display: inline;
-      margin-left: 30px;
+      margin: 0 0 10px 0;
       color: #ccc;
       border: none;
       font-size: 0.01px;
+      display: block;
     }
   }
 
-  .top          {top: 0; left: 0; right: 0;}
-  .top-left     {top: 0; left: 0; bottom: 0; }
-  .top-right    {top: 0; bottom: 0; right: 0;}
-  .bottom-right {bottom: 0; right: 0;}
-  .bottom-left  {bottom: 0; left: 0; right: 0;}
+  .top-left {top: 0; left: 0; bottom: 0; }
+  .top-left a {margin-left:30px;}
+  .top-right {top: 0; bottom: 0; right: 0; text-align: right;}
+  .top-right a {margin-left:84px;}
 }
 
 .admin-view {
