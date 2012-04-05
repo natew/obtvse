@@ -550,7 +550,7 @@ form .permalink {
   -webkit-box-sizing: border-box;
 
   div {
-    position: absolute;
+    position: fixed;
     padding: 20px;
     pointer-events: auto;
 
@@ -563,12 +563,11 @@ form .permalink {
     }
   }
 
-  $box_padding: 120px;
-
-  .top-left     {top: 0; left: 0; padding-right: $box_padding; padding-bottom: $box_padding;}
-  .top-right    {top: 0; right: 0; padding-left: $box_padding; padding-bottom: $box_padding;}
-  .bottom-left  {bottom: 0; left: 0; padding-right: $box_padding; padding-top: $box_padding;}
-  .bottom-right {bottom: 0; right: 0; padding-left: $box_padding; padding-top: $box_padding;}
+  .top          {top: 0; left: 0; right: 0;}
+  .top-left     {top: 0; left: 0; bottom: 0; }
+  .top-right    {top: 0; bottom: 0; right: 0;}
+  .bottom-right {bottom: 0; right: 0;}
+  .bottom-left  {bottom: 0; left: 0; right: 0;}
 }
 
 .admin-view {
