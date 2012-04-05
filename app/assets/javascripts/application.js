@@ -13,6 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require fitvids.js
-//= require posts.js
+//= require history
+//= require posts
 //= require showdown
 //= require_tree ./admin
