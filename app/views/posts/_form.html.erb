@@ -1,5 +1,7 @@
 <%= form_for @post do |f| %>
-  <div class="contain">
+
+<div id="split">
+  <div id="post-editor" class="split-section">
     <%- if @post.errors.any? -%>
     <div class="notice">
       <%- @post.errors.full_messages.each do |msg| -%>
@@ -21,6 +23,11 @@
       </div>
     </fieldset>
   </div>
+  <div id="post-preview" class="split-section">
+  </div>
+</div>
+
+<div id="publish-bar-hover">
   <div id="publish-bar">
     <div class="contain">
       <div class="left">
@@ -46,4 +53,7 @@
       </div>
     </div>
   </div>
+</div>
+
+
 <% end %>

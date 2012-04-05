@@ -2,6 +2,7 @@
 /* TODO: pull out coloring into variables */
 $linkhover: red;
 
+div:before, div:after {content:''; display:table;}
 
 aside {position:relative; display:block;}
 ul {list-style-type:none;}
@@ -136,9 +137,8 @@ code {
 	display: block;
 }
 
-.contain,
-#new_post, .edit_post {
-  width: 580px;
+.contain {
+  width: 600px;
   position: relative;
 }
 
@@ -146,55 +146,6 @@ code {
   max-width: 100%;
   height: auto;
 }
-
-#new_post, .edit_post {
-  padding: 40px 0;
-  margin: 0 auto;
-}
-
-fieldset.markdown {
-  position: relative;
-  border: none;
-  margin: 0;
-  padding: 0;
-}
-
-.markdown:before {
-  display: block;
-  content: "";
-  width: 39px;
-  height: 24px;
-  position: absolute;
-  top: 4px;
-  left: -60px;
-  background: url(/assets/markdown.png) no-repeat top left;
-}
-
-#text-title {
-  margin: 0 0 20px 0;
-}
-
-#post_title {
-  width: 100%;
-  border: none;
-  background: none;
-  line-height: 45px;
-}
-
-#post_content {
-  border: none;
-  width: 100%;
-  position: relative;
-  margin: 0 0 80px 0;
-}
-
-  form .permalink {
-   position: absolute;
-   left: -34px;
-   top: 12px;
-   border: none;
-   color: #ddd;
-  }
 
 #publish-bar {
   position: fixed;
@@ -208,7 +159,7 @@ fieldset.markdown {
 
   .contain {
     margin: 0 auto;
-    width: 700px;
+    width: 600px;
   }
 
   input[type=text] {
@@ -337,10 +288,23 @@ label {
   font-size: 12px;
 }
 
+body.posts.edit #admin,
+body.posts.new #admin {
+  width: 100%;
+}
+
 #admin {
   width: 808px;
   margin: 0 auto;
   position: relative;
+
+  #save-button.saved {
+    color: #999;
+
+    &:hover {
+      cursor: normal;
+    }
+  }
 
   #drafts {
     float: left;
@@ -456,10 +420,6 @@ label {
     border: 0;
   }
 
-  #text-content {
-    margin: 0 0 100px 0;
-  }
-
   .expandingArea {
     position: relative;
   }
@@ -503,6 +463,91 @@ label {
     /* Hide the text; just using it for sizing */
     visibility: hidden;
   }
+}
+
+fieldset.markdown {
+  position: relative;
+  border: none;
+  margin: 0;
+  padding: 0;
+}
+
+.markdown:before {
+  display: block;
+  content: "";
+  width: 39px;
+  height: 24px;
+  position: absolute;
+  top: 4px;
+  left: -60px;
+  background: url(/assets/markdown.png) no-repeat top left;
+}
+
+#text-title {
+  margin: 23px 0;
+}
+
+#post_title {
+  width: 100%;
+  border: none;
+  background: none;
+  line-height: 45px;
+}
+
+#post_content {
+  border: none;
+  width: 100%;
+  position: relative;
+  margin: 0;
+}
+
+form .permalink {
+ position: absolute;
+ left: -34px;
+ top: 12px;
+ border: none;
+ color: #ddd;
+}
+
+#split {
+  #post-preview {
+    display: none;
+  }
+
+  #post-editor {
+    margin-left: -25%;
+    left: 50%;
+    width: 600px;
+  }
+}
+
+#split.preview {
+  #post-preview {display: block;}
+  #post-editor {
+    left: 0;
+    margin: 0;
+    width: 50%;
+  }
+}
+
+.split-section {
+  width: 50%;
+  position: fixed;
+  left: 0;
+  top: 0;
+  padding: 0 20px 100px;
+  height: 100%;
+  overflow: scroll;
+          box-sizing: border-box;
+     -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+}
+
+#post-preview {
+  background: #f0f4fc;
+  border-left: 1px solid #dbe3f1;
+  right: 0;
+  left: auto;
 }
 
 .admin-view {
