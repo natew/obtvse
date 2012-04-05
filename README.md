@@ -36,7 +36,7 @@ For production, you will want to set your password in config.yml or with environ
 Or in your shell (~/.bashrc or ~/.zshrc for example)
 
     export obtvse_login=<LOGIN>
-    export obtvse_passowrd=<PASSWORD>
+    export obtvse_password=<PASSWORD>
 
 
 
