@@ -7,8 +7,9 @@
   <link href='http://fonts.googleapis.com/css?family=Lato:300,900' rel='stylesheet' type='text/css' />
 </head>
 
-<body class="admin">
+<body class="admin <%= controller_name %> <%= action_name %>">
   <div id="admin">
+  	<div id="save"></div>
     <% if notice %><span class="notice"><%= notice %></span><% end %>
     <%= yield %>
   </div>
