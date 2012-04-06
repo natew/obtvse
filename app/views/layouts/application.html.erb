@@ -27,8 +27,8 @@
         <li><%= link_to 'hi', "mailto:#{CONFIG['email']}?subject:whats up!" %></li>
       <% end %>
       <li><%= link_to 'rss', '/posts.rss' %></li>
+      <% if is_admin? %><li class="right"><a href="/admin">admin</a></li><% end %>
       <li class="right">powered by <a href="http://github.com/natew/obtvse.git">obtvse</a></li>
-      <% if is_admin? %><li><a href="/admin">admin</a></li><% end %>
     </ul>
     <span class="powered-by">
   </span>

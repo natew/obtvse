@@ -171,12 +171,6 @@ strong {
     font-weight: bold;
 }
 
-blockquote {
-    margin: 1em;
-    padding: 0 30px;
-    border-left: 8px solid lightblue;
-}
-
 /*
  * Addresses styling not present in S5, Chrome
  */
