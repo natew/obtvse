@@ -15,7 +15,7 @@ input, textarea {outline:none; background:none;}
 
 body {
   background: #fff;
-  color: #555;
+  color: #444;
 }
 
 body, textarea, pre, input, li {
@@ -29,14 +29,6 @@ h1,h2,h3,h4,h5,#text-title pre,header li {
   font-weight: bold;
   font-family: 'Geogrotesque-SemiBold', sans-serif;
   line-height: 1em;
-}
-
-h1 a,
-h2 a,
-h3 a,
-h4 a,
-h5 a {
-  text-decoration: none;
 }
 
 h1,
@@ -53,7 +45,8 @@ p {
 a,
 a:visited
 a:active {
-  color: #333;
+  color: #000;
+  text-decoration: none;
 }
 
 a:hover,
@@ -63,22 +56,31 @@ a:hover,
 
 header {
   width: 580px;
-  margin: 0 auto 60px;
+  margin: 0 auto 90px;
   background: #fff;
   z-index: 10000;
 
   h1 {
-      margin: 15px 0 30px;
+      margin: 15px 0;
       height: 17px;
-      border-bottom: 1px solid #ddd;
+      border-bottom: 1px solid #eee;
       text-align: center;
 
     a {
       font-size: 24px;
-      color: #999;
+      color: #000;
       padding: 0 15px;
       background: #fff;
     }
+  }
+
+  span {
+    font-size: 11px;
+    color: #bbb;
+    font-style: italic;
+    text-align: center;
+    margin: 0 0 -32px;
+    display: block;
   }
 }
 
@@ -125,11 +127,10 @@ body.show #container time {display:block;}
 
   time {
     display: none;
-    margin: -30px 0 30px 0;
-    font-size: 13px;
+    margin: -10px 0 18px 0;
+    font-size: 11px;
     color: #999;
     text-align: center;
-    font-weight: bold;
   }
 }
 
@@ -138,13 +139,39 @@ body.show #container time {display:block;}
 
   section {
     padding: 0;
-    margin: 0 0 60px 0;
+    margin: 0 0 20px 0;
     position: relative;
+
+    a {
+      color: #777;
+      display: inline-block;
+      border-bottom: 1px dotted #ddd;
+      line-height: 1em;
+    }
+
+    blockquote {
+      margin: 1em 40px 1em 20px;
+      padding: 0 20px;
+      border-left: 5px solid lightblue;
+    }
+  }
+
+  a.space-top {
+    margin: 60px 0;
+  }
+
+  h1 {
+    font-size: 33px;
+
+    a {
+      color: #444;
+      border: none;
+    }
   }
 
   h1.external {
     margin-top: 25px;
-    font-size: 20px;
+    font-size: 22px;
 
     .permalink {
       margin-left: 8px;
@@ -152,6 +179,14 @@ body.show #container time {display:block;}
       color: #999;
       border: none;
     }
+  }
+
+  h2 {
+    font-size: 22px;
+  }
+
+  h3 {
+    font-size: 20px;
   }
 }
 
@@ -572,13 +607,11 @@ form .permalink {
 }
 
 nav.pagination {
-  text-align: right;
-  font-size: 16px;
-  margin: 0;
+  text-align: center;
+  margin: 60px 0;
   padding: 0;
-  font-weight: bold;
 }
 
   nav.pagination a {
-    margin-left: 10px;
+    margin: 0 15px;
   }
