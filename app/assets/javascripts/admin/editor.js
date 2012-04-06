@@ -387,10 +387,8 @@ $(function() {
 		var $this = $(this),
 		    bottom = $this.offset().top + $this.height();
 
-		$('#save-button').val('Save').removeClass('saved').attr('disabled','');
 		if (preview) updatePreview();
-
-		if (bottom > $(window).scrollTop() &&
+		if (bottom > ($(window).scrollTop() - 40) &&
 			$this.prop("selectionStart") > ($this.val().length - $this.val().split('\n').slice(-1)[0].length)) {
 			$(window).scrollTop(bottom);
 		}
