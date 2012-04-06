@@ -15,6 +15,7 @@ end
 
 group :development, :test do
   gem 'sqlite3', '~> 1', platform: [:ruby, :mswin, :mingw]
+  gem 'capistrano'
 end
 
 group :assets do
