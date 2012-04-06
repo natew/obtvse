@@ -12,7 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require fitvids.js
+//= require fitvids
 //= require history
 //= require posts
 //= require showdown

@@ -30,7 +30,7 @@ class PostsController < ApplicationController
 
 	def new
 		@no_header = true
-		@post = Post.new
+		@post = params[:id] ? Post.find(params[:id]) : Post.new
 		@published = Post.where(draft:false).page(params[:post_page])
 		@drafts = Post.where(draft:true).page(params[:draft_page])
 
@@ -42,11 +42,6 @@ class PostsController < ApplicationController
 	def get
 		@post = Post.find_by_id(params[:id])
 		render :text => @post.to_json
-	end
-
-	def edit
-		@no_header = true
-		@post = Post.find(params[:id])
 	end
 
 	def create
@@ -72,7 +67,7 @@ class PostsController < ApplicationController
 			if @post.update_attributes(params[:post])
 				format.html { redirect_to "/edit/#{@post.id}", :notice => "Post updated successfully" }
 				format.xml { head :ok }
-				format.text { head :ok }
+				format.text { render :text => @post.to_json }
 			else
 				format.html { render :action => 'edit' }
 				format.xml { render :xml => @post.errors, :status => :unprocessable_entity}
