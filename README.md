@@ -47,7 +47,6 @@ TODO
 - Lots of refactoring, cleanup and refinements
 
 
-
 SCREENSHOTS
 ===========
 ![Admin](http://i.imgur.com/OVr7q.png)
