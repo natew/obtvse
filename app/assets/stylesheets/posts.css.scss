@@ -260,17 +260,18 @@ body.posts.new #admin {
     }
 
     h2 {
-      font-size: 12px;
+      font-size: 16px;
       padding: 5px 0;
-      margin: 0 0 4px 0;
+      margin: 0 0 10px 0;
       color: #999;
       text-transform: uppercase;
-      text-align: center;
+      display: inline-block;
+      border-bottom: 1px solid #eee;
     }
 
     ul {
-      margin: 0;
-      padding: 8px;
+      margin: 0 16px 0 0;
+      padding: 0;
       overflow: scroll;
 
       li {
@@ -348,7 +349,6 @@ body.posts.new #admin {
     height: 100%;
     /* Remove WebKit user-resize widget */
     resize: none;
-    overflow: scroll;
   }
 
   .expandingArea > pre {
@@ -371,7 +371,6 @@ fieldset.markdown {
 
 #text-title {
   margin: 20px 0;
-  border-bottom: 2px solid #eee;
 }
 
   #text-title textarea,
@@ -389,13 +388,17 @@ fieldset.markdown {
 
 #content-fieldset {
   display: none;
+  margin-top: -16px;
 }
 
 #post_content {
   border: none;
   width: 100%;
   position: relative;
-  margin: 0;
+}
+
+#text-content pre {
+  padding: 0 0 20px 0;
 }
 
 form .permalink {
@@ -424,6 +427,7 @@ form .permalink {
     margin-left: -300px;
     top: 0;
     bottom: 0;
+    overflow: scroll;
   }
 }
 
@@ -470,7 +474,7 @@ form .permalink {
 
   div {
     position: fixed;
-    padding: 20px;
+    padding: 30px;
     pointer-events: auto;
     width: 15%;
             box-sizing: border-box;
