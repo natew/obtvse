@@ -108,7 +108,9 @@ $(function() {
 
   // Detect if we are in editing
   if (curPath.length > 2) {
-  	setEditing(parseInt(curPath[2],10));
+  	var id = parseInt(curPath[2],10);
+  	setEditing(id);
+  	post_form.attr('action', '/edit/'+id);
   }
 
 	// History.js
@@ -118,14 +120,14 @@ $(function() {
 	    History.log(State.data, State.title, State.url);
 	});
 
+
   // FUNCTIONS
-
 	function savePost(id) {
-	  var form = $('.edit_post,#new_post'),
-	      action = form.attr('action');
+	  var form        = $('.edit_post,#new_post'),
+	      save_button = $('#save-button'),
+	      action      = form.attr('action');
 
-	  // Update cache
-	  cache[id] = $('#post_content').val();
+	  save_button.addClass('icon-refresh').removeClass('icon-asterisk');
 
 	  // POST
 	  $.ajax({
@@ -134,16 +136,13 @@ $(function() {
 	  	data: form.serialize(),
 	  	dataType: 'text',
 	  	success: function(data) {
-		    $('#save-button').val('Saved').addClass('saved').attr('disabled','disabled');
+		    save_button.removeClass('icon-refresh').addClass('icon-asterisk');
+		    cache[id] = data;
 
 		    // If we saved for the first time
-		    console.log('saved', editingId);
 		    if (editingId == true) {
-		    	var id, slug = data.split(',');
-		    	console.log('got it', data);
-		    	editingId = data;
-		    	post_form.attr('action', '/edit/'+editingId);
-		    	$('#post_slug').val(slug);
+		    	load_post(id);
+		    	editingId = data.id;
 		    	$('#drafts ul').prepend('<li id="post-'+editingId+'"><h3><a href="">'+$('#post_title').val()+'</a></li>');
 		    }
 		  }
@@ -168,6 +167,7 @@ $(function() {
 			admin.removeClass('editing');
 			post_title.val('').focus();
 			post_content.val('');
+			makeExpandingArea(title);
 		}
 		else {
 			editing = true;
@@ -187,10 +187,15 @@ $(function() {
 		History.pushState(null, null, url);
 	}
 
+	function hideDivs() {
+		$('#bar div').animate({opacity:divOpacity});
+	}
+
 	function editSelectedItem() {
 		var id = selectedItem.attr('id').split('-')[1];
 		setEditing(id);
 		post_title.val(selectedItem.find('a').html());
+		makeExpandingArea(title);
 		// Check if post content cached else load it
 		if (cache[id]) {
 			load_post(id);
@@ -201,7 +206,7 @@ $(function() {
 				load_post(id);
 			});
 		}
-		$('#bar div').delay(1500).animate({opacity:0});
+		divTimeout = setTimeout(hideDivs, 1500);
 	}
 
 	function selectCol(col) {
@@ -217,16 +222,14 @@ $(function() {
 	}
 
 
-
-	// Highlight items in list
+	// SETUP
 	selectItem($('.col li:visible:first'));
 
-	// Auto expanding textareas.  See _functions.js
+	// Auto expanding textareas.
 	makeExpandingArea(title);
 	makeExpandingArea(content);
 
 	// Animations on editing interface
-	function hideDivs() { $('#bar div').animate({opacity:divOpacity}); }
 	$('#bar div')
 		.mouseenter(function() { clearTimeout(divTimeout); $('#bar div').stop().animate({opacity:1}); })
 		.mouseleave(function() { divTimeout = setTimeout(hideDivs, 1500); console.log('leave div'); });
@@ -295,7 +298,6 @@ $(function() {
 
 						// Scroll column if necessary
 						var itemOffset = selectedItem.position().top;
-						console.log(itemOffset);
 						if (itemOffset > (col_height/2)) {
 							selectedColUl.scrollTop(selectedColUl.scrollTop()+selectedItem.height()*2);
 						}
@@ -309,6 +311,12 @@ $(function() {
 						if (prev.length > 0) {
 							itemIndex--;
 							selectItem(prev);
+
+							// Scroll column if necessary
+							var itemOffset = selectedItem.position().top;
+							if (itemOffset < (col_height/2)) {
+								selectedColUl.scrollTop(selectedColUl.scrollTop()-selectedItem.height()*2);
+							}
 						}
 					}
 					break;
@@ -389,7 +397,7 @@ $(function() {
 	});
 
 	// Detect if we change anything
-	$('#post_draft,#post_content,#post_title,#post_slug,#post_url').on('change keyup', function(){
+	$('#post_draft,#post_content,#post_title,#post_slug,#post_url').on('change input', function(){
 		changed = true;
 	});
 
@@ -431,17 +439,6 @@ $(function() {
 	$('#save-button').click(function(e){
 		e.preventDefault();
 		savePost(editingId);
-	});
-
-	// Save button validates
-	$('#save-button').click(function(e) {
-		if (validateTitle()) {
-    	$form.attr('target', '_self');
-    	$form.attr('action', original_action);
-    	$form.submit();
-    } else {
-    	e.preventDefault();
-    }
 	});
 
 	// Options menu

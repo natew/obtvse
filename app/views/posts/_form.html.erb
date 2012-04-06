@@ -11,7 +11,6 @@
       </div>
       <%- end -%>
 
-      <%= link_to '⚓', @post, :class => 'permalink', :target => '_blank' if @post.slug %>
       <div id="text-title" class="expandingArea">
         <pre><span></span><br></pre>
         <%= f.text_area :title, :rows => 1, :placeholder => 'Enter your idea...' %>
@@ -41,6 +40,7 @@
     <%= link_to 'Preview', '#', :id => 'preview-button', :target => "_blank", :class => 'icon-eye-open' %>
     <%= link_to 'Publish', '#', :id => 'publish-button', :class => 'icon-upload-alt' %>
     <%= f.check_box :draft %>
+    <%= link_to '⚓', @post, :target => '_blank' if @post.slug %>
   </div>
 
   <div class="hide">

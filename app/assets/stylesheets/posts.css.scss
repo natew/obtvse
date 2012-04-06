@@ -16,7 +16,7 @@ body {
 body, textarea, pre, input {
   font-family: 'Lato', Helvetica, sans-serif;
   line-height: 1.8em;
-  font-size: 16px;
+  font-size: 13px;
   font-weight: 400;
 }
 
@@ -30,7 +30,7 @@ h1,
 #text-title pre,
 #text-title textarea {
   font-weight: 900;
-  font-size: 27px;
+  font-size: 26px;
 }
 
 p {
@@ -222,12 +222,15 @@ body.posts.new #admin {
     }
   }
 
+  #drafts {
+  }
+
   #posts {
     position: absolute;
     top: 92px;
     left: 50%;
-    margin-left: -300px;
-    width: 600px;
+    margin-left: -280px;
+    width: 560px;
   }
 
   .contain {
@@ -235,13 +238,20 @@ body.posts.new #admin {
   }
 
   .col {
-    width: 260px;
+    width: 280px;
     float: left;
-    padding: 0 20px;
+    padding: 0;
+    -webkit-box-sizing: border-box;
+       -moz-box-sizing: border-box;
+            box-sizing: border-box;
 
     &.active {
+      h2 {
+        color: #000;
+      }
+
       ul li h3 a {
-        color: #444;
+        color: #666;
       }
 
       ul li.selected h3 a {
@@ -251,18 +261,19 @@ body.posts.new #admin {
 
     h2 {
       font-size: 12px;
-      padding: 8px 0;
+      padding: 5px 0;
+      margin: 0 0 4px 0;
+      color: #999;
       text-transform: uppercase;
       text-align: center;
-      background: #f2f2f2;
     }
 
     ul {
-      padding: 0;
+      margin: 0;
+      padding: 8px;
       overflow: scroll;
 
       li {
-        padding: 10px 0;
         position: relative;
 
         &.hidden {
@@ -280,7 +291,7 @@ body.posts.new #admin {
 
         h3 {
           margin: 0;
-          font-size: 14px;
+          font-size: 13px;
           font-weight: normal;
           max-width: 100%;
           text-overflow: ellipsis;
@@ -289,6 +300,7 @@ body.posts.new #admin {
             border: none;
             display: block;
             color: #999;
+            padding: 8px 0;
 
             &:hover {color: $linkhover;}
           }
@@ -455,30 +467,30 @@ form .permalink {
   right: 0;
   margin: 0;
   pointer-events: none;
-          box-sizing: border-box;
-     -moz-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
 
   div {
     position: fixed;
     padding: 20px;
     pointer-events: auto;
     width: 15%;
+            box-sizing: border-box;
+       -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
 
     a {
       display: inline;
-      margin: 0 0 10px 0;
+      margin: 0 0 30px 0;
+      line-height: 0.8em;
+      font-size: 12px;
       color: #ccc;
       border: none;
-      font-size: 0.01px;
       display: block;
     }
   }
 
   .top-left {top: 0; left: 0; bottom: 0; }
-  .top-left a {margin-left:30px;}
+  .top-left a {margin-left:15px;}
   .top-right {top: 0; bottom: 0; right: 0; text-align: right;}
-  .top-right a {margin-left:84px;}
 }
 
 .admin-view {
