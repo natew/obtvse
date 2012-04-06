@@ -55,7 +55,7 @@ input[class^="icon-"], input[class*=" icon-"] {
   font-style: normal;
   display: inline-block;
   text-decoration: inherit;
-  font-size: 32px;
+  font-size: 24px;
 }
 a [class^="icon-"], a [class*=" icon-"] {
   display: inline-block;
