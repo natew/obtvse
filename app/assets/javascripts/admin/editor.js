@@ -207,7 +207,6 @@ $(function() {
 				load_post(id);
 			});
 		}
-		divTimeout = setTimeout(hideDivs, 1500);
 	}
 
 	function selectCol(col) {
