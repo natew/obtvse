@@ -173,12 +173,13 @@ $(function() {
 			post_title.val('').focus();
 			post_content.val('');
 			makeExpandingArea(title);
+			History.pushState(null, null, '/new');
 		}
 		else {
 			editing = true;
 			editingId = val;
 			admin.addClass('editing');
-			post_form.attr('action', '/posts');
+			post_title.focus();
 		}
 	}
 
@@ -269,8 +270,12 @@ $(function() {
 		}
 	});
 
-	// Window keybindings
-	$(window).keydown(function(e) {
+	// Window click + keybindings
+	$(window).click(function(e){
+		if (!editing) {
+			post_title.focus();
+		}
+	}).keydown(function(e) {
 		console.log(e.which);
 
 		// Disable keyboard shortcuts for action keys
@@ -401,7 +406,6 @@ $(function() {
 		e.preventDefault();
 		if (editing) setEditing(false);
 		selectItem($('.col li:visible:first'));
-		History.pushState(null, null, '/new');
 	});
 
 	// Preview button
