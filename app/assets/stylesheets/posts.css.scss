@@ -1,14 +1,15 @@
+@import "mixins.css.scss";
+
+/* TODO: pull out coloring into variables */
+$linkhover: red;
+
 @font-face {
   font-family: 'Geogrotesque-SemiBold';
   src: url('/fonts/219E67_0_0.eot');
   src: url('/fonts/219E67_0_0.eot?#iefix') format('embedded-opentype'), url('/fonts/219E67_0_0.woff') format('woff'), url('/fonts/219E67_0_0.ttf') format('truetype');
 }
 
-/* TODO: pull out coloring into variables */
-$linkhover: red;
-
 div:before, div:after {content:''; display:table;}
-
 aside {position:relative; display:block;}
 .hide {visibility:hidden; height:1px; clip:rect(0 0 0 0); position:absolute;}
 input, textarea {outline:none; background:none;}
@@ -335,8 +336,8 @@ body.posts.new #admin {
       display: none;
     }
 
-    #bar {
-      display: block;
+    #bar div {
+      visibility: visible;
     }
   }
 
@@ -359,9 +360,7 @@ body.posts.new #admin {
     width: 280px;
     float: left;
     padding: 0;
-    -webkit-box-sizing: border-box;
-       -moz-box-sizing: border-box;
-            box-sizing: border-box;
+    @include box-sizing(border-box);
 
     &.active {
       h2 {
@@ -448,10 +447,7 @@ body.posts.new #admin {
      * padding whilst still keeping the overall width
      * at exactly that of the containing element.
      */
-    -webkit-box-sizing: border-box;
-       -moz-box-sizing: border-box;
-        -ms-box-sizing: border-box;
-            box-sizing: border-box;
+    @include box-sizing(border-box);
     width: 100%;
   }
 
@@ -568,9 +564,7 @@ form .permalink {
   padding: 0;
   height: 100%;
   padding: 0 20px;
-          box-sizing: border-box;
-     -moz-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
+  @include box-sizing(border-box);
 
   .inner {
     position: relative;
@@ -579,7 +573,6 @@ form .permalink {
 }
 
 #bar {
-  display: none;
   position: fixed;
   top: 0;
   bottom: 0;
@@ -593,9 +586,16 @@ form .permalink {
     padding: 30px;
     pointer-events: auto;
     width: 15%;
-            box-sizing: border-box;
-       -moz-box-sizing: border-box;
-    -webkit-box-sizing: border-box;
+    visibility: hidden;
+    @include box-sizing(border-box);
+
+    &.transition {
+      @include transition(opacity .5s);
+    }
+
+    &.hidden {
+      opacity: 0 !important;
+    }
 
     a {
       display: inline;
