@@ -85,12 +85,12 @@ $(function() {
 	    post_slug      = $('#post_slug'),
 	    post_url       = $('#post_url'),
 	    post_draft     = $('#post_draft'),
-	    post_form       = $('#new_post,.edit_post'),
+	    post_form      = $('#new_post,.edit_post'),
+	    bar_div        = $('#bar div'),
 	    preview        = false,
 	    changed        = false,
 	    editing        = false,
 	    editingId      = null,
-	    divOpacity     = 0,
 	    disableNav     = false,
 	    disableKeys    = [91, 16, 17, 18],
 	    saveInterval   = 5000,
@@ -111,6 +111,8 @@ $(function() {
   	var id = parseInt(curPath[2],10);
   	setEditing(id);
   	post_form.attr('action', '/edit/'+id);
+  	bar_div.addClass('transition');
+  	setTimeout(hideBar,1500);
   }
 
 	// History.js
@@ -143,10 +145,14 @@ $(function() {
 		    if (editingId == true) {
 		    	load_post(id);
 		    	editingId = data.id;
-		    	$('#drafts ul').prepend('<li id="post-'+editingId+'"><h3><a href="">'+$('#post_title').val()+'</a></li>');
+		    	$('#drafts ul').prepend('<li id="post-'+editingId+'"><a href="">'+$('#post_title').val()+'</a></li>');
 		    }
 		  }
 	  });
+	}
+
+	function hideBar() {
+		if ($('#bar div:not(.hovered)').length > 0) bar_div.addClass('hidden');
 	}
 
 	function setHeights() {
@@ -161,7 +167,6 @@ $(function() {
 	}
 
 	function setEditing(val) {
-		console.log(val);
 		if (val == false) {
 			editing = false;
 			admin.removeClass('editing');
@@ -178,17 +183,13 @@ $(function() {
 	}
 
 	function load_post(id) {
-		var url = '/edit/'+id;
+		var url = id == true ? '/new' : '/edit/'+id;
 		post_content.val(cache[id].content);
 		post_slug.val(cache[id].slug);
 		post_url.val(cache[id].url);
 		post_draft.attr('checked',cache[id].draft ? 'checked' : '');
 		post_form.attr('action', url);
 		History.pushState(null, null, url);
-	}
-
-	function hideDivs() {
-		$('#bar div').animate({opacity:divOpacity});
 	}
 
 	function editSelectedItem() {
@@ -231,11 +232,8 @@ $(function() {
 
 	// Animations on editing interface
 	$('#bar div')
-		.mouseenter(function() { clearTimeout(divTimeout); $('#bar div').stop().animate({opacity:1}); })
-		.mouseleave(function() { divTimeout = setTimeout(hideDivs, 1500); console.log('leave div'); });
-	$(document)
-		.mouseenter(function(){ divOpacity = 0; console.log('enter window'); })
-		.mouseleave(function(){ divOpacity = 1; console.log('exit window'); });
+		.mouseenter(function() { bar_div.addClass('hovered').removeClass('hidden'); })
+		.mouseleave(function() { bar_div.removeClass('hovered').addClass('hidden'); });
 
 	// Filtering and other functions with the title field
 	post_title.focus().keyup(function(e) {
@@ -373,7 +371,7 @@ $(function() {
 	// Edit a post on click
 	$('.col a').on('click', function(e) {
 		e.preventDefault();
-		selectItem($(this).parent().parent());
+		selectItem($(this).parent());
 		editSelectedItem();
 	});
 
@@ -403,7 +401,8 @@ $(function() {
 	$('#back-button').click(function(e) {
 		e.preventDefault();
 		if (editing) setEditing(false);
-		History.back();
+		selectItem($('.col li:visible:first'));
+		History.pushState(null, null, '/new');
 	});
 
 	// Preview button
