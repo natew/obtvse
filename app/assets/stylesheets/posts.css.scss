@@ -363,17 +363,6 @@ body.posts.new #admin {
     @include box-sizing(border-box);
 
     &.active {
-      h2 {
-        color: #000;
-      }
-
-      ul li h3 a {
-        color: #666;
-      }
-
-      ul li.selected a {
-        color: #000;
-      }
     }
 
     h2 {
@@ -402,6 +391,7 @@ body.posts.new #admin {
         &.selected a {
           font-weight: bold;
           position: relative;
+          color: #000;
         }
 
         &:hover .links {
