@@ -1,10 +1,26 @@
-title: Nate Wienert
-url: http://natewienert.com
+# Your info
 name: Nate Wienert
 tagline:
+
+# Social media
 twitter: natebirdman
 github: natew
 email: natewienert@gmail.com
+
+# Google Analytics
 google_analytics_id: UA-23975642-4
+
+# Login / password
 login: nwienert
 password: fluf499
+
+# Amazon S3
+development:
+  access_key_id: 0HJCHEM8VR464K2Y86G2
+  secret_access_key: oRQkWSrw8XhY2slQft9GHFVEzmwVu480hm2EvVF/
+test:
+  access_key_id: 0HJCHEM8VR464K2Y86G2
+  secret_access_key: oRQkWSrw8XhY2slQft9GHFVEzmwVu480hm2EvVF/
+production:
+  access_key_id: 0HJCHEM8VR464K2Y86G2
+  secret_access_key: oRQkWSrw8XhY2slQft9GHFVEzmwVu480hm2EvVF/
