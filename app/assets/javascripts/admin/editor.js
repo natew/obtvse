@@ -1,4 +1,6 @@
-var showdown = new Showdown.converter();
+if (typeof(localStorage) == 'undefined' ) {
+	alert('Your browser is not supported :(');
+}
 
 // Allows for auto expanding textareas
 function makeExpandingArea(container) {
@@ -53,10 +55,6 @@ function validateTitle() {
   }
 }
 
-function updatePreview() {
-  $('#post-preview').html('<h1>'+$('#post_title').val()+'</h1>'+showdown.makeHtml($('#post_content').val()));
-}
-
 function filterTitle(objects, val) {
 	return objects.filter(function(el) {
 		var regex = new RegExp(val.split('').join('.*'), 'i');
@@ -101,10 +99,139 @@ $(function() {
 	    selectedColUl  = $('#drafts ul'),
 	    itemIndex      = 0,
 	    colIndex       = 0,
-	    cache          = {},
 	    col_height     = 0,
 	    divTimeout     = null,
-	    curPath        = window.location.pathname.split('/');
+	    curPath        = window.location.pathname.split('/'),
+	    showdown       = null;;
+
+	//
+  // FUNCTIONS
+  //
+
+  // Get cache
+  function getCache(id) {
+  	var string = localStorage.getItem(id);
+  	return JSON.parse(string);
+  }
+
+  // Set cache
+  function setCache(id, data) {
+  	localStorage.setItem(id,JSON.stringify(data));
+  }
+
+  // Saves the post
+	function savePost(id) {
+	  var form        = $('.edit_post,#new_post'),
+	      save_button = $('#save-button'),
+	      action      = form.attr('action');
+
+	  save_button.addClass('icon-refresh').removeClass('icon-asterisk');
+
+	  // POST
+	  $.ajax({
+	  	type: 'POST',
+	  	url: action,
+	  	data: form.serialize(),
+	  	dataType: 'text',
+	  	success: function(data) {
+		    save_button.removeClass('icon-refresh').addClass('icon-asterisk');
+		    setCache(id, data);
+
+		    // If we saved for the first time
+		    if (editingId == true) {
+		    	load_post(id);
+		    	$('#drafts ul').prepend('<li id="post-'+editingId+'"><a href="">'+$('#post_title').val()+'</a></li>');
+		    }
+		  }
+	  });
+	}
+
+	// Markdwon preview
+	function updatePreview() {
+	  $('#post-preview').html('<h1>'+$('#post_title').val()+'</h1>'+showdown.makeHtml($('#post_content').val()));
+	}
+
+	// Hide editor buttons
+	function hideBar() {
+		if ($('#bar div:not(.hovered)').length > 0) bar_div.addClass('hidden');
+	}
+
+	// Set post content height and column height
+	function setHeights() {
+		col_height = $(window).height() - 200;
+		$('.col ul').css('height', col_height);
+		post_content.css('min-height', $(window).height() - post_title.height() - 70);
+	}
+
+	// Highlight an item in the column
+	function selectItem(selector) {
+		selectedItem.removeClass('selected');
+		selectedItem = selector.addClass('selected');
+	}
+
+	// Upadting interface when editing or not
+	function setEditing(val) {
+		if (val == false) {
+			editing = false;
+			admin.removeClass('editing');
+			post_title.val('').focus();
+			post_content.val('');
+			makeExpandingArea(title);
+			History.pushState(null, null, '/new');
+		}
+		else {
+			editing = true;
+			admin.addClass('editing');
+			post_title.focus();
+		}
+	}
+
+	// Uses cache to fill in information
+	function load_post(id) {
+		var url = id == true ? '/new' : '/edit/'+id;
+		if (id != true) editingId = id;
+		post_content.val(getCache(id).content);
+		post_slug.val(getCache(id).slug);
+		post_url.val(getCache(id).url);
+		post_draft.attr('checked',getCache(id).draft ? 'checked' : '');
+		post_form.attr('action', url);
+		History.pushState(null, null, url);
+	}
+
+	// Either uses cache or loads post
+	function editSelectedItem() {
+		var id = selectedItem.attr('id').split('-')[1];
+		setEditing(id);
+		post_title.val(selectedItem.find('a').html());
+		makeExpandingArea(title);
+		// Check if post content cached else load it
+		if (getCache(id)) {
+			load_post(id);
+		} else {
+			// Fetch post content
+			$.getJSON('/get/'+id, function(data) {
+				setCache(id,data);
+				load_post(id);
+			});
+		}
+	}
+
+	// Highlight the proper column
+	function selectCol(col) {
+		colIndex = col;
+		if (colIndex == 0) {
+			published.removeClass('active');
+			selectedCol = drafts.addClass('active');
+		} else {
+			drafts.removeClass('active');
+			selectedCol = published.addClass('active');
+		}
+		selectedColUl = selectedCol.find('ul');
+	}
+
+	//
+	// SETUP
+	//
 
   // Detect if we are in editing
   if (curPath.length > 2) {
@@ -122,108 +249,6 @@ $(function() {
 	    History.log(State.data, State.title, State.url);
 	});
 
-
-  // FUNCTIONS
-	function savePost(id) {
-	  var form        = $('.edit_post,#new_post'),
-	      save_button = $('#save-button'),
-	      action      = form.attr('action');
-
-	  save_button.addClass('icon-refresh').removeClass('icon-asterisk');
-
-	  // POST
-	  $.ajax({
-	  	type: 'POST',
-	  	url: action,
-	  	data: form.serialize(),
-	  	dataType: 'text',
-	  	success: function(data) {
-		    save_button.removeClass('icon-refresh').addClass('icon-asterisk');
-		    cache[id] = data;
-
-		    // If we saved for the first time
-		    if (editingId == true) {
-		    	load_post(id);
-		    	editingId = data.id;
-		    	$('#drafts ul').prepend('<li id="post-'+editingId+'"><a href="">'+$('#post_title').val()+'</a></li>');
-		    }
-		  }
-	  });
-	}
-
-	function hideBar() {
-		if ($('#bar div:not(.hovered)').length > 0) bar_div.addClass('hidden');
-	}
-
-	function setHeights() {
-		col_height = $(window).height() - 200;
-		$('.col ul').css('height', col_height);
-		post_content.css('min-height', $(window).height() - post_title.height() - 70);
-	}
-
-	function selectItem(selector) {
-		selectedItem.removeClass('selected');
-		selectedItem = selector.addClass('selected');
-	}
-
-	function setEditing(val) {
-		if (val == false) {
-			editing = false;
-			admin.removeClass('editing');
-			post_title.val('').focus();
-			post_content.val('');
-			makeExpandingArea(title);
-			History.pushState(null, null, '/new');
-		}
-		else {
-			editing = true;
-			editingId = val;
-			admin.addClass('editing');
-			post_title.focus();
-		}
-	}
-
-	function load_post(id) {
-		var url = id == true ? '/new' : '/edit/'+id;
-		post_content.val(cache[id].content);
-		post_slug.val(cache[id].slug);
-		post_url.val(cache[id].url);
-		post_draft.attr('checked',cache[id].draft ? 'checked' : '');
-		post_form.attr('action', url);
-		History.pushState(null, null, url);
-	}
-
-	function editSelectedItem() {
-		var id = selectedItem.attr('id').split('-')[1];
-		setEditing(id);
-		post_title.val(selectedItem.find('a').html());
-		makeExpandingArea(title);
-		// Check if post content cached else load it
-		if (cache[id]) {
-			load_post(id);
-		} else {
-			// Fetch post content
-			$.getJSON('/get/'+id, function(data) {
-				cache[id] = data;
-				load_post(id);
-			});
-		}
-	}
-
-	function selectCol(col) {
-		colIndex = col;
-		if (colIndex == 0) {
-			published.removeClass('active');
-			selectedCol = drafts.addClass('active');
-		} else {
-			drafts.removeClass('active');
-			selectedCol = published.addClass('active');
-		}
-		selectedColUl = selectedCol.find('ul');
-	}
-
-
-	// SETUP
 	selectItem($('.col li:visible:first'));
 
 	// Auto expanding textareas.
@@ -452,4 +477,7 @@ $(function() {
 
 	// Fade out save post notice
 	$('.notice').delay(2000).fadeOut(500);
+
+	// Initialize showdown
+	showdown = new Showdown.converter();
 });
