@@ -10,6 +10,7 @@
  *
  *= require normalize
  *= require font-awesome
+ *= require highlighter/default
  *= require_self
  *= require_tree .
 */

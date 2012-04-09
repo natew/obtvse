@@ -7,7 +7,6 @@ module AttachmentHelper
 
   module ClassMethods
     def has_attachment(name, options = {})
-
       # generates a string containing the singular model name and the pluralized attachment name.
       # Examples: "user_avatars" or "asset_uploads" or "message_previews"
       attachment_owner    = self.table_name.singularize
@@ -17,12 +16,12 @@ module AttachmentHelper
       # message_previews/00/11/22/001122deadbeef/thumbnail.png
       attachment_path     = "#{attachment_folder}/:id_:style.:extension"
 
-      # Use s3 in production
-      if false #Rails.env.production?
+      # Use s3 only in production unless specified in config
+      if CONFIG['s3_in_development'] or Rails.env.production?
         options[:path]            ||= attachment_path
         options[:storage]         ||= :s3
-        options[:s3_credentials]  ||= File.join(Rails.root, 'config', 'config.yml')
-        options[:bucket]          ||= 'BUCKET_NAME'
+        options[:s3_credentials]  ||= { :access_key_id => CONFIG['access_key_id'], :secret_access_key => CONFIG['secret_access_key'] }
+        options[:bucket]          ||= CONFIG['bucket_name']
         options[:s3_permissions]  ||= 'private'
       else
         # For local Dev/Test envs, use the default filesystem, but separate the environments

@@ -195,12 +195,11 @@ body.show #container time {display:block;}
   border-bottom: none;
 }
 
-code {
-	font-size: 13px;
-	background: #F2F2F2;
-	padding: 20px;
-	margin: 20px;
-	display: block;
+code pre {
+  font-family: monospace, serif;
+  font-size: 13px;
+  padding: 0 20px;
+  display: block;
 }
 
 #container,
