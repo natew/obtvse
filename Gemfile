@@ -1,14 +1,18 @@
 source 'https://rubygems.org'
+source 'http://gems.github.com'
 
 gem 'rails', '~> 3'
 
 gem 'jquery-rails', '~> 2'
-gem 'rdiscount'
-gem 'bcrypt-ruby', '~> 3', require: 'bcrypt'
 gem 'stringex', '~> 1', git: 'git://github.com/rsl/stringex.git'
+gem 'redcarpet'
+gem 'pygments.rb'
+gem 'classifier'
 gem 'kaminari', '~> 0.13'
+gem 'paperclip', '~> 3.0'
+gem 'slim'
 gem 'sorcery'
-gem 'paperclip', "~> 3.0"
+gem 'bcrypt-ruby', '~> 3', require: 'bcrypt'
 
 group :production do
   gem 'pg', '~> 0.13'
