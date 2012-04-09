@@ -10,6 +10,6 @@ class Post < ActiveRecord::Base
   end
 
   def external?
-  	!url.blank?
+    !url.blank?
   end
 end
