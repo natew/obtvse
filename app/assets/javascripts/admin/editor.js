@@ -1,7 +1,3 @@
-if (typeof(localStorage) == 'undefined' ) {
-  alert('Your browser is not supported :(');
-}
-
 // Allows for auto expanding textareas
 function makeExpandingArea(container) {
   var area = container.querySelector('textarea'),
@@ -265,6 +261,9 @@ $(function() {
   setHeights();
   $(window).resize(setHeights);
 
+  // So it doesnt fade in first load, we add it after onload
+  bar_div.addClass('transition');
+
   // Animations on editing interface
   $('#bar div')
     .mouseenter(function() { bar_div.addClass('hovered').removeClass('hidden'); })
@@ -278,18 +277,10 @@ $(function() {
     beganEditing = true;
     post_form.attr('action', '/edit/'+id);
     scrollToBottom();
-    bar_div.addClass('transition');
     setTimeout(hideBar,1500);
   } else {
     post_title.focus();
   }
-
-  // History.js
-  // Bind to StateChange Event
-  History.Adapter.bind(window,'statechange',function(){
-      var State = History.getState();
-      History.log(State.data, State.title, State.url);
-  });
 
   // Select first item
   selectItem($('.col li:visible:first'));
@@ -424,6 +415,10 @@ $(function() {
         case 8:
           if (post_title.val() == '') setEditing(false);
           break;
+        // Tab
+        case 9:
+          beganEditing = true;
+          break;
       }
     }
   }).keyup(function(e) {
@@ -442,13 +437,8 @@ $(function() {
     return false;
   })
 
-  // Scroll window as we edit long posts
-  // + autosave and post preview
-  $('#post_content').keyup(function() {
-    var $this = $(this),
-        bottom = $this.offset().top + $this.height();
-
-    if (!beganEditing) beganEditing = true;
+  // Post preview
+  $('#post_content,#post_title').input(function() {
     if (preview) updatePreview();
   });
 
@@ -504,9 +494,15 @@ $(function() {
     $($(this).attr('href')).removeClass('visible');
   });
 
-  // Fade out save post notice
+  // Fade out notices
   $('.notice').delay(2000).fadeOut(500);
 
   // Initialize showdown
   showdown = new Showdown.converter();
+
+  // History.js Bind to StateChange Event
+  History.Adapter.bind(window,'statechange',function(){
+      var State = History.getState();
+      History.log(State.data, State.title, State.url);
+  });
 });
