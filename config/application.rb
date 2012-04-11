@@ -22,6 +22,9 @@ module Obtvse
     # :all can be used as a placeholder for all plugins not explicitly named.
     # config.plugins = [ :exception_notification, :ssl_requirement, :all ]
 
+    # Precompile admin assets
+    config.assets.precompile += ['admin.js']
+
     # Activate observers that should always be running.
     # config.active_record.observers = :cacher, :garbage_collector, :forum_observer
 
