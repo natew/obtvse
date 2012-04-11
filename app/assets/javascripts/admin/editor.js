@@ -438,7 +438,7 @@ $(function() {
   })
 
   // Post preview
-  $('#post_content,#post_title').input(function() {
+  $('#post_content,#post_title').change(function() {
     if (preview) updatePreview();
   });
 
