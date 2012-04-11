@@ -224,16 +224,21 @@ $(function() {
   // Either uses cache or loads post
   function editSelectedItem() {
     var id = selectedItem.attr('id').split('-')[1];
-    setEditing(id);
-    post_title.val(selectedItem.find('a').html());
-    makeExpandingAreas();
-    // Check if post content cached else load it
-    if (getCache(id)) {
-      loadPost(id);
+    // If they click on "New Draft..."
+    if (id == 0) {
+      setEditing(true);
     } else {
-      loadCache(id, function(){
+      setEditing(id);
+      post_title.val(selectedItem.find('a').html());
+      makeExpandingAreas();
+      // Check if post content cached else load it
+      if (getCache(id)) {
         loadPost(id);
-      });
+      } else {
+        loadCache(id, function(){
+          loadPost(id);
+        });
+      }
     }
   }
 
@@ -297,10 +302,10 @@ $(function() {
       // Filtering
       var val = $(this).val();
       if (val) {
-        var  draft_ids = filterTitle(draftsItems,val).join(',#post-'),
+        var draft_ids = filterTitle(draftsItems,val).join(',#post-'),
             pub_ids   = filterTitle(publishedItems,val).join(',#post-');
 
-        draft_ids ? showOnly('#drafts li', '#post-'+draft_ids) : $('#drafts li').addClass('hidden');
+        draft_ids ? showOnly('#drafts li', '#post-0,#post-'+draft_ids) : $('#drafts li').addClass('hidden');
         pub_ids   ? showOnly('#published li', '#post-'+pub_ids) : $('#published li').addClass('hidden');
         if (!draft_ids && !pub_ids) setEditing(true);
       } else {
