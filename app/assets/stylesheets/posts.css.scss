@@ -383,6 +383,10 @@ body.posts.new #admin {
         position: relative;
         line-height: 1.2em;
 
+        &#post-0 {
+          font-style: italic;
+        }
+
         &.hidden {
           display: none;
         }
