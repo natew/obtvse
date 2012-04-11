@@ -9,6 +9,7 @@
     <h2>Drafts</h2>
     <ul data-items="<%= @drafts.to_json(:only => [:id, :title]) %>">
     <%= render :partial => 'li', :collection => @drafts %>
+    <li id="post-0"><a href="/new">New Draft...</a></li>
     </ul>
   </div>
   <div id="published" class="col">
