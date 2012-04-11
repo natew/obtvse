@@ -25,7 +25,7 @@ body, textarea, pre, input, li {
   font-size: 13px;
 }
 
-h1,h2,h3,h4,h5,#text-title pre,header li {
+h1,h2,h3,h4,h5,#text-title *,header li {
   word-wrap: break-word;
   font-weight: bold;
   font-family: 'Geogrotesque-SemiBold', sans-serif;
