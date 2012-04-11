@@ -24,6 +24,11 @@ function makeExpandingArea(container) {
  container.className += ' active';
 }
 
+function makeExpandingAreas() {
+  makeExpandingArea(title);
+  makeExpandingArea(content);
+}
+
 // Lets us get the caret position in textarea
 function getCaret(el) {
   if (el.selectionStart) {
@@ -64,6 +69,12 @@ function filterTitle(objects, val) {
   });
 }
 
+// Scroll to bottom of content and select the end
+function scrollToBottom() {
+  $('#post_content').focus().putCursorAtEnd();
+  $('#content-fieldset').scrollTop(post_content.height());
+}
+
 function showOnly(context,selectors) {
   $(context).addClass('hidden').filter(selectors).removeClass('hidden');
 }
@@ -90,6 +101,7 @@ $(function() {
       editing        = false,
       editingId      = null,
       disableNav     = false,
+      beganEditing   = false,
       disableKeys    = [91, 16, 17, 18],
       saveInterval   = 5000,
       draftsItems    = $('#drafts ul').data('items'),
@@ -102,7 +114,7 @@ $(function() {
       col_height     = 0,
       divTimeout     = null,
       curPath        = window.location.pathname.split('/'),
-      showdown       = null;;
+      showdown       = null;
 
   //
   // FUNCTIONS
@@ -117,6 +129,14 @@ $(function() {
   // Set cache
   function setCache(id, data) {
     localStorage.setItem(id,JSON.stringify(data));
+  }
+
+  // Load it up
+  function loadCache(id, callback) {
+    $.getJSON('/get/'+id, function(data) {
+      setCache(id,data);
+      if (callback) callback.call();
+    });
   }
 
   // Saves the post
@@ -159,9 +179,11 @@ $(function() {
 
   // Set post content height and column height
   function setHeights() {
+    var content_height = $(window).height() - post_title.height() - 70;
     col_height = $(window).height() - 200;
     $('.col ul').css('height', col_height);
-    post_content.css('min-height', $(window).height() - post_title.height() - 70);
+    post_content.css('min-height', content_height);
+    $('#content-fieldset').css('height', content_height);
   }
 
   // Highlight an item in the column
@@ -172,18 +194,19 @@ $(function() {
 
   // Upadting interface when editing or not
   function setEditing(val) {
-    if (val == false) {
-      editing = false;
-      admin.removeClass('editing');
-      post_title.val('').focus();
-      post_content.val('');
-      makeExpandingArea(title);
-      History.pushState(null, null, '/new');
-    }
-    else {
+    makeExpandingAreas();
+    if (val) {
       editing = true;
       admin.addClass('editing');
       post_title.focus();
+    } else {
+      editing = false;
+      beganEditing = false;
+      admin.removeClass('editing');
+      post_title.val('').focus();
+      post_content.val('');
+      makeExpandingAreas();
+      History.pushState(null, null, '/new');
     }
   }
 
@@ -197,6 +220,8 @@ $(function() {
     post_url.val(cache.url);
     post_draft.attr('checked',cache.draft ? 'checked' : '');
     post_form.attr('action', url);
+    makeExpandingAreas();
+    scrollToBottom();
     History.pushState(null, null, url);
   }
 
@@ -205,14 +230,12 @@ $(function() {
     var id = selectedItem.attr('id').split('-')[1];
     setEditing(id);
     post_title.val(selectedItem.find('a').html());
-    makeExpandingArea(title);
+    makeExpandingAreas();
     // Check if post content cached else load it
     if (getCache(id)) {
       loadPost(id);
     } else {
-      // Fetch post content
-      $.getJSON('/get/'+id, function(data) {
-        setCache(id,data);
+      loadCache(id, function(){
         loadPost(id);
       });
     }
@@ -235,13 +258,30 @@ $(function() {
   // SETUP
   //
 
-  // Detect if we are in editing
+  // Auto expanding textareas.
+  makeExpandingAreas();
+
+  // Set minimum height of content textarea and post lists
+  setHeights();
+  $(window).resize(setHeights);
+
+  // Animations on editing interface
+  $('#bar div')
+    .mouseenter(function() { bar_div.addClass('hovered').removeClass('hidden'); })
+    .mouseleave(function() { bar_div.removeClass('hovered').addClass('hidden'); });
+
+  // Detect if we are editing initially
   if (curPath.length > 2) {
     var id = parseInt(curPath[2],10);
     setEditing(id);
+    loadCache(id);
+    beganEditing = true;
     post_form.attr('action', '/edit/'+id);
+    scrollToBottom();
     bar_div.addClass('transition');
     setTimeout(hideBar,1500);
+  } else {
+    post_title.focus();
   }
 
   // History.js
@@ -251,19 +291,11 @@ $(function() {
       History.log(State.data, State.title, State.url);
   });
 
+  // Select first item
   selectItem($('.col li:visible:first'));
 
-  // Auto expanding textareas.
-  makeExpandingArea(title);
-  makeExpandingArea(content);
-
-  // Animations on editing interface
-  $('#bar div')
-    .mouseenter(function() { bar_div.addClass('hovered').removeClass('hidden'); })
-    .mouseleave(function() { bar_div.removeClass('hovered').addClass('hidden'); });
-
   // Filtering and other functions with the title field
-  post_title.focus().keyup(function(e) {
+  post_title.keyup(function(e) {
     if (!editing) {
       // Selecting
       if (selectedItem.length == 0 || selectedItem.is('.hidden')) {
@@ -416,16 +448,15 @@ $(function() {
     var $this = $(this),
         bottom = $this.offset().top + $this.height();
 
+    if (!beganEditing) beganEditing = true;
     if (preview) updatePreview();
-    if (bottom > ($(window).scrollTop() - 40) &&
-      $this.prop("selectionStart") > ($this.val().length - $this.val().split('\n').slice(-1)[0].length)) {
-      $(window).scrollTop(bottom);
-    }
   });
 
-  // Detect if we change anything
+  // Detect if we change anything for auto-save
   $('#post_draft,#post_content,#post_title,#post_slug,#post_url').on('change input', function(){
-    changed = true;
+    // beganEditing prevents from saving just anything thats type in the title box
+    // Until focus is set on the content, it will be false
+    if (beganEditing) changed = true;
   });
 
   // Back button
@@ -449,10 +480,6 @@ $(function() {
       preview = true;
     }
   });
-
-  // Set minimum height of content textarea and post lists
-  setHeights();
-  $(window).resize(setHeights);
 
   // Autosave
   setInterval(function(){
