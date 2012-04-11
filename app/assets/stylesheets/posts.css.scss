@@ -519,6 +519,10 @@ form .permalink {
     right: 0;
     left: auto;
     display: none;
+
+    h1 {
+      margin: 35px 0 17px;
+    }
   }
 
   #post-editor {
@@ -569,7 +573,8 @@ form .permalink {
   margin: 0;
   pointer-events: none;
 
-  div {
+  .left,
+  .right {
     position: fixed;
     padding: 30px;
     pointer-events: auto;
@@ -596,9 +601,15 @@ form .permalink {
     }
   }
 
-  .top-left {top: 0; left: 0; bottom: 0; }
-  .top-left a {margin-left:15px;}
-  .top-right {top: 0; bottom: 0; right: 0; text-align: right;}
+  .bottom {
+    position: absolute;
+    bottom: 0;
+  }
+
+  .left {top: 0; left: 0; bottom: 0;}
+  .left a {margin-left:15px;}
+  .right {top: 0; bottom: 0; right: 0; text-align: right;}
+  .right .bottom {width: 100%; margin: 0 -50px;}
 }
 
 .admin-view {
