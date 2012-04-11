@@ -75,6 +75,16 @@ function showOnly(context,selectors) {
   $(context).addClass('hidden').filter(selectors).removeClass('hidden');
 }
 
+// Markdwon preview
+function updatePreview() {
+  $('#post-preview').html('<h1>'+$('#post_title').val()+'</h1>'+showdown.makeHtml($('#post_content').val()));
+}
+
+// Hide editor buttons
+function hideBar() {
+  if ($('#bar div:not(.hovered)').length > 0) bar_div.addClass('hidden');
+}
+
 $(function() {
 
   // VARIABLES
@@ -98,6 +108,7 @@ $(function() {
       editingId      = null,
       disableNav     = false,
       beganEditing   = false,
+      hiddenBar      = false,
       disableKeys    = [91, 16, 17, 18],
       saveInterval   = 5000,
       draftsItems    = $('#drafts ul').data('items'),
@@ -163,14 +174,10 @@ $(function() {
     });
   }
 
-  // Markdwon preview
-  function updatePreview() {
-    $('#post-preview').html('<h1>'+$('#post_title').val()+'</h1>'+showdown.makeHtml($('#post_content').val()));
-  }
-
-  // Hide editor buttons
-  function hideBar() {
-    if ($('#bar div:not(.hovered)').length > 0) bar_div.addClass('hidden');
+  // Hide bar after delay
+  function delayedHideBar() {
+    hiddenBar = true;
+    setTimeout(hideBar,2000);
   }
 
   // Set post content height and column height
@@ -282,7 +289,6 @@ $(function() {
     beganEditing = true;
     post_form.attr('action', '/edit/'+id);
     scrollToBottom();
-    setTimeout(hideBar,1500);
   } else {
     post_title.focus();
   }
@@ -440,8 +446,9 @@ $(function() {
   });
 
   // Post preview
-  $('#post_content,#post_title').change(function() {
+  $('#post_content,#post_title').on('input',function() {
       if (preview) updatePreview();
+      if (!hiddenBar) delayedHideBar();
     });
 
   // Woah whats this?
