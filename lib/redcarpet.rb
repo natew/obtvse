@@ -1,17 +1,15 @@
-require 'rubygems'
-require 'sourceclassifier'
+require 'language_sniffer'
 
 # create a custom renderer that allows highlighting of code blocks
 class HTMLwithPygments < Redcarpet::Render::HTML
   def block_code(code, language)
     begin
-      s = SourceClassifier.new
-      i = s.identify(code) || 'javascript'
-      p = Pygments.highlight(code, :lexer => i.downcase)
-      "<code>#{p}</code>"
+      language = LanguageSniffer.detect('test/test', :content => code).language.name || 'text'
+      pygmented_code = Pygments.highlight(code, :lexer => language.downcase)
+      "<code>#{pygmented_code}</code>"
     rescue Exception => e
       puts e.message
-      puts e.backtrace.inspect
+      puts e.backtrace.join("\n")
       "<code>#{code}</code>"
     end
   end

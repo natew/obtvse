@@ -1,13 +1,12 @@
 source 'https://rubygems.org'
-source 'http://gems.github.com'
 
 gem 'rails', '~> 3'
 
 gem 'jquery-rails', '~> 2'
-gem 'stringex', '~> 1', git: 'git://github.com/rsl/stringex.git'
+gem 'stringex', '~> 1', :git => 'git://github.com/rsl/stringex.git'
 gem 'redcarpet'
 gem 'pygments.rb'
-gem 'classifier'
+gem 'language_sniffer', :git => 'https://github.com/grosser/language_sniffer.git'
 gem 'kaminari', '~> 0.13'
 gem 'paperclip', '~> 3.0'
 gem 'slim'
