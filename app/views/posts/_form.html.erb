@@ -39,12 +39,14 @@
   </div>
 
   <div class="right">
+    <%= link_to 'Save', '#', :id => 'save-button', :class => 'icon-asterisk' %>
     <%= link_to 'Preview', '#', :id => 'preview-button', :target => "_blank", :class => 'icon-eye-open' %>
-    <%= f.check_box :draft %>
-    <%= link_to '⚓', @post, :target => '_blank' if @post.slug %>
+    <div class="hide">
+      <%= f.check_box :draft %>
+      <%= link_to '⚓', @post, :target => '_blank' if @post.slug %>
+    </div>
 
     <div class="bottom">
-      <%= link_to 'Save', '#', :id => 'save-button', :class => 'icon-asterisk' %>
       <%= link_to 'Publish', '#', :id => 'publish-button', :class => 'icon-upload-alt' %>
     </div>
   </div>
