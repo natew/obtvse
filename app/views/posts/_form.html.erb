@@ -29,18 +29,24 @@
 </div>
 
 <div id="bar">
-  <div class="top-left">
+  <div class="left">
     <%= link_to 'Back', '#', :id => "back-button", :class => 'icon-arrow-left' %>
-    <%= link_to 'Delete', @post, :confirm => 'Are you sure?', :method => :delete, :class => 'icon-trash' %>
-    <%= link_to 'Options', '#options', :class => 'menu icon-cog' %>
+
+    <div class="bottom">
+      <%= link_to 'Delete', @post, :confirm => 'Are you sure?', :method => :delete, :class => 'icon-trash' %>
+      <%= link_to 'Options', '#options', :class => 'menu icon-cog' %>
+    </div>
   </div>
 
-  <div class="top-right">
-    <%= link_to 'Save', '#', :id => 'save-button', :class => 'icon-asterisk' %>
+  <div class="right">
     <%= link_to 'Preview', '#', :id => 'preview-button', :target => "_blank", :class => 'icon-eye-open' %>
-    <%= link_to 'Publish', '#', :id => 'publish-button', :class => 'icon-upload-alt' %>
     <%= f.check_box :draft %>
     <%= link_to '⚓', @post, :target => '_blank' if @post.slug %>
+
+    <div class="bottom">
+      <%= link_to 'Save', '#', :id => 'save-button', :class => 'icon-asterisk' %>
+      <%= link_to 'Publish', '#', :id => 'publish-button', :class => 'icon-upload-alt' %>
+    </div>
   </div>
 
   <div class="hide">
