@@ -449,7 +449,6 @@ body.posts.new #admin {
     height: 100%;
     /* Remove WebKit user-resize widget */
     resize: none;
-    overflow: scroll;
   }
 
   .expandingArea > pre {
@@ -490,6 +489,7 @@ fieldset.markdown {
 #content-fieldset {
   display: none;
   margin-top: -16px;
+  overflow: scroll;
 }
 
 #post_content {
@@ -528,7 +528,6 @@ form .permalink {
     margin-left: -300px;
     top: 0;
     bottom: 0;
-    overflow: scroll;
   }
 }
 

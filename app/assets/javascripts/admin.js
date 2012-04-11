@@ -3,6 +3,7 @@
 //= require jquery.ui.widget
 //= require jquery.fileupload
 //= require jquery.iframe-transport
+//= require jquery.putcursoratend
 //= require fitvids
 //= require history
 //= require showdown
