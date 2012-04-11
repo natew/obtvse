@@ -175,7 +175,7 @@ $(function() {
 
   // Set post content height and column height
   function setHeights() {
-    var content_height = $(window).height() - post_title.height() - 70;
+    var content_height = Math.max($(window).height() - post_title.height()-70,100);
     col_height = $(window).height() - 200;
     $('.col ul').css('height', col_height);
     post_content.css('min-height', content_height);
@@ -422,6 +422,7 @@ $(function() {
           break;
         // Tab
         case 9:
+          // Moving from title to content allows us to save
           beganEditing = true;
           break;
       }
@@ -438,14 +439,17 @@ $(function() {
     editSelectedItem();
   });
 
-  $('#new_draft').submit(function() {
-    return false;
-  })
-
   // Post preview
   $('#post_content,#post_title').change(function() {
-    if (preview) updatePreview();
-  });
+      if (preview) updatePreview();
+    });
+
+  // Woah whats this?
+  // DOMSubtreeModified detects basically size changes
+  // so we can adjust the height of the textarea
+  $('#text-title pre').on('DOMSubtreeModified', function() {
+      setHeights();
+    });
 
   // Detect if we change anything for auto-save
   $('#post_draft,#post_content,#post_title,#post_slug,#post_url').on('change input', function(){
@@ -488,15 +492,6 @@ $(function() {
   $('#save-button').click(function(e){
     e.preventDefault();
     savePost(editingId);
-  });
-
-  // Options menu
-  $('.menu').toggle(function(){
-    $(this).addClass('active');
-    $($(this).attr('href')).addClass('visible');
-  }, function() {
-    $(this).removeClass('active');
-    $($(this).attr('href')).removeClass('visible');
   });
 
   // Fade out notices
