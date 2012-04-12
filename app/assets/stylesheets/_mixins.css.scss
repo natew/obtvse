@@ -1,8 +1,3 @@
-/* Animation variables */
-
-$bounce-start: 0.5;
-$bounce-end: 0.55;
-
 /*  Colors  */
 $title: #000;
 $border: #555;
@@ -139,25 +134,4 @@ $light-yellow: #ffd;
   -webkit-animation: none !important;
   -moz-animation: none !important;
   animation: none !important;
-}
-
-
-/* Animations */
-
-@-moz-keyframes bounce {
-  0%   { @include transform(scale($bounce-start)); }
-  50%  { @include transform(scale($bounce-end)); }
-  100% { @include transform(scale($bounce-start)); }
-}
-
-@-webkit-keyframes bounce {
-  0%   { @include transform(scale($bounce-start)); }
-  50%  { @include transform(scale($bounce-end)); }
-  100% { @include transform(scale($bounce-start)); }
-}
-
-@keyframes bounce {
-  0%   { @include transform(scale($bounce-start)); }
-  50%  { @include transform(scale($bounce-end)); }
-  100% { @include transform(scale($bounce-start)); }
 }
