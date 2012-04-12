@@ -15,7 +15,6 @@ module ApplicationHelper
             )
 
     redcarpet = Redcarpet::Markdown.new(render,
-                  :space_after_headers => true,
                   :fenced_code_blocks => true,
                   :autolink => true,
                   :no_intra_emphasis => true,
@@ -39,7 +38,7 @@ end
 # create a custom renderer that allows highlighting of code blocks
 class HTMLwithPygments < Redcarpet::Render::HTML
   def block_code(code, language)
-    # Pygments.highlight(code,language)
+    Pygments.highlight(code,language)
     "<code>#{code}</code>"
   end
 end
