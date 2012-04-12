@@ -14,6 +14,7 @@ aside {position:relative; display:block;}
 .hide {visibility:hidden; height:1px; clip:rect(0 0 0 0); position:absolute;}
 input, textarea {outline:none; background:none;}
 
+html,body {width: 100%; height: 100%; overflow: hidden;}
 body {
   background: #fff;
   color: #444;
@@ -463,6 +464,24 @@ body.posts.new #admin {
     display: block;
     /* Hide the text; just using it for sizing */
     visibility: hidden;
+  }
+}
+
+#blog-button {
+  width: 0px;
+  height: 0px;
+  border-left: 20px solid transparent;
+  border-right: 20px solid transparent;
+  border-top: 20px solid #fff;
+  display: block;
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  right: -20px;
+  @include transition(all .3s);
+
+  &:hover {
+    border-top-color: #ddd;
   }
 }
 
