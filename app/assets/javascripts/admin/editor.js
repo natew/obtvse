@@ -56,55 +56,11 @@ $(function() {
 
 
   //
-  // FUNCTIONS
-  //
-
-  // Saves the post
-  function savePost(callback) {
-    var form        = $('.edit_post,#new_post'),
-        save_button = $('#save-button'),
-        action      = form.attr('action');
-
-    el.save.addClass('saving');
-
-    // POST
-    fn.log('Saving...');
-    $.ajax({
-      type: 'POST',
-      url: action,
-      data: form.serialize(),
-      dataType: 'text',
-      success: function(data) {
-        var data = JSON.parse(data),
-            li   = $('#post-'+data.id);
-
-        // Update save button
-        el.save.removeClass('saving dirty').addClass('saved');
-        setTimeout(function saveButtonComplete(){el.save.removeClass('saved')},1000);
-
-        // Update cache
-        setCache(data.id, data);
-
-        // Move to beginning of list
-        li.prependTo(li.parent());
-
-        // If we saved for the first time
-        if (state.id == true || state.id == null) {
-          state.id = data.id;
-          setFormEditing();
-          $('#drafts ul').prepend('<li id="post-'+state.id+'"><a href="">'+el.title.val()+'</a></li>');
-        }
-
-        fn.log('Saved',data.id,data);
-        callback.call();
-      }
-    });
-  }
-
-
-  //
   // SETUP
   //
+
+  // Clear cache
+  localStorage.clear();
 
   // Auto expanding textareas.
   makeExpandingAreas();
@@ -113,18 +69,15 @@ $(function() {
   setHeights();
   $(window).resize(setHeights);
 
-  // So it doesnt fade in first load, we add it after onload
-  el.bar.addClass('transition');
-
   // Animations on editing interface
   el.bar
+    .addClass('transition')
     .mouseenter(function barMouseEnter(){ el.bar.addClass('hovered').removeClass('hidden'); })
     .mouseleave(function barMouseLeave(){ el.bar.removeClass('hovered').addClass('hidden'); });
 
   // Detect if we are editing initially
   if (curPath.length > 2) {
-    var id = parseInt(curPath[2],10);
-    setEditing(id, function editLoaded(){
+    setEditing(parseInt(curPath[2],10), function editLoaded(){
       state.beganEditing = true;
     });
   } else {
@@ -280,7 +233,10 @@ $(function() {
 
       state.lastKey = e.which;
     }
-  }).keyup(function windowKeyup(e) {
+  })
+
+  // Window keyup
+  .keyup(function windowKeyup(e) {
     // Stop disable
     state.navDisable = false;
   });
@@ -463,6 +419,48 @@ $(function() {
     el.curItem = selector.addClass('selected');
   }
 
+  // Saves the post
+  function savePost(callback) {
+    var form        = $('.edit_post,#new_post'),
+        save_button = $('#save-button'),
+        action      = form.attr('action');
+
+    el.save.addClass('saving');
+
+    // POST
+    fn.log('Saving...');
+    $.ajax({
+      type: 'POST',
+      url: action,
+      data: form.serialize(),
+      dataType: 'text',
+      success: function(data) {
+        var data = JSON.parse(data),
+            li   = $('#post-'+data.id);
+
+        // Update save button
+        el.save.removeClass('saving dirty').addClass('saved');
+        setTimeout(function saveButtonComplete(){el.save.removeClass('saved')},1000);
+
+        // Update cache
+        setCache(data.id, data);
+
+        // Move to beginning of list
+        li.prependTo(li.parent());
+
+        // If we saved for the first time
+        if (state.id == true || state.id == null) {
+          state.id = data.id;
+          setFormEditing();
+          $('#drafts ul').prepend('<li id="post-'+state.id+'"><a href="">'+el.title.val()+'</a></li>');
+        }
+
+        fn.log('Saved',data.id,data);
+        if (callback) callback.call(this, data);
+      }
+    });
+  }
+
   // Get cache
   function getCache(id) {
     var string = localStorage.getItem(id);
@@ -477,50 +475,53 @@ $(function() {
   // Load it up
   function loadCache(id, callback) {
     var cache = getCache(id);
-    if (cache)
-      callback.call(cache);
-    else {
+    if (cache) {
+      callback.call(this, cache);
+    } else {
       $.getJSON('/get/'+id, function loadCacheCallback(data) {
         setCache(id, data);
-        if (callback) callback.call(data);
+        callback.call(this, data);
       });
     }
   }
 
-  // Upadting interface when editing or not
+  // Enter editor, val can be true, false, or the ID
+  //   true = editing a new post
+  //   false = exit editor
+  //   id = start editing id
   function setEditing(val, callback) {
     fn.log('Set editing', val);
     if (val) {
       // Update UI
       el.admin.addClass('editing');
       el.bar.removeClass('hidden');
+      state.editing = true;
 
-      loadCache(id, function setEditingLoadCache(data) {
-        // Set state variables
-        state.editing = true;
-        state.id = id;
-        state.post = data;
+      if (val != true) {
+        loadCache(val, function setEditingLoadCache(data) {
+          fn.log('got data', data);
+          // Set state variables
+          state.id = val;
+          state.post = data;
 
-        // Set form attributes
-        setFormEditing();
-        el.content.val(state.post.content);
-        el.slug.val(state.post.slug);
-        el.url.val(state.post.url);
-        setDraft(state.post.draft);
+          // Set form attributes
+          setFormEditing();
+          el.content.val(state.post.content);
+          el.slug.val(state.post.slug);
+          el.url.val(state.post.url);
+          setDraft(state.post.draft);
 
-        // Refresh form
-        makeExpandingAreas();
-        scrollToBottom();
+          // Refresh form
+          makeExpandingAreas();
+          scrollToBottom();
 
-        // Update URL
-        History.pushState(null, null, url);
+          // Update link to post
+          el.blog.attr('href',window.location.protocol+'//'+window.location.host+'/'+state.post.slug);
 
-        // Update link to post
-        el.blog.attr('href',window.location.protocol+'//'+window.location.host+'/'+state.post.slug);
-
-        // Callbacks
-        callback.call();
-      });
+          // Callbacks
+          callback.call(this, data);
+        });
+      }
     }
     else {
       // Update UI
@@ -544,9 +545,16 @@ $(function() {
     }
   }
 
+  // Set form and url if editing
+  //   true = new post
+  //   false = not editing
+  //   integer = editing id
   function setFormEditing(editing) {
-    if (editing != false) el.form.attr('action','/edit/'+state.id);
-    else el.form.attr('action','/new');
+    var url = (typeof editing == 'boolean') ? '/new' : '/edit/'+state.id;
+
+    // Update URL and form
+    el.form.attr('action',url);
+    History.pushState(null, null, url);
   }
 
   // Either uses cache or loads post

@@ -6,8 +6,23 @@ module ApplicationHelper
   end
 
   def markdown(text)
-    text = youtube_embed(text)
-    redcarpet = Redcarpet::Markdown.new(HTMLwithPygments, :fenced_code_blocks => true)
+    #text = youtube_embed(text) TODO: put this inside custom renderer
+    render = HTMLwithPygments.new(
+              :hard_wrap => true,
+              :gh_blockcode => true,
+              :filter_html => false,
+              :safe_links_only => true
+            )
+
+    redcarpet = Redcarpet::Markdown.new(render,
+                  :space_after_headers => true,
+                  :fenced_code_blocks => true,
+                  :autolink => true,
+                  :no_intra_emphasis => true,
+                  :strikethrough => true,
+                  :superscripts => true
+                )
+
     redcarpet.render(text)
   end
 
@@ -18,5 +33,13 @@ module ApplicationHelper
       match ? render(:partial => 'youtube', :locals => { :video => match[1] }) : line
     end
     output.join
+  end
+end
+
+# create a custom renderer that allows highlighting of code blocks
+class HTMLwithPygments < Redcarpet::Render::HTML
+  def block_code(code, language)
+    # Pygments.highlight(code,language)
+    "<code>#{code}</code>"
   end
 end

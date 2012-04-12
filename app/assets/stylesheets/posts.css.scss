@@ -27,7 +27,7 @@ body, textarea, pre, input, li {
 
 h1,h2,h3,h4,h5,#text-title *,header li {
   word-wrap: break-word;
-  font-weight: bold;
+  font-weight: normal;
   font-family: 'Geogrotesque-SemiBold', sans-serif;
   line-height: 1em;
 }
@@ -40,7 +40,6 @@ h3 {font-size: 20px;}
 h1,
 #text-title pre,
 #text-title textarea {
-  font-weight: 900;
   font-size: 26px;
 }
 
@@ -190,11 +189,13 @@ body.show #container time {display:block;}
   border-bottom: none;
 }
 
-code pre {
+code {
+  background: #f5f5f5;
   font-family: monospace, serif;
   font-size: 13px;
-  padding: 0 20px;
+  padding: 20px;
   display: block;
+  @include box-shadow-inset(0, 0, 20px, #ddd);
 }
 
 #container,
@@ -472,7 +473,7 @@ body.posts.new #admin {
   position: absolute;
   top: 0;
   right: -20px;
-  @include transition(all .3s);
+  @include transition(all, .3s);
 
   &:hover {
     border-top-color: #ddd;
@@ -489,7 +490,7 @@ body.posts.new #admin {
   right: 10px;
   border: none;
   @include border-radius(8px);
-  @include transition(all .5s);
+  @include transition(all, .5s);
 
   &:hover {background:#999;}
   &.dirty {background:#ddd;}
@@ -554,7 +555,7 @@ form .permalink {
     right: 0;
     left: auto;
     display: none;
-    @include transition(all 1s);
+    @include transition(all, 1s);
 
     h1 {
       margin: 35px 0 17px;
@@ -628,7 +629,7 @@ $bar-background: #f4f4f4;
   @include box-sizing(border-box);
 
   &.transition {
-    @include transition(all .2s);
+    @include transition(all, .2s);
   }
 
   &.hidden {
@@ -656,7 +657,6 @@ $bar-background: #f4f4f4;
 .admin-view {
   font-size: 11px;
   margin: 0 10px 2px 0;
-  font-weight: 900;
   text-transform: uppercase;
 }
 
