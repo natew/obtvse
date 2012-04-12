@@ -9,7 +9,7 @@ $linkhover: red;
   src: url('/fonts/219E67_0_0.eot?#iefix') format('embedded-opentype'), url('/fonts/219E67_0_0.woff') format('woff'), url('/fonts/219E67_0_0.ttf') format('truetype');
 }
 
-div:before, div:after {content:''; display:table;}
+.clearfix:before, .clearfix:after {content:''; display:table;}
 aside {position:relative; display:block;}
 .hide {visibility:hidden; height:1px; clip:rect(0 0 0 0); position:absolute;}
 input, textarea {outline:none; background:none;}
