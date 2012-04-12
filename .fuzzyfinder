@@ -1,0 +1,12 @@
+**/*.erb
+**/*.haml
+**/*.rb
+**/*.html
+**/*.yml
+**/*.js
+**/*.css
+**/*.scss
+**/*.sass
+Gemfile
+Rakefile
+*.md
