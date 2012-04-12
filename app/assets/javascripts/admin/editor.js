@@ -1,121 +1,41 @@
-// Allows for auto expanding textareas
-function makeExpandingArea(container) {
-  var area = container.querySelector('textarea'),
-      span = container.querySelector('span');
-
- if (area.addEventListener) {
-   area.addEventListener('input', function() {
-     span.textContent = area.value;
-   }, false);
-   span.textContent = area.value;
- } else if (area.attachEvent) {
-   // IE8 compatibility
-   area.attachEvent('onpropertychange', function() {
-     span.innerText = area.value;
-   });
-   span.innerText = area.value;
- }
-
- // Enable extra CSS
- container.className += ' active';
-}
-
-function makeExpandingAreas() {
-  makeExpandingArea(title);
-  makeExpandingArea(content);
-}
-
-// Lets us get the caret position in textarea
-function getCaret(el) {
-  if (el.selectionStart) {
-    return el.selectionStart;
-  } else if (document.selection) {
-    el.focus();
-
-    var r = document.selection.createRange();
-    if (r == null) {
-      return 0;
-    }
-
-    var re = el.createTextRange(),
-        rc = re.duplicate();
-    re.moveToBookmark(r.getBookmark());
-    rc.setEndPoint('EndToStart', re);
-
-    return rc.text.length;
-  }
-  return 0;
-}
-
-function validateTitle() {
-  if ($('#post_title').val() == '') {
-    alert('Please enter a title');
-    return false;
-  } else {
-    return true;
-  }
-}
-
-function filterTitle(objects, val) {
-  return objects.filter(function(el) {
-    var regex = new RegExp(val.split('').join('.*'), 'i');
-    if (el.title.match(regex)) return true;
-  }).map(function(el) {
-    return el.id;
-  });
-}
-
-// Scroll to bottom of content and select the end
-function scrollToBottom() {
-  $('#post_content').focus().putCursorAtEnd();
-  $('#content-fieldset').scrollTop(post_content.height());
-}
-
-function showOnly(context,selectors) {
-  $(context).addClass('hidden').filter(selectors).removeClass('hidden');
-}
-
-// Markdwon preview
-function updatePreview() {
-  $('#post-preview').html('<h1>'+$('#post_title').val()+'</h1>'+showdown.makeHtml($('#post_content').val()));
-}
-
-// Hide editor buttons
-function hideBar() {
-  if ($('#bar div:not(.hovered)').length > 0) bar_div.addClass('hidden');
-}
-
 $(function() {
+  // Elements
+  el = fn.getjQueryElements({
+    published : '#published',
+    drafts    : '#drafts',
+    admin     : '#admin',
+    title     : '#post_title',
+    content   : '#post_content',
+    slug      : '#post_slug',
+    url       : '#post_url',
+    draft     : '#post_draft',
+    form      : '#new_post,.edit_post',
+    bar       : '#bar',
+    curCol    : '#drafts',
+    curColUl  : '#drafts ul',
+    curItem   : '.col li:visible:first'
+  });
+
+  // Editor state variables
+  state = {
+    id           : null,
+    preview      : false,
+    changed      : false,
+    editing      : false,
+    navDisable   : false,
+    beganEditing : false,
+    barHidden    : false,
+  };
 
   // VARIABLES
       History        = window.History,
       document       = window.document,
-      title          = document.getElementById('text-title'),
-      content        = document.getElementById('text-content'),
-      published      = $('#published'),
-      drafts         = $('#drafts'),
-      admin          = $('#admin'),
-      post_title     = $('#post_title'),
-      post_content   = $('#post_content'),
-      post_slug      = $('#post_slug'),
-      post_url       = $('#post_url'),
-      post_draft     = $('#post_draft'),
-      post_form      = $('#new_post,.edit_post'),
-      bar_div        = $('#bar div'),
-      preview        = false,
-      changed        = false,
-      editing        = false,
-      editingId      = null,
-      disableNav     = false,
-      beganEditing   = false,
-      hiddenBar      = false,
+      text_title     = document.getElementById('text-title'),
+      text_content   = document.getElementById('text-content'),
       disableKeys    = [91, 16, 17, 18],
-      saveInterval   = 5000,
+      saveInterval   = 1000,
       draftsItems    = $('#drafts ul').data('items'),
       publishedItems = $('#published ul').data('items'),
-      selectedItem   = $('.col li:visible:first'),
-      selectedCol    = $('#drafts'),
-      selectedColUl  = $('#drafts ul'),
       itemIndex      = 0,
       colIndex       = 0,
       col_height     = 0,
@@ -123,28 +43,16 @@ $(function() {
       curPath        = window.location.pathname.split('/'),
       showdown       = null;
 
+
+  //
+  // DEBUG
+  //
+  setInterval(heartbeatLogger, 10000);
+
+
   //
   // FUNCTIONS
   //
-
-  // Get cache
-  function getCache(id) {
-    var string = localStorage.getItem(id);
-    return JSON.parse(string);
-  }
-
-  // Set cache
-  function setCache(id, data) {
-    localStorage.setItem(id,JSON.stringify(data));
-  }
-
-  // Load it up
-  function loadCache(id, callback) {
-    $.getJSON('/get/'+id, function(data) {
-      setCache(id,data);
-      if (callback) callback.call();
-    });
-  }
 
   // Saves the post
   function savePost(id) {
@@ -155,112 +63,35 @@ $(function() {
     save_button.addClass('icon-refresh').removeClass('icon-asterisk');
 
     // POST
+    fn.log('Saving...');
     $.ajax({
       type: 'POST',
       url: action,
       data: form.serialize(),
       dataType: 'text',
       success: function(data) {
-        var data = JSON.parse(data);
+        var data = JSON.parse(data),
+            li   = $('#post-'+data.id);
+
+        // Update save button
         save_button.removeClass('icon-refresh').addClass('icon-asterisk');
+
+        // Update cache
         setCache(data.id, data);
 
+        // Move to beginning of list
+        li.prependTo(li.parent());
+
         // If we saved for the first time
-        if (editingId == true || editingId == null) {
+        if (state.id == true || state.id == null) {
           loadPost(data.id);
-          $('#drafts ul').prepend('<li id="post-'+editingId+'"><a href="">'+$('#post_title').val()+'</a></li>');
+          $('#drafts ul').prepend('<li id="post-'+state.id+'"><a href="">'+el.title.val()+'</a></li>');
         }
+        fn.log('Saved');
       }
     });
   }
 
-  // Hide bar after delay
-  function delayedHideBar() {
-    hiddenBar = true;
-    setTimeout(hideBar,2000);
-  }
-
-  // Set post content height and column height
-  function setHeights() {
-    var content_height = Math.max($(window).height() - post_title.height()-70,100);
-    col_height = $(window).height() - 200;
-    $('.col ul').css('height', col_height);
-    post_content.css('min-height', content_height);
-    $('#content-fieldset').css('height', content_height);
-  }
-
-  // Highlight an item in the column
-  function selectItem(selector) {
-    selectedItem.removeClass('selected');
-    selectedItem = selector.addClass('selected');
-  }
-
-  // Upadting interface when editing or not
-  function setEditing(val) {
-    makeExpandingAreas();
-    if (val) {
-      editing = true;
-      admin.addClass('editing');
-      post_title.focus();
-    } else {
-      editing = false;
-      beganEditing = false;
-      admin.removeClass('editing');
-      post_title.val('').focus();
-      post_content.val('');
-      makeExpandingAreas();
-      History.pushState(null, null, '/new');
-    }
-  }
-
-  // Uses cache to fill in information
-  function loadPost(id) {
-    var url   = id == true ? '/new' : '/edit/'+id,
-        cache = getCache(id);
-    if (id != true) editingId = id;
-    post_content.val(cache.content);
-    post_slug.val(cache.slug);
-    post_url.val(cache.url);
-    post_draft.attr('checked',cache.draft ? 'checked' : '');
-    post_form.attr('action', url);
-    makeExpandingAreas();
-    scrollToBottom();
-    History.pushState(null, null, url);
-  }
-
-  // Either uses cache or loads post
-  function editSelectedItem() {
-    var id = selectedItem.attr('id').split('-')[1];
-    // If they click on "New Draft..."
-    if (id == 0) {
-      setEditing(true);
-    } else {
-      setEditing(id);
-      post_title.val(selectedItem.find('a').html());
-      makeExpandingAreas();
-      // Check if post content cached else load it
-      if (getCache(id)) {
-        loadPost(id);
-      } else {
-        loadCache(id, function(){
-          loadPost(id);
-        });
-      }
-    }
-  }
-
-  // Highlight the proper column
-  function selectCol(col) {
-    colIndex = col;
-    if (colIndex == 0) {
-      published.removeClass('active');
-      selectedCol = drafts.addClass('active');
-    } else {
-      drafts.removeClass('active');
-      selectedCol = published.addClass('active');
-    }
-    selectedColUl = selectedCol.find('ul');
-  }
 
   //
   // SETUP
@@ -274,33 +105,33 @@ $(function() {
   $(window).resize(setHeights);
 
   // So it doesnt fade in first load, we add it after onload
-  bar_div.addClass('transition');
+  el.bar.addClass('transition');
 
   // Animations on editing interface
-  $('#bar div')
-    .mouseenter(function() { bar_div.addClass('hovered').removeClass('hidden'); })
-    .mouseleave(function() { bar_div.removeClass('hovered').addClass('hidden'); });
+  el.bar
+    .mouseenter(function barMouseEnter() { el.bar.addClass('hovered').removeClass('hidden'); })
+    .mouseleave(function barMouseLeave() { el.bar.removeClass('hovered').addClass('hidden'); });
 
   // Detect if we are editing initially
   if (curPath.length > 2) {
     var id = parseInt(curPath[2],10);
     setEditing(id);
     loadCache(id);
-    beganEditing = true;
-    post_form.attr('action', '/edit/'+id);
+    state.beganEditing = true;
+    el.form.attr('action', '/edit/'+id);
     scrollToBottom();
   } else {
-    post_title.focus();
+    el.title.focus();
   }
 
   // Select first item
   selectItem($('.col li:visible:first'));
 
   // Filtering and other functions with the title field
-  post_title.keyup(function(e) {
-    if (!editing) {
+  el.title.keyup(function titleKeyup(e) {
+    if (!state.editing) {
       // Selecting
-      if (selectedItem.length == 0 || selectedItem.is('.hidden')) {
+      if (el.curItem.length == 0 || el.curItem.is('.hidden')) {
         selectItem($('.col li:visible:first'));
         itemIndex = 0;
       }
@@ -318,13 +149,13 @@ $(function() {
         $('#drafts li,#published li').removeClass('hidden');
       }
     }
-  }).keydown(function(e) {
-    if (!editing) {
+  }).keydown(function titleKeydown(e) {
+    if (!state.editing) {
       switch (e.which) {
         // Esc
         case 27:
           e.preventDefault();
-          post_title.val('');
+          el.title.val('');
           $('#drafts li,#published li').removeClass('hidden');
           break;
       }
@@ -332,37 +163,39 @@ $(function() {
   });
 
   // Window click + keybindings
-  $(window).click(function(e){
-    if (!editing) {
-      post_title.focus();
+  $(window).click(function windowClick(e){
+    if (!state.editing) {
+      el.title.focus();
+    } else {
+      if (!state.barHidden) delayedHideBar();
     }
-  }).keydown(function(e) {
-    console.log(e.which);
+  }).keydown(function windowKeydown(e) {
+    fn.log(e.which);
 
     // Disable keyboard shortcuts for action keys
-    if ($.inArray(e.which,disableKeys) >= 0) disableNav = true;
+    if ($.inArray(e.which,disableKeys) >= 0) state.navDisable = true;
 
-    if (!editing && !disableNav) {
+    if (!state.editing && !state.navDisable) {
       switch (e.which) {
         // Enter
         case 13:
           e.preventDefault();
-          if (selectedItem.length > 0) {
+          if (el.curItem.length > 0) {
             editSelectedItem();
           }
           break;
         // Down
         case 40:
           e.preventDefault();
-          var next = selectedItem.siblings(':visible').eq(itemIndex);
+          var next = el.curItem.siblings(':visible').eq(itemIndex);
           if (next.length > 0) {
             itemIndex++;
             selectItem(next);
 
             // Scroll column if necessary
-            var itemOffset = selectedItem.position().top;
+            var itemOffset = el.curItem.position().top;
             if (itemOffset > (col_height/2)) {
-              selectedColUl.scrollTop(selectedColUl.scrollTop()+selectedItem.height()*2);
+              el.curColUl.scrollTop(el.curColUl.scrollTop()+el.curItem.height()*2);
             }
           }
           break;
@@ -370,15 +203,15 @@ $(function() {
         case 38:
           e.preventDefault();
           if (itemIndex > 0) {
-            var prev = selectedItem.siblings(':visible').eq(itemIndex-1);
+            var prev = el.curItem.siblings(':visible').eq(itemIndex-1);
             if (prev.length > 0) {
               itemIndex--;
               selectItem(prev);
 
               // Scroll column if necessary
-              var itemOffset = selectedItem.position().top;
+              var itemOffset = el.curItem.position().top;
               if (itemOffset < (col_height/2)) {
-                selectedColUl.scrollTop(selectedColUl.scrollTop()-selectedItem.height()*2);
+                el.curColUl.scrollTop(el.curColUl.scrollTop()-el.curItem.height()*2);
               }
             }
           }
@@ -410,95 +243,91 @@ $(function() {
         // Esc
         case 27:
           e.preventDefault();
-          post_title.val('');
+          el.title.val('');
           break;
       }
     }
     // Editing
     else {
+      if (!state.barHidden) delayedHideBar();
       switch (e.which) {
         // Esc
         case 27:
           e.preventDefault();
-          setEditing(false);
+          if (state.preview) hidePreview();
+          else setEditing(false);
           break;
         // Backspace
         case 8:
-          if (post_title.val() == '') setEditing(false);
-          break;
-        // Tab
-        case 9:
-          // Moving from title to content allows us to save
-          beganEditing = true;
+          if (el.title.val() == '') setEditing(false);
           break;
       }
     }
-  }).keyup(function(e) {
+  }).keyup(function windowKeyup(e) {
     // Stop disable
-    disableNav = false;
+    state.navDisable = false;
   });
 
   // Edit a post on click
-  $('.col a').on('click', function(e) {
+  $('.col a').on('click', function colAClick(e) {
     e.preventDefault();
     selectItem($(this).parent());
     editSelectedItem();
   });
 
+  el.content.focus(function contentFocus() {
+    state.beganEditing = true;
+  });
+
   // Post preview
-  $('#post_content,#post_title').on('input',function() {
-      if (preview) updatePreview();
-      if (!hiddenBar) delayedHideBar();
+  $('#post_content,#post_title').on('input',function postInput() {
+      if (state.preview) updatePreview();
     });
 
-  // Woah whats this?
-  // DOMSubtreeModified detects basically size changes
-  // so we can adjust the height of the textarea
-  $('#text-title pre').on('DOMSubtreeModified', function() {
-      setHeights();
-    });
+  // DOMSubtreeModified detects when the text pre changes size,
+  // so we can adjust the height of the other text areas
+  $('#text-title pre').on('DOMSubtreeModified', function textTitleModified() {
+    fn.log(setHeights());
+  });
 
   // Detect if we change anything for auto-save
   $('#post_draft,#post_content,#post_title,#post_slug,#post_url').on('change input', function(){
     // beganEditing prevents from saving just anything thats type in the title box
     // Until focus is set on the content, it will be false
-    if (beganEditing) changed = true;
+    if (state.beganEditing) state.changed = true;
   });
 
   // Back button
-  $('#back-button').click(function(e) {
+  $('#back-button').click(function backButtonClick(e) {
     e.preventDefault();
-    if (editing) setEditing(false);
+    fn.log('Press back button');
+    if (state.editing) setEditing(false);
     selectItem($('.col li:visible:first'));
   });
 
-  // Preview button
-  $('#preview-button').click(function(e){
+  // Preview
+  $('#preview-button').click(function previewButtonClick(e){
     e.preventDefault();
-    if (preview) {
-      $('#split').removeClass('preview');
-      $(this).removeClass('icon-eye-close').addClass('icon-eye-open');
-      preview = false;
-    } else {
-      updatePreview();
-      $('#split').addClass('preview');
-      $(this).removeClass('icon-eye-open').addClass('icon-eye-close');
-      preview = true;
-    }
+    if (state.preview) hidePreview();
+    else showPreview();
   });
 
+  el.bar.click(function barClick(e) {
+    if (state.preview && e.target.id == 'bar') hidePreview();
+  })
+
   // Autosave
-  setInterval(function(){
-    if (editing && changed) {
-      changed = false;
-      savePost(editingId);
+  setInterval(function autoSave(){
+    if (state.editing && state.changed) {
+      state.changed = false;
+      savePost(state.id);
     }
   }, saveInterval);
 
   // Ajax save-button
-  $('#save-button').click(function(e){
+  $('#save-button').click(function saveButtonClick(e){
     e.preventDefault();
-    savePost(editingId);
+    savePost(state.id);
   });
 
   // Fade out notices
@@ -508,8 +337,217 @@ $(function() {
   showdown = new Showdown.converter();
 
   // History.js Bind to StateChange Event
-  History.Adapter.bind(window,'statechange',function(){
-      var State = History.getState();
-      History.log(State.data, State.title, State.url);
+  History.Adapter.bind(window,'statechange',function windowStateChange(){
+    var State = History.getState();
+    //History.log(State.data, State.title, State.url);
   });
+
+  // Get cache
+  function getCache(id) {
+    var string = localStorage.getItem(id);
+    return JSON.parse(string);
+  }
+
+  // Set cache
+  function setCache(id, data) {
+    localStorage.setItem(id,JSON.stringify(data));
+  }
+
+  // Load it up
+  function loadCache(id, callback) {
+    $.getJSON('/get/'+id, function loadCacheCallback(data) {
+      setCache(id,data);
+      if (callback) callback.call();
+    });
+  }
+
+  // Allows for auto expanding textareas
+  function makeExpandingArea(container) {
+    var area = container.querySelector('textarea'),
+        span = container.querySelector('span');
+
+   if (area.addEventListener) {
+     area.addEventListener('input', function makeExpandingAreaCallback() {
+       span.textContent = area.value;
+     }, false);
+     span.textContent = area.value;
+   } else if (area.attachEvent) {
+     // IE8 compatibility
+     area.attachEvent('onpropertychange', function makeExpandingAreaCallback() {
+       span.innerText = area.value;
+     });
+     span.innerText = area.value;
+   }
+
+   // Enable extra CSS
+   container.className += ' active';
+  }
+
+  function makeExpandingAreas() {
+    makeExpandingArea(text_title);
+    makeExpandingArea(text_content);
+  }
+
+  // Lets us get the caret position in textarea
+  function getCaret(el) {
+    if (el.selectionStart) {
+      return el.selectionStart;
+    } else if (document.selection) {
+      el.focus();
+
+      var r = document.selection.createRange();
+      if (r == null) {
+        return 0;
+      }
+
+      var re = el.createTextRange(),
+          rc = re.duplicate();
+      re.moveToBookmark(r.getBookmark());
+      rc.setEndPoint('EndToStart', re);
+
+      return rc.text.length;
+    }
+    return 0;
+  }
+
+  function filterTitle(objects, val) {
+    return objects.filter(function filterTitleObjects(el) {
+      var regex = new RegExp(val.split('').join('.*'), 'i');
+      if (el.title.match(regex)) return true;
+    }).map(function filterTitleMap(el) {
+      return el.id;
+    });
+  }
+
+  // Scroll to bottom of content and select the end
+  function scrollToBottom() {
+    el.content.focus().putCursorAtEnd();
+    $('#content-fieldset').scrollTop(el.content.height());
+  }
+
+  function showOnly(context,selectors) {
+    $(context).addClass('hidden').filter(selectors).removeClass('hidden');
+  }
+
+  // Markdwon preview
+  function updatePreview() {
+    $('#post-preview').html('<h1>'+el.title.val()+'</h1>'+showdown.makeHtml(el.content.val()));
+  }
+
+
+  // Hide bar after delay
+  function delayedHideBar() {
+    state.barHidden = true;
+    setTimeout(hideBar,1500);
+  }
+
+  // Set post content height and column height
+  function setHeights() {
+    var content_height = Math.max($(window).height() - el.title.height()-70,100);
+    col_height = $(window).height() - 200;
+    $('.col ul').css('height', col_height);
+    el.content.css('min-height', content_height);
+    $('#content-fieldset').css('height', content_height);
+    return col_height;
+  }
+
+  // Highlight an item in the column
+  function selectItem(selector) {
+    el.curItem.removeClass('selected');
+    el.curItem = selector.addClass('selected');
+  }
+
+  // Upadting interface when editing or not
+  function setEditing(val) {
+    fn.log('Set editing', val);
+    state.id = val;
+    if (val) {
+      state.editing = true;
+      el.admin.addClass('editing');
+      el.bar.removeClass('hidden');
+      el.title.focus();
+    }
+    else {
+      if (state.changed) savePost(state.id);
+      state.editing = false;
+      state.beganEditing = false;
+      hideBar();
+      el.admin.removeClass('preview editing');
+      el.title.val('').focus();
+      el.content.val('');
+      History.pushState(null, null, '/new');
+    }
+    makeExpandingAreas();
+  }
+
+  // Uses cache to fill in information
+  function loadPost(id) {
+    var url   = id == true ? '/new' : '/edit/'+id,
+        cache = getCache(id);
+    if (id != true) state.id = id;
+    el.content.val(cache.content);
+    el.slug.val(cache.slug);
+    el.url.val(cache.url);
+    el.draft.attr('checked',cache.draft ? 'checked' : '');
+    el.form.attr('action', url);
+    makeExpandingAreas();
+    scrollToBottom();
+    History.pushState(null, null, url);
+  }
+
+  // Either uses cache or loads post
+  function editSelectedItem() {
+    var id = el.curItem.attr('id').split('-')[1];
+    // If they click on "New Draft..."
+    if (id == 0) {
+      setEditing(true);
+    } else {
+      setEditing(id);
+      el.title.val(el.curItem.find('a').html());
+      makeExpandingAreas();
+      // Check if post content cached else load it
+      if (getCache(id)) {
+        loadPost(id);
+      } else {
+        loadCache(id, function(){
+          loadPost(id);
+        });
+      }
+    }
+  }
+
+  // Highlight the proper column
+  function selectCol(col) {
+    colIndex = col;
+    if (colIndex == 0) {
+      el.published.removeClass('active');
+      el.curCol = el.drafts.addClass('active');
+    } else {
+      el.drafts.removeClass('active');
+      el.curCol = el.published.addClass('active');
+    }
+    el.curColUl = el.curCol.find('ul');
+  }
+
+  function hidePreview() {
+    el.admin.removeClass('preview');
+    $('#preview-button').removeClass('icon-eye-close').addClass('icon-eye-open');
+    state.preview = false;
+  }
+
+  function showPreview() {
+    updatePreview();
+    el.admin.addClass('preview');
+    $('#preview-button').removeClass('icon-eye-open').addClass('icon-eye-close');
+    state.preview = true;
+  }
+
+  // Hide editor buttons
+  function hideBar() {
+    el.bar.addClass('hidden');
+  }
+
+  function heartbeatLogger() {
+    fn.log('State:',state,'Elements',el);
+  }
 });
