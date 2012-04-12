@@ -14,7 +14,8 @@ $(function() {
     bar       : '#bar',
     curCol    : '#drafts',
     curColUl  : '#drafts ul',
-    curItem   : '.col li:visible:first'
+    curItem   : '.col li:visible:first',
+    blog      : '#blog-button'
   });
 
   // Editor state variables
@@ -481,6 +482,7 @@ $(function() {
       state.editing = true;
       el.admin.addClass('editing');
       el.bar.removeClass('hidden');
+      el.blog.attr('href',window.location.protocol+'//'+window.location.host+'/'+getCache(val).slug);
       el.title.focus();
     }
     else {
@@ -488,6 +490,7 @@ $(function() {
       state.editing = false;
       state.beganEditing = false;
       hideBar();
+      el.blog.attr('href',window.location.host);
       el.admin.removeClass('preview editing');
       el.title.val('').focus();
       el.content.val('');
