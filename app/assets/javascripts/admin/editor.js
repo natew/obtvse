@@ -9,6 +9,7 @@ $(function() {
     slug      : '#post_slug',
     url       : '#post_url',
     draft     : '#post_draft',
+    save      : '#save-button',
     form      : '#new_post,.edit_post',
     bar       : '#bar',
     curCol    : '#drafts',
@@ -25,6 +26,7 @@ $(function() {
     navDisable   : false,
     beganEditing : false,
     barHidden    : false,
+    lastKey      : 0
   };
 
   // VARIABLES
@@ -55,12 +57,12 @@ $(function() {
   //
 
   // Saves the post
-  function savePost(id) {
+  function savePost() {
     var form        = $('.edit_post,#new_post'),
         save_button = $('#save-button'),
         action      = form.attr('action');
 
-    save_button.addClass('icon-refresh').removeClass('icon-asterisk');
+    el.save.addClass('saving');
 
     // POST
     fn.log('Saving...');
@@ -74,7 +76,8 @@ $(function() {
             li   = $('#post-'+data.id);
 
         // Update save button
-        save_button.removeClass('icon-refresh').addClass('icon-asterisk');
+        el.save.removeClass('saving dirty').addClass('saved');
+        setTimeout(function saveComplete(){el.save.removeClass('saved')},1000);
 
         // Update cache
         setCache(data.id, data);
@@ -162,20 +165,20 @@ $(function() {
     }
   });
 
-  // Window click + keybindings
+  // Window click
   $(window).click(function windowClick(e){
     if (!state.editing) {
       el.title.focus();
     } else {
       if (!state.barHidden) delayedHideBar();
     }
+
+  // Window keybord shortcuts
   }).keydown(function windowKeydown(e) {
     fn.log(e.which);
 
-    // Disable keyboard shortcuts for action keys
-    if ($.inArray(e.which,disableKeys) >= 0) state.navDisable = true;
-
-    if (!state.editing && !state.navDisable) {
+    // Not editing
+    if (!state.editing) { //!$.inArray(state.lastKey,disableKeys)
       switch (e.which) {
         // Enter
         case 13:
@@ -261,7 +264,17 @@ $(function() {
         case 8:
           if (el.title.val() == '') setEditing(false);
           break;
+        // S
+        case 83:
+          // If lastkey is Command
+          if (state.lastKey == 91) {
+            e.preventDefault();
+            savePost();
+          }
+          break;
       }
+
+      state.lastKey = e.which;
     }
   }).keyup(function windowKeyup(e) {
     // Stop disable
@@ -294,7 +307,10 @@ $(function() {
   $('#post_draft,#post_content,#post_title,#post_slug,#post_url').on('change input', function(){
     // beganEditing prevents from saving just anything thats type in the title box
     // Until focus is set on the content, it will be false
-    if (state.beganEditing) state.changed = true;
+    if (state.beganEditing) {
+      state.changed = true;
+      el.save.addClass('dirty');
+    }
   });
 
   // Back button
@@ -320,14 +336,14 @@ $(function() {
   setInterval(function autoSave(){
     if (state.editing && state.changed) {
       state.changed = false;
-      savePost(state.id);
+      savePost();
     }
   }, saveInterval);
 
   // Ajax save-button
   $('#save-button').click(function saveButtonClick(e){
     e.preventDefault();
-    savePost(state.id);
+    savePost();
   });
 
   // Fade out notices
@@ -443,8 +459,8 @@ $(function() {
 
   // Set post content height and column height
   function setHeights() {
-    var content_height = Math.max($(window).height() - el.title.height()-70,100);
-    col_height = $(window).height() - 200;
+    var content_height = Math.max($(window).height() - el.title.height()-40,100);
+    col_height = $(window).height() - 120;
     $('.col ul').css('height', col_height);
     el.content.css('min-height', content_height);
     $('#content-fieldset').css('height', content_height);
@@ -468,7 +484,7 @@ $(function() {
       el.title.focus();
     }
     else {
-      if (state.changed) savePost(state.id);
+      if (state.changed) savePost();
       state.editing = false;
       state.beganEditing = false;
       hideBar();

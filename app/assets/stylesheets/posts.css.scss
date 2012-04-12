@@ -466,6 +466,24 @@ body.posts.new #admin {
   }
 }
 
+#save-button {
+  background: #fff;
+  width: 12px;
+  height: 12px;
+  display: inline-block;
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  border: none;
+  @include border-radius(8px);
+  @include transition(all .5s);
+
+  &:hover {background:#999;}
+  &.dirty {background:#ddd;}
+  &.saving {background:#f5d7a8;}
+  &.saved {background:#baf5a8; @include transform(scale(1.4));}
+}
+
 fieldset.markdown {
   position: relative;
   border: none;
