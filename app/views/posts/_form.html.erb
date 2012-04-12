@@ -29,40 +29,30 @@
 </div>
 
 <div id="bar">
-  <div class="left">
-    <%= link_to 'Back', '#', :id => "back-button", :class => 'icon-arrow-left' %>
+  <%= link_to 'Back', '#', :id => "back-button", :class => 'icon-arrow-left' %>
+  <%= link_to 'Preview', '#', :id => 'preview-button', :target => "_blank", :class => 'icon-eye-open' %>
+  <% link_to 'Save', '#', :id => 'save-button', :class => 'icon-asterisk' %>
 
-    <div class="bottom">
-      <%= link_to 'Delete', @post, :confirm => 'Are you sure?', :method => :delete, :class => 'icon-trash' %>
-      <%= link_to 'Options', '#options', :class => 'menu icon-cog' %>
-    </div>
+  <div class="bottom">
+    <%= link_to 'Publish', '#', :id => 'publish-button', :class => 'icon-upload-alt' %>
+    <%= link_to 'Delete', @post, :confirm => 'Are you sure?', :method => :delete, :class => 'icon-trash' %>
+    <% link_to 'Options', '#options', :class => 'menu icon-cog' %>
   </div>
+</div>
 
-  <div class="right">
-    <%= link_to 'Save', '#', :id => 'save-button', :class => 'icon-asterisk' %>
-    <%= link_to 'Preview', '#', :id => 'preview-button', :target => "_blank", :class => 'icon-eye-open' %>
-    <div class="hide">
-      <%= f.check_box :draft %>
-      <%= link_to '⚓', @post, :target => '_blank' if @post.slug %>
-    </div>
-
-    <div class="bottom">
-      <%= link_to 'Publish', '#', :id => 'publish-button', :class => 'icon-upload-alt' %>
-    </div>
-  </div>
-
-  <div class="hide">
-    <ul id="options" class="sub-menu">
-      <li>
-        <%= f.label :url, 'Slug' %>
-        <%= f.text_field :slug, :placeholder => 'Leave blank to automatically generate' %>
-      </li>
-      <li>
-        <%= f.label :url, 'URL' %>
-        <%= f.text_field :url, :placeholder => 'Optional external link' %>
-      </li>
-    </ul>
-  </div>
+<div class="hide">
+    <%= f.check_box :draft %>
+    <%= link_to '⚓', @post, :target => '_blank' if @post.slug %>
+  <ul id="options" class="sub-menu">
+    <li>
+      <%= f.label :url, 'Slug' %>
+      <%= f.text_field :slug, :placeholder => 'Leave blank to automatically generate' %>
+    </li>
+    <li>
+      <%= f.label :url, 'URL' %>
+      <%= f.text_field :url, :placeholder => 'Optional external link' %>
+    </li>
+  </ul>
 </div>
 
 

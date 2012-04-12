@@ -3,7 +3,7 @@ class PostsController < ApplicationController
   layout :choose_layout
 
   def index
-    @posts = Post.page(params[:page]).per(10).where(draft:false)
+    @posts = Post.where(draft:false).order('updated_at desc').page(params[:page]).per(10)
 
     respond_to do |format|
       format.html
@@ -29,8 +29,8 @@ class PostsController < ApplicationController
   def new
     @no_header = true
     @post = params[:id] ? Post.find(params[:id]) : Post.new
-    @published = Post.where(draft:false)
-    @drafts = Post.where(draft:true)
+    @published = Post.where(draft:false).order('created_at desc')
+    @drafts = Post.where(draft:true).order('updated_at desc')
 
     respond_to do |format|
       format.html
