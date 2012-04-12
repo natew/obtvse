@@ -19,7 +19,10 @@ body {
   background: #fff;
   color: #444;
   overflow: auto;
-  font: 14px/1.9em 'Istok Web'
+}
+
+body, textarea, pre, input, li {
+  font: 14px/1.9em 'Istok Web', Helvetica, Arial, sans-serif;
 }
 
 h1,h2,h3,h4,h5,#text-title *,header li {
@@ -28,6 +31,11 @@ h1,h2,h3,h4,h5,#text-title *,header li {
   font-family: 'Geogrotesque-SemiBold', sans-serif;
   line-height: 1em;
 }
+
+h1 {font-size: 24px;}
+h1.external {font-size: 22px;}
+h2 {font-size: 22px;}
+h3 {font-size: 20px;}
 
 h1,
 #text-title pre,
@@ -65,7 +73,6 @@ header {
       text-align: center;
 
     a {
-      font-size: 24px;
       color: #000;
       padding: 0 15px;
       background: #fff;
@@ -169,7 +176,6 @@ body.show #container time {display:block;}
 
   h1.external {
     margin-top: 25px;
-    font-size: 22px;
 
     .permalink {
       margin-left: 8px;
@@ -177,14 +183,6 @@ body.show #container time {display:block;}
       color: #999;
       border: none;
     }
-  }
-
-  h2 {
-    font-size: 22px;
-  }
-
-  h3 {
-    font-size: 20px;
   }
 }
 
@@ -624,7 +622,7 @@ $bar-background: #f4f4f4;
   bottom: 0;
   left: 0;
   width: 80px;
-  padding: 20px;
+  padding: 20px 0;
   background: $bar-background;
   border-right: 1px solid #eee;
   @include box-sizing(border-box);
@@ -650,6 +648,8 @@ $bar-background: #f4f4f4;
   .bottom {
     position: absolute;
     bottom: 0;
+    left: 0;
+    width: 100%;
   }
 }
 

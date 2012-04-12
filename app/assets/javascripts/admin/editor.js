@@ -15,12 +15,14 @@ $(function() {
     curCol    : '#drafts',
     curColUl  : '#drafts ul',
     curItem   : '.col li:visible:first',
-    blog      : '#blog-button'
+    blog      : '#blog-button',
+    publish   : '#publish-button'
   });
 
   // Editor state variables
   state = {
     id           : null,
+    post         : null,
     preview      : false,
     changed      : false,
     editing      : false,
@@ -78,7 +80,7 @@ $(function() {
 
         // Update save button
         el.save.removeClass('saving dirty').addClass('saved');
-        setTimeout(function saveComplete(){el.save.removeClass('saved')},1000);
+        setTimeout(function saveButtonComplete(){el.save.removeClass('saved')},1000);
 
         // Update cache
         setCache(data.id, data);
@@ -91,7 +93,7 @@ $(function() {
           loadPost(data.id);
           $('#drafts ul').prepend('<li id="post-'+state.id+'"><a href="">'+el.title.val()+'</a></li>');
         }
-        fn.log('Saved');
+        fn.log('Saved',data.id,data);
       }
     });
   }
@@ -119,11 +121,13 @@ $(function() {
   // Detect if we are editing initially
   if (curPath.length > 2) {
     var id = parseInt(curPath[2],10);
-    setEditing(id);
-    loadCache(id);
-    state.beganEditing = true;
-    el.form.attr('action', '/edit/'+id);
-    scrollToBottom();
+    loadCache(id, function editLoadCache() {
+      loadPost(id);
+      setEditing(id);
+      state.beganEditing = true;
+      el.form.attr('action', '/edit/'+id);
+      scrollToBottom();
+    });
   } else {
     el.title.focus();
   }
@@ -305,7 +309,7 @@ $(function() {
   });
 
   // Detect if we change anything for auto-save
-  $('#post_draft,#post_content,#post_title,#post_slug,#post_url').on('change input', function(){
+  $('#post_content,#post_title,#post_slug,#post_url').on('change input', function(){
     // beganEditing prevents from saving just anything thats type in the title box
     // Until focus is set on the content, it will be false
     if (state.beganEditing) {
@@ -328,6 +332,14 @@ $(function() {
     if (state.preview) hidePreview();
     else showPreview();
   });
+
+  // Publish
+  el.publish.click(function publishClick(e) {
+    e.preventDefault();
+    state.post.draft = !state.post.draft;
+    setDraft(state.post.draft);
+    savePost();
+  })
 
   el.bar.click(function barClick(e) {
     if (state.preview && e.target.id == 'bar') hidePreview();
@@ -374,6 +386,7 @@ $(function() {
   function loadCache(id, callback) {
     $.getJSON('/get/'+id, function loadCacheCallback(data) {
       setCache(id,data);
+      state.post = data;
       if (callback) callback.call();
     });
   }
@@ -482,7 +495,7 @@ $(function() {
       state.editing = true;
       el.admin.addClass('editing');
       el.bar.removeClass('hidden');
-      el.blog.attr('href',window.location.protocol+'//'+window.location.host+'/'+getCache(val).slug);
+      el.blog.attr('href',window.location.protocol+'//'+window.location.host+'/'+state.post.slug);
       el.title.focus();
     }
     else {
@@ -501,13 +514,16 @@ $(function() {
 
   // Uses cache to fill in information
   function loadPost(id) {
-    var url   = id == true ? '/new' : '/edit/'+id,
-        cache = getCache(id);
-    if (id != true) state.id = id;
-    el.content.val(cache.content);
-    el.slug.val(cache.slug);
-    el.url.val(cache.url);
-    el.draft.attr('checked',cache.draft ? 'checked' : '');
+    var url = id == true ? '/new' : '/edit/'+id;
+    if (id != true) {
+      state.id = id;
+      fn.log('loading post',id,state.post);
+    }
+
+    el.content.val(state.post.content);
+    el.slug.val(state.post.slug);
+    el.url.val(state.post.url);
+    setDraft(state.post.draft);
     el.form.attr('action', url);
     makeExpandingAreas();
     scrollToBottom();
@@ -532,6 +548,17 @@ $(function() {
           loadPost(id);
         });
       }
+    }
+  }
+
+  function setDraft(on) {
+    fn.log('Setting draft to ', on, el.draft);
+    if (on) {
+      el.publish.html('Publish').addClass('icon-upload-alt').removeClass('icon-ok-circle');
+      el.draft.val(1).attr('checked','checked');
+    } else {
+      el.publish.html('Published').removeClass('icon-upload-alt').addClass('icon-ok-circle');
+      el.draft.val(0).attr('checked','');
     }
   }
 
