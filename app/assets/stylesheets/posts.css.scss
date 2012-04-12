@@ -20,7 +20,7 @@ body {
 }
 
 body, textarea, pre, input, li {
-  font-family: 'Istok Web', Helvetica, Arial, sans-serif;
+  font-family: Helvetica, Arial, sans-serif;
   line-height: 1.9em;
   font-size: 13px;
 }
@@ -335,7 +335,7 @@ body.posts.new #admin {
       display: none;
     }
 
-    #bar div {
+    #bar {
       visibility: visible;
     }
   }
@@ -523,6 +523,7 @@ form .permalink {
     right: 0;
     left: auto;
     display: none;
+    @include transition(all 1s);
 
     h1 {
       margin: 35px 0 17px;
@@ -539,7 +540,11 @@ form .permalink {
   }
 }
 
-#split.preview {
+#admin.preview {
+  #close-preview {
+    display: block;
+  }
+
   #post-preview {
     display:block;
     overflow: scroll;
@@ -568,52 +573,51 @@ form .permalink {
   }
 }
 
+$bar-background: #f4f4f4;
+
+.preview #bar {
+  left: -70px;
+  cursor: pointer;
+
+  &:hover {
+    background: #ccc;
+  }
+}
+
 #bar {
+  visibility: hidden;
   position: fixed;
   top: 0;
   bottom: 0;
   left: 0;
-  right: 0;
-  margin: 0;
-  pointer-events: none;
+  width: 80px;
+  padding: 20px;
+  background: $bar-background;
+  border-right: 1px solid #eee;
+  @include box-sizing(border-box);
 
-  .left,
-  .right {
-    position: fixed;
-    padding: 30px;
-    pointer-events: auto;
-    width: 15%;
-    visibility: hidden;
-    @include box-sizing(border-box);
+  &.transition {
+    @include transition(all .2s);
+  }
 
-    &.transition {
-      @include transition(opacity .5s);
-    }
+  &.hidden {
+    opacity: 0 !important;
+  }
 
-    &.hidden {
-      opacity: 0 !important;
-    }
-
-    a {
-      display: inline;
-      margin: 0 0 30px 0;
-      line-height: 0.8em;
-      font-size: 12px;
-      color: #ccc;
-      border: none;
-      display: block;
-    }
+  a {
+    margin: 0 0 10px 0;
+    line-height: 2em;
+    font-size: 11px;
+    color: #aaa;
+    border: none;
+    display: block;
+    text-align: center;
   }
 
   .bottom {
     position: absolute;
     bottom: 0;
   }
-
-  .left {top: 0; left: 0; bottom: 0;}
-  .left a {margin-left:15px;}
-  .right {top: 0; bottom: 0; right: 0; text-align: right;}
-  .right .bottom {width: 100%; margin: 0 -50px;}
 }
 
 .admin-view {

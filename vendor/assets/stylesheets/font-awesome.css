@@ -53,7 +53,7 @@ input[class^="icon-"], input[class*=" icon-"] {
   font-family: FontAwesome;
   font-weight: normal;
   font-style: normal;
-  display: inline-block;
+  display: block;
   text-decoration: inherit;
   font-size: 24px;
 }
@@ -84,7 +84,6 @@ li[class^="icon-"], li[class*=" icon-"] {
   list-style-type: none;
 }
 [class^="icon-"]:before, [class*=" icon-"]:before {
-  text-indent: -1.2em;
   text-align: center;
 }
 li[class^="icon-"].icon-large:before, li[class*=" icon-"].icon-large:before {
