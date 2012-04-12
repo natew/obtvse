@@ -434,7 +434,8 @@ $(function() {
       url: action,
       data: form.serialize(),
       dataType: 'text',
-      success: function(data) {
+      success: function savingSuccess(data) {
+        fn.log(data);
         var data = JSON.parse(data),
             li   = $('#post-'+data.id);
 
@@ -519,7 +520,7 @@ $(function() {
           el.blog.attr('href',window.location.protocol+'//'+window.location.host+'/'+state.post.slug);
 
           // Callbacks
-          callback.call(this, data);
+          if (callback) callback.call(this, data);
         });
       }
     }
