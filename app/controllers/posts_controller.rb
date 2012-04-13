@@ -14,14 +14,14 @@ class PostsController < ApplicationController
 
   def show
     @single_post = true
-    @post = admin? ? Post.find_by_slug(params[:slug]) : Post.find_by_slug_and_draft(params[:slug],false)
+    @post = admin? ? Post.find_by_slug!(params[:slug]) : Post.find_by_slug_and_draft!(params[:slug],false)
 
     respond_to do |format|
       if @post.present?
         format.html
         format.xml { render :xml => @post }
       else
-        format.any { head status: :not_found  }
+        format.any { render :status => 404  }
       end
     end
   end
