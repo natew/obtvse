@@ -4,7 +4,7 @@ String.prototype.leftPad = function (l, c) { return new Array(l - this.length + 
 
 var fn = {
   log: function() {
-    if (DEBUG) console.log(arguments.callee.caller.name.toString().leftPad(20) + ' | ', arguments);
+    if (DEBUG) console.log(arguments.callee.caller.name.toString().leftPad(20), arguments);
   },
 
   getjQueryElements: function(object) {

@@ -4,6 +4,7 @@
 //= require jquery.fileupload
 //= require jquery.iframe-transport
 //= require jquery.putcursoratend
+//= require jquery.scroll
 //= require fitvids
 //= require history
 //= require showdown
