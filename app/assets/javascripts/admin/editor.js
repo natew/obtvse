@@ -1,6 +1,7 @@
 $(function() {
   // Elements
   el = fn.getjQueryElements({
+    section   : '.split-section',
     published : '#published',
     drafts    : '#drafts',
     admin     : '#admin',
@@ -16,7 +17,8 @@ $(function() {
     curColUl  : '#drafts ul',
     curItem   : '.col li:visible:first',
     blog      : '#blog-button',
-    publish   : '#publish-button'
+    publish   : '#publish-button',
+    preview   : '#post-preview'
   });
 
   // Editor state variables
@@ -46,7 +48,9 @@ $(function() {
       col_height     = 0,
       divTimeout     = null,
       curPath        = window.location.pathname.split('/'),
-      showdown       = null;
+      showdown       = null,
+      lineHeight     = $('#line-height').height(),
+      scrollSpeed    = 0;
 
 
   //
@@ -70,6 +74,7 @@ $(function() {
   $(window).resize(setHeights);
 
   // Animations on editing interface
+  el.section.addClass('transition');
   el.bar
     .addClass('transition')
     .mouseenter(function barMouseEnter(){ el.bar.addClass('hovered').removeClass('hidden'); })
@@ -252,6 +257,24 @@ $(function() {
     state.beganEditing = true;
   });
 
+  // Update preview
+  $('#content-fieldset').scroll(function() {
+    if (state.preview) {
+      var halfWindowHeight = ($('#content-fieldset').height()/2),
+          textareaOffset   = el.content.offset().top;
+      if (textareaOffset < 0) {
+        var lineHeight    = $('#line-height').height(),
+            lineOffset    = parseInt((-textareaOffset)/lineHeight,10),
+            totalLines    = el.content.height()/lineHeight,
+            percentDown   = lineOffset / totalLines,
+            previewHeight = $('#post-preview .inner').height(),
+            previewOffset = previewHeight * percentDown;
+
+        el.preview.stop().animate({'scrollTop':previewOffset});
+      }
+    }
+  });
+
   // Post preview
   $('#post_content,#post_title').on('input',function postInput() {
       if (state.preview) updatePreview();
@@ -393,7 +416,7 @@ $(function() {
 
   // Markdwon preview
   function updatePreview() {
-    $('#post-preview').html('<h1>'+el.title.val()+'</h1>'+showdown.makeHtml(el.content.val()));
+    $('#post-preview .inner').html('<h1>'+el.title.val()+'</h1>'+showdown.makeHtml(el.content.val()));
   }
 
 

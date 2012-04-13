@@ -59,6 +59,11 @@ a:hover,
   color: $linkhover !important;
 }
 
+.goaway {
+  position: absolute;
+  clip: rect(0,0,0,0);
+}
+
 header {
   width: 580px;
   margin: 0 auto 90px;
@@ -207,11 +212,6 @@ code {
 .contain img {
   max-width: 100%;
   height: auto;
-}
-
-#new_post, .edit_post {
-  padding: 40px 0;
-  margin: 0 auto;
 }
 
 fieldset.markdown {
@@ -544,62 +544,44 @@ form .permalink {
  color: #ddd;
 }
 
-#split {
-  position: relative;
+.split-section {
+  &.transition {@include transition(all, .1s);}
 
-  #post-preview {
-    background: #f0f4fc;
-    border-left: 1px solid #dbe3f1;
-    right: 0;
-    left: auto;
-    display: none;
-    @include transition(all, 1s);
+  @include box-sizing(border-box);
+  padding: 0 20px;
+  height: 100%;
+  position: fixed;
+  width: 50%;
+}
 
-    h1 {
-      margin: 35px 0 17px;
-    }
-  }
+#post-editor {
+  width: 600px;
+  left: 50%;
+  margin-left: -300px;
+  top: 0;
+  bottom: 0;
+}
 
-  #post-editor {
-    position: fixed;
-    width: 600px;
-    left: 50%;
-    margin-left: -300px;
-    top: 0;
-    bottom: 0;
+#post-preview {
+  background: #f0f4fc;
+  border-left: 1px solid #dbe3f1;
+  right: -50%;
+  overflow: scroll;
+
+  h1 {
+    margin: 35px 0 17px;
   }
 }
 
 #admin.preview {
-  #close-preview {
-    display: block;
+  #post-editor {
+    margin: 0;
+    width: 50%;
+    left: 0;
   }
 
   #post-preview {
-    display:block;
-    overflow: scroll;
-  }
-
-  #post-editor {
-    left: 0;
-    margin: 0;
-    width: 50%;
-  }
-}
-
-.split-section {
-  position: fixed;
-  width: 50%;
-  left: 0;
-  top: 0;
-  padding: 0;
-  height: 100%;
-  padding: 0 20px;
-  @include box-sizing(border-box);
-
-  .inner {
-    position: relative;
-    height: 100%;
+    right: 0;
   }
 }
 
