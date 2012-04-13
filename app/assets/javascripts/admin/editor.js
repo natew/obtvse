@@ -30,7 +30,9 @@ $(function() {
     editing      : false,
     beganEditing : false,
     barHidden    : false,
-    lastKey      : 0
+    lastKey      : 0,
+    lines        : 0,
+    barShown     : false
   };
 
   // VARIABLES
@@ -49,7 +51,8 @@ $(function() {
       curPath        = window.location.pathname.split('/'),
       showdown       = null,
       lineHeight     = $('#line-height').height(),
-      commandPressed = false;
+      commandPressed = false,
+      previewHeight  = 0;
 
 
   //
@@ -74,10 +77,21 @@ $(function() {
 
   // Animations on editing interface
   el.section.addClass('transition');
-  el.bar
-    .addClass('transition')
-    .mouseenter(function barMouseEnter(){ el.bar.addClass('hovered').removeClass('hidden'); })
-    .mouseleave(function barMouseLeave(){ el.bar.removeClass('hovered').addClass('hidden'); });
+  el.bar.addClass('transition')
+
+  // More accurate detection of bar hovering
+  $(window).mousemove(function windowMouseMove(evt){
+    if (state.editing) {
+      if (evt.pageX < 90 && !state.barShown) {
+        el.bar.removeClass('hidden');
+        state.barShown = true;
+      }
+      else if (evt.pageX > 95 && state.barShown) {
+        el.bar.addClass('hidden');
+        state.barShown = false;
+      }
+    }
+  });
 
   // Detect if we are editing initially
   if (curPath.length > 2) {
@@ -132,7 +146,7 @@ $(function() {
     if (!state.editing) {
       el.title.focus();
     } else {
-      delayedHideBar();
+      hideBar();
     }
 
   // Window keyboard shortcuts
@@ -215,7 +229,7 @@ $(function() {
 
     // Editing shortcuts
     else {
-      delayedHideBar();
+      hideBar();
       switch (e.which) {
         // Cmd
         case 91:
@@ -264,7 +278,7 @@ $(function() {
     }
   });
 
-  $('#content-fieldset').on('scrollstop', function() {
+  $('#content-fieldset').on('scroll', function() {
     updatePreviewPosition();
   })
 
@@ -411,22 +425,6 @@ $(function() {
     });
   }
 
-  function updatePreviewPosition() {
-    // seconds since epoch = new Date() / 1000;
-    if (state.preview) {
-      var halfWindowHeight = ($('#content-fieldset').height()/2),
-          textareaOffset   = el.content.offset().top,
-          lineHeight       = $('#line-height').height(),
-          lineOffset       = parseInt((-textareaOffset)/lineHeight,10),
-          totalLines       = el.content.height()/lineHeight,
-          percentDown      = lineOffset / totalLines,
-          previewHeight    = $('#post-preview .inner').height(),
-          previewOffset    = previewHeight * percentDown;
-
-      el.preview.stop().animate({'scrollTop':previewOffset});
-    }
-  }
-
   // Scroll to bottom of content and select the end
   function scrollToBottom() {
     el.content.focus().putCursorAtEnd();
@@ -435,17 +433,6 @@ $(function() {
 
   function showOnly(context,selectors) {
     $(context).addClass('hidden').filter(selectors).removeClass('hidden');
-  }
-
-  // Markdwon preview
-  function updatePreview() {
-    $('#post-preview .inner').html('<h1>'+el.title.val()+'</h1>'+showdown.makeHtml(el.content.val()));
-  }
-
-
-  // Hide bar after delay
-  function delayedHideBar() {
-    if (!state.barHidden) setTimeout(hideBar,1500);
   }
 
   // Set post content height and column height
@@ -646,6 +633,25 @@ $(function() {
   function togglePreview() {
     if (state.preview) hidePreview();
     else showPreview();
+  }
+
+  // Preview
+  function updatePreviewPosition() {
+    if (state.preview) {
+      var textareaOffset = el.content.offset().top,
+          lineOffset     = parseInt((-textareaOffset)/lineHeight,10),
+          percentDown    = lineOffset / state.lines,
+          previewOffset  = previewHeight * percentDown;
+
+      el.preview.scrollTop(previewOffset);
+    }
+  }
+
+  // Markdwon preview
+  function updatePreview() {
+    $('#post-preview .inner').html('<h1>'+el.title.val()+'</h1>'+showdown.makeHtml(el.content.val()));
+    state.lines   = el.content.height()/lineHeight;
+    previewHeight = $('#post-preview .inner').height();
   }
 
   function hidePreview() {

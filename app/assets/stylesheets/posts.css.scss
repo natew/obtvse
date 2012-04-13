@@ -471,7 +471,7 @@ body.posts.new #admin {
   position: absolute;
   top: 0;
   right: -20px;
-  @include transition(all, .3s);
+  @include transition(all, .2s, ease-in);
 
   &:hover {
     border-top-color: #ddd;
@@ -488,7 +488,7 @@ body.posts.new #admin {
   right: 10px;
   border: none;
   @include border-radius(8px);
-  @include transition(all, .5s);
+  @include transition(all, .5s, ease-in);
 
   &:hover {background:#999;}
   &.dirty {background:#ddd;}
@@ -545,7 +545,7 @@ form .permalink {
 }
 
 .split-section {
-  &.transition {@include transition(all, .1s);}
+  &.transition {@include transition(all, .2s, ease-in);}
 
   @include box-sizing(border-box);
   padding: 0 20px;
@@ -582,6 +582,7 @@ form .permalink {
 
   #post-preview {
     right: 0;
+    opacity: 1;
   }
 }
 
@@ -609,7 +610,7 @@ $bar-background: #f4f4f4;
   @include box-sizing(border-box);
 
   &.transition {
-    @include transition(all, .2s);
+    @include transition(all, .3s, ease-in);
   }
 
   &.hidden {
@@ -617,7 +618,7 @@ $bar-background: #f4f4f4;
   }
 
   a {
-    margin: 0 0 10px 0;
+    margin: 0 10px 10px;
     line-height: 2em;
     font-size: 11px;
     color: #aaa;
