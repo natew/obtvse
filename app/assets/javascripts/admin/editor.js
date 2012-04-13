@@ -28,7 +28,6 @@ $(function() {
     preview      : false,
     changed      : false,
     editing      : false,
-    navDisable   : false,
     beganEditing : false,
     barHidden    : false,
     lastKey      : 0
@@ -50,7 +49,7 @@ $(function() {
       curPath        = window.location.pathname.split('/'),
       showdown       = null,
       lineHeight     = $('#line-height').height(),
-      scrollSpeed    = 0;
+      commandPressed = false;
 
 
   //
@@ -83,6 +82,7 @@ $(function() {
   // Detect if we are editing initially
   if (curPath.length > 2) {
     setEditing(parseInt(curPath[2],10), function editLoaded(){
+      if (window.location.hash == '#preview') showPreview();
       state.beganEditing = true;
     });
   } else {
@@ -132,10 +132,10 @@ $(function() {
     if (!state.editing) {
       el.title.focus();
     } else {
-      if (!state.barHidden) delayedHideBar();
+      delayedHideBar();
     }
 
-  // Window keybord shortcuts
+  // Window keyboard shortcuts
   }).keydown(function windowKeydown(e) {
     fn.log(e.which);
 
@@ -212,15 +212,22 @@ $(function() {
           break;
       }
     }
-    // Editing
+
+    // Editing shortcuts
     else {
-      if (!state.barHidden) delayedHideBar();
+      delayedHideBar();
       switch (e.which) {
+        // Cmd
+        case 91:
+          commandPressed = true;
+          break;
         // Esc
         case 27:
           e.preventDefault();
           if (state.preview) hidePreview();
-          else setEditing(false);
+          else {
+            setEditing(false);
+          }
           break;
         // Backspace
         case 8:
@@ -229,9 +236,16 @@ $(function() {
         // S
         case 83:
           // If lastkey is Command
-          if (state.lastKey == 91) {
+          if (commandPressed) {
             e.preventDefault();
             savePost();
+          }
+          break;
+        // P
+        case 80:
+          if (commandPressed) {
+            e.preventDefault();
+            togglePreview();
           }
           break;
       }
@@ -242,9 +256,17 @@ $(function() {
 
   // Window keyup
   .keyup(function windowKeyup(e) {
-    // Stop disable
-    state.navDisable = false;
+    switch(e.which) {
+      // Cmd
+      case 91:
+        commandPressed = false;
+        break;
+    }
   });
+
+  $('#content-fieldset').on('scrollstop', function() {
+    updatePreviewPosition();
+  })
 
   // Edit a post on click
   $('.col a').on('click', function colAClick(e) {
@@ -255,24 +277,6 @@ $(function() {
 
   el.content.focus(function contentFocus() {
     state.beganEditing = true;
-  });
-
-  // Update preview
-  $('#content-fieldset').scroll(function() {
-    if (state.preview) {
-      var halfWindowHeight = ($('#content-fieldset').height()/2),
-          textareaOffset   = el.content.offset().top;
-      if (textareaOffset < 0) {
-        var lineHeight    = $('#line-height').height(),
-            lineOffset    = parseInt((-textareaOffset)/lineHeight,10),
-            totalLines    = el.content.height()/lineHeight,
-            percentDown   = lineOffset / totalLines,
-            previewHeight = $('#post-preview .inner').height(),
-            previewOffset = previewHeight * percentDown;
-
-        el.preview.stop().animate({'scrollTop':previewOffset});
-      }
-    }
   });
 
   // Post preview
@@ -308,7 +312,10 @@ $(function() {
   $('#preview-button').click(function previewButtonClick(e){
     e.preventDefault();
     if (state.preview) hidePreview();
-    else showPreview();
+    else {
+      showPreview();
+      updatePreviewPosition();
+    }
   });
 
   // Publish
@@ -404,6 +411,22 @@ $(function() {
     });
   }
 
+  function updatePreviewPosition() {
+    // seconds since epoch = new Date() / 1000;
+    if (state.preview) {
+      var halfWindowHeight = ($('#content-fieldset').height()/2),
+          textareaOffset   = el.content.offset().top,
+          lineHeight       = $('#line-height').height(),
+          lineOffset       = parseInt((-textareaOffset)/lineHeight,10),
+          totalLines       = el.content.height()/lineHeight,
+          percentDown      = lineOffset / totalLines,
+          previewHeight    = $('#post-preview .inner').height(),
+          previewOffset    = previewHeight * percentDown;
+
+      el.preview.stop().animate({'scrollTop':previewOffset});
+    }
+  }
+
   // Scroll to bottom of content and select the end
   function scrollToBottom() {
     el.content.focus().putCursorAtEnd();
@@ -422,8 +445,7 @@ $(function() {
 
   // Hide bar after delay
   function delayedHideBar() {
-    state.barHidden = true;
-    setTimeout(hideBar,1500);
+    if (!state.barHidden) setTimeout(hideBar,1500);
   }
 
   // Set post content height and column height
@@ -518,7 +540,7 @@ $(function() {
     if (val) {
       // Update UI
       el.admin.addClass('editing');
-      el.bar.removeClass('hidden');
+      el.bar.addClass('transition').removeClass('hidden');
       state.editing = true;
 
       if (val != true) {
@@ -549,6 +571,7 @@ $(function() {
     }
     else {
       // Update UI
+      el.bar.removeClass('transition');
       el.admin.removeClass('preview editing');
       hideBar();
       el.blog.attr('href',window.location.host);
@@ -578,7 +601,7 @@ $(function() {
 
     // Update URL and form
     el.form.attr('action',url);
-    History.pushState(null, null, url);
+    History.pushState(null, null, url+window.location.hash);
   }
 
   // Either uses cache or loads post
@@ -620,7 +643,14 @@ $(function() {
     el.curColUl = el.curCol.find('ul');
   }
 
+  function togglePreview() {
+    if (state.preview) hidePreview();
+    else showPreview();
+  }
+
   function hidePreview() {
+    History.pushState(null,null,'/edit');
+    History.pushState(null,null,'/edit/'+state.id);
     el.admin.removeClass('preview');
     $('#preview-button').removeClass('icon-eye-close').addClass('icon-eye-open');
     state.preview = false;
@@ -628,6 +658,7 @@ $(function() {
 
   function showPreview() {
     updatePreview();
+    window.location.hash = 'preview';
     el.admin.addClass('preview');
     $('#preview-button').removeClass('icon-eye-open').addClass('icon-eye-close');
     state.preview = true;
@@ -635,7 +666,10 @@ $(function() {
 
   // Hide editor buttons
   function hideBar() {
-    el.bar.addClass('hidden');
+    if (!state.barHidden) {
+      state.barHidden = true;
+      el.bar.addClass('hidden');
+    }
   }
 
   function heartbeatLogger() {
