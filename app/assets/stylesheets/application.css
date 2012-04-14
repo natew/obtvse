@@ -9,8 +9,9 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require normalize
- *= require font-awesome
+ *= require fonts/font-awesome
  *= require highlighter/default
  *= require_self
  *= require_tree .
+ *= require fonts/open-sans
 */
