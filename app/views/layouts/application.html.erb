@@ -10,40 +10,28 @@
 </head>
 
 <body class="<%= controller_name %> <%= action_name %>">
+  <% if is_admin? %><a id="blog-button" href="/new">Go to blog</a><% end %>
   <% unless @no_header %>
   <header>
-    <h1><%= link_to CONFIG['name'], root_url %></h1>
-    <% if CONFIG['tagline'] %>
-      <span><%= CONFIG['tagline'].html_safe %></span>
-    <% end %>
-    <ul class="clearfix">
-      <% if CONFIG['twitter'] %>
-        <li><%= link_to 'twit', 'http://twitter.com/' + CONFIG['twitter'] %></li>
+      <h1><%= link_to CONFIG['name'], root_url %></h1>
+      <% if CONFIG['tagline'] %>
+        <span><%= CONFIG['tagline'].html_safe %></span>
       <% end %>
-      <% if CONFIG['github'] %>
-        <li><%= link_to 'git', 'https://github.com/' + CONFIG['github'] %></li>
-      <% end %>
-      <% if CONFIG['email'] %>
-        <li><%= link_to 'mail', "mailto:#{CONFIG['email']}?subject:whats up!" %></li>
-      <% end %>
-      <li><%= link_to 'rss', '/posts.rss' %></li>
-      <% if is_admin? %><li class="right"><a href="/new">admin</a></li><% end %>
-      <li class="right">powered by <a href="http://github.com/natew/obtvse.git">obtvse</a></li>
-    </ul>
-    <span class="powered-by">
-  </span>
-
+      <ul class="clearfix">
+        <% if CONFIG['twitter'] %><li><%= link_to 'tweet', 'http://twitter.com/' + CONFIG['twitter'] %></li><% end %>
+        <% if CONFIG['github'] %><li><%= link_to 'github', 'https://github.com/' + CONFIG['github'] %></li><% end %>
+        <% if CONFIG['email'] %><li class="right"><%= link_to 'mail', "mailto:#{CONFIG['email']}?subject:whats up!" %></li><% end %>
+        <li class="right"><%= link_to 'feed', '/posts.rss' %></li>
+      </ul>
   </header>
   <% end %>
 
   <div id="container">
-    <% unless @no_header %>
-      <time><% if @post && @post.created_at %>Posted <%= @post.created_at.to_formatted_s(:day_month_year) %><% else %><%= Time.now.to_formatted_s(:day_month_year) %><% end %></time>
-    <% end %>
     <div id="content">
       <% if notice %><span class="notice"><%= notice %></span><% end %>
       <%= yield %>
     </div>
+    <span class="footer">powered by <a href="http://github.com/natew/obtvse.git">obtvse</a></span>
   </div>
 
   <%= javascript_include_tag 'application' %>

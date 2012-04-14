@@ -7,6 +7,7 @@
   <%- else -%>
     <h1><% if @single_post %><%= post.title %><% else %><%= link_to post.title, post.slug %><% end %></h1>
   <%- end -%>
+  <% if action_name == 'index' %><time><%= post.created_at.to_formatted_s(:day_month_year) %></time><% end %>
   <div class="post contain">
     <% if post.content %><%= markdown(post.content).to_html.html_safe %><% end %>
   </div>
