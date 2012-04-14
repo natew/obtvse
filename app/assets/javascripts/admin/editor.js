@@ -279,7 +279,7 @@ $(function() {
 
   $('#content-fieldset').on('scroll', function() {
     updatePreviewPosition();
-  })
+  });
 
   // Edit a post on click
   $('.col a').on('click', function colAClick(e) {
@@ -483,7 +483,7 @@ $(function() {
         // If we saved for the first time
         if (state.id == true || state.id == null) {
           state.id = data.id;
-          setFormEditing();
+          setFormAction('/new');
           $('#drafts ul').prepend('<li id="post-'+state.id+'"><a href="">'+el.title.val()+'</a></li>');
         }
 
@@ -529,7 +529,8 @@ $(function() {
       el.bar.addClass('transition').removeClass('hidden');
       state.editing = true;
 
-      if (val != true) {
+      // If we have a number, we are already have a pos
+      if (typeof val != 'boolean') {
         loadCache(val, function setEditingLoadCache(data) {
           fn.log('got data', data);
           // Set state variables
@@ -537,7 +538,6 @@ $(function() {
           state.post = data;
 
           // Set form attributes
-          setFormEditing();
           el.content.val(state.post.content);
           el.slug.val(state.post.slug);
           el.url.val(state.post.url);
@@ -546,6 +546,11 @@ $(function() {
           // Refresh form
           makeExpandingAreas();
           scrollToBottom();
+
+          // Update url and form
+          var url = '/edit/'+state.id;
+          setFormAction(url);
+          History.pushState(null, null, url+window.location.hash);
 
           // Update link to post
           el.blog.attr('href',window.location.protocol+'//'+window.location.host+'/'+state.post.slug);
@@ -567,27 +572,20 @@ $(function() {
 
       // Save before closing
       if (state.changed) savePost();
-      setFormEditing(false);
 
       // Update state
       state.editing = false;
       state.beganEditing = false;
 
       // Update URL
+      setFormAction('/new');
       History.pushState(null, null, '/new');
     }
   }
 
-  // Set form and url if editing
-  //   true = new post
-  //   false = not editing
-  //   integer = editing id
-  function setFormEditing(editing) {
-    var url = (typeof editing == 'boolean') ? '/new' : '/edit/'+state.id;
-
-    // Update URL and form
+  // Set form action
+  function setFormAction(url) {
     el.form.attr('action',url);
-    History.pushState(null, null, url+window.location.hash);
   }
 
   // Either uses cache or loads post
@@ -597,10 +595,7 @@ $(function() {
     if (id == 0) {
       setEditing(true);
     } else {
-      setEditing(id);
       el.title.val(el.curItem.find('a').html());
-      makeExpandingAreas();
-      // Check if post content cached else load it
       setEditing(id);
     }
   }
