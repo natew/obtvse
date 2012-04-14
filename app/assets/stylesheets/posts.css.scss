@@ -3,12 +3,6 @@
 /* TODO: pull out coloring into variables */
 $linkhover: red;
 
-@font-face {
-  font-family: 'Geogrotesque-SemiBold';
-  src: url('/fonts/219E67_0_0.eot');
-  src: url('/fonts/219E67_0_0.eot?#iefix') format('embedded-opentype'), url('/fonts/219E67_0_0.woff') format('woff'), url('/fonts/219E67_0_0.ttf') format('truetype');
-}
-
 .clearfix:before, .clearfix:after {content:''; display:table;}
 aside {position:relative; display:block;}
 .hide {visibility:hidden; height:1px; clip:rect(0 0 0 0); position:absolute;}
@@ -22,13 +16,13 @@ body {
 }
 
 body, textarea, pre, input, li {
-  font: 13px/1.9em 'Istok Web', Helvetica, Arial, sans-serif;
+  font: 13px/1.9em 'Helvetica Nueue', Helvetica, Arial, sans-serif;
 }
 
 h1,h2,h3,h4,h5,#text-title *,header li {
   word-wrap: break-word;
   font-weight: normal;
-  font-family: 'Geogrotesque-SemiBold', sans-serif;
+  font-family: 'Oswald', Impact, sans-serif;
   line-height: 1em;
 }
 
@@ -65,7 +59,7 @@ a:hover,
 }
 
 header {
-  width: 580px;
+  width: 540px;
   margin: 0 auto 90px;
   background: #fff;
   z-index: 10000;
@@ -118,7 +112,7 @@ header li {
 
 header li a {
   padding: 2px 0;
-  color: #999;
+  color: #666;
   text-decoration: none;
 
   &:hover {
@@ -148,7 +142,7 @@ body.show #container time {display:block;}
 
   section {
     padding: 0;
-    margin: 0 0 40px 0;
+    margin: 0 0 60px 0;
     position: relative;
 
     a {
@@ -171,7 +165,6 @@ body.show #container time {display:block;}
 
   h1 {
     a {
-      color: #444;
       border: none;
     }
   }
@@ -205,7 +198,7 @@ code {
 .contain,
 #new_post,
 .edit_post {
-  width: 580px;
+  width: 440px;
   position: relative;
 }
 
@@ -555,9 +548,9 @@ form .permalink {
 }
 
 #post-editor {
-  width: 600px;
+  width: 440px;
   left: 50%;
-  margin-left: -300px;
+  margin-left: -220px;
   top: 0;
   bottom: 0;
 }
