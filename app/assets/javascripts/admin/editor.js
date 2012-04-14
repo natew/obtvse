@@ -52,7 +52,8 @@ $(function() {
       showdown       = null,
       lineHeight     = $('#line-height').height(),
       commandPressed = false,
-      previewHeight  = 0;
+      previewHeight  = 0,
+      hideBarTimeout = null;
 
 
   //
@@ -83,12 +84,10 @@ $(function() {
   $(window).mousemove(function windowMouseMove(evt){
     if (state.editing) {
       if (evt.pageX < 90 && !state.barShown) {
-        el.bar.removeClass('hidden');
-        state.barShown = true;
+        showBar();
       }
       else if (evt.pageX > 95 && state.barShown) {
-        el.bar.addClass('hidden');
-        state.barShown = false;
+        hideBar();
       }
     }
   });
@@ -146,7 +145,7 @@ $(function() {
     if (!state.editing) {
       el.title.focus();
     } else {
-      hideBar();
+      delayedHideBar();
     }
 
   // Window keyboard shortcuts
@@ -229,7 +228,7 @@ $(function() {
 
     // Editing shortcuts
     else {
-      hideBar();
+      delayedHideBar();
       switch (e.which) {
         // Cmd
         case 91:
@@ -560,7 +559,7 @@ $(function() {
       // Update UI
       el.bar.removeClass('transition');
       el.admin.removeClass('preview editing');
-      hideBar();
+      delayedHideBar();
       el.blog.attr('href',window.location.host);
       el.title.val('').focus();
       el.content.val('');
@@ -666,6 +665,7 @@ $(function() {
     updatePreview();
     window.location.hash = 'preview';
     el.admin.addClass('preview');
+    makeExpandingAreas();
     $('#preview-button').removeClass('icon-eye-open').addClass('icon-eye-close');
     state.preview = true;
   }
@@ -673,9 +673,21 @@ $(function() {
   // Hide editor buttons
   function hideBar() {
     if (!state.barHidden) {
-      state.barHidden = true;
       el.bar.addClass('hidden');
+      state.barShown = false;
     }
+  }
+
+  function delayedHideBar() {
+    hideBarTimeout = setTimeout(function delayedHideBarTimeout() {
+      hideBar();
+    },2000);
+  }
+
+  function showBar() {
+    clearTimeout(hideBarTimeout);
+    el.bar.removeClass('hidden');
+    state.barShown = true;
   }
 
   function heartbeatLogger() {

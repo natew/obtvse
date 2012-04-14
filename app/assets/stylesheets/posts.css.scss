@@ -19,13 +19,19 @@ body, textarea, pre, input, li {
   font: 13px/1.9em 'Helvetica Nueue', Helvetica, Arial, sans-serif;
 }
 
+::selection {
+  background: #00a6c4;
+}
+::-moz-selection {
+  background: #00a6c4;
+}
 
 #container,
 .contain,
-#new_post,
-.edit_post {
+#admin form {
   width: 440px;
   position: relative;
+  margin: 0 auto;
 }
 
 h1,h2,h3,h4,h5,#text-title *,header li {
@@ -38,9 +44,10 @@ h1,h2,h3,h4,h5,#text-title *,header li {
 #text-title pre,
 #text-title textarea,
 h1 {font-size: 26px;}
-h1.external {font-size: 22px;}
-h2 {font-size: 22px;}
-h3 {font-size: 20px;}
+h1.external {font-size: 20px;}
+h2 {font-size: 20px; text-transform: uppercase;}
+h3 {font-size: 16px; text-transform: uppercase; color: #999;}
+h2, h3 {margin: 2em 0 1em;}
 
 p {
   margin: 1em 0;
@@ -313,12 +320,10 @@ label {
   font-size: 12px;
 }
 
-body.posts.edit #admin,
-body.posts.new #admin {
-  width: 100%;
-}
-
 #admin {
+  position: absolute;
+  width: 100%;
+
   &.editing {
     #content-fieldset {
       display: block;
@@ -337,11 +342,7 @@ body.posts.new #admin {
   }
 
   #posts {
-    position: absolute;
-    top: 92px;
-    left: 50%;
-    margin-left: -280px;
-    width: 560px;
+    margin: 92px auto 0;
   }
 
   .contain {
@@ -349,7 +350,7 @@ body.posts.new #admin {
   }
 
   .col {
-    width: 280px;
+    width: 50%;
     float: left;
     padding: 0;
     @include box-sizing(border-box);
@@ -521,7 +522,7 @@ fieldset.markdown {
 
 #content-fieldset {
   display: none;
-  margin-top: -16px;
+  margin-top: -6px;
   overflow: scroll;
 }
 
@@ -554,11 +555,7 @@ form .permalink {
 }
 
 #post-editor {
-  width: 440px;
-  left: 50%;
-  margin-left: -220px;
-  top: 0;
-  bottom: 0;
+  padding: 0;
 }
 
 #post-preview {
@@ -574,6 +571,7 @@ form .permalink {
 
 #admin.preview {
   #post-editor {
+    padding: 0 20px;
     margin: 0;
     width: 50%;
     left: 0;
