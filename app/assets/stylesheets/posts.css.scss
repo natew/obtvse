@@ -30,7 +30,7 @@ body, textarea, pre, input, li {
 
 #container,
 .contain,
-#admin form {
+#post-editor {
   width: 440px;
   position: relative;
   margin: 0 auto;
@@ -346,13 +346,6 @@ label {
     }
   }
 
-  #drafts {
-  }
-
-  #posts {
-    margin: 92px auto 0;
-  }
-
   .contain {
     margin: 0 auto;
   }
@@ -379,11 +372,13 @@ label {
     ul {
       margin: 0 16px 0 0;
       padding: 0;
+      list-style: none;
       overflow: scroll;
 
       li {
         position: relative;
         line-height: 1.2em;
+        word-wrap: break-word;
 
         &#post-0 {
           font-style: italic;
@@ -564,6 +559,10 @@ form .permalink {
 
 #post-editor {
   padding: 0;
+
+  .inner {
+    width: 100%;
+  }
 }
 
 #post-preview {
@@ -579,10 +578,16 @@ form .permalink {
 
 #admin.preview {
   #post-editor {
-    padding: 0 20px;
+    padding: 0;
     margin: 0;
     width: 50%;
     left: 0;
+    position: absolute;
+
+    .inner {
+      padding: 0 20px;
+      @include box-sizing(border-box);
+    }
   }
 
   #post-preview {
