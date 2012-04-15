@@ -13,16 +13,18 @@
   <% if is_admin? %><a id="blog-button" href="/new">Go to blog</a><% end %>
   <% unless @no_header %>
   <header>
+    <div class="inner">
       <h1><%= link_to CONFIG['name'], root_url %></h1>
       <% if CONFIG['tagline'] %>
         <span><%= CONFIG['tagline'].html_safe %></span>
       <% end %>
       <ul class="clearfix">
-        <% if CONFIG['twitter'] %><li><%= link_to 'tweet', 'http://twitter.com/' + CONFIG['twitter'] %></li><% end %>
+        <% if CONFIG['twitter'] %><li><%= link_to 'twitter', 'http://twitter.com/' + CONFIG['twitter'] %></li><% end %>
         <% if CONFIG['github'] %><li><%= link_to 'github', 'https://github.com/' + CONFIG['github'] %></li><% end %>
-        <% if CONFIG['email'] %><li class="right"><%= link_to 'mail', "mailto:#{CONFIG['email']}?subject:whats up!" %></li><% end %>
+        <% if CONFIG['email'] %><li class="right"><%= link_to 'email', "mailto:#{CONFIG['email']}?subject:whats up!" %></li><% end %>
         <li class="right"><%= link_to 'feed', '/posts.rss' %></li>
       </ul>
+    </div>
   </header>
   <% end %>
 
