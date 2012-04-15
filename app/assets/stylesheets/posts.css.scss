@@ -26,7 +26,9 @@ body, textarea, pre, input, li {
 #content,
 .contain,
 #post-editor,
-header .inner {
+header .inner,
+#post_content:before,
+#post_content:after {
   width: 480px;
   position: relative;
   margin: 0 auto;
@@ -274,21 +276,6 @@ fieldset.markdown {
   background: none;
 }
 
-#post_content {
-  border: none;
-  width: 100%;
-  position: relative;
-  margin: 0 0 80px 0;
-}
-
-  form .permalink {
-   position: absolute;
-   left: -34px;
-   top: 12px;
-   border: none;
-   color: #ddd;
-  }
-
 .left {
   float: left;
 }
@@ -370,16 +357,15 @@ label {
       height: 12px;
       display: inline-block;
       position: absolute;
-      bottom: 20px;
-      right: 10px;
+      bottom: 30px;
+      right: 20px;
       border: none;
       @include border-radius(8px);
       @include transition(all, .5s, ease-in);
 
-      &:hover {background:#999;}
-      &.dirty {background:#ddd;}
-      &.saving {background:#f5d7a8;}
-      &.saved {background:#baf5a8; @include transform(scale(1.4));}
+      &.dirty, &:hover {background:lightyellow;}
+      &.saving {background:lightgreen;}
+      &.saved {background:#ccc; @include transform(scale(1.4));}
     }
   }
 
@@ -529,10 +515,43 @@ fieldset.markdown {
 }
 
 #post_content {
+  margin-bottom: 20px;
   border: none;
   width: 100%;
   position: relative;
 }
+
+  /* fade to white */
+  #post_content:before,
+  #post_content:after {
+    content: "";
+    display: block;
+    position: fixed;
+    top: 10px;
+    height: 1.5em;
+    pointer-events: none;
+    background-image: -webkit-gradient( linear, left top, left bottom, from(
+        rgba(255, 255, 255, 1)), to(
+        rgba(255, 255, 255, 0))
+      );
+  }
+
+  #post_content:after {
+    top: auto;
+    bottom: 0;
+    background-image: -webkit-gradient( linear, left bottom, left top, from(
+        rgba(255, 255, 255, 1)), to(
+        rgba(255, 255, 255, 0))
+      );
+  }
+
+  #admin.preview {
+    #post_content:before {top: 0;}
+    #post_content:before,
+    #post_content:after {
+      width: 100%;
+    }
+  }
 
 #text-content pre {
   padding: 0 0 20px 0;
