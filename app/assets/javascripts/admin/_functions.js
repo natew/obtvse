@@ -137,15 +137,15 @@ function selectItem(selector) {
 
 // Saves the post
 function savePost(callback) {
-  var form        = $('.edit_post,#new_post'),
-      save_button = $('#save-button'),
-      action      = form.attr('action');
+  var form   = $('.edit_post,#new_post'),
+      action = form.attr('action');
 
   state.saving = true;
+  state.changed = false;
   el.save.addClass('saving');
+  fn.log('Saving',el.draft);
 
   // POST
-  fn.log('Saving...');
   $.ajax({
     type: 'POST',
     url: action,
@@ -156,28 +156,22 @@ function savePost(callback) {
           li   = $('#post-'+data.id),
           list = data.draft == 'false' ? $('#drafts ul') : $('#published ul');
 
-      fn.log(data);
-
       // Update state
       state.saving = false;
-      state.changed = false;
 
-      // Update save button
+      // Update publish button
       el.save.removeClass('saving dirty').addClass('saved');
       setTimeout(function(){el.save.removeClass('saved')},1000);
 
-      // Update cache
+      // Update cache and post data
       setCache(data.id, data);
+      state.post = data;
 
-      // Move to beginning of list
-      li.prependTo(list);
+      // Update form
+      setFormAction('/edit/'+state.post.id);
 
-      // If we saved for the first time
-      if (state.post == null) {
-        state.post = data;
-        setFormAction('/edit/'+state.post.id);
-        $('#drafts ul').prepend('<li id="post-'+state.post.id+'"><a href="">'+el.title.val()+'</a></li>');
-      }
+      // If item exists move to top, else add to top
+      li.length ? li.prependTo(list) : $('#drafts ul').prepend('<li id="post-'+state.post.id+'"><a href="">'+el.title.val()+'</a></li>');
 
       fn.log('Saved',data.id,data);
       if (callback) callback.call(this, data);
@@ -296,15 +290,21 @@ function editSelectedItem() {
   }
 }
 
-function setDraft(on) {
-  fn.log('Setting draft to ', on, el.draft);
-  if (on) {
-    el.publish.html('Publish').addClass('icon-upload-alt').removeClass('icon-ok-circle');
-    el.draft.val(1).attr('checked','checked');
-  } else {
-    el.publish.html('Published').removeClass('icon-upload-alt').addClass('icon-ok-circle');
-    el.draft.val(0).attr('checked','');
-  }
+function setDraft(draft) {
+  setDraftInput(draft);
+  updateDraftButton(draft);
+}
+
+function setDraftInput(draft) {
+  fn.log(draft);
+  el.draft.attr('value',(draft ? 1 : 0));
+  el.draft.attr('checked',(draft ? 'checked' : ''));
+}
+
+function updateDraftButton(draft) {
+  fn.log(draft);
+  if (draft) el.publish.html('Draft').addClass('icon-edit').removeClass('icon-check');
+  else       el.publish.html('Published').removeClass('icon-edit').addClass('icon-check');
 }
 
 // Highlight the proper column

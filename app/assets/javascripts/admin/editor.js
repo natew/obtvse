@@ -93,7 +93,9 @@ $(function() {
   // Window.click
   $(window).click(function windowClick(e){
     if (!state.editing) el.title.focus();
-    else delayedHideBar();
+    else {
+      if (e.pageX > 95 && !state.barHidden) delayedHideBar();
+    }
   });
 
   // ContentFielset.scroll
@@ -155,10 +157,20 @@ $(function() {
   // Publish.click
   el.publish.click(function publishClick(e) {
     e.preventDefault();
-    state.post.draft = !state.post.draft;
-    setDraft(state.post.draft);
-    $('#post-'+state.post.id)
-    savePost();
+    el.publish.html('...')
+    setDraftInput(!state.post.draft);
+    savePost(function() {
+      updateDraftButton(state.post.draft);
+    });
+  })
+
+  // Publish.hover
+  .hover(function() {
+    if (state.post.draft) el.publish.html('Publish?');
+    else el.publish.html('Unpublish?');
+  }, function() {
+    if (state.post.draft) el.publish.html('Draft');
+    else el.publish.html('Published');
   });
 
   // Save.click
