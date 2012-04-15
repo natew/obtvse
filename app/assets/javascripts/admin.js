@@ -5,6 +5,7 @@
 //= require jquery.iframe-transport
 //= require jquery.putcursoratend
 //= require jquery.scroll
+//= require bootstrap.modal
 //= require fitvids
 //= require history
 //= require showdown

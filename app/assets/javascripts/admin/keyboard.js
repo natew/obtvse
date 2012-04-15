@@ -10,6 +10,10 @@ $(window).keydown(function windowKeydown(e) {
   // Not editing
   if (!state.editing) { //!$.inArray(state.lastKey,disableKeys)
     switch (e.which) {
+      // Cmd
+      case 91:
+        key.cmd = true;
+        break;
       // Shift
       case 16:
         key.shift = true;
@@ -66,15 +70,19 @@ $(window).keydown(function windowKeydown(e) {
         e.preventDefault();
         if ($('#drafts li:visible').length) changeCol();
         break;
-      // Esc
-      case 27:
-        e.preventDefault();
-        el.title.val('');
+      // P
+      case 80:
+        if (key.cmd) {
+          e.preventDefault();
+          editSelectedItem(function() {
+            togglePreview();
+          });
+        }
         break;
     }
   }
 
-  // Editing shortcuts
+  // Editing
   else {
     delayedHideBar();
     switch (e.which) {
@@ -86,9 +94,7 @@ $(window).keydown(function windowKeydown(e) {
       case 27:
         e.preventDefault();
         if (state.preview) hidePreview();
-        else {
-          setEditing(false);
-        }
+        else setEditing(false);
         break;
       // Backspace
       case 8:
