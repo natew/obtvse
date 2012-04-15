@@ -1,3 +1,22 @@
+// VARIABLES
+History        = window.History,
+document       = window.document,
+text_title     = document.getElementById('text-title'),
+text_content   = document.getElementById('text-content'),
+saveInterval   = 1000,
+draftsItems    = $('#drafts ul').data('items'),
+publishedItems = $('#published ul').data('items'),
+itemIndex      = 0,
+colIndex       = 0,
+col_height     = 0,
+divTimeout     = null,
+curPath        = window.location.pathname.split('/'),
+showdown       = null,
+lineHeight     = $('#line-height').height(),
+commandPressed = false,
+previewHeight  = 0,
+hideBarTimeout = null;
+
 // Elements
 var el = fn.getjQueryElements({
   section   : '.split-section',
@@ -201,6 +220,7 @@ function setEditing(val, callback) {
     el.admin.addClass('editing');
     el.bar.addClass('transition').removeClass('hidden');
     state.editing = true;
+    showBar(true);
 
     // If we have a number, we are already have a pos
     if (typeof val != 'boolean') {
@@ -341,24 +361,19 @@ function showPreview() {
   state.preview = true;
 }
 
-// Hide editor buttons
-function hideBar() {
-  if (!state.barHidden) {
+function showBar(yes) {
+  state.barHidden = !yes;
+  if (yes) {
+    clearTimeout(hideBarTimeout);
+    el.bar.removeClass('hidden');
+  } else {
     el.bar.addClass('hidden');
-    state.barHidden = true;
   }
 }
 
-function delayedHideBar() {
-  hideBarTimeout = setTimeout(function delayedHideBarTimeout() {
-    hideBar();
-  },2000);
-}
-
-function showBar() {
+function delayedHideBar(time) {
   clearTimeout(hideBarTimeout);
-  el.bar.removeClass('hidden');
-  state.barHidden = false;
+  hideBarTimeout = setTimeout(function(){showBar(false)},(time ? time : 1000));
 }
 
 function heartbeatLogger() {

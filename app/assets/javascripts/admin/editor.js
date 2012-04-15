@@ -1,24 +1,4 @@
 $(function() {
-  // VARIABLES
-  History        = window.History,
-  document       = window.document,
-  text_title     = document.getElementById('text-title'),
-  text_content   = document.getElementById('text-content'),
-  saveInterval   = 1000,
-  draftsItems    = $('#drafts ul').data('items'),
-  publishedItems = $('#published ul').data('items'),
-  itemIndex      = 0,
-  colIndex       = 0,
-  col_height     = 0,
-  divTimeout     = null,
-  curPath        = window.location.pathname.split('/'),
-  showdown       = null,
-  lineHeight     = $('#line-height').height(),
-  commandPressed = false,
-  previewHeight  = 0,
-  hideBarTimeout = null;
-
-
   //
   // DEBUG
   //
@@ -46,12 +26,8 @@ $(function() {
   // Accurate detection for bar hover
   $(window).mousemove(function windowMouseMove(evt){
     if (state.editing) {
-      if (evt.pageX < 90 && !state.barShown) {
-        showBar();
-      }
-      else if (evt.pageX > 95 && state.barShown) {
-        hideBar();
-      }
+      if (evt.pageX < 90) showBar(true);
+      else if (evt.pageX > 95) delayedHideBar(500);
     }
   });
 
