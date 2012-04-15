@@ -1,8 +1,7 @@
 @import "mixins.css.scss";
 
 /* TODO: pull out coloring into variables */
-$linkhover: red;
-$header: #bf6731;
+$theme: #406170;
 $bar: #f4f4f4;
 
 .clearfix:before, .clearfix:after {content:''; display:table;}
@@ -24,13 +23,14 @@ body, textarea, pre, input, li {
 }
 
 ::selection, ::-moz-selection {
-  background: $header;
+  background: $theme;
   color: #fff;
 }
 
 #container,
 .contain,
-#post-editor {
+#post-editor,
+header .inner {
   width: 440px;
   position: relative;
   margin: 0 auto;
@@ -65,11 +65,12 @@ a:visited
 a:active {
   color: #000;
   text-decoration: none;
+  @include transition(color, .1s, linear);
 }
 
 a:hover,
 #admin #published h3 a:hover {
-  color: $linkhover !important;
+  color: $theme !important;
 }
 
 .goaway {
@@ -78,28 +79,37 @@ a:hover,
 }
 
 header {
-  background: #666;
   z-index: 10000;
   margin: 0 0 2em;
+  padding: 15px 0;
+  background: #000;
 
-  &.transition { @include transition(background 1s); }
-  &.hued { background: $header; }
+  &.transition { @include transition(all, 1s, ease-in); }
+  &.hued { background: $theme; }
+
+  .inner {
+    position: relative;
+  }
 
   h1 {
-      margin: 40px 0 -26px 0;
-      padding: 0 0 8px 0;
-      font-size: 22px;
-      text-align: center;
+    position: relative;
+    z-index: 10;
+    margin: 0;
+    font-size: 22px;
+    text-align: center;
+    pointer-events: none;
 
     a {
       color: #fff;
       padding: 0 15px;
       text-transform: uppercase;
+      display: inline-block;
+      pointer-events: auto;
     }
   }
 
   a {
-    color: rgba(255,255,255,0.8);
+    color: rgba(255,255,255,0.7);
   }
 
   a:hover {
@@ -116,11 +126,14 @@ header {
   }
 
   ul {
-    width: 440px;
     padding: 0;
-    margin: 0 auto;
+    margin: 0;
     height: 34px;
+    width: 100%;
+    text-align: center;
     list-style-type:none;
+    position: absolute;
+    top: 7px;
   }
 
   li.right {float: right;}
@@ -156,12 +169,12 @@ header:after,
   position: relative;
 
   time {
-    margin: 0 0 -18px 0;
+    margin: 0 0 -20px 0;
     font-size: 11px;
     line-height: 2em;
     color: #bbb;
     display: block;
-    border-top: 1px dotted #eee;
+    border-top: 1px dotted #ddd;
     text-align: right;
   }
 }
@@ -431,7 +444,7 @@ label {
           color: #999;
           padding: 8px 0;
 
-          &:hover {color: $linkhover;}
+          &:hover {color: $theme;}
         }
       }
     }
