@@ -13,6 +13,7 @@ body {
   background: #fff;
   color: #444;
   overflow: auto;
+  -webkit-font-smoothing: antialiased; /* fix for borked text when animating */
 }
 
 body, textarea, pre, input, li {
@@ -47,8 +48,7 @@ h1,h2,h3,h4,h5,#text-title *,header li {
 #text-title textarea,
 h1 {font-size: 26px;}
 h1.external {font-size: 20px;}
-h2, h3 {margin: 1.5em 0 1em;}
-h2 {font-size: 20px; text-transform: uppercase;}
+h2 {font-size: 18px; text-transform: uppercase;}
 h3 {font-size: 16px;
   text-transform: uppercase;
   color: #666;
@@ -79,24 +79,32 @@ a:hover,
 }
 
 header {
-  background: #eee;
-  border-bottom: 1px solid #ddd;
+  background: #666;
   z-index: 10000;
   margin: 0 0 2em;
 
+  &.transition { @include transition(background 1s); }
+  &.hued { background: #bf6731; }
+
   h1 {
-      margin: 14px 0 12px 0;
-      height: 9px;
-      font-size: 18px;
-      border-bottom: 1px dotted #e2e2e2;
+      margin: 40px 0 -26px 0;
+      padding: 0 0 8px 0;
+      font-size: 22px;
       text-align: center;
 
     a {
-      color: #1c6459;
+      color: #fff;
       padding: 0 15px;
-      background: #eee;
       text-transform: uppercase;
     }
+  }
+
+  a {
+    color: rgba(255,255,255,0.8);
+  }
+
+  a:hover {
+    color: #fff !important;
   }
 
   span {
@@ -111,7 +119,8 @@ header {
   ul {
     width: 440px;
     padding: 0;
-    margin: -22px auto 32px;
+    margin: 0 auto;
+    height: 34px;
     list-style-type:none;
   }
 
@@ -124,8 +133,6 @@ header {
 
     a {
       padding: 3px 6px;
-      color: #999;
-      background: #eee;
       text-decoration: none;
       font-family: 'Helvetica Nueue', Helvetica;
       font-size: 12px;
@@ -157,7 +164,7 @@ header:after,
     line-height: 2em;
     color: #bbb;
     display: block;
-    border-top: 1px solid #eee;
+    border-top: 1px dotted #eee;
     text-align: right;
   }
 }
@@ -468,7 +475,7 @@ label {
   height: 0px;
   border-left: 20px solid transparent;
   border-right: 20px solid transparent;
-  border-top: 20px solid #fff;
+  border-top: 20px solid rgba(255,255,255,0.2);
   display: block;
   overflow: hidden;
   position: absolute;

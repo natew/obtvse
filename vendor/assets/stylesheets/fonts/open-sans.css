@@ -1,4 +1,8 @@
+body, textarea, pre, input, li {
+  font: 13px/1.9em 'OpenSansRegular', 'Helvetica Nueue', Helvetica, Arial, sans-serif;
+}
 
+/*
 @font-face {
   font-family: 'OpenSansBold';
   src: url('/fonts/open-sans/opensans-bold-webfont.eot');
@@ -19,7 +23,7 @@
        url('/fonts/open-sans/opensans-italic-webfont.svg#OpenSansItalic') format('svg');
   font-weight: normal;
   font-style: normal;
-}
+}*/
 
 @font-face {
   font-family: 'OpenSansRegular';
@@ -65,15 +69,3 @@
   font-weight: normal;
   font-style: normal;
 }*/
-
-body, textarea, pre, input, li {
-  font: 13px/1.9em 'OpenSansRegular', 'Helvetica Nueue', Helvetica, Arial, sans-serif;
-}
-
-bold, strong {
-  font-family: 'OpenSansBold';
-}
-
-em, i {
-  font-family: 'OpenSansItalic';
-}
