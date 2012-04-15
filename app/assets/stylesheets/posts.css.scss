@@ -65,6 +65,9 @@ a:visited
 a:active {
   color: #000;
   text-decoration: none;
+}
+
+.posts a {
   @include transition(color, .1s, linear);
 }
 
@@ -451,8 +454,8 @@ label {
   }
 
   textarea,pre {
-    margin: 0;
-    padding: 0;
+    margin: -3px 0; /* not sure why but preventing a slight scroll on multiline titles */
+    padding: 3px 0;
     outline: 0;
     border: 0;
   }
@@ -530,8 +533,7 @@ fieldset.markdown {
 
 #content-fieldset {
   display: none;
-  margin-top: -6px;
-  overflow: scroll;
+  width: 100%;
 }
 
 #post_content {
@@ -553,7 +555,7 @@ form .permalink {
 }
 
 .split-section {
-  &.transition {@include transition(all, .2s);}
+  &.transition {@include transition(all, .2s, ease-out);}
 
   @include box-sizing(border-box);
   padding: 0 20px;
@@ -567,6 +569,7 @@ form .permalink {
 
   .inner {
     width: 100%;
+    overflow: scroll;
   }
 }
 
@@ -575,6 +578,10 @@ form .permalink {
   border-left: 1px solid #dbe3f1;
   right: -50%;
   overflow: scroll;
+
+  .inner {
+    word-wrap: break-word;
+  }
 }
 
 #admin.preview {
@@ -593,7 +600,6 @@ form .permalink {
 
   #post-preview {
     right: 0;
-    opacity: 1;
   }
 }
 

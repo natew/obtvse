@@ -110,7 +110,6 @@ $(window).keydown(function windowKeydown(e) {
         break;
       // S
       case 83:
-        // If lastkey is Command
         if (key.cmd) {
           e.preventDefault();
           savePost();
