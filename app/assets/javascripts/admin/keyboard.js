@@ -41,7 +41,7 @@ $(window).keydown(function windowKeydown(e) {
       // Up
       case 38: case 9:
         e.preventDefault();
-        if (!key.shift) break;
+        if (e.which == 9 && !key.shift) break;
         if (itemIndex > 0) {
           var prev = el.curItem.siblings(':visible').eq(itemIndex-1);
           if (prev.length > 0) {
