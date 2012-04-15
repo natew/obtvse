@@ -544,13 +544,17 @@ form .permalink {
 }
 
 .split-section {
-  &.transition {@include transition(all, .2s, ease-out);}
-
   @include box-sizing(border-box);
   padding: 0 20px;
   height: 100%;
   position: fixed;
   width: 50%;
+
+  &.transition {@include transition(all, .2s, ease-out);}
+
+  .inner {
+    padding-top: 0 !important;
+  }
 }
 
 #post-editor {
