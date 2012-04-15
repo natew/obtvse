@@ -6,8 +6,6 @@ text_content   = document.getElementById('text-content'),
 saveInterval   = 1000,
 draftsItems    = $('#drafts ul').data('items'),
 publishedItems = $('#published ul').data('items'),
-itemIndex      = 0,
-colIndex       = 0,
 col_height     = 0,
 divTimeout     = null,
 curPath        = window.location.pathname.split('/'),
@@ -48,7 +46,9 @@ var state = {
   beganEditing : false,
   barHidden    : false,
   lastKey      : 0,
-  lines        : 0
+  lines        : 0,
+  itemIndex    : 0,
+  colIndex     : 0
 };
 
 // Allows for auto expanding textareas
@@ -130,9 +130,20 @@ function setHeights() {
 }
 
 // Highlight an item in the column
-function selectItem(selector) {
+function selectItem(object, items) {
+  fn.log(object);
   el.curItem.removeClass('selected');
-  el.curItem = selector.addClass('selected');
+  // We can pass the index
+  if (typeof object == 'number') {
+    var item = $(items).eq(object);
+    el.curItem = item.length ? item : $(items).last();
+    el.curItem.addClass('selected');
+  }
+  // Or the actual item
+  else {
+    el.curItem = object.addClass('selected');
+  }
+  return el.curItem.index();
 }
 
 // Saves the post
@@ -309,8 +320,8 @@ function updateDraftButton(draft) {
 
 // Highlight the proper column
 function selectCol(col) {
-  colIndex = col;
-  if (colIndex == 0) {
+  state.colIndex = col;
+  if (state.colIndex == 0) {
     el.published.removeClass('active');
     el.curCol = el.drafts.addClass('active');
   } else {

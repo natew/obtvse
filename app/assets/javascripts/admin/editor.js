@@ -61,7 +61,7 @@ $(function() {
       // Selecting
       if (el.curItem.length == 0 || el.curItem.is('.hidden')) {
         selectItem($('.col li:visible:first'));
-        itemIndex = 0;
+        state.itemIndex = 0;
       }
 
       // Filtering
