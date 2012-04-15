@@ -569,7 +569,10 @@ form .permalink {
 
   .inner {
     width: 100%;
+    padding: 0 20px;
+    margin: 0 -20px;
     overflow: scroll;
+    @include box-sizing(border-box);
   }
 }
 
@@ -593,8 +596,7 @@ form .permalink {
     position: absolute;
 
     .inner {
-      padding: 0 20px;
-      @include box-sizing(border-box);
+      margin: 0;
     }
   }
 
