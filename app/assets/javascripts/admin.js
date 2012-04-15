@@ -8,4 +8,5 @@
 //= require fitvids
 //= require history
 //= require showdown
+//= require _helpers
 //= require_tree ./admin
