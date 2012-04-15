@@ -48,13 +48,13 @@ h1,h2,h3,h4,h5,#text-title *,header li {
 #text-title textarea,
 h1 {font-size: 26px;}
 h1.external {font-size: 20px;}
-h2 {font-size: 18px; text-transform: uppercase;}
+h2 {
+  font-size: 18px;
+  text-transform: uppercase;
+}
 h3 {font-size: 16px;
   text-transform: uppercase;
   color: #666;
-  border-bottom: 1px dotted #ddd;
-  padding: 0 0 7px 0;
-  margin-bottom: -7px;
 }
 
 p {
