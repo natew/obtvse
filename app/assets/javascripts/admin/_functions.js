@@ -1,5 +1,5 @@
 // Elements
-el = fn.getjQueryElements({
+var el = fn.getjQueryElements({
   section   : '.split-section',
   published : '#published',
   drafts    : '#drafts',
@@ -21,7 +21,7 @@ el = fn.getjQueryElements({
 });
 
 // Editor state variables
-state = {
+var state = {
   post         : null,
   preview      : false,
   changed      : false,
