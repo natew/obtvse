@@ -4,22 +4,18 @@
 $theme: #406170;
 $bar: #f4f4f4;
 
-.clearfix:before, .clearfix:after {content:''; display:table;}
-aside {position:relative; display:block;}
-.hide {visibility:hidden; height:1px; clip:rect(0 0 0 0); position:absolute;}
-input, textarea {outline:none; background:none;}
-
 html,body {width: 100%; height: 100%; overflow: hidden;}
 body {
   background: #fff;
   color: #444;
   overflow: auto;
   -webkit-font-smoothing: antialiased; /* fix for borked text when animating */
+  word-wrap: break-word;
 }
 
 body, textarea, pre, input, li {
   /* These are overwritten if you include one of the /fonts css files */
-  font: 13px/1.9em 'Helvetica Nueue', Helvetica, Arial, sans-serif;
+  font: 15px/1.9em 'Helvetica Nueue', Helvetica, Arial, sans-serif;
 }
 
 ::selection, ::-moz-selection {
@@ -27,17 +23,16 @@ body, textarea, pre, input, li {
   color: #fff;
 }
 
-#container,
+#content,
 .contain,
 #post-editor,
 header .inner {
-  width: 440px;
+  width: 480px;
   position: relative;
   margin: 0 auto;
 }
 
 h1,h2,h3,h4,h5,#text-title *,header li {
-  word-wrap: break-word;
   font-weight: normal;
   font-family: 'Oswald', Impact, sans-serif;
   line-height: 1.3em;
@@ -76,18 +71,15 @@ a:hover,
   color: $theme !important;
 }
 
-.goaway {
-  position: absolute;
-  clip: rect(0,0,0,0);
-}
-
 header {
-  z-index: 10000;
-  margin: 0 0 2em;
   padding: 15px 0;
   background: #000;
+  position: absolute;
+  width: 100%;
+  height: 80px;
+  z-index: 0;
 
-  &.transition { @include transition(all, 1s, ease-in); }
+  &.transition { @include transition(all, 1s); }
   &.hued { background: $theme; }
 
   .inner {
@@ -136,7 +128,7 @@ header {
     text-align: center;
     list-style-type:none;
     position: absolute;
-    top: 7px;
+    top: 5px;
   }
 
   li.right {float: right;}
@@ -158,8 +150,6 @@ header {
   }
 }
 
-header:before,
-header:after,
 .clearfix:before,
 .clearfix:after, {
   content:"";
@@ -167,18 +157,19 @@ header:after,
 }
 
 #container {
-  padding: 0;
-  margin: 0 auto;
+  padding: 20px 0 0;
+  background: #fff;
   position: relative;
+  top: 59px;
+  @include box-shadow(0,0,10px,rgba(0,0,0,0.5));
 
   time {
-    margin: 0 0 -20px 0;
+    margin: 0 0 -8px 0;
+    padding: 0;
     font-size: 11px;
-    line-height: 2em;
     color: #bbb;
     display: block;
-    border-top: 1px dotted #ddd;
-    text-align: right;
+    text-align: center;
   }
 }
 
@@ -187,18 +178,18 @@ header:after,
 
   section {
     padding: 0;
-    margin: 0 0 60px 0;
+    margin: 0 0 50px 0;
     position: relative;
 
     h1 a {
       color: #000;
     }
 
-    a {
+    p a {
       color: #777;
       display: inline-block;
+      line-height: 1.2em;
       border-bottom: 1px dotted #ddd;
-      line-height: 1em;
     }
 
     blockquote {
@@ -417,7 +408,6 @@ label {
       li {
         position: relative;
         line-height: 1.2em;
-        word-wrap: break-word;
 
         &#post-0 {
           font-style: italic;
@@ -468,7 +458,6 @@ label {
   .expandingArea > pre {
     background: transparent;
     white-space: pre-wrap;
-    word-wrap: break-word;
   }
 
   .expandingArea > textarea {
@@ -581,10 +570,6 @@ form .permalink {
   border-left: 1px solid #dbe3f1;
   right: -50%;
   overflow: scroll;
-
-  .inner {
-    word-wrap: break-word;
-  }
 }
 
 #admin.preview {
@@ -675,3 +660,13 @@ nav.pagination {
   margin: 60px 0 30px 0;
   text-align: center;
 }
+
+.goaway {
+  position: absolute;
+  clip: rect(0,0,0,0);
+}
+
+.clearfix:before, .clearfix:after {content:''; display:table;}
+aside {position:relative; display:block;}
+.hide {visibility:hidden; height:1px; clip:rect(0 0 0 0); position:absolute;}
+input, textarea {outline:none; background:none;}
