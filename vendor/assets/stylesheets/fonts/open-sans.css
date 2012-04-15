@@ -1,5 +1,5 @@
 body, textarea, pre, input, li {
-  font: 13px/1.9em 'Open Sans', 'Helvetica Nueue', Helvetica, Arial, sans-serif;
+  font-family: 'Open Sans', 'Helvetica Nueue', Helvetica, Arial, sans-serif;
 }
 
 @font-face {

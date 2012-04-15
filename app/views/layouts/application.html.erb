@@ -12,7 +12,7 @@
 <body class="<%= controller_name %> <%= action_name %>">
   <% if is_admin? %><a id="blog-button" href="/new">Go to blog</a><% end %>
   <% unless @no_header %>
-  <header>
+  <header class="clearfix">
     <div class="inner">
       <h1><%= link_to CONFIG['name'], root_url %></h1>
       <% if CONFIG['tagline'] %>
