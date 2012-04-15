@@ -99,7 +99,7 @@ $(function() {
   });
 
   // ContentFielset.scroll
-  $('#content-fieldset').on('scroll', function() {
+  $('#post-editor .inner').on('scroll', function() {
     updatePreviewPosition();
   });
 
@@ -183,7 +183,4 @@ $(function() {
   el.bar.click(function barClick(e) {
     if (state.preview && e.target.id == 'bar') hidePreview();
   });
-
-  // Initialize showdown
-  showdown = new Showdown.converter();
 });
