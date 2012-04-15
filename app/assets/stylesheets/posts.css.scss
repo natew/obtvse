@@ -38,14 +38,25 @@ h1,h2,h3,h4,h5,#text-title *,header li {
   line-height: 1.3em;
 }
 
+#text-title,
 #text-title pre,
 #text-title textarea,
-h1 {font-size: 26px;}
+h1 {
+  font-size: 26px;
+  line-height: 1.3em;
+}
+
+h1, #text-title {
+  margin: 0.67em 0;
+}
+
 h1.external {font-size: 20px;}
+
 h2 {
   font-size: 18px;
   text-transform: uppercase;
 }
+
 h3 {font-size: 16px;
   text-transform: uppercase;
   color: #666;
@@ -255,10 +266,6 @@ fieldset.markdown {
   top: 4px;
   left: -60px;
   background: url(/assets/markdown.png) no-repeat top left;
-}
-
-#text-title {
-  margin: 0 0 20px 0;
 }
 
 #post_title {
@@ -516,10 +523,6 @@ fieldset.markdown {
   padding: 0;
 }
 
-#text-title {
-  margin: 20px 0;
-}
-
 #content-fieldset {
   display: none;
   width: 100%;
@@ -545,7 +548,6 @@ form .permalink {
 
 .split-section {
   @include box-sizing(border-box);
-  padding: 0 20px;
   height: 100%;
   position: fixed;
   width: 50%;
@@ -553,7 +555,7 @@ form .permalink {
   &.transition {@include transition(all, .2s, ease-out);}
 
   .inner {
-    padding-top: 0 !important;
+    padding: 0 20px;
   }
 }
 
@@ -562,7 +564,6 @@ form .permalink {
 
   .inner {
     width: 100%;
-    padding: 0 20px;
     margin: 0 -20px;
     overflow: scroll;
     @include box-sizing(border-box);
