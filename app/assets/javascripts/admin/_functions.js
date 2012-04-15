@@ -11,7 +11,7 @@ colIndex       = 0,
 col_height     = 0,
 divTimeout     = null,
 curPath        = window.location.pathname.split('/'),
-showdown       = null,
+showdown       = new Showdown.converter(),
 lineHeight     = $('#line-height').height(),
 commandPressed = false,
 previewHeight  = 0,
@@ -320,11 +320,6 @@ function selectCol(col) {
   el.curColUl = el.curCol.find('ul');
 }
 
-function togglePreview() {
-  if (state.preview) hidePreview();
-  else showPreview();
-}
-
 // Preview
 function updatePreviewPosition() {
   if (state.preview) {
@@ -339,9 +334,14 @@ function updatePreviewPosition() {
 
 // Markdown preview
 function updatePreview() {
-  $('#post-preview .inner').html('<h1>'+el.title.val()+'</h1>'+showdown.makeHtml(el.content.val()));
+  $('#post-preview .inner').html('<h1>'+el.title.val().replace("\n",'<br />')+'</h1>'+showdown.makeHtml(el.content.val()));
   state.lines   = el.content.height()/lineHeight;
   previewHeight = $('#post-preview .inner').height();
+}
+
+function togglePreview() {
+  if (state.preview) hidePreview();
+  else showPreview();
 }
 
 function hidePreview() {
