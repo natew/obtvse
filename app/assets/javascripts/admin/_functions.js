@@ -47,8 +47,8 @@ var state = {
   barHidden    : false,
   lastKey      : 0,
   lines        : 0,
-  itemIndex    : 0,
-  colIndex     : 0
+  colIndex     : 0,
+  itemIndex    : [0, 0]
 };
 
 // Allows for auto expanding textareas
@@ -144,6 +144,28 @@ function selectItem(object, items) {
     el.curItem = object.addClass('selected');
   }
   return el.curItem.index();
+}
+
+
+// Highlight the proper column
+function changeCol() {
+  el.curItem.removeClass('selected');
+
+  // to Drafts
+  if (el.curCol.is('#published')) {
+    state.colIndex = 0;
+    el.published.removeClass('active');
+    el.curCol = el.drafts.addClass('active');
+  }
+  // to Published
+  else {
+    state.colIndex = 1;
+    el.drafts.removeClass('active');
+    el.curCol = el.published.addClass('active');
+  }
+
+  el.curItem = el.curCol.find('li:visible:eq('+state.itemIndex[state.colIndex]+')').addClass('selected');
+  el.curColUl = el.curCol.find('ul');
 }
 
 // Saves the post
@@ -318,19 +340,6 @@ function updateDraftButton(draft) {
   else       el.publish.html('Published').removeClass('icon-edit').addClass('icon-check');
 }
 
-// Highlight the proper column
-function selectCol(col) {
-  state.colIndex = col;
-  if (state.colIndex == 0) {
-    el.published.removeClass('active');
-    el.curCol = el.drafts.addClass('active');
-  } else {
-    el.drafts.removeClass('active');
-    el.curCol = el.published.addClass('active');
-  }
-  el.curColUl = el.curCol.find('ul');
-}
-
 // Preview
 function updatePreviewPosition() {
   if (state.preview) {
@@ -345,7 +354,8 @@ function updatePreviewPosition() {
 
 // Markdown preview
 function updatePreview() {
-  $('#post-preview .inner').html('<h1>'+el.title.val().replace("\n",'<br />')+'</h1>'+showdown.makeHtml(el.content.val()));
+  var title = el.title.val().split("\n").join('<br />');
+  $('#post-preview .inner').html('<h1>'+(title ? title : 'No Title')+'</h1>'+showdown.makeHtml(el.content.val()));
   state.lines   = el.content.height()/lineHeight;
   previewHeight = $('#post-preview .inner').height();
 }

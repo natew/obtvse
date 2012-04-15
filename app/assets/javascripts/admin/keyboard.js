@@ -25,9 +25,9 @@ $(window).keydown(function windowKeydown(e) {
       case 40: case 9:
         if (!key.shift) {
           e.preventDefault();
-          var next = el.curItem.siblings(':visible').eq(state.itemIndex);
+          var next = el.curItem.siblings(':visible').eq(state.itemIndex[state.colIndex]);
           if (next.length > 0) {
-            state.itemIndex++;
+            state.itemIndex[state.colIndex]++;
             selectItem(next);
 
             // Scroll column if necessary
@@ -42,10 +42,10 @@ $(window).keydown(function windowKeydown(e) {
       case 38: case 9:
         e.preventDefault();
         if (e.which == 9 && !key.shift) break;
-        if (state.itemIndex > 0) {
-          var prev = el.curItem.siblings(':visible').eq(state.itemIndex-1);
+        if (state.itemIndex[state.colIndex] > 0) {
+          var prev = el.curItem.siblings(':visible').eq(state.itemIndex[state.colIndex]-1);
           if (prev.length > 0) {
-            state.itemIndex--;
+            state.itemIndex[state.colIndex]--;
             selectItem(prev);
 
             // Scroll column if necessary
@@ -58,25 +58,13 @@ $(window).keydown(function windowKeydown(e) {
         break;
       // Right
       case 39:
-        if (state.colIndex == 0) {
-          e.preventDefault();
-          var visible = $('#published li:visible');
-          if (visible.length) {
-            state.itemIndex = selectItem(state.itemIndex, '#published li:visible');
-            selectCol(1);
-          }
-        }
+        e.preventDefault();
+        if ($('#published li:visible').length) changeCol();
         break;
       // Left
       case 37:
-        if (state.colIndex == 1) {
-          e.preventDefault();
-          var visible = $('#drafts li:visible');
-          if (visible.length) {
-            state.itemIndex = selectItem(state.itemIndex, '#drafts li:visible');
-            selectCol(0);
-          }
-        }
+        e.preventDefault();
+        if ($('#drafts li:visible').length) changeCol();
         break;
       // Esc
       case 27:
