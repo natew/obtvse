@@ -61,7 +61,6 @@ $(function() {
       // Selecting
       if (el.curItem.length == 0 || el.curItem.is('.hidden')) {
         selectItem($('.col li:visible:first'));
-        state.itemIndex = 0;
       }
 
       // Filtering
@@ -73,6 +72,8 @@ $(function() {
         draft_ids ? showOnly('#drafts li', '#post-0,#post-'+draft_ids) : $('#drafts li').addClass('hidden');
         pub_ids   ? showOnly('#published li', '#post-'+pub_ids) : $('#published li').addClass('hidden');
         if (!draft_ids && !pub_ids) setEditing(true);
+        state.itemIndex[0] = 0;
+        state.itemIndex[1] = 0;
       } else {
         $('#drafts li,#published li').removeClass('hidden');
       }
