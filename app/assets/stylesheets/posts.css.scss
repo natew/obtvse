@@ -2,6 +2,8 @@
 
 /* TODO: pull out coloring into variables */
 $linkhover: red;
+$header: #bf6731;
+$bar: #f4f4f4;
 
 .clearfix:before, .clearfix:after {content:''; display:table;}
 aside {position:relative; display:block;}
@@ -17,15 +19,12 @@ body {
 }
 
 body, textarea, pre, input, li {
+  /* These are overwritten if you include one of the /fonts css files */
   font: 13px/1.9em 'Helvetica Nueue', Helvetica, Arial, sans-serif;
 }
 
-::selection {
-  background: #00a6c4;
-  color: #fff;
-}
-::-moz-selection {
-  background: #00a6c4;
+::selection, ::-moz-selection {
+  background: $header;
   color: #fff;
 }
 
@@ -41,7 +40,7 @@ h1,h2,h3,h4,h5,#text-title *,header li {
   word-wrap: break-word;
   font-weight: normal;
   font-family: 'Oswald', Impact, sans-serif;
-  line-height: 1em;
+  line-height: 1.3em;
 }
 
 #text-title pre,
@@ -84,7 +83,7 @@ header {
   margin: 0 0 2em;
 
   &.transition { @include transition(background 1s); }
-  &.hued { background: #bf6731; }
+  &.hued { background: $header; }
 
   h1 {
       margin: 40px 0 -26px 0;
@@ -259,7 +258,6 @@ fieldset.markdown {
   width: 100%;
   border: none;
   background: none;
-  line-height: 45px;
 }
 
 #post_content {
@@ -337,6 +335,8 @@ label {
   position: absolute;
   width: 100%;
 
+  #save-button {display:none;}
+
   &.editing {
     #content-fieldset {
       display: block;
@@ -348,6 +348,24 @@ label {
 
     #bar {
       visibility: visible;
+    }
+
+    #save-button {
+      background: #fff;
+      width: 12px;
+      height: 12px;
+      display: inline-block;
+      position: absolute;
+      bottom: 20px;
+      right: 10px;
+      border: none;
+      @include border-radius(8px);
+      @include transition(all, .5s, ease-in);
+
+      &:hover {background:#999;}
+      &.dirty {background:#ddd;}
+      &.saving {background:#f5d7a8;}
+      &.saved {background:#baf5a8; @include transform(scale(1.4));}
     }
   }
 
@@ -479,29 +497,11 @@ label {
   position: absolute;
   top: 0;
   right: -20px;
-  @include transition(all, .2s, ease-in);
+  @include transition(all, .3s, ease-in);
 
   &:hover {
     border-top-color: #ddd;
   }
-}
-
-#save-button {
-  background: #fff;
-  width: 12px;
-  height: 12px;
-  display: inline-block;
-  position: absolute;
-  bottom: 10px;
-  right: 10px;
-  border: none;
-  @include border-radius(8px);
-  @include transition(all, .5s, ease-in);
-
-  &:hover {background:#999;}
-  &.dirty {background:#ddd;}
-  &.saving {background:#f5d7a8;}
-  &.saved {background:#baf5a8; @include transform(scale(1.4));}
 }
 
 fieldset.markdown {
@@ -513,19 +513,6 @@ fieldset.markdown {
 
 #text-title {
   margin: 20px 0;
-}
-
-  #text-title textarea,
-  #text-title pre {
-    padding: 10px 0;
-    line-height: 1.3em;
-  }
-
-#post_title {
-  width: 100%;
-  border: none;
-  background: none;
-  line-height: 45px;
 }
 
 #content-fieldset {
@@ -553,7 +540,7 @@ form .permalink {
 }
 
 .split-section {
-  &.transition {@include transition(all, .2s, ease-in);}
+  &.transition {@include transition(all, .2s);}
 
   @include box-sizing(border-box);
   padding: 0 20px;
@@ -575,10 +562,6 @@ form .permalink {
   border-left: 1px solid #dbe3f1;
   right: -50%;
   overflow: scroll;
-
-  h1 {
-    margin: 35px 0 17px;
-  }
 }
 
 #admin.preview {
@@ -601,8 +584,6 @@ form .permalink {
   }
 }
 
-$bar-background: #f4f4f4;
-
 .preview #bar {
   left: -70px;
   cursor: pointer;
@@ -620,12 +601,12 @@ $bar-background: #f4f4f4;
   left: 0;
   width: 80px;
   padding: 20px 0;
-  background: $bar-background;
+  background: $bar;
   border-right: 1px solid #eee;
   @include box-sizing(border-box);
 
   &.transition {
-    @include transition(all, .3s, ease-in);
+    @include transition(all, .2s, ease-in);
   }
 
   &.hidden {

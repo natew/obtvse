@@ -1,3 +1,8 @@
+var key = {
+  shift: false,
+  cmd: false
+};
+
 // Window click
 $(window).keydown(function windowKeydown(e) {
   fn.log(e.which);
@@ -5,6 +10,10 @@ $(window).keydown(function windowKeydown(e) {
   // Not editing
   if (!state.editing) { //!$.inArray(state.lastKey,disableKeys)
     switch (e.which) {
+      // Shift
+      case 16:
+        key.shift = true;
+        break;
       // Enter
       case 13:
         e.preventDefault();
@@ -13,23 +22,26 @@ $(window).keydown(function windowKeydown(e) {
         }
         break;
       // Down
-      case 40:
-        e.preventDefault();
-        var next = el.curItem.siblings(':visible').eq(itemIndex);
-        if (next.length > 0) {
-          itemIndex++;
-          selectItem(next);
+      case 40: case 9:
+        if (!key.shift) {
+          e.preventDefault();
+          var next = el.curItem.siblings(':visible').eq(itemIndex);
+          if (next.length > 0) {
+            itemIndex++;
+            selectItem(next);
 
-          // Scroll column if necessary
-          var itemOffset = el.curItem.position().top;
-          if (itemOffset > (col_height/2)) {
-            el.curColUl.scrollTop(el.curColUl.scrollTop()+el.curItem.height()*2);
+            // Scroll column if necessary
+            var itemOffset = el.curItem.position().top;
+            if (itemOffset > (col_height/2)) {
+              el.curColUl.scrollTop(el.curColUl.scrollTop()+el.curItem.height()*2);
+            }
           }
+          break;
         }
-        break;
       // Up
-      case 38:
+      case 38: case 9:
         e.preventDefault();
+        if (!key.shift) break;
         if (itemIndex > 0) {
           var prev = el.curItem.siblings(':visible').eq(itemIndex-1);
           if (prev.length > 0) {
@@ -82,7 +94,7 @@ $(window).keydown(function windowKeydown(e) {
     switch (e.which) {
       // Cmd
       case 91:
-        commandPressed = true;
+        key.cmd = true;
         break;
       // Esc
       case 27:
@@ -99,29 +111,32 @@ $(window).keydown(function windowKeydown(e) {
       // S
       case 83:
         // If lastkey is Command
-        if (commandPressed) {
+        if (key.cmd) {
           e.preventDefault();
           savePost();
         }
         break;
       // P
       case 80:
-        if (commandPressed) {
+        if (key.cmd) {
           e.preventDefault();
           togglePreview();
         }
         break;
     }
-
-    state.lastKey = e.which;
   }
+
+  // Record last key
+  state.lastKey = e.which;
 })
 
 .keyup(function windowKeyup(e) {
   switch(e.which) {
     // Cmd
     case 91:
-      commandPressed = false;
+      key.cmd = false;
       break;
+    case 16:
+      key.shift = false;
   }
 });
