@@ -10,6 +10,7 @@ body {
   color: #444;
   -webkit-font-smoothing: antialiased; /* fix for borked text when animating */
   word-wrap: break-word;
+  overflow: hidden;
 }
 
 #body, #admin {
