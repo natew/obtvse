@@ -255,7 +255,7 @@ function setEditing(val, callback) {
     // If true, start editing a new post
     if (val === true) {
       pushState('/new');
-      setFormAction('/new');
+      setFormAction('/posts');
     }
     // Editing post id = val
     else {
