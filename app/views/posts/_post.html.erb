@@ -11,6 +11,4 @@
   <div class="post contain">
     <% if post.content %><%= markdown(post.content).to_html.html_safe %><% end %>
   </div>
-
-  <% if @single_post %><a class="button space-top" href="<%= root_url %>">Back to Blog</a><% end %>
 </section>

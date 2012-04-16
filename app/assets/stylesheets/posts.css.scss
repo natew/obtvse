@@ -8,9 +8,16 @@ html,body {width: 100%; height: 100%; overflow: hidden;}
 body {
   background: #fff;
   color: #444;
-  overflow: auto;
   -webkit-font-smoothing: antialiased; /* fix for borked text when animating */
   word-wrap: break-word;
+}
+
+#body {
+  overflow: scroll;
+  overflow-x: hidden;
+  height: 100%;
+  width: 100%;
+  position: relative;
 }
 
 body, textarea, pre, input, li {
@@ -87,10 +94,7 @@ a:hover,
 header {
   padding: 15px 0;
   background: #000;
-  position: absolute;
   width: 100%;
-  height: 80px;
-  z-index: 0;
 
   &.transition { @include transition(all, 1s); }
   &.hued { background: $theme; }
@@ -170,10 +174,9 @@ header {
 }
 
 #container {
-  padding: 20px 0 0;
+  padding: 20px 0;
   background: #fff;
   position: relative;
-  top: 59px;
   @include box-shadow(0,0,10px,rgba(0,0,0,0.5));
 
   time {
@@ -210,10 +213,6 @@ header {
       padding: 0 20px;
       border-left: 5px solid lightblue;
     }
-  }
-
-  a.space-top {
-    margin: 60px 0;
   }
 
   h1 {

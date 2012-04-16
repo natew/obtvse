@@ -10,6 +10,7 @@
 </head>
 
 <body class="<%= controller_name %> <%= action_name %>">
+  <div id="body">
   <% if is_admin? %><a id="blog-button" href="/new">Go to blog</a><% end %>
   <% unless @no_header %>
   <header class="clearfix">
@@ -33,7 +34,12 @@
       <% if notice %><span class="notice"><%= notice %></span><% end %>
       <%= yield %>
     </div>
-    <span class="footer">powered by <a href="http://github.com/natew/obtvse.git">obtvse</a></span>
+    <span class="footer">
+      <% if action_name == 'index' %><%= link_to 'Back to top', '#', :id => 'back-to-top' %>
+      <% else %><%= link_to 'Back to blog', root_url %>
+      <% end %>
+      <br />
+      powered by <a href="http://github.com/natew/obtvse.git">obtvse</a></span>
   </div>
 
   <%= javascript_include_tag 'application' %>
@@ -47,5 +53,6 @@
       s.parentNode.insertBefore(g,s)}(document,'script'));
     </script> -->
   <% end %>
+  </div>
 </body>
 </html>

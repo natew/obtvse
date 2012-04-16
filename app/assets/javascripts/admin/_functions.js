@@ -34,7 +34,7 @@ var el = fn.getjQueryElements({
   curItem   : '.col li:visible:first',
   blog      : '#blog-button',
   publish   : '#publish-button',
-  preview   : '#post-preview',
+  preview   : '#post-preview'
 });
 
 // Editor state variables
@@ -240,15 +240,20 @@ function loadCache(id, callback) {
 //   id = start editing id
 function setEditing(val, callback) {
   fn.log('Set editing', val);
-  if (val) {
+  if (val !== false) {
     // Update UI
     el.admin.addClass('editing');
     el.bar.addClass('transition').removeClass('hidden');
     state.editing = true;
     showBar(true);
 
-    // If we have a number, we are already have a pos
-    if (typeof val != 'boolean') {
+    // If true, start editing a new post
+    if (val === true) {
+      pushState('/new');
+      setFormAction('/new');
+    }
+    // Editing post id = val
+    else {
       loadCache(val, function setEditingLoadCache(data) {
         fn.log('got data', data);
         // Set state variables
@@ -286,7 +291,6 @@ function setEditing(val, callback) {
     state.beganEditing = false;
 
     // Clear form
-    setFormAction('/new');
     el.title.val('').focus();
     el.content.val('');
     makeExpandingAreas();
@@ -298,7 +302,7 @@ function setEditing(val, callback) {
     delayedHideBar();
 
     // Update URL
-    pushState('/new');
+    pushState('/admin');
   }
 }
 
