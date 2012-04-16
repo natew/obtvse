@@ -103,7 +103,7 @@ $(function() {
   });
 
   // ContentFielset.scroll
-  $('#post-editor .inner').on('scroll', function() {
+  $('#post-editor').on('scroll', function() {
     updatePreviewPosition();
   });
 

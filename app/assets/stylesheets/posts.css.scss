@@ -32,10 +32,8 @@ body, textarea, pre, input, li {
 
 #content,
 .contain,
-#post-editor,
-header .inner,
-#post_content:before,
-#post_content:after {
+#post-editor .inner,
+header .inner {
   width: 480px;
   position: relative;
   margin: 0 auto;
@@ -321,6 +319,7 @@ label {
 
     #posts {
       display: none;
+      position: fixed;
     }
 
     #bar {
@@ -436,6 +435,8 @@ label {
      */
     @include box-sizing(border-box);
     width: 100%;
+    pointer-events: auto;
+    padding-bottom: 10px;
   }
 
   .expandingArea.active > textarea {
@@ -488,27 +489,34 @@ fieldset.markdown {
 #content-fieldset {
   display: none;
   width: 100%;
+  padding-bottom: 20px;
 }
 
 #post_content {
-  margin-bottom: 20px;
   border: none;
   width: 100%;
   position: relative;
 }
 
   /* fade to white */
+  #post_content,
   #post_content:before,
   #post_content:after {
     content: "";
     display: block;
     position: fixed;
-    top: 10px;
+    top: 0;
     height: 1.5em;
+    width: 100%;
     pointer-events: none;
     background-image: -webkit-gradient( linear, left top, left bottom, from(
         rgba(255, 255, 255, 1)), to(
         rgba(255, 255, 255, 0))
+      );
+    background-image: -moz-linear-gradient(
+        to bottom,
+        rgba(255, 255, 255, 1),
+        rgba(255, 255, 255, 0)
       );
   }
 
@@ -528,10 +536,6 @@ fieldset.markdown {
       width: 100%;
     }
   }
-
-#text-content pre {
-  padding: 0 0 20px 0;
-}
 
 form .permalink {
  position: absolute;
@@ -556,11 +560,13 @@ form .permalink {
 
 #post-editor {
   padding: 0;
+  overflow: scroll;
+  width: 100%;
+  position: relative;
 
   .inner {
-    width: 100%;
-    margin: 10px -20px;
-    overflow: scroll;
+    margin: 10px auto;
+    padding: 0;
     @include box-sizing(border-box);
   }
 }
@@ -574,7 +580,7 @@ form .permalink {
 
 #admin.preview {
   #post-editor {
-    padding: 0;
+    padding: 0 20px;
     margin: 0;
     width: 50%;
     left: 0;
@@ -582,6 +588,7 @@ form .permalink {
 
     .inner {
       margin: 0;
+      width: auto;
     }
   }
 
