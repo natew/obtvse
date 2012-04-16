@@ -490,6 +490,7 @@ fieldset.markdown {
   display: none;
   width: 100%;
   padding-bottom: 20px;
+  @include box-sizing(border-box);
 }
 
 #post_content {
@@ -554,7 +555,7 @@ form .permalink {
   &.transition {@include transition(all, .2s, ease-out);}
 
   .inner {
-    padding: 0 20px;
+    padding: 1px 20px;
   }
 }
 
@@ -566,7 +567,8 @@ form .permalink {
 
   .inner {
     margin: 10px auto;
-    padding: 0;
+    padding-right: 0;
+    padding-left: 0;
     @include box-sizing(border-box);
   }
 }
