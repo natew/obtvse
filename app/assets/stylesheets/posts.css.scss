@@ -12,7 +12,7 @@ body {
   @include box-shadow(inset 0,0,400px,#eee);
 }
 
-#body {
+#body, #admin {
   overflow: scroll;
   overflow-x: hidden;
   height: 100%;
@@ -310,6 +310,7 @@ label {
   background: #fff;
   position: absolute;
   width: 100%;
+  overflow: hidden;
 
   #save-button {display:none;}
 
