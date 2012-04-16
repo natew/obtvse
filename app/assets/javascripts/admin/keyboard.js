@@ -26,6 +26,7 @@ $(window).keydown(function windowKeydown(e) {
         }
         break;
       // Down
+      // Tab
       case 40: case 9:
         if (!key.shift) {
           e.preventDefault();
@@ -43,6 +44,7 @@ $(window).keydown(function windowKeydown(e) {
           break;
         }
       // Up
+      // Tab
       case 38: case 9:
         e.preventDefault();
         if (e.which == 9 && !key.shift) break;

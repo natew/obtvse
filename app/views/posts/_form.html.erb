@@ -37,8 +37,8 @@
   <div class="middle">
     <%= link_to 'Date', '#', :id => 'date-button', :class => 'icon-calendar' %>
     <div class="menu">
-      <%= link_to 'Meta', '#meta', :class => 'menu icon-info-sign' %>
-      <ul id="meta" class="sub-menu">
+      <%= link_to 'Info', '#info', :class => 'icon-info-sign' %>
+      <ul id="info" class="sub-menu">
         <li>
           <%= f.label :url, 'Permalink' %>
           <%= f.text_field :slug, :placeholder => 'Leave blank to automatically generate' %>
@@ -47,6 +47,15 @@
           <%= f.label :url, 'External URL' %>
           <%= f.text_field :url, :placeholder => 'Optional' %>
         </li>
+      </ul>
+    </div>
+    <div class="menu">
+      <%= link_to 'Mark', '#bookmark', :class => 'icon-bookmark' %>
+      <ul id="bookmark" class="sub-menu">
+        <li><%= f.label :url, 'History' %></li>
+        <li><%= link_to 'Version 3', '#' %></li>
+        <li><%= link_to 'Version 2', '#' %></li>
+        <li><%= link_to 'Version 1', '#' %></li>
       </ul>
     </div>
   </div>

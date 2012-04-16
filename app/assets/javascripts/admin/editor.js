@@ -27,7 +27,7 @@ $(function() {
   $(window).mousemove(function windowMouseMove(evt){
     if (state.editing) {
       if (evt.pageX < 90) showBar(true);
-      else if (evt.pageX > 95) delayedHideBar(500);
+      else if (evt.pageX > 95 && !$('#bar:hover').length) delayedHideBar(500);
     }
   });
 
