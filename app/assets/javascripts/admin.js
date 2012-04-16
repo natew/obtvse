@@ -7,6 +7,7 @@
 //= require jquery.cookie
 //= require fitvids
 //= require history
+//= require history.jquery
 //= require showdown
 //= require _helpers
 //= require_tree ./admin
