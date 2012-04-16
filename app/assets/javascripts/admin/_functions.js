@@ -203,7 +203,8 @@ function savePost(callback) {
       setFormAction('/edit/'+state.post.id);
 
       // If item exists move to top, else add to top
-      li.length ? li.prependTo(list) : $('#drafts ul').prepend('<li id="post-'+state.post.id+'"><a href="">'+el.title.val()+'</a></li>');
+      if (li.length) li.prependTo(list);
+      else $('#drafts ul').prepend('<li id="post-'+state.post.id+'"><a href="">'+el.title.val()+'</a></li>');
 
       fn.log('Saved',data.id,data);
       if (callback) callback.call(this, data);
@@ -403,7 +404,7 @@ function showBar(yes) {
     clearTimeout(hideBarTimeout);
     el.bar.removeClass('hidden');
   }
-  else if (!state.barPinned) {
+  else if (!state.barPinned && !el.bar.is(':hover')) {
     el.bar.addClass('hidden');
   }
 }
