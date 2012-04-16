@@ -1,7 +1,7 @@
 @import "mixins.css.scss";
 
 /* TODO: pull out coloring into variables */
-$theme: #406170;
+$theme: #b92c2c;
 $bar: #f4f4f4;
 
 html,body {width: 100%; height: 100%; overflow: hidden;}
@@ -10,6 +10,7 @@ body {
   color: #444;
   -webkit-font-smoothing: antialiased; /* fix for borked text when animating */
   word-wrap: break-word;
+  @include box-shadow(inset 0,0,300px,#eee);
 }
 
 #body {
@@ -41,7 +42,7 @@ header .inner,
   margin: 0 auto;
 }
 
-h1,h2,h3,h4,h5,#text-title *,header li {
+h1,h2,h3,h4,h5,#text-title * {
   font-weight: normal;
   font-family: 'Oswald', Impact, sans-serif;
   line-height: 1.3em;
@@ -92,12 +93,8 @@ a:hover,
 }
 
 header {
-  padding: 15px 0;
-  background: #000;
+  padding: 20px 0 0;
   width: 100%;
-
-  &.transition { @include transition(all, 1s); }
-  &.hued { background: $theme; }
 
   .inner {
     position: relative;
@@ -107,45 +104,32 @@ header {
     position: relative;
     z-index: 10;
     margin: 0;
-    font-size: 22px;
+    font-size: 20px;
     text-align: center;
     pointer-events: none;
 
     a {
-      color: #fff;
       padding: 0 15px;
-      text-transform: uppercase;
       display: inline-block;
       pointer-events: auto;
+      color: $theme;
     }
   }
 
   a {
-    color: rgba(255,255,255,0.7);
-  }
-
-  a:hover {
-    color: #fff !important;
-  }
-
-  span {
-    font-size: 11px;
-    color: #bbb;
-    font-style: italic;
-    text-align: center;
-    margin: 0 0 -35px;
-    display: block;
+    color: rgba(0,0,0,0.5);
   }
 
   ul {
-    padding: 0;
+    padding: 0 50px;
     margin: 0;
     height: 34px;
     width: 100%;
     text-align: center;
     list-style-type:none;
     position: absolute;
-    top: 5px;
+    top: 0;
+    @include box-sizing(border-box);
   }
 
   li.right {float: right;}
@@ -156,8 +140,9 @@ header {
     float: left;
 
     a {
+      font-size: 12px;
       padding: 3px 6px;
-      text-decoration: none;
+      font-weight: bold;
 
       &:hover {
         border-color: #777;
@@ -174,13 +159,11 @@ header {
 }
 
 #container {
-  padding: 20px 0;
-  background: #fff;
+  padding: 33px 0;
   position: relative;
-  @include box-shadow(0,0,10px,rgba(0,0,0,0.5));
 
   time {
-    margin: 0 0 -8px 0;
+    margin: 0 0 30px 0;
     padding: 0;
     font-size: 11px;
     color: #bbb;
@@ -194,7 +177,7 @@ header {
 
   section {
     padding: 0;
-    margin: 0 0 50px 0;
+    margin: 0 0 38px 0;
     position: relative;
 
     h1 a {
@@ -256,17 +239,6 @@ fieldset.markdown {
   border: none;
   margin: 0;
   padding: 0;
-}
-
-.markdown:before {
-  display: block;
-  content: "";
-  width: 39px;
-  height: 24px;
-  position: absolute;
-  top: 4px;
-  left: -60px;
-  background: url(/assets/markdown.png) no-repeat top left;
 }
 
 #post_title {
@@ -332,6 +304,7 @@ label {
 }
 
 #admin {
+  background: #fff;
   position: absolute;
   width: 100%;
 

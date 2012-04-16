@@ -1,8 +1,8 @@
 $(function() {
   $('.post').fitVids();
 
-  $('header').addClass('transition');
-  setTimeout(function(){$('header').addClass('hued')},400);
+  $('body').addClass('transition');
+  setTimeout(function(){$('body').addClass('change')},400);
 
   $('#back-to-top').click(function(e) {
     e.preventDefault();
