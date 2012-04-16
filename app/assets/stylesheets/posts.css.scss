@@ -202,6 +202,8 @@ header {
       margin: 1em 40px 1em 20px;
       padding: 0 20px;
       border-left: 5px solid lightblue;
+      font-size: 13px;
+      line-height: 1.7em;
     }
   }
 
@@ -472,12 +474,13 @@ label {
   height: 0px;
   border-left: 20px solid transparent;
   border-right: 20px solid transparent;
-  border-top: 20px solid rgba(255,255,255,0.2);
+  border-top: 20px solid #f2f2f2;
   display: block;
   overflow: hidden;
   position: absolute;
   top: 0;
   right: -20px;
+  z-index: 100;
   @include transition(all, .3s, ease-in);
 
   &:hover {
