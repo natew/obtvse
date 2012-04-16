@@ -4,13 +4,12 @@
 $theme: #b92c2c;
 $bar: #f4f4f4;
 
-html,body {width: 100%; height: 100%; overflow: hidden;}
 body {
   background: #fff;
   color: #444;
   -webkit-font-smoothing: antialiased; /* fix for borked text when animating */
   word-wrap: break-word;
-  @include box-shadow(inset 0,0,300px,#eee);
+  @include box-shadow(inset 0,0,400px,#eee);
 }
 
 #body {
@@ -225,12 +224,12 @@ header {
 }
 
 code {
-  background: #f5f5f5;
+  background: #f2f2f2;
   font-family: monospace, serif;
   font-size: 13px;
   padding: 20px;
   display: block;
-  @include box-shadow-inset(0, 0, 20px, #ddd);
+  @include box-shadow-inset(0, 0, 20px, #eee);
 }
 
 .contain img {
