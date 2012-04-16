@@ -617,7 +617,7 @@ form .permalink {
   width: 80px;
   padding: 20px 0;
   background: $bar;
-  border-right: 1px solid #eee;
+  border-right: 1px solid #e8e8e8;
   @include box-sizing(border-box);
 
   &.transition {
@@ -638,11 +638,58 @@ form .permalink {
     text-align: center;
   }
 
+  .middle {
+    position: absolute;
+    top: 40%;
+    left: 0;
+    width: 100%;
+  }
+
   .bottom {
     position: absolute;
     bottom: 0;
     left: 0;
     width: 100%;
+  }
+
+  .menu:hover .sub-menu {
+    display: block;
+  }
+
+  .sub-menu {
+    display: none;
+    position: absolute;
+    bottom: -35px;
+    left: 79px;
+    padding: 10px 10px 0;
+    background: $bar;
+    border: 1px solid #e8e8e8;
+    border-left: none;
+    @include border-radius-right(5px);
+
+    li {
+      list-style: none;
+      line-height: 1em;
+      margin: 0;
+      padding: 4px 0;
+    }
+
+    label {
+      font-size: 11px;
+      font-weight: bold;
+      color: #999;
+      display: block;
+      margin: 0 0 4px 0;
+      text-transform: uppercase;
+    }
+
+    input[type=text] {
+      border: none;
+      padding: 2px 0;
+      margin: 0 0 10px 0;
+      font-size: 13px;
+      width: 200px;
+    }
   }
 }
 

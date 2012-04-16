@@ -114,6 +114,12 @@ $(window).keydown(function windowKeydown(e) {
           togglePreview();
         }
         break;
+      // B
+      case 66:
+        if (key.cmd) {
+          e.preventDefault();
+          toggleBar();
+        }
     }
   }
 
