@@ -9,7 +9,7 @@ body {
   color: #444;
   -webkit-font-smoothing: antialiased; /* fix for borked text when animating */
   word-wrap: break-word;
-  @include box-shadow(inset 0,0,400px,#eee);
+  @include box-shadow(inset 0,0,200px,#dcdcdc);
 }
 
 #body, #admin {
@@ -656,10 +656,14 @@ form .permalink {
     display: block;
   }
 
+  .menu {
+    position: relative;
+  }
+
   .sub-menu {
     display: none;
     position: absolute;
-    bottom: -35px;
+    top: -65px;
     left: 79px;
     padding: 10px 10px 0;
     background: $bar;
@@ -672,6 +676,12 @@ form .permalink {
       line-height: 1em;
       margin: 0;
       padding: 4px 0;
+
+      a {
+        display: block;
+        width: 200px;
+        text-align: left;
+      }
     }
 
     label {
