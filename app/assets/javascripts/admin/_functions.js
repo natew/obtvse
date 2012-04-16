@@ -186,7 +186,7 @@ function savePost(callback) {
     success: function savingSuccess(data) {
       var data = JSON.parse(data),
           li   = $('#post-'+data.id),
-          list = data.draft == 'false' ? $('#drafts ul') : $('#published ul');
+          list = (data.draft == 'false') ? $('#drafts ul') : $('#published ul');
 
       // Update state
       state.saving = false;
@@ -204,7 +204,9 @@ function savePost(callback) {
 
       // If item exists move to top, else add to top
       if (li.length) li.prependTo(list);
-      else $('#drafts ul').prepend('<li id="post-'+state.post.id+'"><a href="">'+el.title.val()+'</a></li>');
+      else {
+        $('#drafts ul').prepend('<li id="post-'+state.post.id+'"><a href="">'+el.title.val()+'</a></li>');
+      }
 
       fn.log('Saved',data.id,data);
       if (callback) callback.call(this, data);
