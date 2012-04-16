@@ -44,6 +44,8 @@ $(function() {
     }
   }
 
+  if ($.cookie('barPinned') == 'true') toggleBar();
+
   // Select first item
   selectItem($('.col li:visible:first'));
 

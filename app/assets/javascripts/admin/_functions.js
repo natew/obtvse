@@ -45,6 +45,7 @@ var state = {
   editing      : false,
   beganEditing : false,
   barHidden    : false,
+  barPinned    : false,
   saving       : false,
   lastKey      : 0,
   lines        : 0,
@@ -389,12 +390,20 @@ function showPreview() {
   state.preview = true;
 }
 
+function toggleBar() {
+  state.barPinned = !state.barPinned;
+  $.cookie('barPinned',state.barPinned);
+  if (state.barPinned) showBar(true);
+  else showBar(false);
+}
+
 function showBar(yes) {
   state.barHidden = !yes;
   if (yes) {
     clearTimeout(hideBarTimeout);
     el.bar.removeClass('hidden');
-  } else {
+  }
+  else if (!state.barPinned) {
     el.bar.addClass('hidden');
   }
 }
