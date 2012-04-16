@@ -165,9 +165,7 @@ $(function() {
     e.preventDefault();
     el.publish.html('...')
     setDraftInput(!state.post.draft);
-    savePost(function() {
-      updateDraftButton(state.post.draft);
-    });
+    savePost();
   })
 
   // Publish.hover

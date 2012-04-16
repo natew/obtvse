@@ -201,6 +201,7 @@ function savePost(callback) {
 
       // Update form
       setFormAction('/edit/'+state.post.id);
+      updateDraftButton(state.post.draft);
 
       // If item exists move to top, else add to top
       if (li.length) li.prependTo(list);
