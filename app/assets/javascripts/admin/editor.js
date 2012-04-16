@@ -37,8 +37,11 @@ $(function() {
       if (window.location.hash == '#preview') showPreview();
       state.beganEditing = true;
     });
-  } else {
+  } else  {
     el.title.focus();
+    if (curPath[1] == 'new') {
+      setEditing(true);
+    }
   }
 
   // Select first item

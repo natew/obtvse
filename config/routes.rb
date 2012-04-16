@@ -1,5 +1,6 @@
 Obtvse::Application.routes.draw do
   resources :posts
+  match '/admin', :to => 'posts#new'
   match '/get/:id', :to => 'posts#get'
   match '/new', :to => 'posts#new'
   post '/edit/:id', :to => 'posts#update'
