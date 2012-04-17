@@ -30,16 +30,18 @@
   <% end %>
 
   <div id="container">
-    <div id="content">
+    <section id="content">
       <% if notice %><span class="notice"><%= notice %></span><% end %>
       <%= yield %>
-    </div>
-    <span class="footer">
+    </section>
+
+    <section id="footer">
       <% if action_name == 'index' %><%= link_to 'Back to top', '#', :id => 'back-to-top' %>
       <% else %><%= link_to 'Back to blog', root_url %>
       <% end %>
       <br />
-      powered by <a href="http://github.com/natew/obtvse.git">obtvse</a></span>
+      powered by <a href="http://github.com/natew/obtvse.git">obtvse</a>
+    </section>
   </div>
 
   <%= javascript_include_tag 'application' %>
