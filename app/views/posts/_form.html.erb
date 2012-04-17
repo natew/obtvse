@@ -1,7 +1,6 @@
 <%= form_for @post do |f| %>
 
 <div id="post-editor" class="split-section">
-  <pre id="line-height" class="goaway">Test text</pre>
   <div class="inner">
     <%- if @post.errors.any? -%>
     <div class="notice">
@@ -21,6 +20,7 @@
         <pre><span></span><br></pre>
         <%= f.text_area :content, :placeholder => 'Write post here' %>
       </div>
+      <pre id="line-height" class="goaway">Test text</pre>
     </fieldset>
   </div>
 </div>

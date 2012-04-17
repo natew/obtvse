@@ -96,6 +96,12 @@ $light-yellow: #ffd;
 
 /* Shadows */
 
+@mixin box-shadow-none() {
+  box-shadow: none;
+  -moz-box-shadow: none;
+  -webkit-box-shadow: none;
+}
+
 @mixin box-shadow($horizontal: 0px, $vertical: 0px, $blur: 5px, $color: #333) {
   box-shadow: $horizontal $vertical $blur $color;
   -moz-box-shadow: $horizontal $vertical $blur $color;
