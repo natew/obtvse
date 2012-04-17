@@ -95,7 +95,8 @@ $(window).keydown(function windowKeydown(e) {
       // Esc
       case 27:
         e.preventDefault();
-        if (state.preview) hidePreview();
+        if (!state.barHidden) toggleBar();
+        else if (state.preview) hidePreview();
         else setEditing(false);
         break;
       // Backspace

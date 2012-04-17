@@ -563,7 +563,7 @@ form .permalink {
   &.transition {@include transition(all, .2s, ease-out);}
 
   .inner {
-    padding: 1px 20px;
+    padding: 0 20px;
   }
 }
 
@@ -574,7 +574,6 @@ form .permalink {
   position: relative;
 
   .inner {
-    margin: 10px auto;
     padding-right: 0;
     padding-left: 0;
     @include box-sizing(border-box);
@@ -648,9 +647,11 @@ form .permalink {
 
   .middle {
     position: absolute;
-    top: 40%;
+    top: 50%;
     left: 0;
+    margin-top: -74px;
     width: 100%;
+    height: 148px
   }
 
   .bottom {
@@ -706,7 +707,7 @@ form .permalink {
       padding: 2px 0;
       margin: 0 0 10px 0;
       font-size: 13px;
-      width: 200px;
+      width: 220px;
     }
   }
 }
