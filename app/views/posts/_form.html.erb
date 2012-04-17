@@ -36,7 +36,7 @@
 
   <div class="middle">
     <%= link_to 'Date', '#', :id => 'date-button', :class => 'icon-calendar' %>
-    <div class="menu">
+    <div id="menu-info" class="menu">
       <%= link_to 'Info', '#info', :class => 'icon-info-sign' %>
       <ul id="info" class="sub-menu">
         <li>
@@ -46,6 +46,10 @@
         <li>
           <%= f.label :url, 'External URL' %>
           <%= f.text_field :url, :placeholder => 'Optional' %>
+        </li>
+        <li>
+          <label>Wordcount</label>
+          <span id="wordcount"></span>
         </li>
       </ul>
     </div>

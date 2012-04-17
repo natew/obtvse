@@ -13,7 +13,8 @@ showdown       = new Showdown.converter(),
 lineHeight     = $('#line-height').height(),
 commandPressed = false,
 previewHeight  = 0,
-hideBarTimeout = null;
+hideBarTimeout = null,
+scrollTimeout  = null;
 
 // Elements
 var el = fn.getjQueryElements({
@@ -21,6 +22,7 @@ var el = fn.getjQueryElements({
   published : '#published',
   drafts    : '#drafts',
   admin     : '#admin',
+  editor    : '#post-editor',
   title     : '#post_title',
   content   : '#post_content',
   slug      : '#post_slug',
@@ -109,13 +111,6 @@ function filterTitle(objects, val) {
   }).map(function filterTitleMap(el) {
     return el.id;
   });
-}
-
-// Scroll to bottom of content and select the end
-function scrollToBottom() {
-  fn.log('Scroll to bottom',el.content);
-  el.content.focus().putCursorAtEnd();
-  $('#post-editor').scrollTop(el.content.height());
 }
 
 function showOnly(context,selectors) {
@@ -273,7 +268,7 @@ function setEditing(val, callback) {
 
         // Refresh form
         makeExpandingAreas();
-        scrollToBottom();
+        scrollToPosition();
 
         // Update url and form
         var url = '/edit/'+state.post.id;
@@ -416,6 +411,27 @@ function showBar(yes) {
 function delayedHideBar(time) {
   clearTimeout(hideBarTimeout);
   hideBarTimeout = setTimeout(function(){showBar(false)},(time ? time : 1000));
+}
+
+function savePosition() {
+  clearTimeout(scrollTimeout);
+  if (state.editing) {
+    scrollTimeout = setTimeout(function() {
+      $.cookie('position-'+state.post.id,el.editor.scrollTop());
+    },1000);
+  }
+}
+
+// Scroll to bottom of content and select the end
+function scrollToPosition() {
+  var cookie = $.cookie('position-'+state.post.id);
+  fn.log('Scroll to position',cookie);
+  if (cookie) el.editor.scrollTop(cookie);
+  else {
+    // Scroll to bottom
+    el.content.focus().putCursorAtEnd();
+    $('#post-editor').scrollTop(el.content.height());
+  }
 }
 
 function heartbeatLogger() {
