@@ -1,16 +1,39 @@
 @import "mixins.css.scss";
 
-/* TODO: pull out coloring into variables */
+/*    COLORS    */
+
+$body-bg: #fff;
+$body-inner-shadow: #eee;
+$a-color: #000;
 $theme: #b92c2c;
-$bar: #f4f4f4;
+$selection-color: #fff;
+
+
+/*    ADMIN COLORS    */
+
+$admin-bar-bg: #f4f4f4;
+
+
+::selection, ::-moz-selection {
+  background: $theme;
+  color: $selection-color;
+}
+
+
+/*    BASE STRUCTURE    */
 
 html,body {height: 100%;}
 body {
-  background: #fff;
+  background: $body-bg;
   color: #444;
   -webkit-font-smoothing: antialiased; /* fix for borked text when animating */
   word-wrap: break-word;
   overflow: hidden;
+}
+
+body, textarea, pre, input, li {
+  /* These are overwritten if you include one of the /fonts css files */
+  font: 15px/1.8em 'Helvetica Nueue', Helvetica, Arial, sans-serif;
 }
 
 #body, #admin {
@@ -23,17 +46,7 @@ body {
 
 #body {
   border-top: 2px solid $theme;
-  @include box-shadow(inset 0,0,200px,#eee);
-}
-
-body, textarea, pre, input, li {
-  /* These are overwritten if you include one of the /fonts css files */
-  font: 15px/1.8em 'Helvetica Nueue', Helvetica, Arial, sans-serif;
-}
-
-::selection, ::-moz-selection {
-  background: $theme;
-  color: #fff;
+  @include box-shadow(inset 0,0,200px,$body-inner-shadow);
 }
 
 #content,
@@ -44,6 +57,9 @@ header .inner {
   position: relative;
   margin: 0 auto;
 }
+
+
+/*    H1-H6    */
 
 h1,h2,h3,h4,h5,#text-title * {
   font-weight: normal;
@@ -63,7 +79,9 @@ h1, #text-title {
   margin: 0.67em 0;
 }
 
-h1.external {font-size: 20px;}
+h1.external {
+  font-size: 20px;
+}
 
 h2 {
   font-size: 18px;
@@ -79,18 +97,14 @@ h2, h3 {
   margin: 2em 0 1em;
 }
 
-p {
-  margin: 1em 0;
-}
+
+/*    BASE ELEMENTS    */
 
 a,
 a:visited
 a:active {
-  color: #000;
+  color: $a-color;
   text-decoration: none;
-}
-
-.posts a {
   @include transition(color, .1s, linear);
 }
 
@@ -98,6 +112,9 @@ a:hover,
 #admin #published h3 a:hover {
   color: $theme !important;
 }
+
+
+/*    HEADER    */
 
 header {
   padding: 20px 0;
@@ -124,10 +141,6 @@ header {
     }
   }
 
-  a {
-    color: rgba(0,0,0,0.5);
-  }
-
   ul {
     padding: 0 50px;
     margin: 0;
@@ -144,27 +157,19 @@ header {
   li {
     margin: 0;
     display: inline;
-    color: #ccc;
     float: left;
 
     a {
       font-size: 12px;
       padding: 3px 6px;
       font-weight: bold;
-
-      &:hover {
-        border-color: #777;
-        color: #444;
-      }
+      color: #888;
     }
   }
 }
 
-.clearfix:before,
-.clearfix:after, {
-  content:"";
-  display:table;
-}
+
+/*    BODY ELEMENTS    */
 
 #container {
   padding: 0;
@@ -234,7 +239,7 @@ code {
   font-size: 13px;
   padding: 20px;
   display: block;
-  @include box-shadow-inset(0, 0, 20px, #eee);
+  @include box-shadow-inset(0, 0, 20px, #ddd);
 }
 
 .contain img {
@@ -242,39 +247,10 @@ code {
   height: auto;
 }
 
-fieldset.markdown {
-  position: relative;
-  border: none;
-  margin: 0;
-  padding: 0;
-}
-
 #post_title {
   width: 100%;
   border: none;
   background: none;
-}
-
-.left {
-  float: left;
-}
-
-.right {
-  float: right;
-}
-
-.actions {
-  position: absolute;
-  top: 0;
-  right: -60px;
-  font-size: 12px;
-  margin: 0;
-  padding: 0;
-}
-
-.actions li {
-  display: inline-block;
-  margin: 0 10px 0 0;
 }
 
 label {
@@ -287,17 +263,6 @@ label {
 #post_draft {
   position: relative;
   margin: 0 20px 0 0;
-}
-
-.admin-links {
-  position: absolute;
-  text-align: right;
-  top: 18px;
-  right: 20px;
-  margin: 0;
-
-  li {float: left; margin-left: 6px;}
-  a {float: left;}
 }
 
 .notice {
@@ -316,6 +281,13 @@ label {
   position: absolute;
   width: 100%;
   overflow: hidden;
+
+  fieldset.markdown {
+    position: relative;
+    border: none;
+    margin: 0;
+    padding: 0;
+  }
 
   #save-button {display:none;}
 
@@ -419,7 +391,7 @@ label {
   }
 
   textarea,pre {
-    margin: -3px 0; /* not sure why but preventing a slight scroll on multiline titles */
+    margin: -3px 0; /* not sure why but prevents a slight scroll on multiline titles */
     padding: 3px 0;
     outline: 0;
     border: 0;
@@ -485,13 +457,6 @@ label {
   &:hover {
     border-top-color: #ddd;
   }
-}
-
-fieldset.markdown {
-  position: relative;
-  border: none;
-  margin: 0;
-  padding: 0;
 }
 
 #content-fieldset {
@@ -622,8 +587,9 @@ form .permalink {
   bottom: 0;
   left: 0;
   width: 80px;
+  min-height: 400px;
   padding: 20px 0;
-  background: $bar;
+  background: $admin-bar-bg;
   border-right: 1px solid #e8e8e8;
   @include box-sizing(border-box);
 
@@ -675,7 +641,7 @@ form .permalink {
     top: -65px;
     left: 79px;
     padding: 10px 10px 0;
-    background: $bar;
+    background: $admin-bar-bg;
     border: 1px solid #e8e8e8;
     border-left: none;
     @include border-radius-right(5px);
@@ -691,6 +657,12 @@ form .permalink {
         width: 200px;
         text-align: left;
       }
+
+      span {
+        font-size: 12px;
+        display: block;
+        margin: 6px 0 8px;
+      }
     }
 
     label {
@@ -705,17 +677,12 @@ form .permalink {
     input[type=text] {
       border: none;
       padding: 2px 0;
-      margin: 0 0 10px 0;
+      margin: 0 0 8px 0;
       font-size: 13px;
       width: 220px;
+      border-bottom: 1px solid #ddd;
     }
   }
-}
-
-.admin-view {
-  font-size: 11px;
-  margin: 0 10px 2px 0;
-  text-transform: uppercase;
 }
 
 nav.pagination {
@@ -724,10 +691,9 @@ nav.pagination {
   padding: 0;
 }
 
-  nav.pagination a {
-    margin: 0 15px;
-  }
-
+nav.pagination a {
+  margin: 0 15px;
+}
 
 #footer {
   display: block;
@@ -736,112 +702,8 @@ nav.pagination {
   text-align: center;
 }
 
-.goaway {
-  position: absolute;
-  clip: rect(0,0,0,0);
-}
-
+.goaway {position: absolute; clip: rect(0,0,0,0);}
 .clearfix:before, .clearfix:after {content:''; display:table;}
-aside {position:relative; display:block;}
 .hide {visibility:hidden; height:1px; clip:rect(0 0 0 0); position:absolute;}
+aside {position:relative; display:block;}
 input, textarea {outline:none; background:none;}
-
-
-/* Bootstrap modal */
-.modal {display:none;}
-.modal-backdrop {
-  position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  z-index: 1040;
-  background-color: #000000;
-}
-.modal-backdrop.fade {
-  opacity: 0;
-}
-.modal-backdrop,
-.modal-backdrop.fade.in {
-  opacity: 0.8;
-  filter: alpha(opacity=80);
-}
-.modal {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  z-index: 1050;
-  overflow: auto;
-  width: 560px;
-  margin: -250px 0 0 -280px;
-  background-color: #ffffff;
-  border: 1px solid #999;
-  border: 1px solid rgba(0, 0, 0, 0.3);
-  *border: 1px solid #999;
-  /* IE6-7 */
-
-  -webkit-border-radius: 6px;
-  -moz-border-radius: 6px;
-  border-radius: 6px;
-  -webkit-box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
-  -moz-box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
-  box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
-  -webkit-background-clip: padding-box;
-  -moz-background-clip: padding-box;
-  background-clip: padding-box;
-}
-.modal.fade {
-  -webkit-transition: opacity .3s linear, top .3s ease-out;
-  -moz-transition: opacity .3s linear, top .3s ease-out;
-  -ms-transition: opacity .3s linear, top .3s ease-out;
-  -o-transition: opacity .3s linear, top .3s ease-out;
-  transition: opacity .3s linear, top .3s ease-out;
-  top: -25%;
-}
-.modal.fade.in {
-  top: 50%;
-}
-.modal-header {
-  padding: 9px 15px;
-  border-bottom: 1px solid #eee;
-}
-.modal-header .close {
-  margin-top: 2px;
-}
-.modal-body {
-  overflow-y: auto;
-  max-height: 400px;
-  padding: 15px;
-}
-.modal-form {
-  margin-bottom: 0;
-}
-.modal-footer {
-  padding: 14px 15px 15px;
-  margin-bottom: 0;
-  text-align: right;
-  background-color: #f5f5f5;
-  border-top: 1px solid #ddd;
-  -webkit-border-radius: 0 0 6px 6px;
-  -moz-border-radius: 0 0 6px 6px;
-  border-radius: 0 0 6px 6px;
-  -webkit-box-shadow: inset 0 1px 0 #ffffff;
-  -moz-box-shadow: inset 0 1px 0 #ffffff;
-  box-shadow: inset 0 1px 0 #ffffff;
-  *zoom: 1;
-}
-.modal-footer:before,
-.modal-footer:after {
-  display: table;
-  content: "";
-}
-.modal-footer:after {
-  clear: both;
-}
-.modal-footer .btn + .btn {
-  margin-left: 5px;
-  margin-bottom: 0;
-}
-.modal-footer .btn-group .btn + .btn {
-  margin-left: -1px;
-}
