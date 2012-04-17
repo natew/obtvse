@@ -113,8 +113,9 @@ function filterTitle(objects, val) {
 
 // Scroll to bottom of content and select the end
 function scrollToBottom() {
+  fn.log('Scroll to bottom',el.content);
   el.content.focus().putCursorAtEnd();
-  $('#post-editor .inner').scrollTop(el.content.height());
+  $('#post-editor').scrollTop(el.content.height());
 }
 
 function showOnly(context,selectors) {
