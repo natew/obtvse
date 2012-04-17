@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120417094932) do
+ActiveRecord::Schema.define(:version => 20120417142328) do
 
   create_table "images", :force => true do |t|
     t.string   "image_file_name"
