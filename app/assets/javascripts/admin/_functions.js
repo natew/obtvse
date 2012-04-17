@@ -247,6 +247,7 @@ function setEditing(val, callback) {
     el.bar.addClass('transition').removeClass('hidden');
     state.editing = true;
     showBar(true);
+    delayedHideBar();
 
     // If true, start editing a new post
     if (val === true) {
