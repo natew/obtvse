@@ -28,7 +28,7 @@ body {
 
 body, textarea, pre, input, li {
   /* These are overwritten if you include one of the /fonts css files */
-  font: 15px/1.9em 'Helvetica Nueue', Helvetica, Arial, sans-serif;
+  font: 15px/1.8em 'Helvetica Nueue', Helvetica, Arial, sans-serif;
 }
 
 ::selection, ::-moz-selection {
@@ -100,7 +100,8 @@ a:hover,
 }
 
 header {
-  padding: 20px 0 0;
+  padding: 20px 0;
+  margin-bottom: 20px;
   width: 100%;
 
   .inner {
@@ -166,13 +167,15 @@ header {
 }
 
 #container {
-  padding: 33px 0;
+  padding: 0;
   position: relative;
 
   time {
     margin: 0 0 40px 0;
     padding: 0;
+    font-weight: bold;
     font-size: 11px;
+    line-height: 11px;
     color: #bbb;
     display: block;
     text-align: center;
@@ -182,7 +185,7 @@ header {
 #content {
   clear: both;
 
-  section {
+  article {
     padding: 0;
     margin: 0 0 38px 0;
     position: relative;
@@ -221,10 +224,6 @@ header {
       border: none;
     }
   }
-}
-
-.show #content section {
-  border-bottom: none;
 }
 
 code {
@@ -726,7 +725,7 @@ nav.pagination {
   }
 
 
-.footer {
+#footer {
   display: block;
   font-size: 11px;
   margin: 60px 0 30px 0;
