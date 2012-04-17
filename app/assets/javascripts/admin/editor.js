@@ -107,6 +107,7 @@ $(function() {
   // ContentFielset.scroll
   $('#post-editor').on('scroll', function() {
     updatePreviewPosition();
+    savePosition();
   });
 
   // ColA.click
@@ -186,5 +187,10 @@ $(function() {
   // Bar.click
   el.bar.click(function barClick(e) {
     if (state.preview && e.target.id == 'bar') hidePreview();
+  });
+
+  // Wordcount
+  $('#menu-info').mouseenter(function() {
+    $('#wordcount').html(el.content.val().split(/\s+/).length +' words');
   });
 });
