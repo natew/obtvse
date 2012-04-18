@@ -19,6 +19,9 @@ end
 group :development, :test do
   gem 'sqlite3', '~> 1', platform: [:ruby, :mswin, :mingw]
   gem 'capistrano'
+  gem 'quiet_assets'
+  gem 'foreman'
+  gem 'thin'
 end
 
 group :assets do

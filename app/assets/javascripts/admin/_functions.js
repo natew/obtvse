@@ -7,11 +7,8 @@ saveInterval   = 1000,
 draftsItems    = $('#drafts ul').data('items'),
 publishedItems = $('#published ul').data('items'),
 col_height     = 0,
-divTimeout     = null,
-curPath        = window.location.pathname.split('/'),
 showdown       = new Showdown.converter(),
 lineHeight     = $('#line-height').height(),
-commandPressed = false,
 previewHeight  = 0,
 hideBarTimeout = null,
 scrollTimeout  = null;
@@ -308,7 +305,7 @@ function setEditing(val, callback) {
 }
 
 function pushState(url) {
-  History.pushState(state, url.split('/')[0], url);
+  History.pushState(state, url.split('/')[1], url);
 }
 
 // Set form action
