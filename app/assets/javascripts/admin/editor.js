@@ -1,3 +1,5 @@
+curPath = window.location.pathname.split('/');
+
 $(function() {
   //
   // DEBUG
