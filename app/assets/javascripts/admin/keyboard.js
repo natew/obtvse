@@ -105,7 +105,7 @@ $(window).keydown(function windowKeydown(e) {
         break;
       // Backspace
       case 8:
-        if (el.title.val() == '') setEditing(false);
+        if (!state.beganEditing && el.title.val().length == 1) setEditing(false);
         break;
       // S
       case 83:
