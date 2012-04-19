@@ -1,8 +1,3 @@
-var key = {
-  shift: false,
-  cmd: false
-};
-
 // Window click
 $(window).keydown(function windowKeydown(e) {
   fn.log(e.which);
