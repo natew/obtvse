@@ -49,7 +49,7 @@ $(function() {
   if ($.cookie('barPinned') == 'true') toggleBar();
 
   // Select first item
-  selectItem($('.col li:visible:first'));
+  selectItem($('.col li:not(.hidden):first'));
 
   // Autosave
   setInterval(function autoSave(){
@@ -65,23 +65,21 @@ $(function() {
   // Filtering and other functions with the title field
   el.title.keyup(function titleKeyup(e) {
     if (!state.editing) {
-      // Selecting
-      if (el.curItem.length == 0 || el.curItem.is('.hidden')) {
-        selectItem($('.col li:visible:first'));
-      }
-
       // Filtering
       var val = $(this).val();
-      if (val) {
+      if (val && val != prevVal) {
+        prevVal = val;
         var draft_ids = filterTitle(draftsItems,val).join(',#post-'),
             pub_ids   = filterTitle(publishedItems,val).join(',#post-');
 
-        draft_ids ? showOnly('#drafts li', '#post-0,#post-'+draft_ids) : $('#drafts li').addClass('hidden');
+        draft_ids ? showOnly('#drafts li', '#post-0,#post-'+draft_ids) : $('#drafts li:not(#post-0)').addClass('hidden');
         pub_ids   ? showOnly('#published li', '#post-'+pub_ids) : $('#published li').addClass('hidden');
         if (!draft_ids && !pub_ids) setEditing(true);
         state.itemIndex[0] = 0;
         state.itemIndex[1] = 0;
-      } else {
+        selectItem($('.col li:not(.hidden):first'));
+      }
+      else if (!val) {
         $('#drafts li,#published li').removeClass('hidden');
       }
     }
@@ -150,7 +148,6 @@ $(function() {
     e.preventDefault();
     fn.log('Press back button');
     if (state.editing) setEditing(false);
-    selectItem($('.col li:visible:first'));
   });
 
   // Preview.click
