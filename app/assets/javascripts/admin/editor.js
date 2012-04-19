@@ -21,18 +21,6 @@ $(function() {
   setHeights();
   $(window).resize(setHeights);
 
-  // Avoid initial animations
-  el.section.addClass('transition');
-  el.bar.addClass('transition');
-
-  // Accurate detection for bar hover
-  $(window).mousemove(function windowMouseMove(evt){
-    if (state.editing) {
-      if (evt.pageX < 90) showBar(true);
-      else if (evt.pageX > 95 && !$('#bar:hover').length) delayedHideBar(500);
-    }
-  });
-
   // Detect if we are editing initially
   if (curPath.length > 2) {
     setEditing(parseInt(curPath[2],10), function editLoaded(){
@@ -40,6 +28,7 @@ $(function() {
       state.beganEditing = true;
     });
   } else  {
+    selectItem($('.col li:not(.hidden):first'));
     el.title.focus();
     if (curPath[1] == 'new') {
       setEditing(true);
@@ -48,8 +37,25 @@ $(function() {
 
   if ($.cookie('barPinned') == 'true') toggleBar();
 
-  // Select first item
-  selectItem($('.col li:not(.hidden):first'));
+  // Window.mousemove
+  $(window).mousemove(function windowMouseMove(evt){
+    // Accurate detection for bar hover
+    if (state.editing) {
+      if (evt.pageX < 90) showBar(true);
+      else if (evt.pageX > 95 && !$('#bar:hover').length) delayedHideBar(500);
+    }
+  })
+
+  // Window.blur
+  .blur(function() {
+    key.cmd = false;
+    key.shift = false;
+  })
+
+  // Window.beforeunload
+  .on('beforeunload', function() {
+    if (state.editing) savePost();
+  });
 
   // Autosave
   setInterval(function autoSave(){
@@ -57,6 +63,10 @@ $(function() {
       savePost();
     }
   }, saveInterval);
+
+  // Avoid initial animations
+  el.section.addClass('transition');
+  el.bar.addClass('transition');
 
   //
   // BINDINGS

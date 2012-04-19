@@ -14,6 +14,12 @@ hideBarTimeout = null,
 scrollTimeout  = null,
 prevVal        = null;
 
+// Keys
+var key = {
+  shift: false,
+  cmd: false
+};
+
 // Elements
 var el = fn.getjQueryElements({
   section   : '.split-section',
