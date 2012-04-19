@@ -87,6 +87,12 @@ $(window).keydown(function windowKeydown(e) {
   else {
     delayedHideBar();
     switch (e.which) {
+      // Enter
+      case 13:
+        if (el.title.is(':focus')) {
+          e.preventDefault();
+          el.content.focus();
+        }
       // Cmd
       case 91:
         key.cmd = true;
