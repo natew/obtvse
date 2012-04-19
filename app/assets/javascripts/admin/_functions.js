@@ -11,7 +11,8 @@ showdown       = new Showdown.converter(),
 lineHeight     = $('#line-height').height(),
 previewHeight  = 0,
 hideBarTimeout = null,
-scrollTimeout  = null;
+scrollTimeout  = null,
+prevVal        = null;
 
 // Elements
 var el = fn.getjQueryElements({
@@ -30,7 +31,7 @@ var el = fn.getjQueryElements({
   bar       : '#bar',
   curCol    : '#drafts',
   curColUl  : '#drafts ul',
-  curItem   : '.col li:visible:first',
+  curItem   : '.col li:first',
   blog      : '#blog-button',
   publish   : '#publish-button',
   preview   : '#post-preview'
@@ -117,7 +118,7 @@ function showOnly(context,selectors) {
 // Set post content height and column height
 function setHeights() {
   var content_height = Math.max($(window).height() - el.title.height()-40,100);
-  col_height = $(window).height()-120;
+  col_height = $(window).height()-155;
   $('.col ul').css('height', col_height);
   el.content.css('min-height', content_height);
   $('#content-fieldset').css('height', content_height);
@@ -128,16 +129,7 @@ function setHeights() {
 function selectItem(object, items) {
   fn.log(object);
   el.curItem.removeClass('selected');
-  // We can pass the index
-  if (typeof object == 'number') {
-    var item = $(items).eq(object);
-    el.curItem = item.length ? item : $(items).last();
-    el.curItem.addClass('selected');
-  }
-  // Or the actual item
-  else {
-    el.curItem = object.addClass('selected');
-  }
+  el.curItem = object.addClass('selected');
   return el.curItem.index();
 }
 
@@ -159,7 +151,7 @@ function changeCol() {
     el.curCol = el.published.addClass('active');
   }
 
-  el.curItem = el.curCol.find('li:visible:eq('+state.itemIndex[state.colIndex]+')').addClass('selected');
+  el.curItem = el.curCol.find('li:not(.hidden):eq('+state.itemIndex[state.colIndex]+')').addClass('selected');
   el.curColUl = el.curCol.find('ul');
 }
 
@@ -250,7 +242,6 @@ function setEditing(val, callback) {
     el.bar.removeClass('hidden');
     state.editing = true;
     showBar(true);
-    delayedHideBar();
 
     // If true, start editing a new post
     if (val === true) {
@@ -305,6 +296,9 @@ function setEditing(val, callback) {
     el.blog.attr('href','/').removeAttr('target');
     el.admin.removeClass('preview editing');
     showBar(false);
+
+    // Update selection
+    selectItem($('.col li:not(.hidden):first'));
 
     // Update URL
     pushState('/admin');
