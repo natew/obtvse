@@ -291,16 +291,21 @@ label {
 
   #save-button {display:none;}
 
-  &.editing {
-    background: #fff;
-    @include box-shadow(none);
+  #posts {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding-top: 86px;
+  }
 
+  &.editing {
     #content-fieldset {
-      display: block;
+      visibility: visible;
     }
 
     #posts {
-      display: none;
+      visibility: hidden;
       position: fixed;
     }
 
@@ -472,7 +477,7 @@ label {
 }
 
 #content-fieldset {
-  display: none;
+  visibility: hidden;
   width: 100%;
   @include box-sizing(border-box);
 }
@@ -484,7 +489,6 @@ label {
 }
 
   /* fade to white */
-  #post_content,
   #post_content:before,
   #post_content:after {
     content: "";
@@ -530,13 +534,16 @@ form .permalink {
  color: #ddd;
 }
 
+body.transition {
+  .split-section,
+  #bar {@include transition(all .2s ease-out);}
+}
+
 .split-section {
   height: 100%;
   position: fixed;
   width: 50%;
   @include box-sizing(border-box);
-
-  &.transition {@include transition(all .2s ease-out);}
 
   .inner {
     padding: 10px 20px;
@@ -604,10 +611,6 @@ form .permalink {
   background: $admin-bar-bg;
   border-right: 1px solid #e8e8e8;
   @include box-sizing(border-box);
-
-  &.transition {
-    @include transition(all .2s ease-out);
-  }
 
   &.hidden {
     opacity: 0 !important;
