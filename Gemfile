@@ -10,6 +10,7 @@ gem 'paperclip', '~> 3.0'
 gem 'slim'
 gem 'sorcery'
 gem 'bcrypt-ruby', '~> 3', require: 'bcrypt'
+gem 'bourbon', '~> 2.0.0.rc1'
 
 group :production do
   gem 'pg', '~> 0.13'
