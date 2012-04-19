@@ -25,14 +25,14 @@ $(window).keydown(function windowKeydown(e) {
           editSelectedItem();
         }
         break;
-      // Down
-      // Tab
+      // Down, Tab
       case 40: case 9:
         if (!key.shift) {
           e.preventDefault();
-          var next = el.curItem.siblings(':visible').eq(state.itemIndex[state.colIndex]);
+          var next = el.curCol.find('li:not(.hidden)').eq(state.itemIndex[state.colIndex]+1);
           if (next.length > 0) {
             state.itemIndex[state.colIndex]++;
+            fn.log(state.itemIndex,'col',state.colIndex,'next',next)
             selectItem(next);
 
             // Scroll column if necessary
@@ -43,13 +43,12 @@ $(window).keydown(function windowKeydown(e) {
           }
           break;
         }
-      // Up
-      // Tab
+      // Up, Tab
       case 38: case 9:
         e.preventDefault();
         if (e.which == 9 && !key.shift) break;
         if (state.itemIndex[state.colIndex] > 0) {
-          var prev = el.curItem.siblings(':visible').eq(state.itemIndex[state.colIndex]-1);
+          var prev = el.curCol.find('li:not(.hidden)').eq(state.itemIndex[state.colIndex]-1);
           if (prev.length > 0) {
             state.itemIndex[state.colIndex]--;
             selectItem(prev);
@@ -65,12 +64,12 @@ $(window).keydown(function windowKeydown(e) {
       // Right
       case 39:
         e.preventDefault();
-        if ($('#published li:visible').length) changeCol();
+        if ($('#published li:not(.hidden)').length) changeCol();
         break;
       // Left
       case 37:
         e.preventDefault();
-        if ($('#drafts li:visible').length) changeCol();
+        if ($('#drafts li:not(.hidden)').length) changeCol();
         break;
       // P
       case 80:
