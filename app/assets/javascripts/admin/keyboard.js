@@ -89,7 +89,7 @@ $(window).keydown(function windowKeydown(e) {
     switch (e.which) {
       // Enter
       case 13:
-        if (el.title.is(':focus')) {
+        if (!state.beganEditing) {
           e.preventDefault();
           el.content.focus();
         }
