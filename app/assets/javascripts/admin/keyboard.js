@@ -138,3 +138,35 @@ $(window).keydown(function windowKeydown(e) {
       key.shift = false;
   }
 });
+
+
+
+// Highlight the proper column
+function changeCol() {
+  el.curItem.removeClass('selected');
+
+  // to Drafts
+  if (el.curCol.is('#published')) {
+    state.colIndex = 0;
+    el.published.removeClass('active');
+    el.curCol = el.drafts.addClass('active');
+  }
+  // to Published
+  else {
+    state.colIndex = 1;
+    el.drafts.removeClass('active');
+    el.curCol = el.published.addClass('active');
+  }
+
+  selectItem(el.curCol.find('li:not(.hidden):eq('+state.itemIndex[state.colIndex]+')'));
+  el.curColUl = el.curCol.find('ul');
+}
+
+function filterTitle(objects, val) {
+  return objects.filter(function filterTitleObjects(el) {
+    var regex = new RegExp(val.split('').join('.*'), 'i');
+    if (el.title.match(regex)) return true;
+  }).map(function filterTitleMap(el) {
+    return el.id;
+  });
+}
