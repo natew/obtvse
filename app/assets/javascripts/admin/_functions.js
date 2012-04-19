@@ -80,37 +80,6 @@ function makeExpandingAreas() {
   makeExpandingArea(text_content);
 }
 
-// Lets us get the caret position in textarea
-function getCaret(el) {
-  if (el.selectionStart) {
-    return el.selectionStart;
-  } else if (document.selection) {
-    el.focus();
-
-    var r = document.selection.createRange();
-    if (r == null) {
-      return 0;
-    }
-
-    var re = el.createTextRange(),
-        rc = re.duplicate();
-    re.moveToBookmark(r.getBookmark());
-    rc.setEndPoint('EndToStart', re);
-
-    return rc.text.length;
-  }
-  return 0;
-}
-
-function filterTitle(objects, val) {
-  return objects.filter(function filterTitleObjects(el) {
-    var regex = new RegExp(val.split('').join('.*'), 'i');
-    if (el.title.match(regex)) return true;
-  }).map(function filterTitleMap(el) {
-    return el.id;
-  });
-}
-
 function showOnly(context,selectors) {
   $(context).addClass('hidden').filter(selectors).removeClass('hidden');
 }
@@ -131,28 +100,6 @@ function selectItem(object, items) {
   el.curItem.removeClass('selected');
   el.curItem = object.addClass('selected');
   return el.curItem.index();
-}
-
-
-// Highlight the proper column
-function changeCol() {
-  el.curItem.removeClass('selected');
-
-  // to Drafts
-  if (el.curCol.is('#published')) {
-    state.colIndex = 0;
-    el.published.removeClass('active');
-    el.curCol = el.drafts.addClass('active');
-  }
-  // to Published
-  else {
-    state.colIndex = 1;
-    el.drafts.removeClass('active');
-    el.curCol = el.published.addClass('active');
-  }
-
-  el.curItem = el.curCol.find('li:not(.hidden):eq('+state.itemIndex[state.colIndex]+')').addClass('selected');
-  el.curColUl = el.curCol.find('ul');
 }
 
 // Saves the post
