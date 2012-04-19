@@ -179,7 +179,7 @@ function savePost(callback) {
     success: function savingSuccess(data) {
       var data = JSON.parse(data),
           li   = $('#post-'+data.id),
-          list = (data.draft == 'false') ? $('#drafts ul') : $('#published ul');
+          list = (data.draft == 'true') ? $('#drafts ul') : $('#published ul');
 
       // Update state
       state.saving = false;
@@ -188,13 +188,19 @@ function savePost(callback) {
       el.save.removeClass('saving dirty').addClass('saved');
       setTimeout(function(){el.save.removeClass('saved')},1000);
 
+      // If we just finished creating a new post
+      if (!state.post) {
+        setFormAction('/edit/'+data.id);
+        setFormMethod('put');
+        pushState('/edit/'+data.id);
+      }
+
       // Update cache and post data
       setCache(data.id, data);
       state.post = data;
 
       // Update form
-      setFormAction('/edit/'+state.post.id);
-      updateDraftButton(state.post.draft);
+      updateMetaInfo();
 
       // If item exists move to top, else add to top
       if (li.length) li.prependTo(list);
@@ -241,7 +247,7 @@ function setEditing(val, callback) {
   if (val !== false) {
     // Update UI
     el.admin.addClass('editing');
-    el.bar.addClass('transition').removeClass('hidden');
+    el.bar.removeClass('hidden');
     state.editing = true;
     showBar(true);
     delayedHideBar();
@@ -250,6 +256,7 @@ function setEditing(val, callback) {
     if (val === true) {
       pushState('/new');
       setFormAction('/posts');
+      setFormMethod('post');
     }
     // Editing post id = val
     else {
@@ -260,9 +267,7 @@ function setEditing(val, callback) {
 
         // Set form attributes
         el.content.val(state.post.content);
-        el.slug.val(state.post.slug);
-        el.url.val(state.post.url);
-        setDraft(state.post.draft);
+        updateMetaInfo();
 
         // Refresh form
         makeExpandingAreas();
@@ -271,6 +276,7 @@ function setEditing(val, callback) {
         // Update url and form
         var url = '/edit/'+state.post.id;
         setFormAction(url);
+        setFormMethod('put');
         pushState(url+window.location.hash);
 
         // Update link to post
@@ -293,16 +299,22 @@ function setEditing(val, callback) {
     el.title.val('').focus();
     el.content.val('');
     makeExpandingAreas();
+    setFormMethod('post');
 
     // Update UI
     el.blog.attr('href','/').removeAttr('target');
-    el.bar.removeClass('transition');
     el.admin.removeClass('preview editing');
-    delayedHideBar();
+    showBar(false);
 
     // Update URL
     pushState('/admin');
   }
+}
+
+function updateMetaInfo() {
+  el.slug.val(state.post.slug);
+  el.url.val(state.post.url);
+  setDraft(state.post.draft);
 }
 
 function pushState(url) {
@@ -312,6 +324,13 @@ function pushState(url) {
 // Set form action
 function setFormAction(url) {
   el.form.attr('action',url);
+}
+
+// Set form method
+function setFormMethod(type) {
+  var put = $('form div:first input[value="put"]');
+  if (type == 'put' && !put.length) $('form div:first').append('<input name="_method" type="hidden" value="put">');
+  else if (type != 'put') put.remove();
 }
 
 // Either uses cache or loads post
