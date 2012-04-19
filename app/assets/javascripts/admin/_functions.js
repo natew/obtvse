@@ -245,7 +245,7 @@ function setEditing(val, callback) {
     showBar(false);
 
     // Update selection
-    selectItem($('.col li:not(.hidden):first'));
+    selectItem($('#drafts li:first'));
 
     // Update URL
     pushState('/admin');
