@@ -93,7 +93,7 @@ function showOnly(context,selectors) {
 // Set post content height and column height
 function setHeights() {
   var content_height = Math.max($(window).height() - el.title.height()-40,100);
-  col_height = $(window).height()-155;
+  col_height = $(window).height()-125;
   $('.col ul').css('height', col_height);
   el.content.css('min-height', content_height);
   $('#content-fieldset').css('height', content_height);
