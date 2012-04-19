@@ -95,12 +95,13 @@ $(window).keydown(function windowKeydown(e) {
       // Esc
       case 27:
         e.preventDefault();
-        if (state.preview) hidePreview();
+        if (!el.bar.is('.hidden')) showBar(false);
+        else if (state.preview) hidePreview();
         else setEditing(false);
         break;
       // Backspace
       case 8:
-        if (!state.beganEditing && el.title.val().length == 1) setEditing(false);
+        if (!state.beganEditing && el.title.val().length <= 1) setEditing(false);
         break;
       // S
       case 83:

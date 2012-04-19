@@ -42,7 +42,7 @@ $(function() {
     // Accurate detection for bar hover
     if (state.editing) {
       if (evt.pageX < 90) showBar(true);
-      else if (evt.pageX > 95 && !$('#bar:hover').length) delayedHideBar(500);
+      else if (evt.pageX > 95 && !$('#bar:hover').length) delayedHideBar();
     }
   })
 
@@ -65,8 +65,7 @@ $(function() {
   }, saveInterval);
 
   // Avoid initial animations
-  el.section.addClass('transition');
-  el.bar.addClass('transition');
+  $('body').addClass('transition');
 
   //
   // BINDINGS
@@ -109,9 +108,6 @@ $(function() {
   // Window.click
   $(window).click(function windowClick(e){
     if (!state.editing) el.title.focus();
-    else {
-      if (e.pageX > 95 && !state.barHidden) delayedHideBar();
-    }
   });
 
   // ContentFielset.scroll
