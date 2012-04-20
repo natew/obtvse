@@ -4,6 +4,7 @@
 
 $body-bg: #fff;
 $body-inner-shadow: #eee;
+$text-color: #222;
 $a-color: #000;
 $theme: #b92c2c;
 $selection-color: #fff;
@@ -25,7 +26,7 @@ $admin-bar-bg: #f4f4f4;
 html,body {height: 100%;}
 body {
   background: $body-bg;
-  color: #444;
+  color: $text-color;
   -webkit-font-smoothing: antialiased; /* fix for borked text when animating */
   word-wrap: break-word;
   overflow: hidden;
@@ -93,8 +94,8 @@ h3 {font-size: 16px;
   color: #666;
 }
 
-h2, h3 {
-  margin: 2em 0 1em;
+h1, h2, h3 {
+  margin: 2em 0;
 }
 
 
@@ -210,8 +211,10 @@ header {
       margin: 1em 40px 1em 20px;
       padding: 0 20px;
       border-left: 5px solid lightblue;
-      font-size: 13px;
-      line-height: 1.7em;
+    }
+
+    li {
+      margin: 1em 0;
     }
   }
 
