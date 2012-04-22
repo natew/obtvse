@@ -14,4 +14,5 @@
 //= require jquery_ujs
 //= require fitvids.js
 //= require posts.js
+//= require showdown.js
 //= require_tree ./admin
