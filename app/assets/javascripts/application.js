@@ -16,3 +16,4 @@
 //= require posts.js
 //= require showdown.js
 //= require_tree ./admin
+//= require_tree ./vendor

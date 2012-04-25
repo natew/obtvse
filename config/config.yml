@@ -1,10 +1,10 @@
 ---
-title:               Obtvse Demo
-tagline:             Clever tagline.
+title:               Craig Wickesser
+tagline:             flipping the script
 login:               <%= ENV["obtvse_login"] ? ENV["obtvse_login"] : "username" %>
 password:            <%= ENV["obtvse_password"] ? ENV["obtvse_password"] : "password" %>
-name:                Your name
-twitter:             your_twitter_handle
-github:              your_github_handle
-email:               address@example.com
+name:                Craig Wickesser
+twitter:             mindscratch
+github:              mindscratch
+email:               craig@mindscratch.org
 google_analytics_id: YOUR_GA_ID

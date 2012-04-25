@@ -12,7 +12,7 @@
 <body class="<%= controller_name %> <%= action_name %>">
   <% unless @no_header %>
   <header>
-    <h1><%= link_to CONFIG['title'], root_url %></h1>
+    <h2><%= link_to CONFIG['title'], root_url %></h2>
     <span><%= CONFIG['tagline'].html_safe %></span>
     <ul>
       <% if CONFIG['twitter'] %>
