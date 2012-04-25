@@ -1,4 +1,5 @@
-require 'rdiscount'
+# require 'rdiscount'
+require 'redcarpet'
 
 class PostsController < ApplicationController
 	before_filter :authenticate, :except => [:index, :show]

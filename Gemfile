@@ -7,7 +7,8 @@ gem 'thin', '~> 1'
 
 # Rendering engines and vendor libraries
 gem 'jquery-rails', '~> 2'
-gem 'rdiscount'
+#gem 'rdiscount'
+gem 'redcarpet'
 
 # Misc libraries
 # gem 'bcrypt-ruby', '~> 3', require: 'bcrypt'
