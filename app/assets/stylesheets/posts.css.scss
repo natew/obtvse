@@ -202,7 +202,6 @@ header {
 
     p a {
       color: #777;
-      display: inline-block;
       line-height: 1.2em;
       border-bottom: 1px dotted #ddd;
     }
@@ -321,6 +320,11 @@ label {
     background-image: -webkit-gradient( linear, left bottom, left top, from(
         rgba(255, 255, 255, 1)), to(
         rgba(255, 255, 255, 0))
+      );
+    background-image: -moz-linear-gradient(
+        to top,
+        rgba(255, 255, 255, 1),
+        rgba(255, 255, 255, 0)
       );
   }
 
