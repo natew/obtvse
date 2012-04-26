@@ -1,5 +1,3 @@
-require 'rdiscount'
-
 class PostsController < ApplicationController
   before_filter :authenticate, :except => [:index, :show]
   layout :choose_layout
