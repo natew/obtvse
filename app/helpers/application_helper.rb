@@ -5,11 +5,6 @@ module ApplicationHelper
 
   def markdown(text)
     text = youtube_embed(text)
-<<<<<<< HEAD
-    r = RDiscount.new(text)
-    r.smart = true
-    r
-=======
     text = gist_embed(text)
     RedcarpetCompat.new(text, :fenced_code, :gh_blockcode)
   end
@@ -22,7 +17,6 @@ module ApplicationHelper
       match ? "<div id=\"#{match[1]}\" class=\"gist\">Loading gist...</div>" : line
     end
     output.join
->>>>>>> c647a5a... removed dependency on js library to embed gists, now using simple ajax call and css to get and style gists
   end
 
   def youtube_embed(str)
