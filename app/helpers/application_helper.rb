@@ -6,7 +6,8 @@ module ApplicationHelper
   def markdown(text)
     text = youtube_embed(text)
     text = gist_embed(text)
-    RedcarpetCompat.new(text, :fenced_code, :gh_blockcode)
+    # What was this line below doing? Is Redcarpet (https://github.com/tanoku/redcarpet) even being used in this app?
+    # RedcarpetCompat.new(text, :fenced_code, :gh_blockcode)
   end
 
   # TODO refactor these filters so they don't each iterate over all the lines
