@@ -9,7 +9,7 @@
       <h1><% if @single_post %><%= post.title %><% else %><%= link_to post.title, post.slug %><% end %></h1>
     <%- end -%>
 
-    <% if post.has_more_tag && !@single_post %>
+    <% if post.has_more_tag && !@single_post && !@preview %>
       <% if post.excerpt %><%= markdown(post.excerpt).to_html.html_safe %><% end %>
 	  <%= link_to "Read More", post.slug, :class => "button" %>
     <% else %>
