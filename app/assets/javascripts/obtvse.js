@@ -3,7 +3,6 @@ if (typeof Obtvse === 'undefined') {
     $(selector).html(gistResponse.div);
   };
 
-  // TODO: bad, don't add functions to jQuery
   var getGist = function(id, success) {
     $.ajax({
           url: 'https://gist.github.com/' + id + '.json',
