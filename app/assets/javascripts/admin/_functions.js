@@ -156,8 +156,11 @@ function savePost(callback) {
       fn.log('Saved',data.id,data);
       if (callback) callback.call(this, data);
     },
-    error: function() {
-      alert('Could not save.  Please backup your post!');
+    error: function (xmlHttpRequest, textStatus, errorThrown) {
+      if (xmlHttpRequest.readyState == 0 || xmlHttpRequest.status == 0)
+        return;  // it's not really an error
+      else
+        alert('Could not save.  Please backup your post!');
     }
   });
 }
