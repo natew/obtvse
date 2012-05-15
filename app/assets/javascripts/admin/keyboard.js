@@ -87,7 +87,7 @@ $(window).keydown(function windowKeydown(e) {
       // Esc
       case 27:
         e.preventDefault();
-        if (!el.bar.is('.hidden')) showBar(false);
+        if (!state.barPinned && !el.bar.is('.hidden')) showBar(false);
         else if (state.preview) hidePreview();
         else setEditing(false);
         break;

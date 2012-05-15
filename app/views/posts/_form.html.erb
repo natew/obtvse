@@ -35,7 +35,15 @@
   <% link_to 'Save', '#', :id => 'save-button', :class => 'icon-asterisk' %>
 
   <div class="middle">
-    <%= link_to 'Date', '#', :id => 'date-button', :class => 'icon-calendar' %>
+    <div id="menu-date" class="menu">
+      <%= link_to 'Date', '#', :id => 'date-button', :class => 'icon-calendar' %>
+      <ul id="date" class="sub-menu">
+        <li>
+          <%= f.label :published_at, 'Published Date' %>
+          <%= f.text_field :published_at %>
+        </li>
+      </ul>
+    </div>
     <div id="menu-info" class="menu">
       <%= link_to 'Info', '#info', :class => 'icon-info-sign' %>
       <ul id="info" class="sub-menu">
