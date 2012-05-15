@@ -1,25 +1,10 @@
-<<<<<<< HEAD
 
-=======
-// Window click
->>>>>>> abba66e4407dd2f8fb81f94372fe231cc4b4b54e
 $(window).keydown(function windowKeydown(e) {
   fn.log(e.which);
 
   // Not editing
   if (!state.editing) { //!$.inArray(state.lastKey,disableKeys)
     switch (e.which) {
-<<<<<<< HEAD
-=======
-      // Cmd
-      case 91:
-        key.cmd = true;
-        break;
-      // Shift
-      case 16:
-        key.shift = true;
-        break;
->>>>>>> abba66e4407dd2f8fb81f94372fe231cc4b4b54e
       // Enter
       case 13:
         e.preventDefault();
@@ -29,20 +14,12 @@ $(window).keydown(function windowKeydown(e) {
         break;
       // Down, Tab
       case 40: case 9:
-<<<<<<< HEAD
         if (!e.shiftKey) {
-=======
-        if (!key.shift) {
->>>>>>> abba66e4407dd2f8fb81f94372fe231cc4b4b54e
           e.preventDefault();
           var next = el.curCol.find('li:not(.hidden)').eq(state.itemIndex[state.colIndex]+1);
           if (next.length > 0) {
             state.itemIndex[state.colIndex]++;
-<<<<<<< HEAD
             fn.log(state.itemIndex,'col',state.colIndex,'next',next);
-=======
-            fn.log(state.itemIndex,'col',state.colIndex,'next',next)
->>>>>>> abba66e4407dd2f8fb81f94372fe231cc4b4b54e
             selectItem(next);
 
             // Scroll column if necessary
@@ -56,11 +33,7 @@ $(window).keydown(function windowKeydown(e) {
       // Up, Tab
       case 38: case 9:
         e.preventDefault();
-<<<<<<< HEAD
         if (e.which == 9 && !e.shiftKey) break;
-=======
-        if (e.which == 9 && !key.shift) break;
->>>>>>> abba66e4407dd2f8fb81f94372fe231cc4b4b54e
         if (state.itemIndex[state.colIndex] > 0) {
           var prev = el.curCol.find('li:not(.hidden)').eq(state.itemIndex[state.colIndex]-1);
           if (prev.length > 0) {
@@ -87,11 +60,7 @@ $(window).keydown(function windowKeydown(e) {
         break;
       // P
       case 80:
-<<<<<<< HEAD
         if (e.metaKey) {
-=======
-        if (key.cmd) {
->>>>>>> abba66e4407dd2f8fb81f94372fe231cc4b4b54e
           e.preventDefault();
           editSelectedItem(function() {
             togglePreview();
@@ -128,33 +97,21 @@ $(window).keydown(function windowKeydown(e) {
         break;
       // S
       case 83:
-<<<<<<< HEAD
         if (e.metaKey) {
-=======
-        if (key.cmd) {
->>>>>>> abba66e4407dd2f8fb81f94372fe231cc4b4b54e
           e.preventDefault();
           savePost();
         }
         break;
       // P
       case 80:
-<<<<<<< HEAD
         if (e.metaKey) {
-=======
-        if (key.cmd) {
->>>>>>> abba66e4407dd2f8fb81f94372fe231cc4b4b54e
           e.preventDefault();
           togglePreview();
         }
         break;
       // B
       case 66:
-<<<<<<< HEAD
         if (e.metaKey) {
-=======
-        if (key.cmd) {
->>>>>>> abba66e4407dd2f8fb81f94372fe231cc4b4b54e
           e.preventDefault();
           toggleBar();
         }
