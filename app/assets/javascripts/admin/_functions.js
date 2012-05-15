@@ -131,7 +131,7 @@ function savePost(callback) {
 
       // Update publish button
       el.save.removeClass('saving dirty').addClass('saved');
-      setTimeout(function(){el.save.removeClass('saved')},1000);
+      setTimeout(function(){el.save.removeClass('saved')},500);
 
       // If we just finished creating a new post
       if (!state.post) {
@@ -155,6 +155,9 @@ function savePost(callback) {
 
       fn.log('Saved',data.id,data);
       if (callback) callback.call(this, data);
+    },
+    error: function() {
+      alert('Could not save.  Please backup your post!');
     }
   });
 }

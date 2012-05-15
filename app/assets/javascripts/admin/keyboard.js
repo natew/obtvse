@@ -1,18 +1,10 @@
-// Window click
+
 $(window).keydown(function windowKeydown(e) {
   fn.log(e.which);
 
   // Not editing
   if (!state.editing) { //!$.inArray(state.lastKey,disableKeys)
     switch (e.which) {
-      // Cmd
-      case 91:
-        key.cmd = true;
-        break;
-      // Shift
-      case 16:
-        key.shift = true;
-        break;
       // Enter
       case 13:
         e.preventDefault();
@@ -22,12 +14,12 @@ $(window).keydown(function windowKeydown(e) {
         break;
       // Down, Tab
       case 40: case 9:
-        if (!key.shift) {
+        if (!e.shiftKey) {
           e.preventDefault();
           var next = el.curCol.find('li:not(.hidden)').eq(state.itemIndex[state.colIndex]+1);
           if (next.length > 0) {
             state.itemIndex[state.colIndex]++;
-            fn.log(state.itemIndex,'col',state.colIndex,'next',next)
+            fn.log(state.itemIndex,'col',state.colIndex,'next',next);
             selectItem(next);
 
             // Scroll column if necessary
@@ -41,7 +33,7 @@ $(window).keydown(function windowKeydown(e) {
       // Up, Tab
       case 38: case 9:
         e.preventDefault();
-        if (e.which == 9 && !key.shift) break;
+        if (e.which == 9 && !e.shiftKey) break;
         if (state.itemIndex[state.colIndex] > 0) {
           var prev = el.curCol.find('li:not(.hidden)').eq(state.itemIndex[state.colIndex]-1);
           if (prev.length > 0) {
@@ -68,7 +60,7 @@ $(window).keydown(function windowKeydown(e) {
         break;
       // P
       case 80:
-        if (key.cmd) {
+        if (e.metaKey) {
           e.preventDefault();
           editSelectedItem(function() {
             togglePreview();
@@ -105,21 +97,21 @@ $(window).keydown(function windowKeydown(e) {
         break;
       // S
       case 83:
-        if (key.cmd) {
+        if (e.metaKey) {
           e.preventDefault();
           savePost();
         }
         break;
       // P
       case 80:
-        if (key.cmd) {
+        if (e.metaKey) {
           e.preventDefault();
           togglePreview();
         }
         break;
       // B
       case 66:
-        if (key.cmd) {
+        if (e.metaKey) {
           e.preventDefault();
           toggleBar();
         }

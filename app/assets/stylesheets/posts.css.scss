@@ -365,15 +365,14 @@ label {
       height: 12px;
       display: inline-block;
       position: absolute;
-      bottom: 30px;
+      bottom: 20px;
       right: 20px;
       border: none;
       @include border-radius(8px);
-      @include transition(all .5s ease-in);
 
-      &.dirty, &:hover {background:lightyellow;}
-      &.saving {background:lightgreen;}
-      &.saved {background:#ccc; @include transform(scale(1.4));}
+      &.dirty, &:hover {background:#efb66c;}
+      &.saving {background:#ccc;}
+      &.saved {background:#76be6a;}
     }
   }
 
