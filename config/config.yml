@@ -1,0 +1,22 @@
+# Your information
+name:    Nate Wienert
+tagline:
+twitter: natebirdman
+github:  natew
+email:   natewienert@gmail.com
+
+# Google Analytics
+ga_id:   UA-23975642-4
+
+# Admin credentials
+login:    <%= ENV["obtvse_login"] ? ENV["obtvse_login"] : "username" %>
+password: <%= ENV["obtvse_password"] ? ENV["obtvse_password"] : "password" %>
+
+# Amazon S3
+s3_in_development: true
+access_key_id:     <%= ENV["access_key_id"] ? ENV["access_key_id"] : "" %>
+secret_access_key: <%= ENV["secret_access_key"] ? ENV["secret_access_key"] : "" %>
+bucket:            bucket_name
+
+#0HJCHEM8VR464K2Y86G2
+#oRQkWSrw8XhY2slQft9GHFVEzmwVu480hm2EvVF/
