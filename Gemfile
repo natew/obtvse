@@ -11,6 +11,7 @@ gem 'slim'
 gem 'sorcery'
 gem 'bcrypt-ruby', '~> 3', require: 'bcrypt'
 gem 'bourbon', '~> 2.0.0.rc1'
+gem 'thin'
 
 group :production do
   gem 'pg', '~> 0.13'
@@ -22,7 +23,6 @@ group :development, :test do
   gem 'capistrano'
   gem 'quiet_assets'
   gem 'foreman'
-  gem 'thin'
 end
 
 group :assets do
