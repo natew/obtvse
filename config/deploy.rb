@@ -19,7 +19,7 @@ role :app, domain
 role :db,  domain, :primary => true # This is where Rails migrations will run
 
 after 'deploy:update', 'deploy:cleanup'
-after 'deploy:update', 'deploy:symlink'
+after 'deploy:update', 'deploy:create_symlink'
 
 namespace :deploy do
   task :start, :roles => :app do
