@@ -1,10 +1,10 @@
 ---
-title:               Obtvse Demo
-tagline:             Clever tagline.
+title:               <%= ENV["obtvse_title"] ? ENV["obtvse_title"] : "Obtvse Demo" %>
+tagline:             <%= ENV["obtvse_tagline"] ? ENV["obtvse_tagline"] : "Clever tagline." %>
 login:               <%= ENV["obtvse_login"] ? ENV["obtvse_login"] : "username" %>
 password:            <%= ENV["obtvse_password"] ? ENV["obtvse_password"] : "password" %>
-name:                Your name
-twitter:             your_twitter_handle
-github:              your_github_handle
-email:               address@example.com
-google_analytics_id: YOUR_GA_ID
+name:                <%= ENV["obtvse_name"] ? ENV["obtvse_name"] : "Your name" %>
+twitter:             <%= ENV["obtvse_twitter"] ? ENV["obtvse_twitter"] : "your_twitter_handle" %>
+github:              <%= ENV["obtvse_github"] ? ENV["obtvse_github"] : "your_github_handle" %>
+email:               <%= ENV["obtvse_email"] ? ENV["obtvse_email"] : "address@example.com" %>
+google_analytics_id: <%= ENV["obtvse_ga_id"] ? ENV["obtvse_ga_id"] : "YOUR_GA_ID" %>
