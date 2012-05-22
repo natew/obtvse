@@ -11,7 +11,7 @@
 
     <% if post.has_more_tag && !@single_post && !@preview %>
       <% if post.excerpt %><%= markdown(post.excerpt).to_html.html_safe %><% end %>
-	  <%= link_to "Continue Reading →", post.slug, :class => "button" %>
+	    <%= link_to "Continue Reading →", post.slug, :class => "button" %>
     <% else %>
       <% if post.content %><%= markdown(post.content).to_html.html_safe %><% end %>
     <% end %>
