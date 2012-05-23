@@ -33,7 +33,7 @@
       <div class="left">
         <a href="/admin">&laquo; Admin</a>
         <%= link_to 'Delete', @post, :confirm => 'Are you sure?', :method => :delete, :class => 'delete-bar' %>
-        <%= link_to 'Options', '#options', :class => 'menu' %>
+        <%= link_to 'Options', '#options', :class => 'menu' %>	
         <ul id="options" class="sub-menu">
           <li>
             <%= f.label :url, 'Slug' %>
@@ -44,6 +44,8 @@
             <%= f.text_field :url, :placeholder => 'Optional external link' %>
           </li>
         </ul>
+	<ul id="images" class="sub-menu">
+	</ul>
       </div>
       <div class="right">
         <%= f.label :draft %>
@@ -54,6 +56,13 @@
     </div>
   </div>
 </div>
+<% end %>
 
-
+<% if supports_s3_upload? %>
+  <div id="inline-image-upload">
+    <%= form_for(InlineImage.new, :remote => true, :html => { :multipart => true, :id => 'fileupload'}) do |i| %>
+      Add an image:<div id="upload-status"></div> 
+      <%= i.file_field :image, :title => 'Embed a photo', :class => 'file', :id => 'image_upload' %>
+    <% end %>	
+  </div>
 <% end %>

@@ -1,0 +1,13 @@
+#Todo: Key and secret code in here
+development:
+  bucket: <%= ENV['s3_bucket'] %>
+  access_key_id: <%= ENV['s3_key'] %>
+  secret_access_key: <%= ENV['s3_secret'] %>
+test:
+  bucket: <%= ENV['s3_bucket'] %>
+  access_key_id: <%= ENV['s3_key'] %>
+  secret_access_key: <%= ENV['s3_secret'] %>
+production:
+  bucket: <%= ENV['s3_bucket'] %>
+  access_key_id: <%= ENV['s3_key'] %>
+  secret_access_key: <%= ENV['s3_secret'] %>
