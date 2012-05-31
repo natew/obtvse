@@ -40,7 +40,7 @@
       <ul id="date" class="sub-menu">
         <li>
           <%= f.label :published_at, 'Published Date' %>
-          <%= f.text_field :published_at %>
+          <%= f.text_field :published_at, :value => (!@post.published_at.nil? ? @post.published_at.to_s(:day_month_year_time) : ''), :placeholder => 'Leave blank or set custom date' %>
         </li>
       </ul>
     </div>

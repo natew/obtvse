@@ -169,7 +169,7 @@ $(function() {
   // Publish.click
   el.publish.click(function publishClick(e) {
     e.preventDefault();
-    el.publish.html('...')
+    el.publish.html('...');
     setDraftInput(!state.post.draft);
     savePost();
   })

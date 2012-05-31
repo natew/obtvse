@@ -3,7 +3,7 @@ class PostsController < ApplicationController
   layout :choose_layout
 
   def index
-    @posts = Post.where(draft:false).order('created_at desc').page(params[:page]).per(10)
+    @posts = Post.where(draft:false).order('published_at desc').page(params[:page]).per(10)
 
     respond_to do |format|
       format.html
@@ -28,8 +28,8 @@ class PostsController < ApplicationController
 
   def new
     @no_header = true
-    @post = params[:id] ? Post.find(params[:id]) : Post.new
-    @published = Post.where(draft:false).order('created_at desc')
+    @post = params[:id] ? Post.find(params[:id]) : Post.first
+    @published = Post.where(draft:false).order('published_at desc')
     @drafts = Post.where(draft:true).order('updated_at desc')
 
     respond_to do |format|
@@ -61,6 +61,11 @@ class PostsController < ApplicationController
   def update
     @post = Post.find_by_id(params[:id])
 
+    # Set published_at if we are publishing for the first time
+    if @post.published_at.nil? and params[:post]['draft'] == '0'
+      params[:post]['published_at'] = Time.now
+    end
+
     respond_to do |format|
       if @post.update_attributes(params[:post])
         format.html { redirect_to "/edit/#{@post.id}", :notice => "Post updated successfully" }
@@ -75,7 +80,7 @@ class PostsController < ApplicationController
   end
 
   def destroy
-    @post = Post.find_by_slug(params[:slug])
+    @post = Post.find_by_slug(params[:id])
     @post.destroy
 
     respond_to do |format|

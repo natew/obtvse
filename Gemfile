@@ -12,6 +12,7 @@ gem 'sorcery'
 gem 'bcrypt-ruby', '~> 3', require: 'bcrypt'
 gem 'bourbon', '~> 2.0.0.rc1'
 gem 'thin'
+gem 'chronic'
 
 group :production do
   gem 'pg', '~> 0.13'
