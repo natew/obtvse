@@ -1,11 +1,10 @@
 ---
-title:               Chris Burnor
-tagline:             Builder
-login:               <%= ENV["obtvse_login"] ? ENV["obtvse_login"] : "chris" %>
-password:            <%= ENV["obtvse_password"] ? ENV["obtvse_password"] : "Fr33d0m" %>
-name:                Chris Burnor
-twitter:             chrisburnor
-github:              chrisburnor
-email:               self@chrisburnor.com
-google_analytics_id: UA-29146404-1
-
+title:               Obtvse Demo
+tagline:             Clever tagline.
+login:               <%= ENV["obtvse_login"] ? ENV["obtvse_login"] : "username" %>
+password:            <%= ENV["obtvse_password"] ? ENV["obtvse_password"] : "password" %>
+name:                Your name
+twitter:             your_twitter_handle
+github:              your_github_handle
+email:               address@example.com
+google_analytics_id: YOUR_GA_ID
