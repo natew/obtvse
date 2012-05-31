@@ -130,11 +130,17 @@ header {
 }
 
 code {
-	font-size: 13px;
-	background: #F2F2F2;
-	padding: 20px;
-	margin: 20px;
-	display: block;
+  padding: 4px;
+  font-size: 13px;
+  background: #F2F2F2;
+}
+
+pre {
+  code {
+    padding: 20px;
+    margin: 20px;
+    display: block;
+  }
 }
 
 .contain {
