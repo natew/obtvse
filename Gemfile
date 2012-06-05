@@ -14,6 +14,13 @@ gem 'redcarpet'
 gem 'stringex', '~> 1', git: 'git://github.com/rsl/stringex.git'
 gem 'kaminari', '~> 0.13'
 
+# Photo uploads
+gem "paperclip", :git => "git://github.com/thoughtbot/paperclip.git"
+
+# storage
+gem 'aws-s3', :require => 'aws/s3'
+gem 'aws-sdk'
+
 group :production do
   # gem 'newrelic_rpm', '~> 3'
   # gem 'dalli', '~> 1'
@@ -47,3 +54,4 @@ group :assets do
   gem 'coffee-rails', '~> 3'
   gem 'uglifier', '~> 1'
 end
+

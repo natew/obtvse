@@ -49,6 +49,7 @@ class PostsController < ApplicationController
     @no_header = true
     @posts = Post.page(params[:page]).per(20)
     @post = Post.new
+    @image = InlineImage.new
 
     respond_to do |format|
       format.html
