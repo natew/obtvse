@@ -38,6 +38,8 @@ Or in your shell (~/.bashrc or ~/.zshrc for example)
     export obtvse_password=<PASSWORD>
 
 
+Here's a quick [guide for installing on Heroku](http://natewienert.com/installing-obtvse-on-heroku).
+
 
 TODO
 ====
