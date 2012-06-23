@@ -228,8 +228,13 @@ code {
   color: #fff;
 }
 
-.button.space-top {
-  margin-top: 100px;
+.button {
+  &.space-top {
+    margin-top: 50px;
+  }
+  &.space-bottom {
+    margin-bottom: 50px;
+  }
 }
 
 .left {
