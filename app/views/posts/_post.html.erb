@@ -21,7 +21,9 @@
         <li><%= link_to 'Edit', '/edit/' + post.id.to_s unless @preview %></li>
       </ul>
     <%- end -%>
+    <% if @single_post %>
+      <a class="button space-top space-bottom" href="<%= root_url %>">Back to Blog</a>
+      <%= render 'posts/comments' %>
+    <% end %>
   </div>
-
-  <% if @single_post %><a class="button space-top" href="<%= root_url %>">Back to Blog</a><% end %>
 </section>
