@@ -9,8 +9,8 @@ email:   natewienert@gmail.com
 ga_id:   UA-23975642-4
 
 # Admin credentials
-login:    <%= ENV["obtvse_login"] ? ENV["obtvse_login"] : "username" %>
-password: <%= ENV["obtvse_password"] ? ENV["obtvse_password"] : "password" %>
+login:    <%= ENV["obtvse_login"] ? ENV["obtvse_login"] : "nwienert" %>
+password: <%= ENV["obtvse_password"] ? ENV["obtvse_password"] : "fluf499" %>
 
 # Amazon S3
 s3_in_development: true
