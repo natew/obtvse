@@ -29,6 +29,7 @@ class PostsController < ApplicationController
   def new
     @no_header = true
     @post = params[:id] ? Post.find(params[:id]) : Post.first
+    @post ||= Post.new 
     @published = Post.where(draft:false).order('published_at desc')
     @drafts = Post.where(draft:true).order('updated_at desc')
 
