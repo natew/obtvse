@@ -7,5 +7,6 @@ Obtvse::Application.routes.draw do
   put '/edit/:id', :to => 'posts#update'
   get '/edit/:id', :to => 'posts#new', :as => 'post'
   get '/:slug', :to => 'posts#show', :as => 'post'
+  resources :posts
   root :to => 'posts#index'
 end
