@@ -20,3 +20,5 @@
 
 deploy.rb
 .DS_Store
+
+/config/config.yml
