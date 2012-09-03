@@ -23,7 +23,7 @@
       <% if CONFIG['github'] %>
         <li><%= link_to 'github', 'https://github.com/' + CONFIG['github'] %></li>
       <% end %>
-      <% if CONFIG['display_email'] %>
+      <% if CONFIG['email'] %>
         <li><%= link_to 'say hi', "mailto:#{CONFIG['email']}?subject:whats up!" %></li>
       <% end %>
       <li><%= link_to 'rss feed', '/posts.rss' %></li>
