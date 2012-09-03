@@ -5,6 +5,9 @@ gem 'rails', '~> 3'
 # Extention libraries
 gem 'thin', '~> 1'
 
+# Authentication libraries
+gem 'devise', '~> 2.1.2'
+
 # Rendering engines and vendor libraries
 gem 'jquery-rails', '~> 2'
 gem 'redcarpet'

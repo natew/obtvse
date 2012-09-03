@@ -16,7 +16,7 @@
       <% if post.content %><%= markdown(post.content).to_html.html_safe %><% end %>
     <% end %>
 
-    <%- if is_admin? -%>
+    <%- if admin_signed_in? -%>
       <ul class="actions">
         <li><%= link_to 'Edit', '/edit/' + post.id.to_s unless @preview %></li>
       </ul>
