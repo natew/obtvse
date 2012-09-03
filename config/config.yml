@@ -8,4 +8,4 @@ email:               address@example.com # same/different than email associated 
 google_analytics_id: YOUR_GA_ID
 disqus_shortname:    <%= ENV.fetch("disqus_shortname") { "" } %>
 admin_login:         username # 'username' or 'email' -- controls what admin logs in with
-allow_registration:  'no' # 'yes' or 'no' -- must be enabled to create first account (or to allow multiple admins), can/should be disabled after
+allow_registration:  'yes' # 'yes' or 'no' -- must be enabled to create first account (or to allow multiple admins), can/should be disabled after
