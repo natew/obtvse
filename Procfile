@@ -1,1 +1,2 @@
-web: bundle exec rails server thin -p $PORT
+web: bundle exec thin start -p $PORT
+log: tail -f -n 0 log/development.log

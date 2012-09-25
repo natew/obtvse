@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Qliq</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Styles -->
+    <link href="/qliq/bootstrap.css" rel="stylesheet">
+    <link href="/qliq/bootstrap-responsive.css" rel="stylesheet">
+    <link href="/qliq/qliq.css" rel="stylesheet">
+
+    <!-- Font -->
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Fav and touch icons
+    <link rel="shortcut icon" href="assets/ico/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="assets/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="assets/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="assets/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="assets/ico/apple-touch-icon-57-precomposed.png">
+
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-146052-10']);
+      _gaq.push(['_trackPageview']);
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+    -->
+
+    <script type="text/javascript">
+      // debounce utility from underscorejs.org
+      var debounce = function(func, wait, immediate) {
+        var timeout;
+        return function() {
+          var context = this, args = arguments;
+          var later = function() {
+            timeout = null;
+            if (!immediate) func.apply(context, args);
+          };
+          if (immediate && !timeout) func.apply(context, args);
+          clearTimeout(timeout);
+          timeout = setTimeout(later, wait);
+        };
+      };
+    </script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.23/jquery-ui.min.js"></script>
+    <script src="/qliq/tiles.js"></script>
+    <script src="/qliq/qliq.js"></script>
+  </head>
+
+  <body>
+    <header>
+        <div class="header-container">
+          <h1>Qliq</h1>
+          <a id="user" href="">Kristina<img src="/qliq/imgs/profile-s.png" /></a>
+          <hr />
+          <a id="notifications" href="">1</a>
+          <a id="pulse" href="">Pulse</a>
+
+          <form id="search-container">
+            <div id="search-query-container">
+              <input id="search-query" type="text" name="query" />
+              <input id="search-button" type="submit" />
+            </div>
+          </form>
+          <button id="share">Share</button>
+        </div>
+    </header>
+
+    <div id="page-container" class="container">
+      <h1>My Feed</h1>
+      <div id="sample2-templates" class="dev-tiles-templates">
+          <ul>
+              <li id="sample2-t1" class="dev-l1 selected dev-template"></li>
+              <li class="dev-l2 dev-template"></li>
+              <li class="dev-l3 dev-template"></li>
+              <li class="dev-l4 dev-template"></li>
+              <li class="dev-l5 dev-template"></li>
+          </ul>
+      </div>
+      <div id="sample2-grid" class="grid"></div>
+    </div>
+
+    <script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>
+  </body>
+</html>
