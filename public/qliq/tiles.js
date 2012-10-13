@@ -386,7 +386,7 @@ Tiles.UniformTemplates = {
         this.priorityPageSize = Number.MAX_VALUE;
 
         // spacing between tiles
-        this.cellPadding = 3;
+        this.cellPadding = 10;
 
         // actual width and height of a cell in the grid
         this.cellSize = 0;
