@@ -92,7 +92,6 @@ header {
 }
 
 #container {
-  margin-left: 243px;
   position: relative;
 
   time {
@@ -138,7 +137,7 @@ code {
 }
 
 .contain {
-  width: 600px;
+  width: 85%;
   position: relative;
 }
 
@@ -574,3 +573,81 @@ nav.pagination {
   nav.pagination a {
     margin-left: 10px;
   }
+
+.sidebar {
+  padding: 0 30px;
+
+  ul {
+    margin: 10px 0;
+
+    li {
+      word-break: break-all;
+    }
+  }
+}
+
+.row-fluid {
+  width: 100%;
+  *zoom: 1;
+}
+
+.row-fluid::after {
+  clear: both;
+}
+
+.row-fluid::before,
+.row-fluid::after {
+  display: table;
+  line-height: 0;
+  content: "";
+}
+
+.row-fluid .sidebar {
+  width: 23.076923076923077%;
+  *width: 23.023731587561375%;
+
+  h1 {
+    margin: 25px 0;
+  }
+}
+
+.row-fluid .content {
+  width: 74.35897435897436%;
+  *width: 74.30578286961266%;
+  border-left: 1px solid #ddd;
+}
+
+.row-fluid .sidebar,
+.row-fluid .content {
+  display: block;
+  float: left;
+  min-height: 30px;
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+@media (max-width: 767px) {
+  .sidebar {
+    text-align: center;
+    padding-left: 0;
+  }
+
+  .sidebar ul {
+    padding: 0 !important;
+  }
+
+  .sidebar, .content {
+    width: 100% !important;
+  }
+
+  .content {
+    padding: 0 5px;
+  }
+
+  #content, #container {
+    section, time {
+      padding-left: 0px;
+    }
+  }
+}
