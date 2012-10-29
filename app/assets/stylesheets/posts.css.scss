@@ -27,11 +27,21 @@ h1,h2,h3,h4,h5,#text-title pre {
   line-height: 1.3em;
 }
 
+h1 a {
+  border-bottom: none;      
+
+  &:hover {
+    text-decoration: none;
+    color: black;
+  }
+}
+
+
 h1,
 #text-title pre,
 #text-title textarea {
   font-weight: 900;
-  font-size: 35px;
+  font-size: 28px;
 }
 
 p {
@@ -92,22 +102,23 @@ header {
 }
 
 #container {
-  margin-left: 243px;
-  position: relative;
+  position: absolute;
+  left: 26%;
 
   time {
     display: block;
-    padding: 20px 0 20px 50px;
+    padding: 40px 0 40px 50px;
     text-transform: uppercase;
     font-weight: 900;
-    font-size: 12px;
+    font-size: 14px;
     border-bottom: 1px solid #ddd;
+    letter-spacing: 1px;
   }
 }
 
 #content {
   section {
-    padding: 26px 0 40px 50px;
+    padding: 17px 0 40px 50px;
     border-bottom: 1px solid #ddd;
     position: relative;
   }
@@ -123,6 +134,8 @@ header {
       border: none;
     }
   }
+
+  ul, ol { padding: 0 0 0 40px; }
 }
 
 .show #content section {
@@ -138,7 +151,7 @@ code {
 }
 
 .contain {
-  width: 600px;
+  width: 85%;
   position: relative;
 }
 
@@ -574,3 +587,104 @@ nav.pagination {
   nav.pagination a {
     margin-left: 10px;
   }
+
+.sidebar {
+  position: fixed;
+  padding: 0 30px;
+
+  h1 { 
+    margin: 25px 0 10px 0 !important; 
+  }
+
+  #owner-name {
+    color: #3A3A3A;
+    font-size: 13px;
+    margin-top: 0;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  #tagline {
+    font-size: 16px;
+    font-weight: 400;
+    color: #585C60;
+  }
+
+  ul {
+    margin: 25px 0;
+
+    li {
+      word-break: break-all;
+    }
+  }
+}
+
+.row-fluid {
+  width: 100%;
+  *zoom: 1;
+}
+
+.row-fluid::after {
+  clear: both;
+}
+
+.row-fluid::before,
+.row-fluid::after {
+  display: table;
+  line-height: 0;
+  content: "";
+}
+
+.row-fluid .sidebar {
+  width: 23.076923076923077%;
+  *width: 23.023731587561375%;
+
+  h1 {
+    margin: 25px 0;
+  }
+}
+
+.row-fluid .content {
+  width: 74.35897435897436%;
+  *width: 74.30578286961266%;
+  position: absolute;
+  left: 25%;
+  border-left: 1px solid #ddd;
+}
+
+.row-fluid .sidebar,
+.row-fluid .content {
+  display: block;
+  float: left;
+  min-height: 30px;
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+@media (max-width: 767px) {
+  .sidebar {
+    text-align: center;
+    padding-left: 0;
+  }
+
+  .sidebar ul {
+    padding: 0 !important;
+  }
+
+  .sidebar, .content {
+    width: 100% !important;
+    position: relative !important;
+  }
+
+  .content {
+    padding: 0 5px;
+    left: 0% !important;
+  }
+
+  #content, #container {
+    section, time {
+      padding-left: 0px;
+    }
+  }
+}
