@@ -31,7 +31,16 @@ h1,
 #text-title pre,
 #text-title textarea {
   font-weight: 900;
-  font-size: 35px;
+  font-size: 30px;
+  margin: 25px 0 10px 0 !important; 
+
+  a { 
+    border-bottom: none;
+    
+    &:hover {
+      color: black; 
+    }
+  }
 }
 
 p {
@@ -92,21 +101,23 @@ header {
 }
 
 #container {
-  position: relative;
+  position: absolute;
+  left: 26%;
 
   time {
     display: block;
-    padding: 20px 0 20px 50px;
+    padding: 40px 0 40px 50px;
     text-transform: uppercase;
     font-weight: 900;
-    font-size: 12px;
+    font-size: 14px;
     border-bottom: 1px solid #ddd;
+    letter-spacing: 1px;
   }
 }
 
 #content {
   section {
-    padding: 26px 0 40px 50px;
+    padding: 17px 0 40px 50px;
     border-bottom: 1px solid #ddd;
     position: relative;
   }
@@ -122,6 +133,8 @@ header {
       border: none;
     }
   }
+
+  ul, ol { padding: 0 0 0 40px; }
 }
 
 .show #content section {
@@ -575,10 +588,25 @@ nav.pagination {
   }
 
 .sidebar {
+  position: fixed;
   padding: 0 30px;
 
+  #owner-name {
+    color: #3A3A3A;
+    font-size: 13px;
+    margin-top: 0;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  #tagline {
+    font-size: 16px;
+    font-weight: 400;
+    color: #585C60;
+  }
+
   ul {
-    margin: 10px 0;
+    margin: 25px 0;
 
     li {
       word-break: break-all;
@@ -614,6 +642,8 @@ nav.pagination {
 .row-fluid .content {
   width: 74.35897435897436%;
   *width: 74.30578286961266%;
+  position: absolute;
+  left: 25%;
   border-left: 1px solid #ddd;
 }
 
@@ -639,10 +669,12 @@ nav.pagination {
 
   .sidebar, .content {
     width: 100% !important;
+    position: relative !important;
   }
 
   .content {
     padding: 0 5px;
+    left: 0% !important;
   }
 
   #content, #container {

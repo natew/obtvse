@@ -15,7 +15,8 @@
   <div class="row-fluid">
     <div class="sidebar">
       <h1><%= link_to CONFIG['title'], root_url %></h1>
-      <span><%= CONFIG['tagline'].html_safe %></span>
+      <h2 id="owner-name"><%= CONFIG['name'].html_safe %></h2>
+      <h2 id="tagline"><%= CONFIG['tagline'].html_safe %></h2>
       <ul>
         <% if CONFIG['twitter'] %>
           <li><%= link_to '@' + CONFIG['twitter'], 'http://twitter.com/' + CONFIG['twitter'] %></li>
