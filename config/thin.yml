@@ -1,0 +1,14 @@
+---
+pid: tmp/pids/thin.pid
+address: 0.0.0.0
+timeout: 30
+wait: 30
+port: 3020
+log: log/thin.log
+max_conns: 1024
+require: []
+environment: production
+max_persistent_conns: 512
+servers: 4
+daemonize: true
+chdir: /var/www/natewienert.com/web/current
