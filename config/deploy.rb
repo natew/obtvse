@@ -23,15 +23,15 @@ after 'deploy:update', 'deploy:create_symlink'
 
 namespace :deploy do
   task :start, :roles => :app do
-    run "touch #{current_release}/tmp/restart.txt"
+    run "cd #{current_path};RAILS_ENV=production bundle exec thin start -C config/thin.yml"
   end
 
   task :stop, :roles => :app do
+    run "cd #{current_path};RAILS_ENV=production bundle exec thin stop -C config/thin.yml"
   end
 
-  desc "Restart Application"
   task :restart, :roles => :app do
-    run "touch #{current_release}/tmp/restart.txt"
+    run "cd #{current_path};RAILS_ENV=production bundle exec thin restart -C config/thin.yml"
   end
 
   task :symlink_attachments do
