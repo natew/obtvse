@@ -21,17 +21,25 @@ role :db,  domain, :primary => true # This is where Rails migrations will run
 after 'deploy:update', 'deploy:cleanup'
 after 'deploy:update', 'deploy:create_symlink'
 
+# Runs +command+ as root invoking the command with su -c
+# and handling the root password prompt.
+def surun(command)
+  run("su - -c '#{command}'") do |channel, stream, output|
+    channel.send_data("#{password}\n") if output
+  end
+end
+
 namespace :deploy do
   task :start, :roles => :app do
-    run "cd #{current_path};RAILS_ENV=production bundle exec thin start -C config/thin.yml"
+    surun "cd #{current_path};RAILS_ENV=production bundle exec thin start -C config/thin.yml"
   end
 
   task :stop, :roles => :app do
-    run "cd #{current_path};RAILS_ENV=production bundle exec thin stop -C config/thin.yml"
+    surun "cd #{current_path};RAILS_ENV=production bundle exec thin stop -C config/thin.yml"
   end
 
   task :restart, :roles => :app do
-    run "cd #{current_path};RAILS_ENV=production bundle exec thin restart -C config/thin.yml"
+    surun "cd #{current_path};RAILS_ENV=production bundle exec thin restart -C config/thin.yml"
   end
 
   task :symlink_attachments do
