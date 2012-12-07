@@ -11,7 +11,7 @@ gem 'redcarpet'
 
 # Misc libraries
 # gem 'bcrypt-ruby', '~> 3', require: 'bcrypt'
-gem 'stringex', '~> 1', git: 'git://github.com/rsl/stringex.git'
+gem 'stringex', '~> 1', :git => 'git://github.com/rsl/stringex.git'
 gem 'kaminari', '~> 0.13'
 
 group :production do
@@ -37,7 +37,7 @@ end
 
 group :development, :test do
   gem 'foreman', '~> 0.40'
-  gem 'sqlite3', '~> 1', platform: [:ruby, :mswin, :mingw]
+  gem 'sqlite3', '~> 1', :platform => [:ruby, :mswin, :mingw]
   gem 'faker', '~> 1'
   gem 'factory_girl_rails', '~> 1'
 end
