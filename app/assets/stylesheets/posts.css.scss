@@ -5,7 +5,7 @@
 $body-bg: #fff;
 $body-inner-shadow: #eee;
 $text-color: #222;
-$a-color: #000;
+$a-color: #b92c2c;
 $theme: #b92c2c;
 $selection-color: #fff;
 
@@ -53,7 +53,7 @@ body, textarea, pre, input, li {
 .contain,
 #post-editor .inner,
 header .inner {
-  width: 480px;
+  width: 520px;
   position: relative;
   margin: 0 auto;
 }
@@ -84,17 +84,18 @@ h1.external {
 }
 
 h2 {
-  font-size: 18px;
+  font-size: 22px;
   color: #888;
 }
 
-h3 {font-size: 16px;
-  text-transform: uppercase;
+h3 {
+  font-size: 16px;
   color: #666;
 }
 
 h2, h3, h4 {
   margin: 2em 0;
+  text-transform: uppercase;
 }
 
 
@@ -111,6 +112,10 @@ a:active {
 a:hover,
 #admin #published h3 a:hover {
   color: $theme !important;
+}
+
+ol, ul {
+  margin: 2em 0;
 }
 
 
@@ -199,9 +204,11 @@ header {
       color: #000;
     }
 
-    p a {
-      color: #777;
-      line-height: 1.2em;
+    p img {
+      margin: 2em auto;
+    }
+
+    a {
       border-bottom: 1px dotted #ddd;
     }
 
@@ -237,10 +244,13 @@ header {
 code {
   background: #f2f2f2;
   font-family: monospace, serif;
-  font-size: 13px;
+  font-size: 12px;
   padding: 20px;
   display: block;
   white-space: pre;
+  max-height: 330px;
+  overflow: auto;
+  margin: 2em 0;
   @include box-shadow(inset 0 0 20px #ddd);
 }
 
