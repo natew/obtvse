@@ -69,8 +69,9 @@ h1,h2,h3,h4,h5,#text-title * {
 #text-title pre,
 #text-title textarea,
 h1 {
-  font-size: 26px;
+  font-size: 28px;
   line-height: 1.3em;
+  text-align: center;
 }
 
 h1, #text-title {
@@ -83,17 +84,16 @@ h1.external {
 
 h2 {
   font-size: 22px;
-  color: #888;
+  color: #777;
 }
 
 h3 {
   font-size: 16px;
-  color: #666;
+  color: #999;
 }
 
 h2, h3, h4 {
   margin: 2em 0;
-  text-transform: uppercase;
 }
 
 
@@ -121,7 +121,7 @@ ol, ul {
 
 header {
   padding: 20px 0;
-  margin-bottom: 20px;
+  margin-bottom: 3em;
   width: 100%;
 
   .inner {
@@ -179,7 +179,7 @@ header {
   position: relative;
 
   time {
-    margin: 0 0 3em 0;
+    margin: 0 0 -3em 0;
     padding: 0;
     font-weight: bold;
     font-size: 11px;
@@ -195,7 +195,7 @@ header {
 
   article {
     padding: 0;
-    margin: 0 0 3em 0;
+    margin: 0 0 6em 0;
     position: relative;
 
     h1 a {
