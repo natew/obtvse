@@ -27,7 +27,6 @@ body {
   color: $text-color;
   -webkit-font-smoothing: antialiased; /* fix for borked text when animating */
   word-wrap: break-word;
-  overflow: hidden;
 }
 
 body, textarea, pre, input, li {
