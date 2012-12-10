@@ -22,8 +22,6 @@ $admin-bar-bg: #f4f4f4;
 
 
 /*    BASE STRUCTURE    */
-
-html,body {height: 100%;}
 body {
   background: $body-bg;
   color: $text-color;
@@ -37,7 +35,7 @@ body, textarea, pre, input, li {
   font: 15px/1.8em 'Helvetica Nueue', Helvetica, Arial, sans-serif;
 }
 
-#body, #admin {
+#admin {
   overflow: scroll;
   overflow-x: hidden;
   height: 100%;
@@ -46,6 +44,7 @@ body, textarea, pre, input, li {
 }
 
 #body {
+  position: relative;
   border-top: 2px solid $theme;
 }
 
