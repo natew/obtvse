@@ -13,7 +13,9 @@
   <% unless @no_header %>
   <header>
     <h1><%= link_to CONFIG['title'], root_url %></h1>
-    <span><%= CONFIG['tagline'].html_safe %></span>
+    <span>
+      <%= CONFIG['tagline'].html_safe %>
+    </span>
     <ul>
       <% if CONFIG['twitter'] %>
         <li><%= link_to '@' + CONFIG['twitter'], 'http://twitter.com/' + CONFIG['twitter'] %></li>
@@ -27,8 +29,15 @@
       <li><%= link_to 'rss feed', '/posts.rss' %></li>
     </ul>
     <span class="powered-by">
-      Powered by <a href="http://github.com/natew/obtvse.git">Obtvse</a>
-      <% if is_admin? %> &nbsp;&middot;&nbsp; <a href="/admin">Admin</a><% end %>
+      Powered by <a href="http://github.com/natew/obtvse.git">Obtvse</a>&nbsp;&middot;&nbsp;
+      <% if admin_signed_in? %>
+        <%= link_to "Logout", destroy_admin_session_path %>
+      <% else %>
+        <% if (CONFIG['allow_registration'] == 'yes') %>
+          <%= link_to "Sign Up", new_admin_registration_path %> or
+        <% end %>
+        <%= link_to "Sign In", new_admin_session_path %>
+      <% end %>
   </span>
 
   </header>
@@ -36,10 +45,20 @@
 
   <div id="container">
     <% unless @no_header %>
-      <time><% if @post && @post.created_at %>Posted <%= @post.created_at.to_formatted_s(:day_month_year) %><% else %><%= Time.now.to_formatted_s(:day_month_year) %><% end %></time>
+      <time>
+        <% if admin_signed_in? %>
+          <%= link_to 'New Draft', '/new', :class => 'button' %>
+          <%= link_to 'Admin', '/admin', :class => 'button' %>
+        <% elsif @post && @post.created_at %>
+          Posted <%= @post.created_at.to_formatted_s(:day_month_year) %>
+        <% else %>
+          <%= Time.now.to_formatted_s(:day_month_year) %>
+        <% end %>
+      </time>
     <% end %>
     <div id="content">
       <% if notice %><span class="notice"><%= notice %></span><% end %>
+      <% if alert %><span class="alert"><%= alert %></span><% end %>
       <%= yield %>
     </div>
   </div>

@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-  before_filter :authenticate, :except => [:index, :show]
+  before_filter :authenticate_admin!, :except => [:index, :show]
   layout :choose_layout
 
   def index
@@ -33,7 +33,7 @@ class PostsController < ApplicationController
 
   def show
     @single_post = true
-    @post = admin? ? Post.find_by_slug(params[:slug]) : Post.find_by_slug_and_draft(params[:slug],false)
+    @post = admin_signed_in? ? Post.find_by_slug(params[:slug]) : Post.find_by_slug_and_draft(params[:slug],false)
 
     respond_to do |format|
       if @post.present?
@@ -100,10 +100,6 @@ class PostsController < ApplicationController
   end
 
   private
-
-  def admin?
-    session[:admin] == true
-  end
 
   def choose_layout
     if ['admin', 'new', 'edit', 'create'].include? action_name

@@ -36,17 +36,17 @@
         <%= link_to 'Options', '#options', :class => 'menu' %>
         <ul id="options" class="sub-menu">
           <li>
-            <%= f.label :url, 'Slug' %>
+            <%= f.label :url, 'Slug', :class => 'white' %>
             <%= f.text_field :slug, :placeholder => 'Leave blank to automatically generate' %>
           </li>
           <li>
-            <%= f.label :url, 'URL' %>
+            <%= f.label :url, 'URL', :class => 'white' %>
             <%= f.text_field :url, :placeholder => 'Optional external link' %>
           </li>
         </ul>
       </div>
       <div class="right">
-        <%= f.label :draft %>
+        <%= f.label :draft, :class => 'white' %>
         <%= f.check_box :draft %>
         <%= f.submit 'Preview', :id => 'preview-button', :preview => true, :target => "_blank" %>
         <%= f.submit 'Save', :id => 'save-button' %>

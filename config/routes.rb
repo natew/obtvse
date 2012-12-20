@@ -1,4 +1,6 @@
 Obtvse::Application.routes.draw do
+  devise_for :admin, :controllers => { :registrations => 'registrations' } 
+
   resources :posts
   match '/admin', :to => 'posts#admin'
   match '/new', :to => 'posts#new'

@@ -1,7 +1,4 @@
 module ApplicationHelper
-  def is_admin?
-    true if session[:admin] == true
-  end
 
   def markdown(text)
     output = text.lines.map do |line|
