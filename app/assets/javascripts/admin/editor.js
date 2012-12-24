@@ -177,7 +177,7 @@ $(function() {
   // Publish.hover
   .hover(function() {
     if (state.post.draft) el.publish.html('Publish?');
-    else el.publish.html('Unpublish?');
+    else el.publish.html('Undo?');
   }, function() {
     if (state.post.draft) el.publish.html('Draft');
     else el.publish.html('Published');

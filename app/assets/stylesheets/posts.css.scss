@@ -1,18 +1,12 @@
 @import "bourbon";
-
-$body-bg: #fff;
-$body-inner-shadow: #eee;
-$text-color: #222;
-$a-color: #b92c2c;
-$theme: #b92c2c;
-$selection-color: #fff;
-
-$admin-bar-bg: #f4f4f4;
+@import "themes/default";
 
 ::selection, ::-moz-selection {
   background: $theme;
   color: $selection-color;
 }
+
+* { @include box-sizing(border-box); }
 
 body {
   background: $body-bg;
@@ -24,14 +18,6 @@ body {
 body, textarea, pre, input, li {
   /* These are overwritten if you include one of the /fonts css files */
   font: 15px/1.8em 'Helvetica Nueue', Helvetica, Arial, sans-serif;
-}
-
-#admin {
-  overflow: scroll;
-  overflow-x: hidden;
-  height: 100%;
-  width: 100%;
-  position: relative;
 }
 
 #body {
@@ -145,7 +131,6 @@ header {
     list-style-type:none;
     position: absolute;
     top: 0;
-    @include box-sizing(border-box);
   }
 
   li.right {float: right;}
@@ -280,236 +265,12 @@ label {
   font-size: 12px;
 }
 
-#admin {
-  background: #fff;
-  position: absolute;
-  width: 100%;
-  overflow: hidden;
-
-  #fade {
-    pointer-events: none;
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    z-index: 10;
-  }
-
-  /* fade to white */
-  #fade:before,
-  #fade:after {
-    content: "";
-    display: block;
-    position: fixed;
-    top: 0;
-    height: 1.5em;
-    width: 100%;
-    pointer-events: none;
-    background-image: -webkit-gradient( linear, left top, left bottom, from(
-        rgba(255, 255, 255, 1)), to(
-        rgba(255, 255, 255, 0))
-      );
-    background-image: -moz-linear-gradient(
-        to bottom,
-        rgba(255, 255, 255, 1),
-        rgba(255, 255, 255, 0)
-      );
-  }
-
-  #fade:after {
-    top: auto;
-    bottom: 0 ;
-    background-image: -webkit-gradient( linear, left bottom, left top, from(
-        rgba(255, 255, 255, 1)), to(
-        rgba(255, 255, 255, 0))
-      );
-    background-image: -moz-linear-gradient(
-        to top,
-        rgba(255, 255, 255, 1),
-        rgba(255, 255, 255, 0)
-      );
-  }
-
-  fieldset.markdown {
-    position: relative;
-    border: none;
-    margin: 0;
-    padding: 0;
-  }
-
-  #save-button {display:none;}
-
-  #posts {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    padding-top: 86px;
-  }
-
-  &.editing {
-    #content-fieldset {
-      visibility: visible;
-    }
-
-    #posts {
-      visibility: hidden;
-      position: fixed;
-    }
-
-    #bar {
-      visibility: visible;
-    }
-
-    #save-button {
-      background: #fff;
-      width: 12px;
-      height: 12px;
-      display: inline-block;
-      position: absolute;
-      bottom: 20px;
-      right: 20px;
-      border: none;
-      @include border-radius(8px);
-
-      &.dirty, &:hover {background:#efb66c;}
-      &.saving {background:#ccc;}
-      &.saved {background:#76be6a;}
-    }
-  }
-
-  .contain {
-    margin: 0 auto;
-  }
-
-  .col {
-    width: 50%;
-    float: left;
-    padding: 0;
-    @include box-sizing(border-box);
-
-    &.active {
-    }
-
-    h2 {
-      font-size: 16px;
-      padding: 5px 0;
-      margin: 0 0 10px 0;
-      color: #999;
-      text-transform: uppercase;
-      display: inline-block;
-      border-bottom: 1px solid #eee;
-    }
-
-    ul {
-      margin: 0 16px 0 0;
-      padding: 0 0 20px 0;
-      list-style: none;
-      overflow: scroll;
-      @include box-sizing(border-box);
-
-      li {
-        position: relative;
-        line-height: 1.2em;
-        text-overflow: ellipsis;
-        max-height: 3em;
-        @include transition(max-height .3s);
-
-        &#post-0 {
-          font-style: italic;
-        }
-
-        &.hidden {
-          max-height: 0;
-
-          a {
-            opacity: 0;
-            @include transition-delay(0s);
-          }
-        }
-
-        &.selected a {
-          font-weight: bold;
-          position: relative;
-          color: #000;
-        }
-
-        &:hover .links {
-          visibility: visible;
-        }
-
-        a {
-          margin: 0;
-          font-size: 13px;
-          max-width: 100%;
-          text-overflow: ellipsis;
-          border: none;
-          display: block;
-          color: #999;
-          padding: 8px 0;
-          @include transition(opacity .2s);
-          @include transition-delay(.03s);
-
-          &:hover {color: $theme;}
-        }
-      }
-    }
-  }
-
-  textarea,pre {
-    margin: -3px 0; /* not sure why but prevents a slight scroll on multiline titles */
-    padding: 3px 0;
-    outline: 0;
-    border: 0;
-  }
-
-  .expandingArea {
-    position: relative;
-  }
-
-  .expandingArea > textarea,
-  .expandingArea > pre {
-    background: transparent;
-    white-space: pre-wrap;
-  }
-
-  .expandingArea > textarea {
-    /* The border-box box model is used to allow
-     * padding whilst still keeping the overall width
-     * at exactly that of the containing element.
-     */
-    @include box-sizing(border-box);
-    width: 100%;
-    pointer-events: auto;
-  }
-
-  .expandingArea.active > textarea {
-    /* Hide any scrollbars */
-    overflow: hidden;
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    /* Remove WebKit user-resize widget */
-    resize: none;
-  }
-
-  .expandingArea > pre {
-    display: none;
-  }
-
-  .expandingArea.active > pre {
-    display: block;
-    /* Hide the text; just using it for sizing */
-    visibility: hidden;
-  }
-}
-
 #blog-button {
   width: 0px;
   height: 0px;
   border-left: 20px solid transparent;
   border-right: 20px solid transparent;
-  border-top: 20px solid #f2f2f2;
+  border-top: 20px solid #999;
   display: block;
   overflow: hidden;
   position: absolute;
@@ -519,204 +280,19 @@ label {
   @include transition(all .3s ease-in);
 
   &:hover {
-    border-top-color: #ddd;
+    border-top-color: $theme;
   }
 }
 
 #content-fieldset {
   visibility: hidden;
   width: 100%;
-  @include box-sizing(border-box);
 }
 
 #post_content {
   border: none;
   width: 100%;
   position: relative;
-}
-
-#admin.preview {
-  #post_content:before {top: 0;}
-  #post_content:before,
-  #post_content:after {
-    width: 100%;
-  }
-}
-
-form .permalink {
- position: absolute;
- left: -34px;
- top: 12px;
- border: none;
- color: #ddd;
-}
-
-body.transition {
-  .split-section,
-  #bar {@include transition(all .2s ease-out);}
-}
-
-.split-section {
-  height: 100%;
-  position: fixed;
-  width: 50%;
-  @include box-sizing(border-box);
-
-  .inner {
-    padding: 10px 20px;
-  }
-}
-
-#post-editor {
-  padding: 0;
-  overflow: scroll;
-  width: 100%;
-  height: 100%;
-  position: relative;
-
-  .inner {
-    padding-right: 0;
-    padding-left: 0;
-    @include box-sizing(border-box);
-  }
-}
-
-#post-preview {
-  background: #f0f4fc;
-  border-left: 1px solid #dbe3f1;
-  right: -50%;
-  overflow: scroll;
-}
-
-#admin.preview {
-  #post-editor {
-    padding: 0 20px;
-    margin: 0;
-    width: 50%;
-    left: 0;
-    position: absolute;
-
-    .inner {
-      margin: 0;
-      width: auto;
-    }
-  }
-
-  #post-preview {
-    right: 0;
-    z-index: 12;
-  }
-}
-
-.preview #bar {
-  left: -70px;
-  cursor: pointer;
-
-  &:hover {
-    background: #ccc;
-  }
-}
-
-#bar {
-  visibility: hidden;
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  z-index: 11;
-  width: 80px;
-  min-height: 400px;
-  padding: 20px 0;
-  background: $admin-bar-bg;
-  border-right: 1px solid #e8e8e8;
-  @include box-sizing(border-box);
-
-  &.hidden {
-    opacity: 0 !important;
-  }
-
-  a {
-    margin: 0 10px 10px;
-    line-height: 2em;
-    font-size: 11px;
-    color: #aaa;
-    border: none;
-    display: block;
-    text-align: center;
-  }
-
-  .middle {
-    position: absolute;
-    top: 50%;
-    left: 0;
-    margin-top: -74px;
-    width: 100%;
-    height: 148px
-  }
-
-  .bottom {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-  }
-
-  .menu:hover .sub-menu {
-    display: block;
-  }
-
-  .menu {
-    position: relative;
-  }
-
-  .sub-menu {
-    display: none;
-    position: absolute;
-    top: -65px;
-    left: 79px;
-    padding: 10px 10px 0;
-    background: $admin-bar-bg;
-    border: 1px solid #e8e8e8;
-    border-left: none;
-    @include border-right-radius(5px);
-
-    li {
-      list-style: none;
-      line-height: 1em;
-      margin: 0;
-      padding: 4px 0;
-
-      a {
-        display: block;
-        width: 200px;
-        text-align: left;
-      }
-
-      span {
-        font-size: 12px;
-        display: block;
-        margin: 6px 0 8px;
-      }
-    }
-
-    label {
-      font-size: 11px;
-      font-weight: bold;
-      color: #999;
-      display: block;
-      margin: 0 0 4px 0;
-      text-transform: uppercase;
-    }
-
-    input[type=text] {
-      border: none;
-      padding: 2px 0;
-      margin: 0 0 8px 0;
-      font-size: 13px;
-      width: 220px;
-      border-bottom: 1px solid #ddd;
-    }
-  }
 }
 
 nav.pagination {

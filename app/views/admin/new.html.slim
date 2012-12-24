@@ -1,0 +1,16 @@
+= content_for(:title) { "Admin" }
+
+= render 'editor'
+
+#posts
+  .contain
+    #drafts.col.active
+      h2 Drafts
+      ul data-items="#{@drafts.to_json(:only => [:id, :title])}"
+        = render partial: 'li', collection: @drafts
+        li#post-0
+          a href="/new" New Draft...
+    #published.col
+      h2 Published
+      ul data-items="#{@published.to_json(only: [:id, :title])}"
+        = render partial: 'li', collection: @published

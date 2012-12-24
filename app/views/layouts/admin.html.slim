@@ -1,0 +1,23 @@
+doctype html
+html lang="en-US"
+  head
+    title= html_title yield(:title)
+    = csrf_meta_tag
+    = stylesheet_link_tag 'application'
+    link href="http://fonts.googleapis.com/css?family=Open+Sans+Condensed:700" rel="stylesheet" type="text/css"
+  body class="admin #{action_name}"
+    #admin
+      a#blog-button href="#{root_url}" target="_blank"
+      #fade
+      = yield
+    #modal.modal
+      .modal-header
+        a.close data-dismiss="modal"
+        h3#modal-title
+      .modal-body
+        p#modal-content
+      .modal-footer
+        a#btn-primary.btn href="#"
+        a#btn-seconday.btn.btn-primary href="#"
+    = javascript_include_tag 'admin'
+    #null

@@ -1,3 +1,8 @@
+REFRESH BRANCH
+==============
+This is a total hacky work in progress!  Lots of experiments and fun things going on, but use at your own risk.  For example, authentication is currently totally off due to a need to rethink the config files.
+
+
 Obtvse
 ================
 A clean and simple markdown blog.  Inspired by [Svbtle](http://svbtle.com).

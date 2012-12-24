@@ -1,0 +1,48 @@
+doctype html
+html lang="en-US"
+  head
+    title= html_title yield(:title)
+    = csrf_meta_tag
+    = stylesheet_link_tag 'application'
+    meta content=INFO['name'] name="author"
+      link href="/posts.rss" rel="alternate" title="RSS" type="application/rss+xml"
+      link href="http://fonts.googleapis.com/css?family=Open+Sans+Condensed:700" rel="stylesheet" type="text/css"
+  body class="#{controller_name} #{action_name}"
+    #body
+      - if is_admin?
+        a#blog-button href="/new"
+      - unless @no_header
+        header.clearfix
+          .inner
+            h1= link_to INFO['name'], root_url
+            - if INFO['tagline']
+              span= INFO['tagline'].html_safe
+            ul.clearfix
+              - if INFO['twitter']
+                li= link_to 'twitter', "http://twitter.com/#{INFO['twitter']}"
+              - if INFO['github']
+                li= link_to 'github', "https://github.com/#{INFO['github']}"
+              - if INFO['email']
+                li.right= link_to 'mail', "mailto:#{INFO['email']}"
+              li.right= link_to 'subscribe', '/posts.rss'
+      #container
+        section#content
+          - if notice
+            span.notice= notice
+          = yield
+        section#footer
+          - if action_name == 'index'
+            = link_to 'Back to top', '#', :id => 'back-to-top'
+          - else
+            = link_to 'Back to blog', root_url
+          br/
+          | powered by
+          a href="http://github.com/natew/obtvse.git"  Obtvse
+      = javascript_include_tag 'application'
+      - if INFO['ga_id']
+        /! Google Analytics
+        javascript:
+          | var _gaq=[['_setAccount',' INFO['ga_id'] '],['_trackPageview']];
+          | (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+          | g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+          | s.parentNode.insertBefore(g,s)}(document,'script'));

@@ -1,8 +1,8 @@
 xml.instruct! :xml, :version => "1.0"
 xml.rss :version => "2.0" do
   xml.channel do
-    xml.title CONFIG['title']
-    xml.description CONFIG['tagline']
+    xml.title INFO['title']
+    xml.description INFO['tagline']
     xml.link root_url
 
     for post in @posts

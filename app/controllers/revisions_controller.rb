@@ -1,2 +1,0 @@
-class RevisionsController < ApplicationController
-end

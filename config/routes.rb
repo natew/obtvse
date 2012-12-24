@@ -1,11 +1,16 @@
 Obtvse::Application.routes.draw do
-  resources :posts
-  match '/admin', :to => 'posts#new'
-  match '/get/:id', :to => 'posts#get'
-  match '/new', :to => 'posts#new'
-  post '/edit/:id', :to => 'posts#update'
-  put '/edit/:id', :to => 'posts#update'
-  get '/edit/:id', :to => 'posts#new', :as => 'post'
-  get '/:slug', :to => 'posts#show', :as => 'post'
-  root :to => 'posts#index'
+
+  # Admin
+  match '/admin', to: 'admin#new'
+  match '/get/:id', to: 'admin#get'
+  match '/new', to: 'admin#new'
+  post '/posts', to: 'admin#create'
+  post '/edit/:id', to: 'admin#update'
+  put '/edit/:id', to: 'admin#update'
+  get '/edit/:id', to: 'admin#new', as: 'post'
+
+  # Posts
+  get '/:slug', to: 'posts#show', as: 'post'
+  root to: 'posts#index'
+
 end

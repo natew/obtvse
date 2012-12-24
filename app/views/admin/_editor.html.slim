@@ -1,0 +1,56 @@
+= form_for @post do |f|
+  #post-editor.split-section
+    .inner
+      - if @post.errors.any?
+        .notice
+          - @post.errors.full_messages.each do |msg|
+            = msg
+      #text-title.expandingArea
+        pre
+          span
+          br/
+        = f.text_area :title, rows: 1
+      fieldset#content-fieldset.markdown
+        #text-content.expandingArea
+          pre
+            span
+            br/
+          = f.text_area :content, placeholder: 'Write post here', class: 'faded'
+  #post-preview.split-section
+    .inner
+  #bar
+    = link_to 'Back', '#', id: "back-button", class: 'icon-arrow-left'
+    = link_to 'Preview', '#', id: 'preview-button', target: "_blank", class: 'icon-eye-open'
+    - link_to 'Save', '#', id: 'save-button', class: 'icon-asterisk'
+    .middle
+      #menu-date.menu
+        = link_to 'Date', '#', id: 'date-button', class: 'icon-calendar'
+        ul#date.sub-menu
+          li
+            = f.label :published_at, 'Published Date'
+            = f.text_field :published_at
+      #menu-info.menu
+        = link_to 'Info', '#info', class: 'icon-info-sign'
+        ul#info.sub-menu
+          li
+            = f.label :url, 'Permalink'
+            = f.text_field :slug, placeholder: 'Leave blank to automatically generate'
+          li
+            = f.label :url, 'External URL'
+            = f.text_field :url, placeholder: 'Optional'
+          li
+            label Wordcount
+            span#wordcount
+      .menu
+        = link_to 'History', '#history', class: 'icon-list'
+        ul#history.sub-menu
+          li= f.label :url, 'History'
+          li= link_to 'Version 3', '#'
+          li= link_to 'Version 2', '#'
+          li= link_to 'Version 1', '#'
+    .bottom
+      = link_to 'Draft', '#', id: 'publish-button', class: 'icon-edit'
+      = link_to 'Delete', @post, confirm: 'Are you sure?', method: :delete, class: 'icon-trash'
+  .hide
+    = f.check_box :draft
+button#save-button.animated

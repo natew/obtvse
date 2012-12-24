@@ -9,5 +9,5 @@
 //= require history
 //= require history.jquery
 //= require showdown
-//= require _helpers
+//= require _fn
 //= require_tree ./admin

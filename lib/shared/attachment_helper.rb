@@ -17,11 +17,11 @@ module AttachmentHelper
       attachment_path     = "#{attachment_folder}/:id_:style.:extension"
 
       # Use s3 only in production unless specified in config
-      if CONFIG['s3_in_development'] or Rails.env.production?
+      if INFO['s3_in_development'] or Rails.env.production?
         options[:path]            ||= attachment_path
         options[:storage]         ||= :s3
-        options[:s3_credentials]  ||= { :access_key_id => CONFIG['access_key_id'], :secret_access_key => CONFIG['secret_access_key'] }
-        options[:bucket]          ||= CONFIG['bucket_name']
+        options[:s3_credentials]  ||= { :access_key_id => INFO['access_key_id'], :secret_access_key => INFO['secret_access_key'] }
+        options[:bucket]          ||= INFO['bucket_name']
         options[:s3_permissions]  ||= 'private'
       else
         # For local Dev/Test envs, use the default filesystem, but separate the environments
