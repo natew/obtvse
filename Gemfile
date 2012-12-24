@@ -1,18 +1,17 @@
 source 'https://rubygems.org'
 
 gem 'rails', '~> 3'
-
 gem 'jquery-rails', '~> 2'
+
+gem 'thin'
+gem 'turbolinks'
+
+gem 'slim'
+gem 'bourbon', '~> 2.0.0.rc1'
+
 gem 'stringex', '~> 1', :git => 'git://github.com/rsl/stringex.git'
 gem 'redcarpet'
 gem 'kaminari', '~> 0.13'
-gem 'paperclip', '~> 3.0'
-gem 'slim'
-gem 'sorcery'
-gem 'bcrypt-ruby', '~> 3', require: 'bcrypt'
-gem 'bourbon', '~> 2.0.0.rc1'
-gem 'thin'
-gem 'turbolinks'
 
 group :production do
   gem 'pg', '~> 0.13'

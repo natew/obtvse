@@ -1,7 +1,5 @@
 @import "bourbon";
 
-/*    COLORS    */
-
 $body-bg: #fff;
 $body-inner-shadow: #eee;
 $text-color: #222;
@@ -9,19 +7,13 @@ $a-color: #b92c2c;
 $theme: #b92c2c;
 $selection-color: #fff;
 
-
-/*    ADMIN COLORS    */
-
 $admin-bar-bg: #f4f4f4;
-
 
 ::selection, ::-moz-selection {
   background: $theme;
   color: $selection-color;
 }
 
-
-/*    BASE STRUCTURE    */
 body {
   background: $body-bg;
   color: $text-color;
