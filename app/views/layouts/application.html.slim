@@ -17,7 +17,7 @@ html lang="en-US"
             p Your witty tagline goes here, with #{link_to 'more', '#'}, and #{link_to 'more', '#'}, links.
             ul.clearfix
               - if INFO['twitter']
-                li= link_to '@twitter', "http://twitter.com/#{INFO['twitter']}"
+                li= link_to "@#{INFO['twitter']}", "http://twitter.com/#{INFO['twitter']}"
               - if INFO['github']
                 li= link_to 'github', "https://github.com/#{INFO['github']}"
               - if INFO['email']
