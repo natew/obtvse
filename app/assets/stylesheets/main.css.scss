@@ -9,7 +9,7 @@
 * { @include box-sizing(border-box); }
 
 body {
-  background: #555;
+  background: $body-bg;
   color: $text-color;
   -webkit-font-smoothing: antialiased; /* fix for borked text when animating */
   word-wrap: break-word;
@@ -25,6 +25,7 @@ body, textarea, pre, input, li {
   position: relative;
   border-top: 2px solid $theme;
   overflow: hidden;
+  line-height: 1.7em;
 }
 
 #content,
@@ -177,10 +178,11 @@ header {
   position: relative;
 
   time {
-    margin: 0 0 -3em 0;
+    margin: 0 0 -3.4em 0;
     padding: 0;
     font-size: 12px;
     line-height: 11px;
+    text-transform: uppercase;
     color: #999;
     display: block;
   }
@@ -194,8 +196,24 @@ header {
     margin: 0 0 6em 0;
     position: relative;
 
-    h1 a {
-      color: #000;
+    h1 {
+      margin: 2em 0 1em;
+
+      &.external {
+        margin-top: 25px;
+
+        .permalink {
+          margin-left: 8px;
+          font-size: 19px;
+          color: #999;
+          border: none;
+        }
+      }
+
+      a {
+        border: none;
+        color: #000;
+      }
     }
 
     p img {
@@ -215,24 +233,6 @@ header {
 
     li {
       margin: 1em 0;
-    }
-  }
-
-  h1 {
-    margin: 2em 0 1em;
-    a {
-      border: none;
-    }
-  }
-
-  h1.external {
-    margin-top: 25px;
-
-    .permalink {
-      margin-left: 8px;
-      font-size: 19px;
-      color: #999;
-      border: none;
     }
   }
 }
@@ -318,8 +318,9 @@ nav.pagination a {
 
 #footer {
   display: block;
-  font-size: 11px;
+  font-size: 12px;
   margin: 60px 0 30px 0;
+  line-height: 3em;
   text-align: center;
 }
 

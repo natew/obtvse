@@ -7,9 +7,17 @@ html lang="en-US"
     meta content=INFO['name'] name="author"
       link href="/posts.rss" rel="alternate" title="RSS" type="application/rss+xml"
       link href="http://fonts.googleapis.com/css?family=Open+Sans+Condensed:700" rel="stylesheet" type="text/css"
+    = javascript_include_tag 'application'
+    - if INFO['ga_id']
+      /! Google Analytics
+      javascript:
+        var _gaq=[['_setAccount',' INFO['ga_id'] '],['_trackPageview']];
+        (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+        g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+        s.parentNode.insertBefore(g,s)}(document,'script'));
   body class="#{controller_name} #{action_name} #{logged_in? ? '' : 'not-'}logged-in #{no_users? ? 'no-users' : ''}"
     #body
-      a#blog-button href="/new" data-target="#modal-login" class="#{logged_in? ? '' : 'modal'}"
+      a#blog-button href="/admin" data-target="#modal-login" class="#{logged_in? ? '' : 'modal'}"
       - unless @no_header
         header.clearfix
           .inner
@@ -34,9 +42,9 @@ html lang="en-US"
           = yield
         section#footer
           - if action_name == 'index'
-            = link_to 'Back to top', '#', :id => 'back-to-top'
+            = link_to 'Top', '#', :id => 'back-to-top'
           - else
-            = link_to 'Back to blog', root_path
+            = link_to 'Home', root_path
           br/
           | powered by
           a href="http://github.com/natew/obtvse.git"  Obtvse
@@ -46,11 +54,3 @@ html lang="en-US"
         = render 'users/new_form'
       - else
         = render 'sessions/new_form'
-    = javascript_include_tag 'application'
-    - if INFO['ga_id']
-      /! Google Analytics
-      javascript:
-        | var _gaq=[['_setAccount',' INFO['ga_id'] '],['_trackPageview']];
-        | (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
-        | g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
-        | s.parentNode.insertBefore(g,s)}(document,'script'));
