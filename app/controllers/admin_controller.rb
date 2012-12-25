@@ -2,7 +2,7 @@ class AdminController < ApplicationController
 
   layout 'admin'
 
-  # before_filter :authenticate
+  before_filter :authenticate
 
   def new
     @no_header = true

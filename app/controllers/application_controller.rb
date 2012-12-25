@@ -5,9 +5,8 @@ class ApplicationController < ActionController::Base
 
   def authenticate
     authenticate_or_request_with_http_basic do |login, password|
-      if login == INFO['login'] and password == INFO['password']
+      if login == ENV['obtvse_login'] and password == ENV['obtvse_password']
         session[:admin] = true
-        true
       end
     end
   end

@@ -8,4 +8,9 @@ $(function() {
     e.preventDefault();
     $('body').animate({scrollTop:0});
   });
+
+  $('.open-external').click(function(e) {
+    e.preventDefault();
+    window.open($(this).attr('href'));
+  })
 });

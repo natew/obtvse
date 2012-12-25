@@ -1,0 +1,16 @@
+/* iPhone [portrait + landscape] */
+@media only screen and (max-width: 768px) {
+  #content, .inner, header .inner {
+    width: auto;
+    margin: 0 12%;
+  }
+
+  .contain {
+    width: auto;
+  }
+
+  header ul {
+    position: relative;
+    margin: 10px 0 2em -8px;
+  }
+}

@@ -123,66 +123,81 @@ body.admin {
     overflow: hidden;
 
     &.active {
+      h2 {
+        color: #555;
+      }
     }
 
     h2 {
       font-size: 18px;
       padding: 5px 0;
-      margin: 0 0 10px 0;
-      color: #777;
+      margin: 0 0 10px 12px;
+      color: #999;
       text-transform: uppercase;
       display: inline-block;
     }
 
     ul {
       margin: 0 -20px 0 0;
-      padding: 0 20px 20px 0;
+      padding: 0 30px 20px 12px;
       list-style: none;
       overflow: scroll;
+    }
 
-      li {
-        position: relative;
-        line-height: 1.2em;
-        text-overflow: ellipsis;
-        @include transition(max-height .3s);
+    li {
+      position: relative;
+      line-height: 1.2em;
+      text-overflow: ellipsis;
+      @include transition(max-height .3s);
 
-        &#post-0 {
-          font-style: italic;
+      &#post-0 {
+        font-style: italic;
+      }
+
+      &.hidden {
+        max-height: 0;
+
+        a {
+          opacity: 0;
+          @include transition-delay(0s);
         }
+      }
 
-        &.hidden {
-          max-height: 0;
-
-          a {
-            opacity: 0;
-            @include transition-delay(0s);
-          }
-        }
-
-        &.selected a {
-          font-weight: bold;
-          position: relative;
-          color: #000;
-        }
-
-        &:hover .links {
-          visibility: visible;
+      &.selected {
+        &:before {
+          content: "\f0da";
+          font-family: FontAwesome;
+          display: block;
+          color: #444;
+          position: absolute;
+          top: 8px;
+          left: -12px;
         }
 
         a {
-          margin: 0;
-          font-size: 13px;
-          max-width: 100%;
-          text-overflow: ellipsis;
-          border: none;
-          display: block;
-          color: #999;
-          padding: 8px 0;
-          @include transition(opacity .2s);
-          @include transition-delay(.03s);
-
-          &:hover {color: $theme;}
+          position: relative;
+          color: #444;
         }
+      }
+
+      &:hover .links {
+        visibility: visible;
+      }
+
+      a {
+        margin: 0;
+        font-size: 14px;
+        max-width: 100%;
+        text-overflow: ellipsis;
+        border: none;
+        display: block;
+        color: #999;
+        padding: 6px 0;
+        margin-bottom: 4px;
+        @include transition(opacity .2s);
+        @include transition-delay(.03s);
+
+        &:hover {color: $theme;}
       }
     }
   }
@@ -334,8 +349,8 @@ body.transition {
   }
 
   a {
-    margin: 0 10px 10px;
-    line-height: 2em;
+    margin: 0 10px 18px;
+    line-height: 1.9em;
     font-size: 12px;
     color: darken($admin-bar-bg, 35%);
     border: none;
@@ -347,7 +362,7 @@ body.transition {
     position: absolute;
     top: 50%;
     left: 0;
-    margin-top: -94px;
+    margin-top: -108px;
     width: 100%;
     height: 148px
   }
@@ -415,4 +430,10 @@ body.transition {
       border-bottom: 1px solid #ddd;
     }
   }
+}
+
+
+[class^="icon-"]:before, [class*=" icon-"]:before {
+  display: block;
+  font-size: 24px;
 }

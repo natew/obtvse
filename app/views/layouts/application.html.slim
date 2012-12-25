@@ -15,16 +15,15 @@ html lang="en-US"
         header.clearfix
           .inner
             h1= link_to INFO['name'], root_url
-            - if INFO['tagline']
-              span= INFO['tagline'].html_safe
+            p Your witty tagline goes here, with #{link_to 'more', '#'}, and #{link_to 'more', '#'}, links.
             ul.clearfix
               - if INFO['twitter']
-                li= link_to 'twitter', "http://twitter.com/#{INFO['twitter']}"
+                li= link_to '@twitter', "http://twitter.com/#{INFO['twitter']}", class: 'open-external'
               - if INFO['github']
-                li= link_to 'github', "https://github.com/#{INFO['github']}"
+                li= link_to 'github', "https://github.com/#{INFO['github']}", class: 'open-external'
               - if INFO['email']
-                li.right= link_to 'mail', "mailto:#{INFO['email']}"
-              li.right= link_to 'subscribe', '/posts.rss'
+                li.right= link_to 'email', "mailto:#{INFO['email']}", class: 'open-external'
+              li.right= link_to 'rss', '/posts.rss', class: 'open-external'
       #container
         section#content
           - if notice

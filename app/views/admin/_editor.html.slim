@@ -29,15 +29,18 @@
           li
             = f.label :published_at, 'Published Date'
             = f.text_field :published_at
-      #menu-info.menu
-        = link_to 'Info', '#info', class: 'icon-info-sign'
-        ul#info.sub-menu
+      #menu-link.menu
+        = link_to 'Link', '#link', class: 'icon-link'
+        ul#link.sub-menu
           li
             = f.label :url, 'Permalink'
             = f.text_field :slug, placeholder: 'Leave blank to automatically generate'
           li
             = f.label :url, 'External URL'
             = f.text_field :url, placeholder: 'Optional'
+      .menu
+        = link_to 'Stats', '#stats', class: 'icon-bar-chart'
+        ul#stats.sub-menu
           li
             label Wordcount
             span#wordcount

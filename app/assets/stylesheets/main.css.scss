@@ -49,7 +49,6 @@ h1,h2,h3,h4,h5,#text-title * {
 h1 {
   font-size: 28px;
   line-height: 1.3em;
-  text-align: center;
 }
 
 h1, #text-title {
@@ -80,7 +79,7 @@ h2, h3, h4 {
 a,
 a:visited
 a:active {
-  color: $a-color;
+  color: $theme;
   text-decoration: none;
   @include transition(color .1s linear);
 }
@@ -98,9 +97,10 @@ ol, ul {
 /*    HEADER    */
 
 header {
-  padding: 20px 0;
+  padding: 1em 0;
   margin-bottom: 3em;
   width: 100%;
+  border-bottom: 1px solid #eee;
 
   .inner {
     position: relative;
@@ -110,12 +110,10 @@ header {
     position: relative;
     z-index: 10;
     margin: 0;
-    font-size: 20px;
-    text-align: center;
+    font-size: 28px;
     pointer-events: none;
 
     a {
-      padding: 0 15px;
       display: inline-block;
       pointer-events: auto;
       color: $theme;
@@ -123,28 +121,30 @@ header {
   }
 
   ul {
-    padding: 0 50px;
+    padding: 0;
     margin: 0;
-    height: 34px;
-    width: 100%;
-    text-align: center;
-    list-style-type:none;
+    margin-left: -6px;
+    list-style: none;
     position: absolute;
-    top: 0;
+    top: 3px;
+    right: 0;
   }
 
-  li.right {float: right;}
   li {
     margin: 0;
     display: inline;
     float: left;
 
     a {
-      font-size: 12px;
-      padding: 3px 6px;
-      font-weight: bold;
-      color: #888;
+      font-size: 13px;
+      padding: 3px 8px;
+      color: #333;
     }
+  }
+
+  p {
+    color: #999;
+    margin: 10px 0 0;
   }
 }
 
@@ -158,12 +158,10 @@ header {
   time {
     margin: 0 0 -3em 0;
     padding: 0;
-    font-weight: bold;
-    font-size: 11px;
+    font-size: 12px;
     line-height: 11px;
-    color: #bbb;
+    color: #999;
     display: block;
-    text-align: center;
   }
 }
 
@@ -200,7 +198,7 @@ header {
   }
 
   h1 {
-    margin: 2em 0;
+    margin: 2em 0 1em;
     a {
       border: none;
     }
@@ -270,7 +268,7 @@ label {
   height: 0px;
   border-left: 20px solid transparent;
   border-right: 20px solid transparent;
-  border-top: 20px solid #999;
+  border-top: 20px solid #ddd;
   display: block;
   overflow: hidden;
   position: absolute;
