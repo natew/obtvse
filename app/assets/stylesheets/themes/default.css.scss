@@ -1,4 +1,6 @@
 $body-bg: #fff;
 $text-color: #222;
-$theme: #794eb9;
 $selection-color: #fff;
+
+$theme: #794eb9;
+$theme-light: lighten($theme, 14%);

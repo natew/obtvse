@@ -2,7 +2,7 @@ class AdminController < ApplicationController
 
   layout 'admin'
 
-  before_filter :authenticate
+  before_filter :require_login, except: [:not_authenticated]
 
   def new
     @no_header = true
@@ -60,6 +60,12 @@ class AdminController < ApplicationController
       format.html { redirect_to '/admin' }
       format.xml { head :ok }
     end
+  end
+
+  protected
+
+  def not_authenticated
+    redirect_to root_path, alert: 'Please login first'
   end
 
 end

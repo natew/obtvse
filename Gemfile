@@ -6,6 +6,9 @@ gem 'jquery-rails', '~> 2'
 gem 'thin'
 gem 'turbolinks'
 
+gem 'sorcery'
+gem 'bcrypt-ruby', "~> 3.0.0"
+
 gem 'slim'
 gem 'bourbon', '~> 2.0.0.rc1'
 

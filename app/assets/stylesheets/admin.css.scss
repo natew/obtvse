@@ -6,6 +6,13 @@ $admin-bar-border: darken($admin-bar-bg,6%);
 
 body.admin {
   overflow: hidden;
+
+  label {
+    font-size: 16px;
+    color: #fff;
+    font-weight: bold;
+    margin: 0 8px 0 0;
+  }
 }
 
 #admin #text-title pre,
@@ -76,7 +83,7 @@ body.admin {
   #posts {
     position: absolute;
     top: 0;
-    left: 0;
+    left: -12px;
     width: 100%;
     padding-top: 86px;
   }

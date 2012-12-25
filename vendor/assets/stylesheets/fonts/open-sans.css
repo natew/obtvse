@@ -4,6 +4,17 @@ body, textarea, pre, input, li {
 
 @font-face {
   font-family: 'Open Sans';
+  src: url('/fonts/open-sans/opensans-light-webfont.eot');
+  src: url('/fonts/open-sans/opensans-light-webfont.eot?#iefix') format('embedded-opentype'),
+       url('/fonts/open-sans/opensans-light-webfont.woff') format('woff'),
+       url('/fonts/open-sans/opensans-light-webfont.ttf') format('truetype'),
+       url('/fonts/open-sans/opensans-light-webfont.svg#OpenSansLight') format('svg');
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Open Sans';
   src: url('/fonts/open-sans/opensans-regular-webfont.eot');
   src: url('/fonts/open-sans/opensans-regular-webfont.eot?#iefix') format('embedded-opentype'),
        url('/fonts/open-sans/opensans-regular-webfont.woff') format('woff'),
@@ -46,18 +57,6 @@ body, textarea, pre, input, li {
        url('/fonts/open-sans/opensans-italic-webfont.svg#OpenSansItalic') format('svg');
   font-weight: normal;
   font-style: italic;
-}*/
-
-/*
-@font-face {
-  font-family: 'Open Sans';
-  src: url('/fonts/open-sans/opensans-light-webfont.eot');
-  src: url('/fonts/open-sans/opensans-light-webfont.eot?#iefix') format('embedded-opentype'),
-       url('/fonts/open-sans/opensans-light-webfont.woff') format('woff'),
-       url('/fonts/open-sans/opensans-light-webfont.ttf') format('truetype'),
-       url('/fonts/open-sans/opensans-light-webfont.svg#OpenSansLight') format('svg');
-  font-weight: light;
-  font-style: normal;
 }*/
 
 /*

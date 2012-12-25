@@ -7,14 +7,13 @@ html lang="en-US"
     meta content=INFO['name'] name="author"
       link href="/posts.rss" rel="alternate" title="RSS" type="application/rss+xml"
       link href="http://fonts.googleapis.com/css?family=Open+Sans+Condensed:700" rel="stylesheet" type="text/css"
-  body class="#{controller_name} #{action_name}"
+  body class="#{controller_name} #{action_name} #{logged_in? ? '' : 'not-'}logged-in #{no_users? ? 'no-users' : ''}"
     #body
-      - if is_admin?
-        a#blog-button href="/new"
+      a#blog-button href="/new" data-target="#modal-login" class="#{logged_in? ? '' : 'modal'}"
       - unless @no_header
         header.clearfix
           .inner
-            h1= link_to INFO['name'], root_url
+            h1= link_to INFO['name'], root_path
             p Your witty tagline goes here, with #{link_to 'more', '#'}, and #{link_to 'more', '#'}, links.
             ul.clearfix
               - if INFO['twitter']
@@ -24,6 +23,10 @@ html lang="en-US"
               - if INFO['email']
                 li.right= link_to 'email', "mailto:#{INFO['email']}"
               li.right= link_to 'rss', '/posts.rss'
+      - if notice
+        #dialog.notice.contain= notice
+      - if alert
+        #dialog.alert.contain= alert
       #container
         section#content
           - if notice
@@ -33,15 +36,21 @@ html lang="en-US"
           - if action_name == 'index'
             = link_to 'Back to top', '#', :id => 'back-to-top'
           - else
-            = link_to 'Back to blog', root_url
+            = link_to 'Back to blog', root_path
           br/
           | powered by
           a href="http://github.com/natew/obtvse.git"  Obtvse
-      = javascript_include_tag 'application'
-      - if INFO['ga_id']
-        /! Google Analytics
-        javascript:
-          | var _gaq=[['_setAccount',' INFO['ga_id'] '],['_trackPageview']];
-          | (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
-          | g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
-          | s.parentNode.insertBefore(g,s)}(document,'script'));
+      .avgrund-cover
+    aside#modal-login.avgrund-popup
+      - if no_users?
+        = render 'users/new_form'
+      - else
+        = render 'sessions/new_form'
+    = javascript_include_tag 'application'
+    - if INFO['ga_id']
+      /! Google Analytics
+      javascript:
+        | var _gaq=[['_setAccount',' INFO['ga_id'] '],['_trackPageview']];
+        | (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+        | g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+        | s.parentNode.insertBefore(g,s)}(document,'script'));

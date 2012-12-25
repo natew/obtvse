@@ -2,7 +2,7 @@ require 'redcarpet'
 
 module ApplicationHelper
   def is_admin?
-    true if session[:admin] == true
+    logged_in?
   end
 
   def markdown(text)

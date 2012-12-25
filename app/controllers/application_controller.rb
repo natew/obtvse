@@ -1,13 +1,17 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
+  before_filter :get_user
+
+  helper_method :no_users?
+
+  def no_users?
+    User.all.count == 0
+  end
+
   private
 
-  def authenticate
-    authenticate_or_request_with_http_basic do |login, password|
-      if login == ENV['obtvse_login'] and password == ENV['obtvse_password']
-        session[:admin] = true
-      end
-    end
+  def get_user
+    @user = current_user || User.new
   end
 end

@@ -9,7 +9,7 @@
 * { @include box-sizing(border-box); }
 
 body {
-  background: $body-bg;
+  background: #555;
   color: $text-color;
   -webkit-font-smoothing: antialiased; /* fix for borked text when animating */
   word-wrap: break-word;
@@ -21,8 +21,10 @@ body, textarea, pre, input, li {
 }
 
 #body {
+  background: $body-bg;
   position: relative;
   border-top: 2px solid $theme;
+  overflow: hidden;
 }
 
 #content,
@@ -34,6 +36,9 @@ header .inner {
   margin: 0 auto;
 }
 
+.hidden {
+  display: none;
+}
 
 /*    H1-H6    */
 
@@ -86,7 +91,7 @@ a:active {
 
 a:hover,
 #admin #published h3 a:hover {
-  color: $theme !important;
+  color: $theme-light !important;
 }
 
 ol, ul {
@@ -150,6 +155,22 @@ header {
 
 
 /*    BODY ELEMENTS    */
+
+#dialog {
+  margin-top: -2em;
+  margin-bottom: 2em;
+  padding: 5px;
+
+  &.notice {
+    color: #887a26;
+    background: rgba(#887a26, 0.1);
+  }
+
+  &.alert {
+    color: #ec2420;
+    background: rgba(#ec2420, 0.1);
+  }
+}
 
 #container {
   padding: 0;
@@ -216,6 +237,35 @@ header {
   }
 }
 
+#blog-button {
+  width: 0px;
+  height: 0px;
+  border-left: 20px solid transparent;
+  border-right: 20px solid transparent;
+  border-top: 20px solid #ddd;
+  display: block;
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  right: -20px;
+  z-index: 100;
+  @include transition(all .3s ease-in);
+
+  &:hover {
+    border-top-color: $theme;
+  }
+}
+
+.not-logged-in {
+  #blog-button {
+    border-top-color: #fff;
+
+    &:hover {
+      border-top-color: #ccc;
+    }
+  }
+}
+
 code {
   background: #f2f2f2;
   font-family: monospace, serif;
@@ -240,46 +290,9 @@ code {
   background: none;
 }
 
-label {
-  font-size: 16px;
-  color: #fff;
-  font-weight: bold;
-  margin: 0 8px 0 0;
-}
-
 #post_draft {
   position: relative;
   margin: 0 20px 0 0;
-}
-
-.notice {
-  position: absolute;
-  top: 0;
-  background: lightYellow;
-  width: 100%;
-  display: block;
-  text-align: center;
-  padding: 3px 0;
-  font-size: 12px;
-}
-
-#blog-button {
-  width: 0px;
-  height: 0px;
-  border-left: 20px solid transparent;
-  border-right: 20px solid transparent;
-  border-top: 20px solid #ddd;
-  display: block;
-  overflow: hidden;
-  position: absolute;
-  top: 0;
-  right: -20px;
-  z-index: 100;
-  @include transition(all .3s ease-in);
-
-  &:hover {
-    border-top-color: $theme;
-  }
 }
 
 #content-fieldset {
