@@ -40,7 +40,7 @@ form {
 
     &:focus {
       background: #fff;
-      @include box-shadow(0 0 12  px rgba(0,0,0,0.2));
+      @include box-shadow(0 0 12px rgba(0,0,0,0.2));
     }
   }
 
@@ -58,6 +58,7 @@ form {
 
     &:focus {
       background: $theme-light;
+      @include box-shadow(0 0 12px rgba(0,0,0,0.2));
     }
   }
 }

@@ -16,22 +16,33 @@ $(function() {
     window.open($(this).attr('href'));
   });
 
+  // Modals
+  Avgrund = Avgrund();
+  var lastModalTarget;
+
   $body.on('click', '.modal', function(e) {
     e.preventDefault();
     var href = $(this).attr('href'),
         target = href[0] == '#' ? href : $(this).attr('data-target');
 
+    lastModalTarget = target;
     Avgrund.show(target);
-    setTimeout(function() {
-      console.log($('input[type="text"]:first', target))
-      $('input[type="text"]:first', target).focus().select();
-    })
+    $('body,html').animate({scrollTop: 0});
+    $('input[type="text"]:first', target).focus().select();
   });
 
   $body.on('click', '.modal-close, .avgrund-cover', function(e) {
     e.preventDefault();
     Avgrund.hide();
   });
+
+  $(document)
+    .on('avgrund:show', function() {
+      window.location.hash = lastModalTarget;
+    }).on('avgrund:hide', function() {
+      window.location.hash = '';
+      window.history.replaceState('http://' + window.location.host + '/', document.title, null);
+    });
 
   if ($body.is('.no-users')) {
     $('#blog-button').click();

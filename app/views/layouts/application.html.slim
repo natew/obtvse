@@ -49,8 +49,9 @@ html lang="en-US"
           | powered by
           a href="http://github.com/natew/obtvse.git"  Obtvse
       .avgrund-cover
-    aside#modal-login.avgrund-popup
-      - if no_users?
-        = render 'users/new_form'
-      - else
-        = render 'sessions/new_form'
+    - unless logged_in?
+      aside#modal-login.avgrund-popup
+        - if no_users?
+          = render 'users/new_form'
+        - else
+          = render 'sessions/new_form'

@@ -51,27 +51,37 @@ var Avgrund = (function(){
     document.removeEventListener( 'touchstart', onDocumentClick, false );
 
     removeClass( container, 'avgrund-active' );
-    removeClass( popup, 'avgrund-popup-animate')
+    removeClass( popup, 'avgrund-popup-animate');
+
+    triggerEvent('avgrund:hide');
   }
 
   function disableBlur() {
     addClass( document.documentElement, 'no-blur' );
   }
 
-  function addClass( element, name ) {
+  function addClass(element, name) {
     element.className = element.className.replace( /\s+$/gi, '' ) + ' ' + name;
   }
 
-  function removeClass( element, name ) {
+  function removeClass(element, name) {
     element.className = element.className.replace( name, '' );
   }
 
-  function show(selector){
+  function triggerEvent(name) {
+    var event = document.createEvent('Event');
+    event.initEvent(name, true, true);
+    document.dispatchEvent(event);
+  }
+
+  function show(selector) {
     popup = document.querySelector( selector );
     addClass(popup, 'avgrund-popup-animate');
     activate();
+    triggerEvent('avgrund:show');
     return this;
   }
+
   function hide() {
     deactivate();
   }
@@ -84,4 +94,4 @@ var Avgrund = (function(){
     hide: hide
   }
 
-})();
+});
