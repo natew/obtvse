@@ -53,7 +53,7 @@ h1,h2,h3,h4,h5,#text-title * {
 #text-title pre,
 #text-title textarea,
 h1 {
-  font-size: 28px;
+  font-size: 30px;
   line-height: 1.3em;
 }
 
@@ -95,6 +95,15 @@ a:hover,
   color: $theme-light !important;
 }
 
+article a,
+header p a {
+  border-bottom: 1px dotted #ddd;
+
+  &:hover {
+    border-bottom-style: solid;
+  }
+}
+
 ol, ul {
   margin: 2em 0;
 }
@@ -116,7 +125,7 @@ header {
     position: relative;
     z-index: 10;
     margin: 0;
-    font-size: 28px;
+    font-size: 26px;
     pointer-events: none;
 
     a {
@@ -128,8 +137,7 @@ header {
 
   ul {
     padding: 0;
-    margin: 0;
-    margin-left: -6px;
+    margin: 0 -6px;
     list-style: none;
     position: absolute;
     top: 3px;
@@ -219,10 +227,6 @@ header {
     p img {
       display: block;
       margin: 2em auto;
-    }
-
-    a {
-      border-bottom: 1px dotted #ddd;
     }
 
     blockquote {
