@@ -5,4 +5,3 @@
 //= require turbolinks
 //= require avgrund
 //= require main
-//= require events

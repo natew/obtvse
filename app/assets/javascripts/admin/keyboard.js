@@ -72,7 +72,6 @@ $(window).keydown(function windowKeydown(e) {
 
   // Editing
   else {
-    delayedHideBar();
     switch (e.which) {
       // Enter
       case 13:
@@ -89,11 +88,12 @@ $(window).keydown(function windowKeydown(e) {
         e.preventDefault();
         if (!state.barPinned && !el.bar.is('.hidden')) showBar(false);
         else if (state.preview) hidePreview();
-        else setEditing(false);
+        else $('#back-button')[0].click();
         break;
       // Backspace
       case 8:
-        if (!state.beganEditing && el.title.val().length <= 1) setEditing(false);
+        if (!state.beganEditing && el.title.val().length <= 1)
+          $('#back-button')[0].click();
         break;
       // S
       case 83:

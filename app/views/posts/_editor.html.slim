@@ -28,7 +28,7 @@
             label Wordcount
             span#wordcount
       .menu
-        = link_to 'History', '#history', class: 'icon-list'
+        - link_to 'History', '#history', class: 'icon-list'
         ul#history.sub-menu
           li= f.label :url, 'History'
           li= link_to 'Version 3', '#'

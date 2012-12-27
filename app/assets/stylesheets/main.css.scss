@@ -32,7 +32,7 @@ body, textarea, pre, input, li {
 .contain,
 #post-editor .inner,
 header .inner {
-  width: 520px;
+  width: $width;
   position: relative;
   margin: 0 auto;
 }

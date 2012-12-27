@@ -21,20 +21,12 @@ Route.prototype = {
 
 Route = new Route();
 
-$(document)
-  .on('ready', function() {
-    routing(window.location.pathname);
-  })
-  .on('page:fetch', function() {
-    routing(window.location.pathname);
-  });
-
-
 function routing(page) {
+  fn.log('routing', page)
   Route.setPage(page);
 
   if (Route.is('/admin'))
     setEditing(false);
-  else if (Route.is(/(edit|new)\//))
+  else if (Route.is(/edit|new/))
     setEditing(true);
 }
