@@ -1,27 +1,10 @@
 = form_for @post do |f|
-  #post-editor.split-section
-    .inner
-      - if @post.errors.any?
-        .notice
-          - @post.errors.full_messages.each do |msg|
-            = msg
-      #text-title.expandingArea
-        pre
-          span
-          br/
-        = f.text_area :title, rows: 1, placeholder: 'Begin typing...'
-      fieldset#content-fieldset.markdown
-        #text-content.expandingArea
-          pre
-            span
-            br/
-          = f.text_area :content, placeholder: 'Write post here', class: 'faded'
+  = render partial: 'form', locals: { f: f }
   #post-preview.split-section
     .inner
   #bar
-    = link_to 'Back', '#', id: "back-button", class: 'icon-arrow-left'
-    = link_to 'Preview', '#', id: 'preview-button', target: "_blank", class: 'icon-eye-open'
-    - link_to 'Save', '#', id: 'save-button', class: 'icon-asterisk'
+    = link_to 'Back', admin_path, id: "back-button", class: 'icon-arrow-left'
+    = link_to 'Preview', '#preview', id: 'preview-button', class: 'icon-eye-open'
     .middle
       #menu-date.menu
         = link_to 'Date', '#', id: 'date-button', class: 'icon-calendar'
@@ -39,7 +22,7 @@
             = f.label :url, 'External URL'
             = f.text_field :url, placeholder: 'Optional'
       .menu
-        = link_to 'Stats', '#stats', class: 'icon-bar-chart'
+        = link_to 'Stats', '#stats', class: 'icon-bar-chart', id: 'stats-button'
         ul#stats.sub-menu
           li
             label Wordcount

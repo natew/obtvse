@@ -66,13 +66,8 @@
   background: white;
   box-shadow: 0px 0px 20px rgba( 0, 0, 0, 0.6 );
   border-radius: 3px;
-
-  -webkit-transform: scale( 0.8 );
-     -moz-transform: scale( 0.8 );
-      -ms-transform: scale( 0.8 );
-       -o-transform: scale( 0.8 );
-          transform: scale( 0.8 );
 }
+
   .avgrund-active .avgrund-popup-animate {
     visibility: visible;
     opacity: 1;
@@ -83,6 +78,7 @@
          -o-transform: scale( 1.1 );
             transform: scale( 1.1 );
   }
+
   .avgrund-popup.stack {
     -webkit-transform: scale( 1.5 );
        -moz-transform: scale( 1.5 );
@@ -90,6 +86,7 @@
          -o-transform: scale( 1.5 );
             transform: scale( 1.5 );
   }
+
   .avgrund-active .avgrund-popup.stack {
     -webkit-transform: scale( 1.1 );
        -moz-transform: scale( 1.1 );
@@ -115,6 +112,7 @@
        -o-transition: 0.3s all cubic-bezier(0.250, 0.460, 0.450, 0.940);
           transition: 0.3s all cubic-bezier(0.250, 0.460, 0.450, 0.940);
 }
+
 .avgrund-ready .avgrund-popup.no-transition {
   -webkit-transition: none;
      -moz-transition: none;

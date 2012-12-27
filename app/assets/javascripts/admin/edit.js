@@ -1,47 +1,10 @@
-// VARIABLES
-History        = window.History,
-document       = window.document,
-text_title     = document.getElementById('text-title'),
-text_content   = document.getElementById('text-content'),
-saveInterval   = 3000,
-draftsItems    = $('#drafts ul').data('items'),
-publishedItems = $('#published ul').data('items'),
-col_height     = 0,
-showdown       = new Showdown.converter(),
-lineHeight     = $('#line-height').height(),
-previewHeight  = 0,
-hideBarTimeout = null,
-scrollTimeout  = null,
-prevVal        = null;
+curPath = window.location.pathname.split('/');
 
 // Keys
 var key = {
   shift: false,
   cmd: false
 };
-
-// Elements
-var el = fn.getjQueryElements({
-  section   : '.split-section',
-  published : '#published',
-  drafts    : '#drafts',
-  admin     : '#admin',
-  editor    : '#post-editor',
-  title     : '#post_title',
-  content   : '#post_content',
-  slug      : '#post_slug',
-  url       : '#post_url',
-  draft     : '#post_draft',
-  save      : '#save-button',
-  form      : '#new_post,.edit_post',
-  bar       : '#bar',
-  curCol    : '#drafts',
-  curColUl  : '#drafts ul',
-  curItem   : '.col li:first',
-  blog      : '#blog-button',
-  publish   : '#publish-button',
-  preview   : '#post-preview'
-});
 
 // Editor state variables
 var state = {
@@ -58,6 +21,208 @@ var state = {
   colIndex     : 0,
   itemIndex    : [0, 0]
 };
+
+var text_title,
+    text_content,
+    saveInterval,
+    draftsItems,
+    publishedItems,
+    col_height,
+    showdown,
+    lineHeight,
+    previewHeight,
+    hideBarTimeout,
+    scrollTimeout,
+    prevVal,
+    el;
+
+$(function() {
+  // VARIABLES
+  text_title     = document.getElementById('text-title'),
+  text_content   = document.getElementById('text-content'),
+  saveInterval   = 3000,
+  draftsItems    = $('#drafts ul').data('items'),
+  publishedItems = $('#published ul').data('items'),
+  col_height     = 0,
+  showdown       = new Showdown.converter(),
+  lineHeight     = $('#line-height').height(),
+  previewHeight  = 0,
+  hideBarTimeout = null,
+  scrollTimeout  = null,
+  prevVal        = null;
+
+  // Elements
+  el = fn.getjQueryElements({
+    section   : '.split-section',
+    published : '#published',
+    drafts    : '#drafts',
+    admin     : '#admin',
+    editor    : '#post-editor',
+    title     : '#post_title',
+    content   : '#post_content',
+    slug      : '#post_slug',
+    url       : '#post_url',
+    draft     : '#post_draft',
+    save      : '#save-button',
+    form      : '#new_post,.edit_post',
+    bar       : '#bar',
+    curCol    : '#drafts',
+    curColUl  : '#drafts ul',
+    curItem   : '.col li:first',
+    blog      : '#blog-button',
+    publish   : '#publish-button',
+    preview   : '#post-preview'
+  });
+
+  // DEBUG
+  setInterval(heartbeatLogger, 10000);
+
+  //
+  // SETUP
+  //
+
+  // Clear cache
+  localStorage.clear();
+
+  // Auto expanding textareas.
+  makeExpandingAreas();
+
+  // Set minimum height of content textarea and post lists
+  setHeights();
+  $(window).resize(setHeights);
+
+  // Detect if we are editing initially
+  if (curPath.length > 2) {
+    setEditing(parseInt(curPath[2],10), function editLoaded(){
+      if (window.location.hash == '#preview') showPreview();
+      state.beganEditing = true;
+    });
+  } else  {
+    selectItem($('.col li:not(.hidden):first'));
+    el.title.focus();
+    if (curPath[1] == 'new') {
+      setEditing(true);
+    }
+  }
+
+  if ($.cookie('barPinned') == 'true') toggleBar();
+
+  $(window)
+    .mousemove(function windowMouseMove(evt){
+      // Accurate detection for bar hover
+      if (state.editing) {
+        if (evt.pageX < 90) showBar(true);
+        else if (evt.pageX > 95 && !$('#bar:hover').length) delayedHideBar();
+      }
+    })
+
+    .blur(function() {
+      key.cmd = false;
+      key.shift = false;
+    })
+
+    .on('beforeunload', function() {
+      if (state.editing) savePost();
+    })
+
+    .click(function windowClick(e){
+      if (!state.editing) el.title.focus();
+    });
+
+  // Autosave
+  setInterval(function autoSave(){
+    if (state.editing && state.changed && !state.saving) {
+      savePost();
+    }
+  }, saveInterval);
+
+  // Avoid initial animations
+  $('body').addClass('transition');
+
+  //
+  // BINDINGS
+  //
+
+  // ContentFielset.scroll
+  $('#post-editor').on('scroll', function() {
+    updatePreviewPosition();
+    savePosition();
+  });
+
+  // Content.focus - detect beginning of editing
+  el.content.focus(function contentFocus() {
+    state.beganEditing = true;
+  });
+
+  // Post.input - preview updating
+  $('#post_content,#post_title').on('input',function postInput() {
+    if (state.preview) updatePreview();
+  });
+
+  // DOMSubtreeModified detects when the text pre changes size,
+  // so we can adjust the height of the other text areas
+  $('#text-title pre').on('DOMSubtreeModified', function textTitleModified() {
+    fn.log(setHeights());
+  });
+
+  // Post.change - autosave detection
+  $('#post_content, #post_title, #post_slug, #post_url').on('change input', function(){
+    // beganEditing prevents from saving just anything thats type in the title box
+    // Until focus is set on the content, it will be false
+    if (state.beganEditing) {
+      state.changed = true;
+      el.save.addClass('dirty');
+    }
+  });
+
+  // Back.click
+  $('#back-button').click(function backButtonClick() {
+    if (state.editing) setEditing(false);
+  });
+
+  // Preview button
+  $('#preview-button').click(function previewButtonClick(e){
+    e.preventDefault();
+    if (state.preview) hidePreview();
+    else {
+      showPreview();
+      updatePreviewPosition();
+    }
+  });
+
+  // Publish button
+  el.publish
+    .click(function publishClick(e) {
+      e.preventDefault();
+      el.publish.html('...')
+      setDraftInput(!state.post.draft);
+      savePost();
+    })
+
+    .hover(function() {
+      if (state.post.draft) el.publish.html('Publish?');
+      else el.publish.html('Undo?');
+    }, function() {
+      if (state.post.draft) el.publish.html('Draft');
+      else el.publish.html('Published');
+    });
+
+  // Save.click
+  $('#save-button').click(function saveButtonClick(e){
+    e.preventDefault();
+    savePost();
+  });
+
+  // Bar.click
+  el.bar.click(function barClick(e) {
+    if (state.preview && e.target.id == 'bar') hidePreview();
+  });
+
+  // Wordcount
+  $('#stats-button').mouseenter(function() {
+    $('#wordcount').html(el.content.val().split(/\s+/).length +' words');
+  });
+});
 
 // Allows for auto expanding textareas
 function makeExpandingArea(container) {
@@ -100,14 +265,6 @@ function setHeights() {
   return col_height;
 }
 
-// Highlight an item in the column
-function selectItem(object, items) {
-  fn.log(object);
-  el.curItem.removeClass('selected');
-  el.curItem = object.addClass('selected');
-  return el.curItem.index();
-}
-
 // Saves the post
 function savePost(callback) {
   state.saving = true;
@@ -137,7 +294,6 @@ function savePost(callback) {
       if (!state.post) {
         setFormAction('/edit/'+data.id);
         setFormMethod('put');
-        pushState('/edit/'+data.id);
       }
 
       // Update cache and post data
@@ -194,7 +350,7 @@ function loadCache(id, callback) {
 //   false = exit editor
 //   id = start editing id
 function setEditing(val, callback) {
-  fn.log('Set editing', val);
+
   if (val !== false) {
     // Update UI
     el.admin.addClass('editing');
@@ -204,7 +360,6 @@ function setEditing(val, callback) {
 
     // If true, start editing a new post
     if (val === true) {
-      pushState('/new');
       setFormAction('/posts');
       setFormMethod('post');
     }
@@ -221,13 +376,7 @@ function setEditing(val, callback) {
 
         // Refresh form
         makeExpandingAreas();
-        scrollToPosition();
-
-        // Update url and form
-        var url = '/edit/'+state.post.id;
-        setFormAction(url);
-        setFormMethod('put');
-        pushState(url+window.location.hash);
+        // scrollToPosition();
 
         // Update link to post
         el.blog.attr('href',window.location.protocol+'//'+window.location.host+'/'+state.post.slug).attr('target','_blank');
@@ -258,9 +407,6 @@ function setEditing(val, callback) {
 
     // Update selection
     selectItem($('#drafts li:first'));
-
-    // Update URL
-    pushState('/admin');
   }
 }
 
@@ -268,10 +414,6 @@ function updateMetaInfo() {
   el.slug.val(state.post.slug);
   el.url.val(state.post.url);
   setDraft(state.post.draft);
-}
-
-function pushState(url) {
-  History.pushState(state, url.split('/')[1], url);
 }
 
 // Set form action
@@ -284,21 +426,6 @@ function setFormMethod(type) {
   var put = $('form div:first input[value="put"]');
   if (type == 'put' && !put.length) $('form div:first').append('<input name="_method" type="hidden" value="put">');
   else if (type != 'put') put.remove();
-}
-
-// Either uses cache or loads post
-function editSelectedItem(callback) {
-  var id = el.curItem.attr('id').split('-')[1];
-  // If they click on "New Draft..."
-  if (id == 0) {
-    var edit = true;
-  } else {
-    el.title.val(el.curItem.find('a').html());
-    var edit = id;
-  }
-  setEditing(edit, function editSelectedItemCallback() {
-    if (callback) callback.call();
-  });
 }
 
 function setDraft(draft) {

@@ -1,0 +1,2 @@
+li id="post-#{li.id}" data-id="#{li.id}" class=(li.draft? ? "draft" : "")
+  = link_to li.title, edit_post_path(li.id)

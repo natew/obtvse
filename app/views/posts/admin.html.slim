@@ -1,6 +1,7 @@
 = content_for(:title) { "Admin" }
 
-= render 'editor'
+= form_for @post do |f|
+  = render partial: 'form', locals: { f: f }
 
 #posts
   .contain

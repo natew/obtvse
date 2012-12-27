@@ -4,10 +4,11 @@ html lang="en-US"
     title= html_title yield(:title)
     = csrf_meta_tag
     = stylesheet_link_tag 'application'
+    = javascript_include_tag 'admin'
     link href="http://fonts.googleapis.com/css?family=Open+Sans+Condensed:700" rel="stylesheet" type="text/css"
   body class="admin #{action_name}"
     #admin
-      a#blog-button href="#{root_page}"
+      a#blog-button href="#{root_path}"
       #fade
       = yield
     #modal.modal
@@ -19,5 +20,4 @@ html lang="en-US"
       .modal-footer
         a#btn-primary.btn href="#"
         a#btn-seconday.btn.btn-primary href="#"
-    = javascript_include_tag 'admin'
     #null
