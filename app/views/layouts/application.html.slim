@@ -35,19 +35,18 @@ html lang="en-US"
         #dialog.notice.contain= notice
       - if alert
         #dialog.alert.contain= alert
-      #container
-        section#content
-          - if notice
-            span.notice= notice
-          = yield
-        section#footer
-          - if action_name == 'index'
-            = link_to 'Top', '#', :id => 'back-to-top'
-          - else
-            = link_to 'Home', root_path
-          aside
-            | powered by
-            a href="http://github.com/natew/obtvse.git"  obtvse
+      section#content
+        - if notice
+          span.notice= notice
+        = yield
+      section#footer
+        - if action_name == 'index'
+          = link_to 'Top', '#', :id => 'back-to-top'
+        - else
+          = link_to 'Home', root_path
+        aside
+          | powered by
+          a href="http://github.com/natew/obtvse.git"  obtvse
       .avgrund-cover
     - unless logged_in?
       aside#modal-login.avgrund-popup

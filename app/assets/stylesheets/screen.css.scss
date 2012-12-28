@@ -1,7 +1,7 @@
 /* iPhone [portrait + landscape] */
 @media only screen and (max-width: 768px),
 only screen and (-webkit-min-device-pixel-ratio: 2) {
-  body {
+  body, li {
     font-size: 28px;
   }
 
@@ -26,13 +26,11 @@ only screen and (-webkit-min-device-pixel-ratio: 2) {
   }
 
   #content {
-    time {
-      font-size: 24px;
-    }
-
-    h1 {
-      font-size: 56px;
-    }
+    time { font-size: 24px; }
+    h1 { font-size: 56px; }
+    h2 { font-size: 46px; }
+    h3 { font-size: 38px; }
+    code { font-size: 24px; }
   }
 
   #content, .inner, header .inner {
