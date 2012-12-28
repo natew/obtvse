@@ -21,9 +21,9 @@ class PostsController < ApplicationController
     respond_to do |format|
       if @post.present?
         format.html
-        format.xml { render :xml => @post }
+        format.xml { render xml: @post }
       else
-        format.any { render :status => 404  }
+        format.any { render status: 404  }
       end
     end
   end
@@ -45,7 +45,7 @@ class PostsController < ApplicationController
 
   def get
     @post = Post.find_by_id(params[:id])
-    render :text => @post.to_json
+    render text: @post.to_json
   end
 
   def edit
@@ -57,28 +57,29 @@ class PostsController < ApplicationController
 
     respond_to do |format|
       if @post.save
-        format.html { redirect_to "/edit/#{@post.id}", :notice => "Post created successfully" }
-        format.xml { render :xml => @post, :status => :created, location: @post }
-        format.text { render :text => @post.to_json }
+        format.html { redirect_to "/edit/#{@post.id}", notice: "Post created successfully" }
+        format.xml { render xml: @post, status: :created, location: @post }
+        format.text { render text: @post.to_json }
       else
-        format.html { render :action => 'new' }
-        format.xml { render :xml => @post.errors, :status => :unprocessable_entity}
+        format.html { render action: 'new' }
+        format.xml { render xml: @post.errors, status: :unprocessable_entity}
         format.text { head :bad_request }
       end
     end
   end
 
   def update
-    @post = Post.find_by_id(params[:id])
+    @post = Post.find_by_slug(params[:id])
+    logger.info @post
 
     respond_to do |format|
       if @post.update_attributes(params[:post])
-        format.html { redirect_to "/edit/#{@post.id}", :notice => "Post updated successfully" }
+        format.html { redirect_to "/edit/#{@post.id}", notice: "Post updated successfully" }
         format.xml { head :ok }
-        format.text { render :text => @post.to_json }
+        format.text { render text: @post.to_json }
       else
-        format.html { render :action => 'edit' }
-        format.xml { render :xml => @post.errors, :status => :unprocessable_entity}
+        format.html { render action: 'edit' }
+        format.xml { render xml: @post.errors, status: :unprocessable_entity}
         format.text { head :bad_request }
       end
     end

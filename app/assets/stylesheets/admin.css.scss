@@ -15,6 +15,37 @@ body.admin {
   }
 }
 
+body.edit #admin {
+  #content-fieldset {
+    visibility: visible;
+  }
+
+  #posts {
+    visibility: hidden;
+    position: fixed;
+  }
+
+  #bar {
+    visibility: visible;
+  }
+
+  #save-button {
+    background: #fff;
+    width: 12px;
+    height: 12px;
+    display: inline-block;
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    border: none;
+    @include border-radius(8px);
+
+    &.dirty, &:hover {background:#efb66c;}
+    &.saving {background:#ccc;}
+    &.saved {background:#76be6a;}
+  }
+}
+
 #admin #text-title pre,
 #admin #text-title textarea {
   text-align: left;
@@ -86,37 +117,6 @@ body.admin {
     left: -12px;
     width: 100%;
     padding-top: 120px;
-  }
-
-  &.editing {
-    #content-fieldset {
-      visibility: visible;
-    }
-
-    #posts {
-      visibility: hidden;
-      position: fixed;
-    }
-
-    #bar {
-      visibility: visible;
-    }
-
-    #save-button {
-      background: #fff;
-      width: 12px;
-      height: 12px;
-      display: inline-block;
-      position: absolute;
-      bottom: 20px;
-      right: 20px;
-      border: none;
-      @include border-radius(8px);
-
-      &.dirty, &:hover {background:#efb66c;}
-      &.saving {background:#ccc;}
-      &.saved {background:#76be6a;}
-    }
   }
 
   .contain {
