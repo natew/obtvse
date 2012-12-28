@@ -8,7 +8,7 @@ $(function() {
 
   $('#back-to-top').click(function(e) {
     e.preventDefault();
-    $body.animate({scrollTop:0});
+    $('html,body').animate({scrollTop:0});
   });
 
   $('header a:not(h1 a), .open-external').click(function(e) {

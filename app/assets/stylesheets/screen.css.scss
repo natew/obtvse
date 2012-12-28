@@ -7,13 +7,17 @@ only screen and (-webkit-min-device-pixel-ratio: 2) {
 
   header {
     h1 a {
-      margin: 1em 0;
+      margin: .5em 0;
       font-size: 46px;
+    }
+
+    p {
+      font-size: 24px;
     }
 
     ul {
       position: relative;
-      margin: 20px 0 2em -8px;
+      margin: 1em 0 2em -8px;
 
       li a {
         font-size: 24px;

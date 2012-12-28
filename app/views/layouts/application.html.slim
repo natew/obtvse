@@ -45,9 +45,9 @@ html lang="en-US"
             = link_to 'Top', '#', :id => 'back-to-top'
           - else
             = link_to 'Home', root_path
-          br/
-          | powered by
-          a href="http://github.com/natew/obtvse.git"  Obtvse
+          aside
+            | powered by
+            a href="http://github.com/natew/obtvse.git"  obtvse
       .avgrund-cover
     - unless logged_in?
       aside#modal-login.avgrund-popup

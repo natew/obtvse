@@ -113,7 +113,7 @@ body.edit #admin {
   #posts {
     position: absolute;
     top: 0;
-    left: -12px;
+    left: -20px;
     width: 100%;
     padding-top: 120px;
   }
@@ -197,8 +197,9 @@ body.edit #admin {
           display: block;
           color: #444;
           position: absolute;
-          top: 8px;
+          top: .5em;
           left: -12px;
+          font-size: 14px;
         }
 
         a {
