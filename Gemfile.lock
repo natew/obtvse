@@ -50,6 +50,7 @@ GEM
       net-sftp (>= 2.0.0)
       net-ssh (>= 2.0.14)
       net-ssh-gateway (>= 1.1.0)
+    chronic (0.8.0)
     coffee-rails (3.2.2)
       coffee-script (>= 2.2.0)
       railties (~> 3.2.0)
@@ -183,6 +184,7 @@ DEPENDENCIES
   bcrypt-ruby (~> 3.0.0)
   bourbon (~> 2.0.0.rc1)
   capistrano
+  chronic
   coffee-rails (~> 3)
   foreman
   jquery-rails (~> 2)

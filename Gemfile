@@ -15,6 +15,7 @@ gem 'bourbon', '~> 2.0.0.rc1'
 gem 'stringex', '~> 1', :git => 'git://github.com/rsl/stringex.git'
 gem 'redcarpet'
 gem 'kaminari', '~> 0.13'
+gem 'chronic'
 
 group :production do
   gem 'pg', '~> 0.13'

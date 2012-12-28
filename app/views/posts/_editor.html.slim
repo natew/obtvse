@@ -1,4 +1,4 @@
-= form_for @post do |f|
+= form_for @post, url: post_path(@post.id) do |f|
   = render partial: 'form', locals: { f: f }
   #post-preview.split-section
     .inner
@@ -11,12 +11,12 @@
         ul#date.sub-menu
           li
             = f.label :published_at, 'Published Date'
-            = f.text_field :published_at
+            = f.text_field :published_at, value: f.object.published_at
       #menu-link.menu
         = link_to 'Link', '#link', class: 'icon-link'
         ul#link.sub-menu
           li
-            = f.label :url, 'Permalink'
+            = f.label :slug, 'Permalink'
             = f.text_field :slug, placeholder: 'Leave blank to automatically generate'
           li
             = f.label :url, 'External URL'

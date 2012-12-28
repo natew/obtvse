@@ -3,40 +3,38 @@ var showdown       = new Showdown.converter(),
     previewHeight  = 0,
     hideBarTimeout = null,
     scrollTimeout  = null,
+    lineHeight = 24,
     editElements   = {
-      admin   : '#admin',
-      editor  : '#post-editor',
-      title   : '#post_title',
-      content : '#post_content',
-      slug    : '#post_slug',
-      url     : '#post_url',
-      draft   : '#post_draft',
-      save    : '#save-button',
-      form    : '#new_post,.edit_post',
-      bar     : '#bar',
-      blog    : '#blog-button',
-      publish : '#publish-button',
-      preview : '#post-preview'
+      admin     : '#admin',
+      editor    : '#post-editor',
+      title     : '#post_title',
+      content   : '#post_content',
+      slug      : '#post_slug',
+      url       : '#post_url',
+      published : '#post_published_at',
+      draft     : '#post_draft',
+      save      : '#save-button',
+      form      : '#new_post, .edit_post',
+      bar       : '#bar',
+      blog      : '#blog-button',
+      publish   : '#publish-button',
+      preview   : '#post-preview'
     };
 
 $.subscribe('edit:enter', function(id) {
   el = fn.getjQueryElements(editElements);
   makeExpandingAreas();
+  setPostState();
+  updatePostState();
+  setLineHeight();
 
   if (window.location.hash == '#preview')
     showPreview();
-
-  state.editing = true;
-  state.beganEditing = false;
 
   el.title.focus().select();
   resetAutoSave();
   initBar();
   doEditBindings();
-
-  state.post = el.content.val();
-  updateMetaInfo();
-  el.blog.attr('href',window.location.protocol+'//'+window.location.host+'/'+state.post.slug).attr('target','_blank');
 });
 
 $.subscribe('edit:leave', function() {
@@ -81,7 +79,7 @@ function doEditBindings() {
   el.publish
     .click(function publishClick(e) {
       e.preventDefault();
-      el.publish.html('...')
+      el.publish.html('...');
       setDraftInput(!state.post.draft);
       savePost();
     })
@@ -103,6 +101,14 @@ function doEditBindings() {
   // Bar.click
   el.bar.click(function barClick(e) {
     if (state.preview && e.target.id == 'bar') hidePreview();
+  });
+
+  // Menu hover
+  $('.menu').hover(function() {
+    var menu = this;
+    setTimeout(function() {
+      $('input:first', menu).focus().select();
+    }, 0);
   });
 
   // Wordcount
@@ -141,9 +147,22 @@ function resetAutoSave() {
   });
 }
 
+function setPostState() {
+  state.editing = true;
+  state.beganEditing = false;
+  state.post = $('#post').data('state');
+}
+
+function updatePostState() {
+  el.slug.val(state.post.slug);
+  el.url.val(state.post.url);
+  el.published.val(state.post.published_at);
+  setDraft(state.post.draft);
+  el.blog.attr('href', '/' + state.post.slug);
+}
+
 // Saves the post
 function savePost(callback) {
-  if (!state.changed) return false;
   state.saving = true;
   state.changed = false;
   el.save.addClass('saving');
@@ -178,7 +197,7 @@ function savePost(callback) {
       state.post = data;
 
       // Update form
-      updateMetaInfo();
+      updatePostState();
 
       // If item exists move to top, else add to top
       if (li.length) li.prependTo(list);
@@ -222,12 +241,6 @@ function loadCache(id, callback) {
       callback.call(this, data);
     });
   }
-}
-
-function updateMetaInfo() {
-  el.slug.val(state.post.slug);
-  el.url.val(state.post.url);
-  setDraft(state.post.draft);
 }
 
 // Set form action
@@ -328,7 +341,7 @@ function savePosition() {
   clearTimeout(scrollTimeout);
   if (state.editing) {
     scrollTimeout = setTimeout(function() {
-      $.cookie('position-'+state.post.id,el.editor.scrollTop());
+      $.cookie('position-'+state.post.id, el.editor.scrollTop());
     },1000);
   }
 }
@@ -343,4 +356,9 @@ function scrollToPosition() {
     el.content.focus().putCursorAtEnd();
     $('#post-editor').scrollTop(el.content.height());
   }
+}
+
+function setLineHeight() {
+  // Determine line height from css
+  lineHeight = $('#line-height').height();
 }

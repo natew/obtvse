@@ -14,7 +14,7 @@ var state = {
   itemIndex    : [0, 0]
 };
 
-var el, lineHeight;
+var el;
 
 $(function() {
 
@@ -55,12 +55,14 @@ $(function() {
         el.title.focus();
     });
 
-  // Determine line height from css
-  lineHeight = $('#line-height').height();
-
   // Avoid initial animations
   $('body').addClass('transition');
 
+  // External links
+  $('.open-external').click(function(e) {
+    e.preventDefault();
+    window.open($(this).attr('href'));
+  });
 });
 
 function makeExpandingAreas() {

@@ -2,7 +2,9 @@
 # See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 en:
-  hello: "Hello world"
+  time:
+    formats:
+      nice: "%b %d, %Y at %I:%M"
   views:
     pagination:
       previous: " &lt; Previous"

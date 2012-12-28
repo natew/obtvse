@@ -8,7 +8,7 @@ html lang="en-US"
     link href="http://fonts.googleapis.com/css?family=Open+Sans+Condensed:700" rel="stylesheet" type="text/css"
   body class="admin #{action_name}"
     #admin
-      a#blog-button href="#{root_path}"
+      a#blog-button href="#{root_path}" data-no-turbolink="true" class="open-external"
       #fade
       = yield
     #modal.modal
@@ -21,3 +21,4 @@ html lang="en-US"
         a#btn-primary.btn href="#"
         a#btn-seconday.btn.btn-primary href="#"
     #null
+    #line-height "Lorem"

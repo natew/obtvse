@@ -17,12 +17,6 @@ Obtvse::Application.routes.draw do
 
   get '/:slug', to: 'posts#show', as: 'post'
 
-  # match '/new', to: 'posts#new'
-  # post '/posts', to: 'admin#create'
-  # post '/edit/:id', to: 'admin#update'
-  # put '/edit/:id', to: 'admin#update'
-  # get '/edit/:id', to: 'admin#new', as: 'post'
-
   root to: 'posts#index'
 
 end

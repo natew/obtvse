@@ -17,7 +17,7 @@ html lang="en-US"
         s.parentNode.insertBefore(g,s)}(document,'script'));
   body class="#{controller_name} #{action_name} #{logged_in? ? '' : 'not-'}logged-in #{no_users? ? 'no-users' : ''}"
     #body
-      a#blog-button href="/admin" data-target="#modal-login" class="#{logged_in? ? '' : 'modal'}"
+      a#blog-button href="/admin" data-target="#modal-login" class="#{logged_in? ? '' : 'modal'}" data-no-turbolink="true"
       - unless @no_header
         header.clearfix
           .inner
