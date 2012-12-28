@@ -40,14 +40,9 @@ $(function() {
 
   // Permanent bindings
   $(window)
-    .mousemove(function windowMouseMove(evt){
-      // Accurate detection for bar hover
-      if (state.editing) {
-        if (evt.pageX < 90)
-          showBar(true);
-        else if (evt.pageX > 95 && !$('#bar:hover').length)
-          delayedHideBar();
-      }
+    .mousemove(function windowMouseMove(e){
+      setBarVisibility(e);
+      setBodyMoving();
     })
 
     .on('beforeunload', function() {
@@ -95,3 +90,27 @@ function makeExpandingArea(container) {
  // Enable extra CSS
  container.className += ' active';
 }
+
+var movingTimeout, moving = false;
+function setBodyMoving() {
+  if (!moving) {
+    moving = true;
+    $('body').addClass('moving');
+  }
+
+  clearTimeout(movingTimeout);
+  movingTimeout = setTimeout(function() {
+    moving = false;
+    $('body').removeClass('moving');
+  }, 1000);
+}
+
+var setBarVisibility = _.debounce(function(e) {
+    // Accurate detection for bar hover
+    if (state.editing) {
+      if (e.pageX < 90)
+        showBar(true);
+      else if (e.pageX > 95 && !$('#bar:hover').length)
+        delayedHideBar();
+    }
+  }, 15);

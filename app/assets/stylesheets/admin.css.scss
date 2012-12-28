@@ -13,37 +13,37 @@ body.admin {
     font-weight: bold;
     margin: 0 8px 0 0;
   }
+
+  #blog-button { opacity: 0; }
+
+  &.moving {
+    #blog-button,
+    #save-button { opacity: 1; }
+  }
 }
 
 body.edit #admin {
   #content-fieldset {
     visibility: visible;
   }
+}
 
-  #posts {
-    visibility: hidden;
-    position: fixed;
-  }
+#save-button {
+  background: #fff;
+  width: 12px;
+  height: 12px;
+  display: inline-block;
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  z-index: 10000;
+  border: none;
+  @include border-radius(8px);
 
-  #bar {
-    visibility: visible;
-  }
-
-  #save-button {
-    background: #fff;
-    width: 12px;
-    height: 12px;
-    display: inline-block;
-    position: absolute;
-    bottom: 20px;
-    right: 20px;
-    border: none;
-    @include border-radius(8px);
-
-    &.dirty, &:hover {background:#efb66c;}
-    &.saving {background:#ccc;}
-    &.saved {background:#76be6a;}
-  }
+  &.dirty, &:hover {background:#ccc;}
+  &.saving {background:#ccba40;}
+  &.saved {background:#76be6a;}
+  &.error {background:#bc3c2b;}
 }
 
 #admin #text-title pre,
@@ -109,8 +109,6 @@ body.edit #admin {
     padding: 0;
   }
 
-  #save-button {display:none;}
-
   #posts {
     position: absolute;
     top: 0;
@@ -156,6 +154,7 @@ body.edit #admin {
       line-height: 1.2em;
       text-overflow: ellipsis;
       @include transition(max-height .3s);
+      @include transition-delay(.1s);
 
       &#post-0 {
         font-style: italic;
@@ -163,10 +162,12 @@ body.edit #admin {
 
       &.hidden {
         max-height: 0;
+        overflow: hidden;
+        @include transition-delay(0s);
 
         a {
           opacity: 0;
-          @include transition-delay(0s);
+          @include transition-delay(.1s);
         }
       }
 
@@ -339,19 +340,19 @@ body.transition {
 }
 
 #bar {
-  visibility: hidden;
   position: fixed;
   top: 0;
   bottom: 0;
   left: 0;
   z-index: 11;
+  opacity: 1;
   width: 80px;
   min-height: 400px;
   padding: 20px 0;
   background: $admin-bar-bg;
   border-right: 1px solid $admin-bar-border;
 
-  &.hidden {
+  &.shy {
     opacity: 0 !important;
   }
 

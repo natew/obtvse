@@ -21,6 +21,7 @@ $.subscribe('index:enter', function() {
   setColumnHeights();
   setupFiltering();
   state.colIndex = 0;
+  state.itemIndex = [0, 0];
 });
 
 $(window).resize(setColumnHeights);
@@ -37,15 +38,20 @@ function setupFiltering() {
         var val = $(this).val();
         if (val && val != prevVal) {
           prevVal = val;
-          var draft_ids = filterTitle(draftsItems,val).join(',#post-'),
-              pub_ids   = filterTitle(publishedItems,val).join(',#post-');
+          var draftIds = filterTitle(draftsItems, val),
+              pubIds   = filterTitle(publishedItems, val);
 
-          draft_ids ? showOnly('#drafts li', '#post-0,#post-'+draft_ids) : $('#drafts li:not(#post-0)').addClass('hidden');
-          pub_ids   ? showOnly('#published li', '#post-'+pub_ids) : $('#published li').addClass('hidden');
-          if (!draft_ids && !pub_ids) setEditing(true);
+          draftIds ? showOnly('#drafts li', draftIds) : $('#drafts li').addClass('hidden');
+          pubIds   ? showOnly('#published li', pubIds) : $('#published li').addClass('hidden');
+
+          if (!draftIds && !pubIds) setEditing(true);
+
           state.itemIndex[0] = 0;
           state.itemIndex[1] = 0;
-          selectItem($('.col li:not(.hidden):first'));
+
+          var item = $('.col li:not(.hidden):first');
+          selectItem(item);
+          updateItemState(item);
         }
         else if (!val) {
           $('#drafts li,#published li').removeClass('hidden');
@@ -64,6 +70,12 @@ function setupFiltering() {
         }
       }
     });
+}
+
+function showOnly(context, indices) {
+  $(context).each(function() {
+    $(this).toggleClass('hidden', !_.contains(indices, $(this).data('id')));
+  });
 }
 
 // Set column height
@@ -85,6 +97,14 @@ function selectItem(object, items) {
   el.curItem.removeClass('selected');
   el.curItem = object.addClass('selected');
   return el.curItem.index();
+}
+
+function updateItemState(object) {
+  var colIndex = object.parents('.col').index();
+  if (colIndex != state.colIndex) changeCol();
+  state.colIndex = colIndex;
+
+  state.itemIndex[colIndex] = el.curItem.index();
 }
 
 // Either uses cache or loads post
@@ -115,9 +135,9 @@ function changeCol() {
 
 function filterTitle(objects, val) {
   return objects.filter(function filterTitleObjects(el) {
-    var regex = new RegExp(val.split('').join('.*'), 'i');
-    if (el.title.match(regex)) return true;
-  }).map(function filterTitleMap(el) {
-    return el.id;
-  });
+      var regex = new RegExp(val.split('').join('.*'), 'i');
+      if (el.title.match(regex)) return true;
+    }).map(function filterTitleMap(el) {
+      return el.id;
+    });
 }

@@ -29,7 +29,7 @@ $.subscribe('edit:enter', function(id) {
   state.editing = true;
   state.beganEditing = false;
 
-  el.title.focus();
+  el.title.focus().select();
   resetAutoSave();
   initBar();
   doEditBindings();
@@ -141,10 +141,6 @@ function resetAutoSave() {
   });
 }
 
-function showOnly(context,selectors) {
-  $(context).addClass('hidden').filter(selectors).removeClass('hidden');
-}
-
 // Saves the post
 function savePost(callback) {
   if (!state.changed) return false;
@@ -196,8 +192,10 @@ function savePost(callback) {
     error: function (xmlHttpRequest, textStatus, errorThrown) {
       if (xmlHttpRequest.readyState == 0 || xmlHttpRequest.status == 0)
         return;  // it's not really an error
-      else
+      else {
         alert('Could not save.  Please backup your post!');
+        el.save.removeClass('dirty saving').addClass('error');
+      }
     }
   });
 }
@@ -309,18 +307,19 @@ function toggleBar() {
   else showBar(false);
 }
 
-function showBar(yes) {
-  state.barHidden = !yes;
-  if (yes) {
+function showBar(show) {
+  state.barHidden = !show;
+  if (show) {
     clearTimeout(hideBarTimeout);
-    el.bar.removeClass('hidden');
+    el.bar.removeClass('shy');
   }
   else if (!state.barPinned && !el.bar.is(':hover')) {
-    el.bar.addClass('hidden');
+    el.bar.addClass('shy');
   }
 }
 
 function delayedHideBar(time) {
+  fn.log('hiding bar')
   clearTimeout(hideBarTimeout);
   hideBarTimeout = setTimeout(function(){showBar(false)},(time ? time : 1000));
 }
