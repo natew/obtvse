@@ -1,18 +1,23 @@
-var editElements = {
-  admin   : '#admin',
-  editor  : '#post-editor',
-  title   : '#post_title',
-  content : '#post_content',
-  slug    : '#post_slug',
-  url     : '#post_url',
-  draft   : '#post_draft',
-  save    : '#save-button',
-  form    : '#new_post,.edit_post',
-  bar     : '#bar',
-  blog    : '#blog-button',
-  publish : '#publish-button',
-  preview : '#post-preview'
-};
+var showdown       = new Showdown.converter(),
+    saveInterval   = 5000,
+    previewHeight  = 0,
+    hideBarTimeout = null,
+    scrollTimeout  = null,
+    editElements   = {
+      admin   : '#admin',
+      editor  : '#post-editor',
+      title   : '#post_title',
+      content : '#post_content',
+      slug    : '#post_slug',
+      url     : '#post_url',
+      draft   : '#post_draft',
+      save    : '#save-button',
+      form    : '#new_post,.edit_post',
+      bar     : '#bar',
+      blog    : '#blog-button',
+      publish : '#publish-button',
+      preview : '#post-preview'
+    };
 
 $.subscribe('edit:enter', function(id) {
   el = fn.getjQueryElements(editElements);
@@ -22,7 +27,9 @@ $.subscribe('edit:enter', function(id) {
     showPreview();
 
   state.editing = true;
+  state.beganEditing = false;
 
+  el.title.focus();
   resetAutoSave();
   initBar();
   doEditBindings();
@@ -34,6 +41,7 @@ $.subscribe('edit:enter', function(id) {
 
 $.subscribe('edit:leave', function() {
   savePost();
+  state.editing = false;
 });
 
 function doEditBindings() {
@@ -65,7 +73,7 @@ function doEditBindings() {
   });
 
   // Content.focus - detect beginning of editing
-  el.content.focus(function contentFocus() {
+  el.content.focus(function() {
     state.beganEditing = true;
   });
 

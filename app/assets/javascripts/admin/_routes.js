@@ -11,7 +11,7 @@ var Routes = (function() {
         page = window.location.pathname;
 
       for (var route in this.routes) {
-        if (new RegExp(route + '$').test(page)) {
+        if (new RegExp(route).test(page)) {
           current = this.routes[route];
           var to = current + ':enter';
           fn.log(to);

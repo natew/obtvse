@@ -14,23 +14,14 @@ var state = {
   itemIndex    : [0, 0]
 };
 
-var el,
-    showdown        = new Showdown.converter(),
-    lineHeight,
-    saveInterval    = 3000,
-    col_height      = 0,
-    previewHeight   = 0,
-    hideBarTimeout  = null,
-    scrollTimeout   = null,
-    prevVal         = null;
+var el, lineHeight;
 
 $(function() {
 
   // Setup routes
   Routes.bind({
-    '/admin': 'index',
-    '/new':   'new',
-    '/edit':  'edit'
+    'admin':    'index',
+    'edit|new': 'edit'
   });
 
   // Attach turbolinks events to routing
@@ -46,9 +37,6 @@ $(function() {
 
   // Clear cache
   localStorage.clear();
-
-  // Set minimum height of content textarea and post lists
-  $(window).resize(setColumnHeights);
 
   // Permanent bindings
   $(window)

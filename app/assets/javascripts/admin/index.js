@@ -1,37 +1,29 @@
-var indexElements = {
-  admin     : '#admin',
-  title     : '#post_title',
-  content   : '#post_content',
-  section   : '.split-section',
-  published : '#published',
-  drafts    : '#drafts',
-  curCol    : '#drafts',
-  curColUl  : '#drafts ul',
-  curItem   : '.col li:first'
-};
+var prevVal = null,
+    col_height,
+    indexElements = {
+      admin     : '#admin',
+      title     : '#post_title',
+      content   : '#post_content',
+      section   : '.split-section',
+      published : '#published',
+      drafts    : '#drafts',
+      curCol    : '#drafts',
+      curColUl  : '#drafts ul',
+      curItem   : '#drafts li:first'
+    };
 
 $.subscribe('index:enter', function() {
   el = fn.getjQueryElements(indexElements);
-  makeExpandingAreas();
 
-  setColumnHeights();
   el.title.focus();
-
-  // Update state
-  state.editing = false;
-  state.beganEditing = false;
-
-  // Select col
-  selectItem($('.col li:not(.hidden):first'));
-
-  // Update UI
-  el.admin.removeClass('preview editing');
-
-  // Update selection
-  selectItem($('#drafts li:first'));
-
-  setupFiltering()
+  selectItem(el.curItem);
+  makeExpandingAreas();
+  setColumnHeights();
+  setupFiltering();
+  state.colIndex = 0;
 });
+
+$(window).resize(setColumnHeights);
 
 function setupFiltering() {
   // Filtering and other functions with the title field
@@ -80,6 +72,7 @@ function setColumnHeights() {
 
   var content_height = Math.max($(window).height() - el.title.height()-40,100);
   col_height = $(window).height()-125;
+
   $('.col ul').css('height', col_height);
   el.content.css('min-height', content_height);
   $('#content-fieldset').css('height', content_height);
