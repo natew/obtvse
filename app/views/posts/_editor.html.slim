@@ -1,4 +1,4 @@
-= form_for @post, url: post_path(@post.id) do |f|
+= form_for @post, url: @post_path do |f|
   = render partial: 'form', locals: { f: f }
   #post-preview.split-section
     .inner

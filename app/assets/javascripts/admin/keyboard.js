@@ -93,7 +93,7 @@ $(window)
         // Esc
         case 27:
           e.preventDefault();
-          if (!state.barPinned && !el.bar.is('.hidden')) showBar(false);
+          if (!state.barPinned && !el.bar.is('.shy')) showBar(false);
           else if (state.preview) hidePreview();
           else $('#back-button')[0].click();
           break;

@@ -33,43 +33,46 @@ function setupFiltering() {
 
   el.title
     .keyup(function titleKeyup(e) {
-      if (!state.editing) {
-        // Filtering
-        var val = $(this).val();
-        if (val && val != prevVal) {
-          prevVal = val;
-          var draftIds = filterTitle(draftsItems, val),
-              pubIds   = filterTitle(publishedItems, val);
+      // Filtering
+      var val = $(this).val();
+      if (val) {
+        prevVal = val;
+        var draftIds = filterTitle(draftsItems, val),
+            pubIds   = filterTitle(publishedItems, val);
 
-          draftIds ? showOnly('#drafts li', draftIds) : $('#drafts li').addClass('hidden');
-          pubIds   ? showOnly('#published li', pubIds) : $('#published li').addClass('hidden');
+        draftIds ? showOnly('#drafts li', draftIds) : $('#drafts li').addClass('hidden');
+        pubIds   ? showOnly('#published li', pubIds) : $('#published li').addClass('hidden');
 
-          if (!draftIds && !pubIds) setEditing(true);
+        if (!draftIds.length && !pubIds.length)
+          goToNewPost();
 
-          state.itemIndex[0] = 0;
-          state.itemIndex[1] = 0;
+        state.itemIndex[0] = 0;
+        state.itemIndex[1] = 0;
 
-          var item = $('.col li:not(.hidden):first');
-          selectItem(item);
-          updateItemState(item);
-        }
-        else if (!val) {
-          $('#drafts li,#published li').removeClass('hidden');
-        }
+        var item = $('.col li:not(.hidden):first');
+        selectItem(item);
+        updateItemState(item);
+      }
+      else {
+        $('#drafts li, #published li').removeClass('hidden');
       }
     })
     .keydown(function titleKeydown(e) {
-      if (!state.editing) {
-        switch (e.which) {
-          // Esc
-          case 27:
-            e.preventDefault();
-            el.title.val('');
-            $('#drafts li,#published li').removeClass('hidden');
-            break;
-        }
+      switch (e.which) {
+        // Esc
+        case 27:
+          e.preventDefault();
+          el.title.val('');
+          $('#drafts li,#published li').removeClass('hidden');
+          break;
       }
     });
+}
+
+function goToNewPost() {
+  el.title.attr('disabled', 'disabled')
+  var newpost = $('#new-post');
+  newpost.attr('href', newpost.attr('href') + '?title=' + el.title.val())[0].click();
 }
 
 function showOnly(context, indices) {

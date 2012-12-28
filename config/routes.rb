@@ -2,7 +2,6 @@ Obtvse::Application.routes.draw do
 
   # Admin
   match '/admin', to: 'posts#admin', as: 'admin'
-  match '/get/:id', to: 'admin#get'
 
   # Authentication
   get 'logout' => 'sessions#destroy', as: 'logout'

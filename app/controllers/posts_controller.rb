@@ -36,20 +36,17 @@ class PostsController < ApplicationController
   end
 
   def new
-    @post = Post.new
+    @post = Post.new(title: params[:title] || '')
+    @post_path = '/'
 
     respond_to do |format|
       format.html
     end
   end
 
-  def get
-    @post = Post.find_by_id(params[:id])
-    render text: @post.to_json
-  end
-
   def edit
     @post = Post.find(params[:id])
+    @post_path = post_path(@post.id)
   end
 
   def create

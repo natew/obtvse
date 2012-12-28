@@ -31,7 +31,10 @@ $.subscribe('edit:enter', function(id) {
   if (window.location.hash == '#preview')
     showPreview();
 
-  el.title.focus().select();
+  setTimeout(function() {
+    el.title.focus().putCursorAtEnd();
+  }, 0);
+
   resetAutoSave();
   initBar();
   doEditBindings();
@@ -154,6 +157,7 @@ function setPostState() {
 }
 
 function updatePostState() {
+  if (!state.post) return;
   el.slug.val(state.post.slug);
   el.url.val(state.post.url);
   el.published.val(state.post.published_at);
@@ -163,6 +167,8 @@ function updatePostState() {
 
 // Saves the post
 function savePost(callback) {
+  if (!state.beganEditing) return false;
+
   state.saving = true;
   state.changed = false;
   el.save.addClass('saving');
@@ -332,9 +338,10 @@ function showBar(show) {
 }
 
 function delayedHideBar(time) {
-  fn.log('hiding bar')
   clearTimeout(hideBarTimeout);
-  hideBarTimeout = setTimeout(function(){showBar(false)},(time ? time : 1000));
+  hideBarTimeout = setTimeout(function(){
+    showBar(false)
+  }, (time ? time : 1000));
 }
 
 function savePosition() {

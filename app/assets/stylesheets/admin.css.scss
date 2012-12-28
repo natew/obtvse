@@ -141,6 +141,7 @@ body.edit #admin {
       color: #999;
       text-transform: uppercase;
       display: inline-block;
+      @include transition(all .1s linear);
     }
 
     ul {
@@ -154,24 +155,17 @@ body.edit #admin {
       position: relative;
       line-height: 1.2em;
       text-overflow: ellipsis;
-      max-height: 10em;
-      @include transition(all .2s linear);
-      @include transition-delay(.1s);
-
-      &#post-0 {
-        font-style: italic;
-        max-height: 100px !important;
-        a { opacity: 1 !important; }
-      }
+      max-height: 8.4em;
+      margin-bottom: 1em;
+      @include transition(all .1s linear);
 
       &.hidden {
         max-height: 0;
+        margin-bottom: 0;
         overflow: hidden;
-        @include transition-delay(0s);
 
         a {
           opacity: 0;
-          @include transition-delay(.2s);
         }
       }
 
@@ -179,13 +173,16 @@ body.edit #admin {
         margin: 0;
         font-size: 14px;
         max-width: 100%;
+        max-height: 8.8em;
+        overflow: hidden;
         text-overflow: ellipsis;
         border: none;
         display: block;
         color: #999;
-        padding: 6px 0;
+        padding: 0;
+        opacity: 1;
         margin-bottom: 4px;
-        @include transition(opacity .1s);
+        @include transition(all .1s linear);
 
         &:hover {color: $theme;}
       }
@@ -197,7 +194,7 @@ body.edit #admin {
           display: block;
           color: #444;
           position: absolute;
-          top: .5em;
+          top: .1em;
           left: -12px;
           font-size: 14px;
         }
