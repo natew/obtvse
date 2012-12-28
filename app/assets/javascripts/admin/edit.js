@@ -45,6 +45,12 @@ $.subscribe('edit:leave', function() {
   state.editing = false;
 });
 
+$(window)
+  .on('beforeunload', function() {
+    if (state.editing)
+      savePost();
+  });
+
 function doEditBindings() {
   // ContentFielset.scroll
   $('#post-editor').on('scroll', function() {

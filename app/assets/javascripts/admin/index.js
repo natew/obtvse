@@ -24,7 +24,12 @@ $.subscribe('index:enter', function() {
   state.itemIndex = [0, 0];
 });
 
-$(window).resize(setColumnHeights);
+$(window)
+  .resize(setColumnHeights)
+  .click(function windowClick(e){
+    if (!state.editing)
+      el.title.focus();
+  });
 
 function setupFiltering() {
   // Filtering and other functions with the title field
@@ -96,7 +101,6 @@ function setColumnHeights() {
 
 // Highlight an item in the column
 function selectItem(object, items) {
-  fn.log(object);
   el.curItem.removeClass('selected');
   el.curItem = object.addClass('selected');
   return el.curItem.index();

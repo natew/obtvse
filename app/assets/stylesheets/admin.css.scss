@@ -268,7 +268,7 @@ form .permalink {
  color: #ddd;
 }
 
-body.transition {
+.transition {
   .split-section,
   #bar {@include transition(all .2s ease-out);}
 }

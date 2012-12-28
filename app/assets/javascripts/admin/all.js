@@ -24,14 +24,17 @@ $(function() {
     'edit|new': 'edit'
   });
 
-  // Attach turbolinks events to routing
   Routes.enter();
 
   $(document)
     .on('page:fetch', function() {
-      Routes.leave()
+      Routes.leave();
     })
     .on('page:load', function() {
+      Routes.enter();
+    })
+    .on('page:restore', function() {
+      Routes.leave();
       Routes.enter();
     });
 
@@ -43,20 +46,10 @@ $(function() {
     .mousemove(function windowMouseMove(e){
       setBarVisibility(e);
       setBodyMoving();
-    })
-
-    .on('beforeunload', function() {
-      if (state.editing)
-        savePost();
-    })
-
-    .click(function windowClick(e){
-      if (!state.editing)
-        el.title.focus();
     });
 
   // Avoid initial animations
-  $('body').addClass('transition');
+  $('html').addClass('transition');
 
   // External links
   $('.open-external').click(function(e) {
