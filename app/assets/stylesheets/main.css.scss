@@ -228,6 +228,14 @@ header {
   li {
     margin: 1em 0;
   }
+
+  code {
+    padding: 20px;
+    display: block;
+    white-space: pre;
+    font: 14px/24px 'Pragmata Pro', 'Droid Sans Mono', Monaco, Consolas, 'Ubuntu Mono', monospace !important;
+    margin: 2em 0;
+  }
 }
 
 #blog-button {
@@ -256,15 +264,6 @@ header {
     &:hover {
       border-top-color: #ccc;
     }
-  }
-}
-
-pre {
-  font: 14px/22px 'Pragmata Pro', 'Droid Sans Mono', Monaco, Consolas, 'Ubuntu Mono', monospace !important;
-  margin: 2em 0;
-
-  code {
-    padding: 20px;
   }
 }
 

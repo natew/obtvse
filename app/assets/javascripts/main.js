@@ -1,43 +1,41 @@
 $(function() {
-  var $body = $('body');
+  var $body = $('body'),
+      $html = $('html');
 
-  $('.post').fitVids();
+  pageActions();
 
-  hljs.tabReplace = '  ';
-  hljs.initHighlightingOnLoad();
+  $(document).on('page:load', function() {
+    pageActions();
+  });
 
-  $body.addClass('transition');
-  setTimeout(function(){$body.addClass('change')},400);
+  $html.addClass('transition');
+  setTimeout(function(){$html.addClass('change')},400);
 
   $('#back-to-top').click(function(e) {
     e.preventDefault();
     $('html,body').animate({scrollTop:0});
   });
 
-  $('header a:not(h1 a), .open-external').click(function(e) {
-    e.preventDefault();
-    window.open($(this).attr('href'));
-  });
-
   // Modals
   Avgrund = Avgrund();
   var lastModalTarget;
 
-  $body.on('click', '.modal', function(e) {
-    e.preventDefault();
-    var href = $(this).attr('href'),
-        target = href[0] == '#' ? href : $(this).attr('data-target');
+  $html
+    .on('click', '.modal', function(e) {
+      e.preventDefault();
+      var href = $(this).attr('href'),
+          target = href[0] == '#' ? href : $(this).attr('data-target');
 
-    lastModalTarget = target;
-    Avgrund.show(target);
-    $('body,html').animate({scrollTop: 0});
-    $('input[type="text"]:first', target).focus().select();
-  });
+      lastModalTarget = target;
+      Avgrund.show(target);
+      $('body,html').animate({scrollTop: 0});
+      $('input[type="text"]:first', target).focus().select();
+    })
 
-  $body.on('click', '.modal-close, .avgrund-cover', function(e) {
-    e.preventDefault();
-    Avgrund.hide();
-  });
+    .on('click', '.modal-close, .avgrund-cover', function(e) {
+      e.preventDefault();
+      Avgrund.hide();
+    });
 
   $(document)
     .on('avgrund:show', function() {
@@ -47,7 +45,18 @@ $(function() {
       window.history.replaceState('http://' + window.location.host + '/', document.title, null);
     });
 
-  if ($body.is('.no-users')) {
-    $('#blog-button').click();
+  function pageActions() {
+    $('.post').fitVids();
+
+    prettyPrint();
+
+    $('header a:not(h1 a), .open-external').click(function(e) {
+      e.preventDefault();
+      window.open($(this).attr('href'));
+    });
+
+    if ($body.is('.no-users')) {
+      $('#blog-button').click();
+    }
   }
 });

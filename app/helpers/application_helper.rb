@@ -50,7 +50,7 @@ class HTMLwithPygments < Redcarpet::Render::HTML
     if code
       code.gsub!(/[\<]/, '&lt;')
       code.gsub!(/[\>]/, '&gt;')
-      "<pre><code>#{code}</code></pre>"
+      "<code class=\"prettyprint\">#{code}</code>"
     end
   end
 end

@@ -4,5 +4,7 @@
 //= require fitvids
 //= require turbolinks
 //= require avgrund
-//= require highlight.pack
+//= require prettify
+//= require prettify/lang-css
+//= require prettify/lang-sql
 //= require main
