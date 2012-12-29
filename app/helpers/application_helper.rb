@@ -6,21 +6,22 @@ module ApplicationHelper
   end
 
   def markdown(text)
-    #text = youtube_embed(text) TODO: put this inside custom renderer
+    text = youtube_embed(text)
+
     render = HTMLwithPygments.new(
-              :hard_wrap => true,
-              :gh_blockcode => true,
-              :filter_html => false,
-              :safe_links_only => true
-            )
+      hard_wrap: true,
+      gh_blockcode: true,
+      filter_html: false,
+      safe_links_only: true
+    )
 
     redcarpet = Redcarpet::Markdown.new(render,
-                  :fenced_code_blocks => true,
-                  :autolink => true,
-                  :no_intra_emphasis => true,
-                  :strikethrough => true,
-                  :superscripts => true
-                )
+      fenced_code_blocks: true,
+      autolink: true,
+      no_intra_emphasis: true,
+      strikethrough: true,
+      superscripts: true,
+    )
 
     redcarpet.render(text)
   end
@@ -29,7 +30,12 @@ module ApplicationHelper
     output = str.lines.map do |line|
       match = nil
       match = line.match(/^http.*(?:youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=)([^#\&\?]*).*/)
-      match ? render(:partial => 'youtube', :locals => { :video => match[1] }) : line
+
+      if match
+        render partial: 'youtube', locals: { video: match[1] }
+      else
+        line
+      end
     end
     output.join
   end
@@ -37,8 +43,9 @@ end
 
 # create a custom renderer that allows highlighting of code blocks
 class HTMLwithPygments < Redcarpet::Render::HTML
-  def block_code(code, language)
-    #Pygments.highlight(code,language)
-    "<code>#{code}</code>"
+  require 'pygments'
+
+  def block_code(code, lang)
+    "<code>#{Pygments.highlight(code)}</code>"
   end
 end

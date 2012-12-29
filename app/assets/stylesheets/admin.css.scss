@@ -118,10 +118,6 @@ body.edit #admin {
     padding-top: 120px;
   }
 
-  .contain {
-    margin: 0 auto;
-  }
-
   .col {
     width: 50%;
     float: left;
@@ -304,6 +300,10 @@ form .permalink {
   right: -50%;
   overflow: hidden;
   overflow-y: auto;
+
+  .inner {
+    width: auto;
+  }
 }
 
 #admin.preview {

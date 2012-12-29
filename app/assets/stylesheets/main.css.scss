@@ -28,10 +28,7 @@ body, textarea, pre, input, li {
   line-height: 1.7em;
 }
 
-#content,
-.contain,
-#post-editor .inner,
-header .inner {
+.inner {
   width: $width;
   position: relative;
   margin: 0 auto;
@@ -263,19 +260,19 @@ header {
 }
 
 code {
-  background: #f2f2f2;
-  font-family: monospace, serif;
-  font-size: 12px;
-  padding: 20px;
+  font-size: 14px;
   display: block;
   white-space: pre;
-  max-height: 330px;
-  overflow: auto;
   margin: 2em 0;
-  @include box-shadow(inset 0 0 20px #ddd);
+
+  pre {
+    font: 14px/22px 'Pragmata Pro', 'Droid Sans Mono', Monaco, Consolas, 'Ubuntu Mono', monospace !important;
+    margin: 0;
+    padding: 20px;
+  }
 }
 
-.contain img {
+.inner img {
   max-width: 100%;
   height: auto;
 }

@@ -88,6 +88,7 @@ function doEditBindings() {
   el.publish
     .click(function publishClick(e) {
       e.preventDefault();
+      state.beganEditing = true;
       el.publish.html('...');
       setDraftInput(!state.post.draft);
       savePost();

@@ -32,10 +32,10 @@ html lang="en-US"
                 li.right= link_to 'email', "mailto:#{INFO['email']}"
               li.right= link_to 'rss', '/posts.rss'
       - if notice
-        #dialog.notice.contain= notice
+        #dialog.notice.inner= notice
       - if alert
-        #dialog.alert.contain= alert
-      section#content
+        #dialog.alert.inner= alert
+      section#content.inner
         - if notice
           span.notice= notice
         = yield

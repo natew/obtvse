@@ -4,7 +4,7 @@
   = render partial: 'form', locals: { f: f }
 
 #posts
-  .contain
+  .inner
     #drafts.col.active
       h2 Drafts
       ul data-items="#{@drafts.to_json(:only => [:id, :title])}"

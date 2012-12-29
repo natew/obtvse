@@ -4,17 +4,23 @@ gem 'rails', '~> 3'
 gem 'jquery-rails', '~> 2'
 
 gem 'thin'
-gem 'turbolinks'
 
+# Auth/users
 gem 'sorcery'
 gem 'bcrypt-ruby', "~> 3.0.0"
 
-gem 'slim'
-gem 'bourbon', '~> 2.0.0.rc1'
+# Syntax highlighting
+gem 'pygments.rb'
 
-gem 'stringex', '~> 1', :git => 'git://github.com/rsl/stringex.git'
+# Frontend Utilities
+gem 'slim'
+gem 'turbolinks'
 gem 'redcarpet'
+gem 'bourbon', '~> 2.0.0.rc1'
 gem 'kaminari', '~> 0.13'
+
+# Ruby Utilities
+gem 'stringex', '~> 1', :git => 'git://github.com/rsl/stringex.git'
 gem 'chronic'
 
 group :production do
