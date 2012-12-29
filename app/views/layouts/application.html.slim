@@ -5,7 +5,7 @@ html lang="en-US"
     = csrf_meta_tag
     = stylesheet_link_tag 'application'
     meta content=INFO['name'] name="author"
-      link href="/posts.rss" rel="alternate" title="RSS" type="application/rss+xml"
+      link href="#{rss_path}" rel="alternate" title="RSS" type="application/rss+xml"
       link href="http://fonts.googleapis.com/css?family=Open+Sans+Condensed:700" rel="stylesheet" type="text/css"
     = javascript_include_tag 'application'
     - if INFO['ga_id']
@@ -30,7 +30,7 @@ html lang="en-US"
                 li= link_to 'github', "https://github.com/#{INFO['github']}"
               - if INFO['email']
                 li.right= link_to 'email', "mailto:#{INFO['email']}"
-              li.right= link_to 'rss', '/posts.rss'
+              li.right= link_to 'rss', rss_path
       - if notice
         #dialog.notice.inner= notice
       - if alert
@@ -39,7 +39,9 @@ html lang="en-US"
         - if notice
           span.notice= notice
         = yield
-      section#footer
+      .avgrund-cover
+    section#footer
+      .inner
         - if action_name == 'index'
           = link_to 'Top', '#', :id => 'back-to-top'
         - else
@@ -47,7 +49,6 @@ html lang="en-US"
         aside
           | powered by
           a href="http://github.com/natew/obtvse.git"  obtvse
-      .avgrund-cover
     - unless logged_in?
       aside#modal-login.avgrund-popup
         - if no_users?

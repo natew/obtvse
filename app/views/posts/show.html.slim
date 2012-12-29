@@ -2,3 +2,8 @@
 = content_for(:page_title) { linked_title }
 
 = render @post
+= render 'signature'
+
+nav.history.clearfix
+  = link_to "#{@next.title}".html_safe, @next, class: 'next' if @next
+  = link_to "#{@previous.title}".html_safe, @previous, class: 'prev' if @previous

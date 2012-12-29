@@ -4,10 +4,6 @@
  *= require prettify
  *= require prettify/vibrant-ink
  *= require avgrund
- *= require form
- *= require main
- *= require modal
- *= require screen
- *= require admin
+ *= require_tree .
  *= require fonts/open-sans
 */

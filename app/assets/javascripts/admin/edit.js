@@ -188,20 +188,18 @@ function savePost(callback) {
     data: el.form.serialize(),
     dataType: 'text',
     success: function savingSuccess(data) {
-      var data = JSON.parse(data),
-          li   = $('#post-'+data.id),
-          list = (data.draft == 'true') ? $('#drafts ul') : $('#published ul');
+      var data = JSON.parse(data);
 
       // Update state
       state.saving = false;
 
-      // Update publish button
+      // Update save button
       el.save.removeClass('saving dirty').addClass('saved');
       setTimeout(function(){el.save.removeClass('saved')},500);
 
       // If we just finished creating a new post
       if (!state.post) {
-        setFormAction('/edit/'+data.id);
+        setFormAction('/edit/' + data.id);
         setFormMethod('put');
       }
 
@@ -212,13 +210,7 @@ function savePost(callback) {
       // Update form
       updatePostState();
 
-      // If item exists move to top, else add to top
-      if (li.length) li.prependTo(list);
-      else {
-        $('#drafts ul').prepend('<li id="post-'+state.post.id+'"><a href="">'+el.title.val()+'</a></li>');
-      }
-
-      fn.log('Saved',data.id,data);
+      fn.log('Saved', data.id, data);
       if (callback) callback.call(this, data);
     },
     error: function (xmlHttpRequest, textStatus, errorThrown) {

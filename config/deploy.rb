@@ -1,6 +1,9 @@
 require "bundler/capistrano"
 load 'deploy/assets'
 
+# Pretty colors
+require 'capistrano_colors'
+
 default_run_options[:pty] = true
 
 set :user, "nwienert"
@@ -18,6 +21,7 @@ role :web, domain
 role :app, domain
 role :db,  domain, :primary => true # This is where Rails migrations will run
 
+after 'deploy:update_code', 'deploy:migrate'
 after 'deploy:update', 'deploy:cleanup'
 after 'deploy:update', 'deploy:create_symlink'
 

@@ -18,6 +18,9 @@ class PostsController < ApplicationController
 
     not_found if @post.draft and !logged_in?
 
+    @next = Post.next(@post).last
+    @previous = Post.previous(@post).first
+
     respond_to do |format|
       if @post.present?
         format.html
@@ -31,7 +34,7 @@ class PostsController < ApplicationController
   def admin
     @no_header = true
     @post = Post.new
-    @published = Post.where(draft:false).order('created_at desc')
+    @published = Post.where(draft:false).order('published_at desc')
     @drafts = Post.where(draft:true).order('updated_at desc')
   end
 

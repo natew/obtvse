@@ -1,0 +1,110 @@
+@import "bourbon";
+@import "theme";
+
+#content {
+  clear: both;
+
+  article {
+    padding: 0;
+    margin: 0 0 6em 0;
+    position: relative;
+  }
+
+  time {
+    margin: 0 0 -1.4em 0;
+    padding: 0;
+    font-size: 14px;
+    text-transform: uppercase;
+    color: #9a9a9a;
+    display: block;
+  }
+
+  h1 {
+    margin: 1em 0;
+
+    &.external {
+      margin-top: 25px;
+
+      .permalink {
+        margin-left: 8px;
+        font-size: 19px;
+        color: #999;
+        border: none;
+      }
+    }
+
+    a {
+      border: none;
+      color: #000;
+    }
+  }
+
+  p img {
+    display: block;
+    margin: 2em auto;
+  }
+
+  blockquote {
+    margin: 1em 40px 1em 20px;
+    padding: 0 20px;
+    border-left: 5px solid lightblue;
+  }
+
+  li {
+    margin: 1em 0;
+  }
+
+  code {
+    padding: 20px;
+    display: block;
+    white-space: pre;
+    font: 14px/24px 'Pragmata Pro', 'Droid Sans Mono', Monaco, Consolas, 'Ubuntu Mono', monospace !important;
+    margin: 2em 0;
+  }
+
+  nav.history {
+    margin: 2em 0;
+
+    a {
+      max-height: 2em;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      max-width: 48%;
+    }
+
+    .next {
+      float: right;
+      padding-right: 10px;
+
+      &:before {
+        content: " »";
+        display: inline-block;
+        float: right;
+      }
+    }
+
+    .prev {
+      float: left;
+
+      &:before {
+        content: "« ";
+      }
+    }
+  }
+}
+
+.signature {
+  border: 1px solid #eee;
+  text-align: center;
+  padding: 20px;
+
+  a {
+    font-weight: bold;
+  }
+}
+
+.inner img {
+  max-width: 100%;
+  height: auto;
+}

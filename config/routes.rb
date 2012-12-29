@@ -9,6 +9,7 @@ Obtvse::Application.routes.draw do
   get 'signup' => 'users#new', as: 'signup'
 
   get '/posts(.:format)', to: 'posts#index'
+  get '/posts.rss', to: 'posts#index', as: 'rss'
 
   resources :users
   resources :sessions

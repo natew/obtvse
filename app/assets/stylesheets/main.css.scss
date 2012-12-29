@@ -1,5 +1,5 @@
 @import "bourbon";
-@import "themes/default";
+@import "theme";
 
 ::selection, ::-moz-selection {
   background: $theme;
@@ -160,6 +160,11 @@ header {
 
 /*    BODY ELEMENTS    */
 
+aside {
+  position:relative;
+  display:block;
+}
+
 #dialog {
   margin-top: -2em;
   margin-bottom: 2em;
@@ -173,68 +178,6 @@ header {
   &.alert {
     color: #ec2420;
     background: rgba(#ec2420, 0.1);
-  }
-}
-
-#content {
-  clear: both;
-
-  article {
-    padding: 0;
-    margin: 0 0 6em 0;
-    position: relative;
-  }
-
-  time {
-    margin: 0 0 -1.4em 0;
-    padding: 0;
-    font-size: 14px;
-    text-transform: uppercase;
-    color: #9a9a9a;
-    display: block;
-  }
-
-  h1 {
-    margin: 1em 0;
-
-    &.external {
-      margin-top: 25px;
-
-      .permalink {
-        margin-left: 8px;
-        font-size: 19px;
-        color: #999;
-        border: none;
-      }
-    }
-
-    a {
-      border: none;
-      color: #000;
-    }
-  }
-
-  p img {
-    display: block;
-    margin: 2em auto;
-  }
-
-  blockquote {
-    margin: 1em 40px 1em 20px;
-    padding: 0 20px;
-    border-left: 5px solid lightblue;
-  }
-
-  li {
-    margin: 1em 0;
-  }
-
-  code {
-    padding: 20px;
-    display: block;
-    white-space: pre;
-    font: 14px/24px 'Pragmata Pro', 'Droid Sans Mono', Monaco, Consolas, 'Ubuntu Mono', monospace !important;
-    margin: 2em 0;
   }
 }
 
@@ -267,11 +210,6 @@ header {
   }
 }
 
-.inner img {
-  max-width: 100%;
-  height: auto;
-}
-
 #post_title {
   width: 100%;
   border: none;
@@ -296,24 +234,35 @@ nav.pagination {
 
 nav.pagination a {
   margin: 0 15px;
+  font-weight: bold;
 }
 
 #footer {
+  border-top: 1px solid #eee;
   display: block;
-  font-size: 14px;
+  font-size: 16px;
   color: #999;
-  margin: 60px 0 30px 0;
+  padding: 1em 0;
+  margin: 2em 0 0;
   line-height: 3em;
   text-align: center;
 
   aside {
     display: block;
-    font-size: .8em;
+    font-size: .9em;
   }
 }
 
-.goaway {position: absolute; clip: rect(0,0,0,0);}
-.clearfix:before, .clearfix:after {content:''; display:table;}
-.hide {visibility:hidden; height:1px; clip:rect(0 0 0 0); position:absolute;}
-aside {position:relative; display:block;}
-input, textarea {outline:none; background:none;}
+/* nonsense */
+
+.clearfix:before, .clearfix:after {
+  content:'';
+  display:table;
+}
+
+.hide {
+  visibility: hidden;
+  height: 1px;
+  clip:rect(0 0 0 0);
+  position: absolute;
+}

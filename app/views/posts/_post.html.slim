@@ -1,5 +1,5 @@
 article id="post-#{post.id}"
-  time= post.created_at.to_formatted_s(:day_month_year)
+  time= post.published_at.to_formatted_s(:day_month_year)
   - if post.external?
     h1.external
       - if @single_post
