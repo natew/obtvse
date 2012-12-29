@@ -32,7 +32,7 @@ module ApplicationHelper
       match = line.match(/^http.*(?:youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=)([^#\&\?]*).*/)
 
       if match
-        render partial: 'youtube', locals: { video: match[1] }
+        render partial: 'youtube.html', locals: { video: match[1] }
       else
         line
       end

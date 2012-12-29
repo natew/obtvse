@@ -12,7 +12,7 @@ article id="post-#{post.id}"
       - if @single_post
         = post.title
       - else
-        = link_to post.title, post.slug
+        = link_to post.title, post
   .post.inner
     - if post.content
       = markdown(post.content).to_html.html_safe

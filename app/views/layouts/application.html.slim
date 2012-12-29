@@ -30,7 +30,7 @@ html lang="en-US"
                 li= link_to 'github', "https://github.com/#{INFO['github']}"
               - if INFO['email']
                 li.right= link_to 'email', "mailto:#{INFO['email']}"
-              li.right= link_to 'rss', rss_path
+              li.right= link_to 'rss', rss_path, class: 'open-external'
       - if notice
         #dialog.notice.inner= notice
       - if alert

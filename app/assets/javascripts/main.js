@@ -50,7 +50,7 @@ $(function() {
 
     prettyPrint();
 
-    $('header a:not(h1 a), .open-external').click(function(e) {
+    $('.open-external, a[href^="http://"]').click(function(e) {
       e.preventDefault();
       window.open($(this).attr('href'));
     });
