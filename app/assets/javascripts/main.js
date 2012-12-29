@@ -1,6 +1,5 @@
 $(function() {
-  var $body = $('body'),
-      $html = $('html');
+  var $html = $('html');
 
   pageActions();
 
@@ -57,7 +56,7 @@ $(function() {
       window.open($(this).attr('href'));
     });
 
-    if ($body.is('.no-users')) {
+    if ($('body').is('.no-users')) {
       $('#blog-button').click();
     }
   }
