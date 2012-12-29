@@ -1,3 +1,5 @@
+- placeholder ||= ''
+
 #post-editor.split-section
   .inner
     - if @post.errors.any?
@@ -8,7 +10,7 @@
       pre
         span
         br/
-      = f.text_area :title, rows: 1, placeholder: 'Begin typing...'
+      = f.text_area :title, rows: 1, placeholder: placeholder
     fieldset#content-fieldset.markdown
       #text-content.expandingArea
         pre

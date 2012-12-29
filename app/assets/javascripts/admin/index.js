@@ -26,20 +26,20 @@ $.subscribe('index:enter', function() {
 
 $(window)
   .resize(setColumnHeights)
-  .click(function windowClick(e){
-    if (!state.editing)
-      el.title.focus();
-  });
+  .focus(focusTitle);
+
+$html
+  .on('click.anywhere', focusTitle);
 
 function setupFiltering() {
   // Filtering and other functions with the title field
-  var draftsItems    = $('#drafts ul').data('items'),
-      publishedItems = $('#published ul').data('items');
+  var draftsItems    = $('#drafts ul:first').data('items'),
+      publishedItems = $('#published ul:first').data('items');
 
   el.title
-    .keyup(function titleKeyup(e) {
-      // Filtering
-      var val = $(this).val();
+    .on('keyup.filter', function(e) {
+      var val = el.title.val();
+
       if (val) {
         prevVal = val;
         var draftIds = filterTitle(draftsItems, val),
@@ -48,8 +48,10 @@ function setupFiltering() {
         draftIds ? showOnly('#drafts li', draftIds) : $('#drafts li').addClass('hidden');
         pubIds   ? showOnly('#published li', pubIds) : $('#published li').addClass('hidden');
 
-        if (!draftIds.length && !pubIds.length)
+        if (!draftIds.length && !pubIds.length) {
+          el.title.off('keyup.filter');
           goToNewPost();
+        }
 
         state.itemIndex[0] = 0;
         state.itemIndex[1] = 0;
@@ -62,7 +64,8 @@ function setupFiltering() {
         $('#drafts li, #published li').removeClass('hidden');
       }
     })
-    .keydown(function titleKeydown(e) {
+
+    .on('keydown.filter', function(e) {
       switch (e.which) {
         // Esc
         case 27:
@@ -90,7 +93,7 @@ function showOnly(context, indices) {
 function setColumnHeights() {
   if (state.editing) return false;
 
-  var content_height = Math.max($(window).height() - el.title.height()-40,100);
+  var content_height = Math.max($(window).height() - el.title.height() - 100 ,100);
   col_height = $(window).height()-125;
 
   $('.col ul').css('height', col_height);
@@ -147,4 +150,9 @@ function filterTitle(objects, val) {
     }).map(function filterTitleMap(el) {
       return el.id;
     });
+}
+
+function focusTitle() {
+  if (!state.editing)
+    el.title.focus();
 }

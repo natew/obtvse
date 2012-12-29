@@ -11,15 +11,11 @@ $(function() {
   $html.addClass('transition');
   setTimeout(function(){$html.addClass('change')},400);
 
-  $('#back-to-top').click(function(e) {
-    e.preventDefault();
-    $('html,body').animate({scrollTop:0});
-  });
-
   // Modals
   Avgrund = Avgrund();
   var lastModalTarget;
 
+  // Bind to HTML (turbolinks replaces body on each click)
   $html
     .on('click', '.modal', function(e) {
       e.preventDefault();
@@ -35,12 +31,18 @@ $(function() {
     .on('click', '.modal-close, .avgrund-cover', function(e) {
       e.preventDefault();
       Avgrund.hide();
+    })
+
+    .on('click', '#back-to-top', function(e) {
+      e.preventDefault();
+      $('html,body').animate({scrollTop:0});
     });
 
   $(document)
     .on('avgrund:show', function() {
       window.location.hash = lastModalTarget;
-    }).on('avgrund:hide', function() {
+    })
+    .on('avgrund:hide', function() {
       window.location.hash = '';
       window.history.replaceState('http://' + window.location.host + '/', document.title, null);
     });

@@ -1,5 +1,6 @@
+- placeholder ||= 'Title here...'
 = form_for @post, url: @post_path do |f|
-  = render partial: 'form', locals: { f: f }
+  = render partial: 'form', locals: { f: f, placeholder: placeholder }
   #post-preview.split-section
     .inner
   #bar

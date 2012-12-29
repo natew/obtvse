@@ -22,6 +22,8 @@ var showdown       = new Showdown.converter(),
     };
 
 $.subscribe('edit:enter', function(id) {
+  state.editing = true;
+
   el = fn.getjQueryElements(editElements);
   makeExpandingAreas();
   setPostState();
@@ -41,8 +43,8 @@ $.subscribe('edit:enter', function(id) {
 });
 
 $.subscribe('edit:leave', function() {
-  savePost();
   state.editing = false;
+  savePost();
 });
 
 $(window)
@@ -79,16 +81,10 @@ function doEditBindings() {
     }
   });
 
-  // Content.focus - detect beginning of editing
-  el.content.focus(function() {
-    state.beganEditing = true;
-  });
-
   // Publish button
   el.publish
     .click(function publishClick(e) {
       e.preventDefault();
-      state.beganEditing = true;
       el.publish.html('...');
       setDraftInput(!state.post.draft);
       savePost();
@@ -140,26 +136,17 @@ var autoSaveInterval;
 function resetAutoSave() {
   // Interval
   clearInterval(autoSaveInterval);
-  autoSaveInterval = setInterval(function autoSave(){
-    if (state.editing && state.changed && !state.saving) {
-      savePost();
-    }
-  }, saveInterval);
+  autoSaveInterval = setInterval(savePost, saveInterval);
 
   // Set to dirty on change/input
-  $('#post_content, #post_title, #post_slug, #post_url').on('change input', function(){
-    // beganEditing prevents from saving just anything thats type in the title box
-    // Until focus is set on the content, it will be false
-    if (state.beganEditing) {
-      state.changed = true;
-      el.save.addClass('dirty');
-    }
+  $('input, textarea').on('change input', function(){
+    state.changed = true;
+    el.save.addClass('dirty');
   });
 }
 
 function setPostState() {
   state.editing = true;
-  state.beganEditing = false;
   state.post = $('#post').data('state');
 }
 
@@ -174,7 +161,8 @@ function updatePostState() {
 
 // Saves the post
 function savePost(callback) {
-  if (!state.beganEditing) return false;
+  if (state.saving || !state.changed)
+    return false;
 
   state.saving = true;
   state.changed = false;
@@ -195,7 +183,9 @@ function savePost(callback) {
 
       // Update save button
       el.save.removeClass('saving dirty').addClass('saved');
-      setTimeout(function(){el.save.removeClass('saved')},500);
+      setTimeout(function() {
+        if (el.save) el.save.removeClass('saved')
+      }, 500);
 
       // If we just finished creating a new post
       if (!state.post) {
@@ -266,13 +256,11 @@ function setDraft(draft) {
 }
 
 function setDraftInput(draft) {
-  fn.log(draft);
   el.draft.attr('value',(draft ? 1 : 0));
   el.draft.attr('checked',(draft ? 'checked' : ''));
 }
 
 function updateDraftButton(draft) {
-  fn.log(draft);
   if (draft) el.publish.html('Draft').addClass('icon-edit').removeClass('icon-check');
   else       el.publish.html('Published').removeClass('icon-edit').addClass('icon-check');
 }
@@ -331,7 +319,7 @@ function showBar(show) {
     clearTimeout(hideBarTimeout);
     el.bar.removeClass('shy');
   }
-  else if (!state.barPinned && !el.bar.is(':hover')) {
+  else if (el.bar && !state.barPinned && !el.bar.is(':hover')) {
     el.bar.addClass('shy');
   }
 }

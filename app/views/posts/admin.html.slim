@@ -1,12 +1,12 @@
 = content_for(:title) { "Admin" }
 
 = form_for @post do |f|
-  = render partial: 'form', locals: { f: f }
+  = render partial: 'form', locals: { f: f, placeholder: "Type your idea" }
 
 #posts
   .inner
     #drafts.col.active
-      h2 Drafts
+      h2 Ideas
       ul data-items="#{@drafts.to_json(:only => [:id, :title])}"
         = render partial: 'li', collection: @drafts
     #published.col

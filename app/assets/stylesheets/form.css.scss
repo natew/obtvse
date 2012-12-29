@@ -26,6 +26,11 @@ form {
     }
   }
 
+  input, textarea {
+    border: none;
+    outline: none;
+  }
+
   input[type="text"],
   input[type="email"],
   input[type="password"] {

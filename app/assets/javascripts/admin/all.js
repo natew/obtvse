@@ -14,7 +14,8 @@ var state = {
   itemIndex    : [0, 0]
 };
 
-var el;
+var el,
+    $html = $('html');
 
 $(function() {
 

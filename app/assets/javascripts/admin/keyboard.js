@@ -11,6 +11,7 @@ $(window)
 
     // Not editing
     if (!state.editing) { //!$.inArray(state.lastKey,disableKeys)
+      el.title.focus();
       switch (e.which) {
         // Enter
         case 13:
