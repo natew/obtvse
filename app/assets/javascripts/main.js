@@ -1,12 +1,6 @@
 $(function() {
   var $html = $('html');
 
-  pageActions();
-
-  $(document).on('page:load', function() {
-    pageActions();
-  });
-
   $html.addClass('transition');
   setTimeout(function(){$html.addClass('change')},400);
 
@@ -45,6 +39,9 @@ $(function() {
       window.location.hash = '';
       window.history.replaceState('http://' + window.location.host + '/', document.title, null);
     });
+
+  pageActions();
+  $(document).on('page:load', pageActions);
 
   function pageActions() {
     $('.post').fitVids();
