@@ -44,8 +44,6 @@ $(function() {
   $(document).on('page:load', pageActions);
 
   function pageActions() {
-    $('.post').fitVids();
-
     prettyPrint();
 
     $('.open-external, a[href^="http://"]').click(function(e) {

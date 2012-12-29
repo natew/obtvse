@@ -3,36 +3,16 @@
 /* iPhone [portrait + landscape] */
 @media only screen and (max-width: 768px),
 only screen and (-webkit-min-device-pixel-ratio: 2) {
-  body, li {
-    font-size: 28px;
-  }
 
   header {
     h1 a {
       margin: .5em 0;
-      font-size: 46px;
-    }
-
-    p {
-      font-size: 24px;
     }
 
     ul {
       position: relative;
       margin: 1em 0 2em -8px;
-
-      li a {
-        font-size: 24px;
-      }
     }
-  }
-
-  #content {
-    time { font-size: 24px; }
-    h1 { font-size: 56px; }
-    h2 { font-size: 46px; }
-    h3 { font-size: 38px; }
-    code { font-size: 24px; }
   }
 
   #content, .inner, header .inner {

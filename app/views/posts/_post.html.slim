@@ -1,5 +1,4 @@
 article id="post-#{post.id}"
-  time= post.published_at.to_formatted_s(:day_month_year)
   - if post.external?
     h1.external
       - if @single_post
@@ -13,6 +12,7 @@ article id="post-#{post.id}"
         = post.title
       - else
         = link_to post.title, post
-  .post.inner
+  time= post.published_at.to_formatted_s(:day_month_year)
+  .post
     - if post.content
       = markdown(post.content).to_html.html_safe
