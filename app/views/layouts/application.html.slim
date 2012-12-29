@@ -5,13 +5,13 @@ html lang="en-US"
     = csrf_meta_tag
     = stylesheet_link_tag 'application'
     meta content=INFO['name'] name="author"
-      link href="#{rss_path}" rel="alternate" title="RSS" type="application/rss+xml"
-      link href="http://fonts.googleapis.com/css?family=Open+Sans+Condensed:700" rel="stylesheet" type="text/css"
+    link href="#{rss_path}" rel="alternate" title="RSS" type="application/rss+xml"
+    link href="http://fonts.googleapis.com/css?family=Open+Sans+Condensed:700" rel="stylesheet" type="text/css"
     = javascript_include_tag 'application'
     - if INFO['ga_id']
       /! Google Analytics
       javascript:
-        var _gaq=[['_setAccount',' INFO['ga_id'] '],['_trackPageview']];
+        var _gaq=[['_setAccount',' #{INFO['ga_id']} '],['_trackPageview']];
         (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
         g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
         s.parentNode.insertBefore(g,s)}(document,'script'));
