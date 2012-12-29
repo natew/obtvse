@@ -3,6 +3,9 @@ $(function() {
 
   $('.post').fitVids();
 
+  hljs.tabReplace = '  ';
+  hljs.initHighlightingOnLoad();
+
   $body.addClass('transition');
   setTimeout(function(){$body.addClass('change')},400);
 

@@ -9,18 +9,15 @@ gem 'thin'
 gem 'sorcery'
 gem 'bcrypt-ruby', "~> 3.0.0"
 
-# Syntax highlighting
-gem 'pygments.rb'
-
 # Frontend Utilities
 gem 'slim'
 gem 'turbolinks'
-gem 'redcarpet'
+gem 'redcarpet', require: false
 gem 'bourbon', '~> 2.0.0.rc1'
 gem 'kaminari', '~> 0.13'
 
 # Ruby Utilities
-gem 'stringex', '~> 1', :git => 'git://github.com/rsl/stringex.git'
+gem 'stringex', '~> 1', github: 'rsl/stringex'
 gem 'chronic'
 
 group :production do

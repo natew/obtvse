@@ -42,10 +42,15 @@ module ApplicationHelper
 end
 
 # create a custom renderer that allows highlighting of code blocks
+
 class HTMLwithPygments < Redcarpet::Render::HTML
-  require 'pygments'
+  # require 'pygments'
 
   def block_code(code, lang)
-    "<code>#{Pygments.highlight(code)}</code>"
+    if code
+      code.gsub!(/[\<]/, '&lt;')
+      code.gsub!(/[\>]/, '&gt;')
+      "<pre><code>#{code}</code></pre>"
+    end
   end
 end

@@ -259,15 +259,11 @@ header {
   }
 }
 
-code {
-  font-size: 14px;
-  display: block;
-  white-space: pre;
+pre {
+  font: 14px/22px 'Pragmata Pro', 'Droid Sans Mono', Monaco, Consolas, 'Ubuntu Mono', monospace !important;
   margin: 2em 0;
 
-  pre {
-    font: 14px/22px 'Pragmata Pro', 'Droid Sans Mono', Monaco, Consolas, 'Ubuntu Mono', monospace !important;
-    margin: 0;
+  code {
     padding: 20px;
   }
 }
