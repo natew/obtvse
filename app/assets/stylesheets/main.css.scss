@@ -17,15 +17,13 @@ body {
 
 body, textarea, pre, input, li {
   /* These are overwritten if you include one of the /fonts css files */
-  font: 18px/1.8em 'Helvetica Nueue', Helvetica, Arial, sans-serif;
+  font: 18px/1.5em 'Source Sans Pro', 'Helvetica Nueue', Helvetica, Arial, sans-serif;
 }
 
 #body {
   background: $body-bg;
   position: relative;
-  border-top: 2px solid $theme;
   overflow: hidden;
-  line-height: 1.7em;
 }
 
 .inner {
@@ -38,16 +36,15 @@ body, textarea, pre, input, li {
 
 h1,h2,h3,h4,h5,#text-title * {
   font-weight: normal;
-  font-family: 'Open Sans Condensed', Times New Roman, serif;
-  line-height: 1.3em;
+  font-weight: 900;
+  line-height: 1.25em;
 }
 
 #text-title,
 #text-title pre,
 #text-title textarea,
 h1 {
-  font-size: 34px;
-  line-height: 1.4em;
+  font-size: 38px;
 }
 
 h1, #text-title {
@@ -59,17 +56,17 @@ h1.external {
 }
 
 h2 {
-  font-size: 26px;
-  color: #777;
+  font-size: 24px;
+  color: rgba(0,0,0,0.6);
 }
 
 h3 {
-  font-size: 22px;
-  color: #999;
+  font-size: 20px;
+  color: rgba(0,0,0,0.5);
 }
 
 h2, h3, h4 {
-  margin: 1.8em 0 1em 0;
+  margin: 1em 0 .5em 0;
 }
 
 
@@ -80,7 +77,7 @@ a:visited
 a:active {
   color: $theme;
   text-decoration: none;
-  @include transition(color .1s linear);
+  @include transition(all .1s linear);
 }
 
 a:hover,
@@ -105,10 +102,9 @@ ol, ul {
 /*    HEADER    */
 
 header {
-  padding: 1em 0;
-  margin-bottom: 2em;
+  padding: 0;
+  margin-bottom: 1em;
   width: 100%;
-  border-bottom: 1px solid #eee;
 
   .inner {
     position: relative;
@@ -117,9 +113,11 @@ header {
   h1 {
     position: relative;
     z-index: 10;
-    margin: -.2em 0 0;
-    font-size: 30px;
+    margin: .5em 0 0;
+    font-size: 38px;
     pointer-events: none;
+    text-align: center;
+    font-weight: 600;
 
     a {
       display: inline-block;
@@ -130,29 +128,34 @@ header {
 
   p {
     color: #777;
-    margin: 10px 0 0;
-    font-size: 16px;
-    line-height: 1.8em;
+    margin: .5em 0;
+    font-size: 18px;
+    line-height: 2em;
+    text-align: center;
+
+    &:first-line {
+      font-size: 22px;
+    }
   }
 
   ul {
-    padding: 0;
+    padding: 5px 0;
     margin: 0 -6px;
     list-style: none;
-    position: absolute;
-    top: 0;
-    right: 0;
+    text-align: center;
+    border-top: 1px solid rgba(0,0,0,0.05);
   }
 
   li {
     margin: 0;
     display: inline;
-    float: left;
 
     a {
-      font-size: 14px;
+      font-size: 16px;
       padding: 3px 8px;
-      color: #333;
+      margin: 0;
+      border-radius: 16px;
+      color: rgba(0,0,0,0.8);
     }
   }
 }

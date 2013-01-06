@@ -12,8 +12,9 @@ gem 'bcrypt-ruby', "~> 3.0.0"
 # Frontend Utilities
 gem 'slim'
 gem 'turbolinks'
-gem 'redcarpet', require: false
 gem 'bourbon', '~> 2.0.0.rc1'
+
+gem 'redcarpet', require: false
 gem 'kaminari', '~> 0.13'
 
 # Ruby Utilities

@@ -3,6 +3,7 @@
 
 #content {
   clear: both;
+  color: rgba(0,0,0,0.78);
 
   article {
     padding: 0;
@@ -15,12 +16,10 @@
   }
 
   time {
-    margin: -2em 0 1em;
+    margin: -1.4em 0 0;
     padding: 0;
-    font-size: 14px;
-    font-weight: bold;
-    text-transform: uppercase;
-    color: #9a9a9a;
+    font-size: 16px;
+    color: rgba(0,0,0,0.3);
     display: block;
   }
 
@@ -40,13 +39,22 @@
 
     a {
       border: none;
-      color: #000;
+      color: rgba(0,0,0,0.8);
     }
   }
 
-  p img {
-    display: block;
-    margin: 2em auto;
+  p {
+    margin-bottom: .5em;
+
+    img {
+      display: block;
+      margin: 2em auto;
+    }
+  }
+
+  p:first-child {
+    font-size: 22px;
+    line-height: 1.5em;
   }
 
   blockquote {
@@ -55,8 +63,12 @@
     border-left: 5px solid lightblue;
   }
 
-  li {
+  ul {
     margin: 1em 0;
+  }
+
+  li {
+    margin: .5em 0;
   }
 
   code {
@@ -64,7 +76,7 @@
     display: block;
     white-space: pre;
     font: 14px/24px 'Pragmata Pro', 'Droid Sans Mono', Monaco, Consolas, 'Ubuntu Mono', monospace !important;
-    margin: 2em 0;
+    margin: 1em 0;
   }
 
   nav.history {
