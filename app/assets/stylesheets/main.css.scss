@@ -37,14 +37,15 @@ body, textarea, pre, input, li {
 h1,h2,h3,h4,h5,#text-title * {
   font-weight: normal;
   font-weight: 900;
-  line-height: 1.25em;
+  line-height: 1.1em;
 }
 
 #text-title,
 #text-title pre,
 #text-title textarea,
 h1 {
-  font-size: 38px;
+  font-size: 48px;
+  letter-spacing: -1px;
 }
 
 h1, #text-title {
@@ -66,6 +67,7 @@ h3 {
 }
 
 h2, h3, h4 {
+  line-height: 1.1em;
   margin: 1em 0 .5em 0;
 }
 
@@ -114,10 +116,9 @@ header {
     position: relative;
     z-index: 10;
     margin: .5em 0 0;
-    font-size: 38px;
+    font-size: 36px;
     pointer-events: none;
     text-align: center;
-    font-weight: 600;
 
     a {
       display: inline-block;
@@ -128,7 +129,7 @@ header {
 
   p {
     color: #777;
-    margin: .5em 0;
+    margin: .25em 0 .5em;
     font-size: 18px;
     line-height: 2em;
     text-align: center;
