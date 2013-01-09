@@ -11,13 +11,13 @@
 body {
   background: $body-bg;
   color: $text-color;
-  -webkit-font-smoothing: antialiased; /* fix for borked text when animating */
+  -webkit-font-smoothing: antialiased;
   word-wrap: break-word;
 }
 
 body, textarea, pre, input, li {
   /* These are overwritten if you include one of the /fonts css files */
-  font: 18px/1.5em 'Source Sans Pro', 'Helvetica Nueue', Helvetica, Arial, sans-serif;
+  font: 18px/1.6em 'Source Sans Pro', 'Helvetica Nueue', Helvetica, Arial, sans-serif;
 }
 
 #body {
@@ -34,12 +34,6 @@ body, textarea, pre, input, li {
 
 /*    H1-H6    */
 
-h1,h2,h3,h4,h5,#text-title * {
-  font-weight: normal;
-  font-weight: 900;
-  line-height: 1.1em;
-}
-
 #text-title,
 #text-title pre,
 #text-title textarea,
@@ -53,12 +47,12 @@ h1, #text-title {
 }
 
 h1.external {
-  font-size: 20px;
+  font-size: 32px;
 }
 
 h2 {
   font-size: 24px;
-  color: rgba(0,0,0,0.6);
+  color: rgba(0,0,0,0.65);
 }
 
 h3 {
@@ -66,9 +60,13 @@ h3 {
   color: rgba(0,0,0,0.5);
 }
 
-h2, h3, h4 {
+h1, h2, h3, h4 {
   line-height: 1.1em;
-  margin: 1em 0 .5em 0;
+  margin: 1.25em 0 .5em 0;
+}
+
+h1, h2, h3, h4, #text-title *, time {
+  font-family: 'Chatype Regular', 'Helvetica Nueue', Helvetica, Arial, sans-serif !important;
 }
 
 
@@ -87,15 +85,6 @@ a:hover,
   color: $theme-light !important;
 }
 
-article a,
-header p a {
-  border-bottom: 1px dotted #ddd;
-
-  &:hover {
-    border-bottom-style: solid;
-  }
-}
-
 ol, ul {
   margin: 2em 0;
 }
@@ -104,9 +93,10 @@ ol, ul {
 /*    HEADER    */
 
 header {
-  padding: 0;
-  margin-bottom: 1em;
-  width: 100%;
+  text-align: center;
+  padding: 1em 0;
+  background: $theme;
+  border-bottom: 1px solid rgba(0,0,0,0.04);
 
   .inner {
     position: relative;
@@ -115,36 +105,35 @@ header {
   h1 {
     position: relative;
     z-index: 10;
-    margin: .5em 0 0;
+    margin: 0;
     font-size: 36px;
     pointer-events: none;
-    text-align: center;
 
     a {
       display: inline-block;
       pointer-events: auto;
-      color: $theme;
+      color: #fff;
     }
   }
 
   p {
-    color: #777;
-    margin: .25em 0 .5em;
+    color: rgba(255,255,255,0.6);
+    margin: 12px 0 0;
     font-size: 18px;
-    line-height: 2em;
-    text-align: center;
+  }
 
-    &:first-line {
-      font-size: 22px;
+  a {
+    color: #fff;
+
+    &:hover {
+      color: lighten($theme, 50%) !important;
     }
   }
 
   ul {
-    padding: 5px 0;
-    margin: 0 -6px;
+    margin: 14px 0 0;
+    padding: 0;
     list-style: none;
-    text-align: center;
-    border-top: 1px solid rgba(0,0,0,0.05);
   }
 
   li {
@@ -152,11 +141,32 @@ header {
     display: inline;
 
     a {
-      font-size: 16px;
-      padding: 3px 8px;
-      margin: 0;
-      border-radius: 16px;
-      color: rgba(0,0,0,0.8);
+      margin: 0 7px -10px;
+      color: rgba(0,0,0,0.3);
+
+      &:hover {
+        color: #000 !important;
+      }
+
+      &[class^="icon"],
+      &[class*=" icon-"] {
+        display: inline-block;
+        height: 30px;
+        width: 34px;
+        overflow: hidden;
+
+        &:before {
+          font-size: 32px;
+        }
+      }
+
+      &.icon-twitter {
+        line-height: 1.7em;
+
+        &:before {
+          font-size: 38px;
+        }
+      }
     }
   }
 }

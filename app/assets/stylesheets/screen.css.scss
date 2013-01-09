@@ -4,17 +4,6 @@
 @media only screen and (max-width: 768px),
 only screen and (-webkit-min-device-pixel-ratio: 2) {
 
-  header {
-    h1 a {
-      margin: .5em 0;
-    }
-
-    ul {
-      position: relative;
-      margin: 1em 0 2em -8px;
-    }
-  }
-
   #content, .inner, header .inner {
     width: auto;
     margin: 0 8%;

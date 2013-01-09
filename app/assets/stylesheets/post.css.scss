@@ -7,7 +7,7 @@
 
   article {
     padding: 0;
-    margin: 0 0 6em 0;
+    margin: 0 0 4em 0;
     position: relative;
 
     embed, object {
@@ -16,15 +16,16 @@
   }
 
   time {
-    margin: -2.4em 0 0;
+    margin: 2em 0 -2em 0;
     padding: 0;
-    font-size: 16px;
-    color: rgba(0,0,0,0.3);
+    font-size: 14px;
+    color: rgba(0,0,0,0.35);
     display: block;
+    text-align: center;
   }
 
   h1 {
-    margin: 1em 0;
+    margin: 1em 0 .5em;
 
     &.external {
       margin-top: 25px;
@@ -32,7 +33,7 @@
       .permalink {
         margin-left: 8px;
         font-size: 19px;
-        color: #999;
+        color: rgba(0,0,0,0.5);
         border: none;
       }
     }
@@ -44,8 +45,6 @@
   }
 
   p {
-    margin-bottom: .5em;
-
     img {
       display: block;
       margin: 2em auto;
@@ -64,7 +63,7 @@
   }
 
   ul {
-    margin: 1em 0;
+    margin: .5em 0;
   }
 
   li {
