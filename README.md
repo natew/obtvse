@@ -13,9 +13,11 @@ Password: password
 Installation
 ============
 
+**Obtvse uses some ruby 1.9 syntax, so please make sure your `ruby -v` shows at least 1.9, and please use 1.9 on your host as well!**
+
 If you are new to Rails development, check out guides for getting your development environment set up for [Mac](http://astonj.com/tech/setting-up-a-ruby-dev-enviroment-on-lion/) and [Windows](http://jelaniharris.com/2011/installing-ruby-on-rails-3-in-windows/).
 
-    git clone git://github.com/NateW/obtvse.git
+    git clone git://github.com/natew/obtvse.git
     cd obtvse
     bundle install
     rake db:migrate
