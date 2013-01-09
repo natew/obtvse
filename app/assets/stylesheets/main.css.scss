@@ -2,8 +2,7 @@
 @import "theme";
 
 ::selection, ::-moz-selection {
-  background: $theme;
-  color: $selection-color;
+  background: $selection-bg;
 }
 
 * { @include box-sizing(border-box); }
@@ -17,7 +16,7 @@ body {
 
 body, textarea, pre, input, li {
   /* These are overwritten if you include one of the /fonts css files */
-  font: 18px/1.6em 'Source Sans Pro', 'Helvetica Nueue', Helvetica, Arial, sans-serif;
+  font: 18px/1.55em 'Source Sans Pro', 'Helvetica Nueue', Helvetica, Arial, sans-serif;
 }
 
 #body {
@@ -42,10 +41,6 @@ h1 {
   letter-spacing: -1px;
 }
 
-h1, #text-title {
-  margin: 0.67em 0;
-}
-
 h1.external {
   font-size: 32px;
 }
@@ -60,17 +55,21 @@ h3 {
   color: rgba(0,0,0,0.5);
 }
 
-h1, h2, h3, h4 {
+h1, h2, h3, h4, #text-title {
   line-height: 1.1em;
   margin: 1.25em 0 .5em 0;
 }
 
-h1, h2, h3, h4, #text-title *, time {
-  font-family: 'Chatype Regular', 'Helvetica Nueue', Helvetica, Arial, sans-serif !important;
+h1, h2, h3, h4, #text-title * {
+  font-family: 'Chatype Thin', 'Helvetica Nueue', Helvetica, Arial, sans-serif !important;
 }
 
 
 /*    BASE ELEMENTS    */
+
+p {
+  margin: .5em 0 1em;
+}
 
 a,
 a:visited
@@ -94,9 +93,8 @@ ol, ul {
 
 header {
   text-align: center;
-  padding: 1em 0;
-  background: $theme;
-  border-bottom: 1px solid rgba(0,0,0,0.04);
+  padding: .75em 0;
+  border-bottom: 2px solid rgba(0,0,0,0.04);
 
   .inner {
     position: relative;
@@ -106,35 +104,33 @@ header {
     position: relative;
     z-index: 10;
     margin: 0;
-    font-size: 36px;
+    font-size: 32px;
     pointer-events: none;
+    font-family: 'Chatype Medium' !important;
 
     a {
       display: inline-block;
       pointer-events: auto;
-      color: #fff;
+      color: $logo;
     }
   }
 
   p {
-    color: rgba(255,255,255,0.6);
-    margin: 12px 0 0;
+    color: rgba(0,0,0,0.4);
+    margin: .4em 0 .2em;
     font-size: 18px;
-  }
 
-  a {
-    color: #fff;
-
-    &:hover {
-      color: lighten($theme, 50%) !important;
+    a {
+      border-radius: 6px;
     }
   }
+}
 
-  ul {
-    margin: 14px 0 0;
-    padding: 0;
-    list-style: none;
-  }
+#connect {
+  margin: 1em 0 0;
+  padding: 0;
+  list-style: none;
+  text-align: center;
 
   li {
     margin: 0;
@@ -151,20 +147,20 @@ header {
       &[class^="icon"],
       &[class*=" icon-"] {
         display: inline-block;
-        height: 30px;
-        width: 34px;
+        height: 28px;
+        width: 28px;
         overflow: hidden;
 
         &:before {
-          font-size: 32px;
+          font-size: 26px;
         }
       }
 
       &.icon-twitter {
-        line-height: 1.7em;
+        line-height: 1.4em;
 
         &:before {
-          font-size: 38px;
+          font-size: 30px;
         }
       }
     }
@@ -200,7 +196,7 @@ aside {
   height: 0px;
   border-left: 20px solid transparent;
   border-right: 20px solid transparent;
-  border-top: 20px solid #ddd;
+  border-top: 20px solid rgba(0,0,0,0.1);
   display: block;
   overflow: hidden;
   position: absolute;

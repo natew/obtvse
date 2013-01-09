@@ -1,9 +1,11 @@
-$body-bg: #f6f2ed;
-$text-color: #151515;
-$selection-color: #fff;
-
-$theme: #69382a;
+$logo: #2b3634;
+$theme: #415f44;
 $theme-light: lighten($theme, 14%);
+
+$body-bg: #eeeae5;
+$text-color: #151515;
+
+$selection-bg: darken($body-bg, 2.5%);
 
 $width: 620px;
 $width-big: 720px;

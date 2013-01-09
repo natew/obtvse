@@ -1,4 +1,3 @@
-/*
 @font-face {
     font-family: 'Chatype Thin';
     src: url('/fonts/chatype/chatypeb2.1thin-webfont.eot');
@@ -9,7 +8,7 @@
     font-style: normal;
 
 }
-
+/*
 @font-face {
     font-family: 'Chatype Bold';
     src: url('/fonts/chatype/chatypeb2.1bold-webfont.eot');
@@ -19,7 +18,7 @@
     font-weight: normal;
     font-style: normal;
 
-}
+}*/
 
 @font-face {
     font-family: 'Chatype Medium';
@@ -30,9 +29,9 @@
     font-weight: normal;
     font-style: normal;
 
-}*/
+}
 
-@font-face {
+/*@font-face {
     font-family: 'Chatype Regular';
     src: url('/fonts/chatype/chatypeb2.1regular-webfont.eot');
     src: url('/fonts/chatype/chatypeb2.1regular-webfont.eot?#iefix') format('embedded-opentype'),
@@ -41,4 +40,4 @@
     font-weight: normal;
     font-style: normal;
 
-}
+}*/

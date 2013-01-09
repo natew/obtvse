@@ -3,7 +3,7 @@
 
 #content {
   clear: both;
-  color: rgba(0,0,0,0.78);
+  color: rgba(0,0,0,0.7);
 
   article {
     padding: 0;
@@ -16,16 +16,16 @@
   }
 
   time {
-    margin: 2em 0 -2em 0;
+    margin: 0;
     padding: 0;
     font-size: 14px;
     color: rgba(0,0,0,0.35);
     display: block;
-    text-align: center;
+    font-weight: bold;
   }
 
   h1 {
-    margin: 1em 0 .5em;
+    margin: 1em 0 .25em;
 
     &.external {
       margin-top: 25px;

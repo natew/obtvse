@@ -23,16 +23,16 @@ html lang="en-US"
         header.clearfix
           .inner
             h1= link_to INFO['name'], root_path
-            ul.clearfix
-              - if INFO['twitter']
-                li= link_to "@#{INFO['twitter']}", "http://twitter.com/#{INFO['twitter']}", class: 'icon-twitter'
-              - if INFO['github']
-                li= link_to 'github', "https://github.com/#{INFO['github']}", class: 'icon-github'
-              - if INFO['email']
-                li.right= link_to 'email', "mailto:#{INFO['email']}", class: 'icon-envelope'
-              li.right= link_to 'rss', rss_path, class: 'open-external icon-rss'
             p
-              | Your witty tagline goes here, with #{link_to 'some', '#'}, really #{link_to 'cool', '#'}, links
+              | Your witty tagline goes here, with #{link_to 'some', '#'} really #{link_to 'cool', '#'} links
+        ul#connect.clearfix
+          - if INFO['twitter']
+            li= link_to "@#{INFO['twitter']}", "http://twitter.com/#{INFO['twitter']}", class: 'icon-twitter'
+          - if INFO['github']
+            li= link_to 'github', "https://github.com/#{INFO['github']}", class: 'icon-github'
+          - if INFO['email']
+            li.right= link_to 'email', "mailto:#{INFO['email']}", class: 'icon-envelope'
+          li.right= link_to 'rss', rss_path, class: 'open-external icon-rss'
       - if notice
         #dialog.notice.inner= notice
       - if alert
