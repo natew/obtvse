@@ -256,6 +256,7 @@ function setDraft(draft) {
 }
 
 function setDraftInput(draft) {
+  state.changed = true;
   el.draft.attr('value',(draft ? 1 : 0));
   el.draft.attr('checked',(draft ? 'checked' : ''));
 }

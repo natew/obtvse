@@ -18,10 +18,8 @@
   time {
     margin: 0;
     padding: 0;
-    font-size: 14px;
-    color: rgba(0,0,0,0.35);
+    color: rgba(0,0,0,0.4);
     display: block;
-    font-weight: bold;
   }
 
   h1 {
@@ -40,7 +38,6 @@
 
     a {
       border: none;
-      color: rgba(0,0,0,0.8);
     }
   }
 
@@ -51,23 +48,10 @@
     }
   }
 
-  p:first-child {
-    font-size: 22px;
-    line-height: 1.5em;
-  }
-
   blockquote {
     margin: 1em 40px 1em 20px;
     padding: 0 20px;
     border-left: 5px solid lightblue;
-  }
-
-  ul {
-    margin: .5em 0;
-  }
-
-  li {
-    margin: .5em 0;
   }
 
   code {
