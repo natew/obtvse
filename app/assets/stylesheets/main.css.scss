@@ -37,7 +37,7 @@ body, textarea, pre, input, li {
 #text-title pre,
 #text-title textarea,
 h1 {
-  font-size: 48px;
+  font-size: 42px;
   letter-spacing: -1px;
 }
 
@@ -56,7 +56,7 @@ h3 {
 }
 
 h1, h2, h3, h4, #text-title {
-  line-height: 1.1em;
+  line-height: 1.15em;
   margin: 1.25em 0 .5em 0;
 }
 
@@ -127,7 +127,7 @@ header {
 }
 
 #connect {
-  margin: 1em 0 0;
+  margin: 1em 0 -1em;
   padding: 0;
   list-style: none;
   text-align: center;
