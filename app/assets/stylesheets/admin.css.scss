@@ -29,6 +29,15 @@ body.edit #admin {
   }
 }
 
+#content-fieldset {
+  position: relative;
+  border: none;
+  margin: 10px 0 0;
+  padding: 0;
+  visibility: hidden;
+  width: 100%;
+}
+
 #save-button {
   background: #fff;
   width: 12px;
@@ -47,11 +56,6 @@ body.edit #admin {
   &.error {background:#bc3c2b;}
 }
 
-#admin #text-title pre,
-#admin #text-title textarea {
-  text-align: left;
-}
-
 #admin {
   background: #fff;
   position: absolute;
@@ -60,11 +64,13 @@ body.edit #admin {
   height: 100%;
   overflow: hidden;
 
-  fieldset.markdown {
-    position: relative;
-    border: none;
-    margin: 0;
-    padding: 0;
+  #text-title {
+    margin: 20px 0 0;
+
+    pre,
+    textarea {
+      text-align: left;
+    }
   }
 
   #posts {
@@ -83,16 +89,13 @@ body.edit #admin {
 
     &.active {
       h2 {
-        color: #fff;
-        background: #999;
-        margin-left: 12px;
       }
     }
 
     h2 {
       font-size: 18px;
       padding: 4px 7px;
-      margin: 0 0 1.2em 6px;
+      margin: 0 0 0 6px;
       color: #999;
       text-transform: uppercase;
       display: inline-block;
@@ -128,7 +131,7 @@ body.edit #admin {
           content: "\f0da";
           font-family: FontAwesome;
           display: block;
-          color: #222;
+          color: #aaa;
           position: absolute;
           top: .1em;
           left: -12px;

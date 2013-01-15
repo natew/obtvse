@@ -8,9 +8,10 @@ var fn = {
   },
 
   getjQueryElements: function(object) {
+    var result = {};
     for (var key in object) {
-      object[key] = $(object[key]);
+      result[key] = $(object[key]);
     }
-    return object;
+    return result;
   }
 };

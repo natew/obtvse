@@ -46,7 +46,7 @@ $(function() {
   $(window)
     .mousemove(function windowMouseMove(e){
       setBarVisibility(e);
-      setBodyMoving();
+      addMovingClassToBodyIfMouseMoving();
     });
 
   // Avoid initial animations
@@ -88,7 +88,7 @@ function makeExpandingArea(container) {
 }
 
 var movingTimeout, moving = false;
-function setBodyMoving() {
+function addMovingClassToBodyIfMouseMoving() {
   if (!moving) {
     moving = true;
     $('body').addClass('moving');

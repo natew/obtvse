@@ -29,6 +29,7 @@ $.subscribe('edit:enter', function(id) {
   setPostState();
   updatePostState();
   setLineHeight();
+  setEditorHeight();
 
   if (window.location.hash == '#preview')
     showPreview();
@@ -51,7 +52,8 @@ $(window)
   .on('beforeunload', function() {
     if (state.editing)
       savePost();
-  });
+  })
+  .resize(setEditorHeight);
 
 function doEditBindings() {
   // ContentFielset.scroll
@@ -356,4 +358,11 @@ function scrollToPosition() {
 function setLineHeight() {
   // Determine line height from css
   lineHeight = $('#line-height').height();
+}
+
+function setEditorHeight() {
+  if (!state.editing) return false;
+  var content_height = $(window).height() - el.title.height();
+  // content_height + margin
+  $('#text-content').css('min-height', content_height);
 }
