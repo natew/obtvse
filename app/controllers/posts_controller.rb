@@ -3,7 +3,7 @@ class PostsController < ApplicationController
   layout 'admin', except: [:index, :show]
 
   def index
-    @posts = Post.published.newest.page(params[:page]).per(6)
+    @posts = Post.published.newest.page(params[:page]).per(10)
 
     respond_to do |format|
       format.html

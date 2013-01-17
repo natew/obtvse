@@ -13,6 +13,7 @@ article id="post-#{post.id}"
       - else
         = link_to post.title, post
   time= post.published_at.to_formatted_s(:day_month_year)
-  .post
-    - if post.content
-      = markdown(post.content).to_html.html_safe
+  - unless @list
+    .post
+      - if post.content
+        = markdown(post.content).to_html.html_safe

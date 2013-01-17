@@ -16,6 +16,7 @@ html lang="en-US"
         (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
         g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
         s.parentNode.insertBefore(g,s)}(document,'script'));
+    = render partial: 'application/typekit'
   body class="#{controller_name} #{action_name} #{logged_in? ? '' : 'not-'}logged-in #{no_users? ? 'no-users' : ''}"
     #body
       a#blog-button href="/admin" data-target="#modal-login" class="#{logged_in? ? '' : 'modal'}" data-no-turbolink="true"

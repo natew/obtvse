@@ -19,7 +19,7 @@ h1, h2, h3, h4, #text-title * {
 #text-title pre,
 #text-title textarea,
 h1 {
-  font-size: 38px;
+  font-size: 28px;
   letter-spacing: -1px;
 }
 
@@ -46,6 +46,10 @@ h1, h2, h3, h4, #text-title {
   Place things inside #body to not affect the admin
 */
 
+$header-width: 240px;
+$header-pad: 40px;
+$content-pad: 60px;
+
 #body {
   header {
     text-align: center;
@@ -53,8 +57,8 @@ h1, h2, h3, h4, #text-title {
     top: 0;
     right: 0;
     bottom: 0;
-    width: 200px;
-    @include linear-gradient(top, #fff 20%, #ccc 50%, #fff 80%);
+    width: $header-width;
+    @include linear-gradient(top, #fff 0%, #ccc 50%, #fff 100%);
 
     .inner {
       width: auto;
@@ -90,7 +94,7 @@ h1, h2, h3, h4, #text-title {
     }
 
     #connect {
-      margin: 15px 0 5px;
+      margin: 15px 0 8px;
       padding: 0;
       list-style: none;
       text-align: center;
@@ -132,12 +136,11 @@ h1, h2, h3, h4, #text-title {
   }
 
   footer {
-    border-top: 1px solid #eee;
     display: block;
     font-size: 16px;
     color: #999;
     padding: 1em 0;
-    margin: 2em 0 0;
+    margin: 2em $header-width - $header-pad 0 0;
     line-height: 3em;
     text-align: center;
 
@@ -152,12 +155,29 @@ h1, h2, h3, h4, #text-title {
   }
 
   #content {
-    margin: 0 auto;
-    padding: 0 2em;
+    margin: $content-pad auto;
+    padding: 0 0 0 $content-pad;
     max-width: 1000px;
 
     .inner {
-      margin-right: 240px;
+      margin-right: $header-width + $content-pad;
+    }
+  }
+}
+
+/* Medium */
+@media only screen and (max-width: 1024px) {
+  #body {
+    header {
+      width: 180px;
+
+      #header-content {
+        padding: 0 10px;
+      }
+    }
+
+    #content .inner {
+      margin-right: 180px + $content-pad;
     }
   }
 }
@@ -165,8 +185,25 @@ h1, h2, h3, h4, #text-title {
 /* iPhone [portrait + landscape] */
 @media only screen and (max-width: 768px),
 only screen and (-webkit-min-device-pixel-ratio: 2) {
-}
+  #body {
+    header {
+      position: relative;
+      top: auto;
+      left: auto;
+      margin: 0 auto -20px;
+      padding: 0 60px;
+      background: none;
+      width: auto;
 
+      .inner, #header-content {
+        position: relative;
+        top: auto;
+        margin: 0;
+      }
+    }
 
-@media only screen and (min-width: 1024px) {
+    #content .inner {
+      margin-right: 60px;
+    }
+  }
 }
