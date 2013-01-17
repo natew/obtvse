@@ -1,5 +1,5 @@
 @import "bourbon";
-@import "themes/default";
+@import "theme";
 
 $admin-bar-bg: #eee;
 $admin-bar-border: darken($admin-bar-bg,6%);
@@ -406,6 +406,16 @@ form .permalink {
   }
 }
 
+#post_title {
+  width: 100%;
+  border: none;
+  background: none;
+}
+
+#post_draft {
+  position: relative;
+  margin: 0 20px 0 0;
+}
 
 [class^="icon-"]:before, [class*=" icon-"]:before {
   display: block;

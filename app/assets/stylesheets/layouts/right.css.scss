@@ -1,0 +1,172 @@
+@import "../theme";
+@import "bourbon";
+
+/*
+  Fonts
+    fonts are overwritten by /fonts css files
+*/
+
+body, textarea, pre, input, li {
+  font: 20px/1.4em 'Helvetica Nueue', Helvetica, Arial, sans-serif;
+  font-weight: 300;
+}
+
+h1, h2, h3, h4, #text-title * {
+  font-family: 'Helvetica Nueue', Helvetica, Arial, sans-serif;
+}
+
+#text-title,
+#text-title pre,
+#text-title textarea,
+h1 {
+  font-size: 38px;
+  letter-spacing: -1px;
+}
+
+h1.external {
+  font-size: 32px;
+}
+
+h2 {
+  font-size: 24px;
+  color: rgba(0,0,0,0.8);
+}
+
+h3 {
+  font-size: 20px;
+  color: rgba(0,0,0,0.6);
+}
+
+h1, h2, h3, h4, #text-title {
+  line-height: 1.2em;
+  margin: 1.25em 0 .25em 0;
+}
+
+/*
+  Place things inside #body to not affect the admin
+*/
+
+#body {
+  header {
+    text-align: center;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 200px;
+    @include linear-gradient(top, #fff 20%, #ccc 50%, #fff 80%);
+
+    .inner {
+      width: auto;
+      position: absolute;
+      top: 0;
+      left: 1px;
+      right: 0;
+      bottom: 0;
+      background: #fff;
+    }
+
+    #header-content {
+      position: absolute;
+      top: 50%;
+      margin-top: -90px;
+      padding: 0 20px;
+    }
+
+    h1 {
+      position: relative;
+      font-size: 18px;
+
+      a {
+        color: $logo;
+      }
+    }
+
+    p {
+      color: rgba(0,0,0,0.4);
+      margin: 0;
+      font-size: 14px;
+      line-height: 1.4em;
+    }
+
+    #connect {
+      margin: 15px 0 5px;
+      padding: 0;
+      list-style: none;
+      text-align: center;
+
+      li {
+        margin: 0;
+        display: inline;
+
+        #connect-email {
+          display: none;
+        }
+
+        a {
+          margin: 0 3px;
+          color: rgba(0,0,0,0.3);
+
+          &[class^="icon"],
+          &[class*=" icon-"] {
+            display: inline-block;
+            height: 20px;
+            width: 28px;
+            overflow: hidden;
+
+            &:before {
+              font-size: 26px;
+            }
+          }
+
+          &.icon-twitter {
+            line-height: 1.2em;
+
+            &:before {
+              font-size: 30px;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  footer {
+    border-top: 1px solid #eee;
+    display: block;
+    font-size: 16px;
+    color: #999;
+    padding: 1em 0;
+    margin: 2em 0 0;
+    line-height: 3em;
+    text-align: center;
+
+    aside {
+      display: block;
+      font-size: .9em;
+    }
+  }
+
+  .inner {
+    width: auto;
+  }
+
+  #content {
+    margin: 0 auto;
+    padding: 0 2em;
+    max-width: 1000px;
+
+    .inner {
+      margin-right: 240px;
+    }
+  }
+}
+
+/* iPhone [portrait + landscape] */
+@media only screen and (max-width: 768px),
+only screen and (-webkit-min-device-pixel-ratio: 2) {
+}
+
+
+@media only screen and (min-width: 1024px) {
+}

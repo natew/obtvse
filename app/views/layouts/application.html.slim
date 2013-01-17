@@ -22,27 +22,29 @@ html lang="en-US"
       - unless @no_header
         header.clearfix
           .inner
-            h1= link_to INFO['name'], root_path
-            ul#connect.clearfix
-              - if INFO['twitter']
-                li= link_to "@#{INFO['twitter']}", "http://twitter.com/#{INFO['twitter']}", class: 'icon-twitter'
-              - if INFO['github']
-                li= link_to 'github', "https://github.com/#{INFO['github']}", class: 'icon-github'
-              - if INFO['email']
-                li.right= link_to 'email', "mailto:#{INFO['email']}", class: 'icon-envelope'
-              li.right= link_to 'rss', rss_path, class: 'open-external icon-rss'
-            p
-              | Your witty tagline goes here, with #{link_to 'some', '#'} really #{link_to 'cool', '#'} links
+            #header-content
+              h1= link_to INFO['name'], root_path
+              ul#connect.clearfix
+                - if INFO['twitter']
+                  li= link_to "@#{INFO['twitter']}", "http://twitter.com/#{INFO['twitter']}", class: 'icon-twitter', id: 'connect-twitter'
+                - if INFO['github']
+                  li= link_to 'github', "https://github.com/#{INFO['github']}", class: 'icon-github', id: 'connect-github'
+                - if INFO['email']
+                  li.right= link_to 'email', "mailto:#{INFO['email']}", class: 'icon-envelope', id: 'connect-email'
+                li.right= link_to 'rss', rss_path, class: 'open-external icon-rss', id: 'connect-rss'
+              p
+                | Your witty tagline goes here, with #{link_to 'some', '#'} really #{link_to 'cool', '#'} links
       - if notice
         #dialog.notice.inner= notice
       - if alert
         #dialog.alert.inner= alert
-      section#content.inner
-        - if notice
-          span.notice= notice
-        = yield
+      section#content
+        .inner
+          - if notice
+            span.notice= notice
+          = yield
       .avgrund-cover
-      section#footer
+      footer
         .inner
           - if action_name == 'index'
             = link_to 'Top', '#', :id => 'back-to-top'

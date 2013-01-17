@@ -1,0 +1,162 @@
+@import "../theme";
+@import "bourbon";
+
+/*
+  Fonts
+    fonts are overwritten by /fonts css files
+*/
+
+body, textarea, pre, input, li {
+  font: 20px/1.4em 'Source Sans Pro', 'Helvetica Nueue', Helvetica, Arial, sans-serif;
+}
+
+h1, h2, h3, h4, #text-title * {
+  font-family: 'Chatype Thin', 'Helvetica Nueue', Helvetica, Arial, sans-serif !important;
+}
+
+#text-title,
+#text-title pre,
+#text-title textarea,
+h1 {
+  font-size: 38px;
+  letter-spacing: -1px;
+}
+
+h1.external {
+  font-size: 32px;
+}
+
+h2 {
+  font-size: 24px;
+  color: rgba(0,0,0,0.8);
+}
+
+h3 {
+  font-size: 20px;
+  color: rgba(0,0,0,0.6);
+}
+
+h1, h2, h3, h4, #text-title {
+  line-height: 1.2em;
+  margin: 1.25em 0 .25em 0;
+}
+
+/*
+  Place things inside #body to not affect the admin
+*/
+
+#body {
+  header {
+    text-align: center;
+    position: relative;
+    padding: 10px 0 0;
+
+    h1 {
+      position: relative;
+      z-index: 10;
+      margin: 0 0 10px 0;
+      font-size: 32px;
+      pointer-events: none;
+      font-family: 'Chatype Medium' !important;
+
+      a {
+        display: inline-block;
+        pointer-events: auto;
+        color: $logo;
+      }
+    }
+
+    p {
+      color: rgba(0,0,0,0.4);
+      margin: .3em 0;
+      font-size: 20px;
+
+      a {
+        border-radius: 6px;
+      }
+    }
+  }
+
+  footer {
+    border-top: 1px solid #eee;
+    display: block;
+    font-size: 16px;
+    color: #999;
+    padding: 1em 0;
+    margin: 2em 0 0;
+    line-height: 3em;
+    text-align: center;
+
+    aside {
+      display: block;
+      font-size: .9em;
+    }
+  }
+}
+
+#connect {
+  position: absolute;
+  top: 4px;
+  left: 0;
+  right: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  text-align: center;
+
+  li {
+    margin: 0;
+    display: inline;
+    float: left;
+
+    &.right {
+      float: right;
+    }
+
+    a {
+      margin: 0 8px;
+      color: rgba(0,0,0,0.3);
+
+      &[class^="icon"],
+      &[class*=" icon-"] {
+        display: inline-block;
+        height: 20px;
+        width: 28px;
+        overflow: hidden;
+
+        &:before {
+          font-size: 26px;
+        }
+      }
+
+      &.icon-twitter {
+        line-height: 1.2em;
+
+        &:before {
+          font-size: 30px;
+        }
+      }
+    }
+  }
+}
+
+/* iPhone [portrait + landscape] */
+@media only screen and (max-width: 768px),
+only screen and (-webkit-min-device-pixel-ratio: 2) {
+
+  #content, .inner, header .inner {
+    width: auto;
+    margin: 0 8%;
+  }
+
+  .contain {
+    width: auto;
+  }
+}
+
+
+@media only screen and (min-width: 1024px) {
+  .inner {
+    width: $width-big;
+  }
+}
