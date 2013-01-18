@@ -3,10 +3,14 @@ $header-bg: #fff;
 $text-color: #151515;
 
 $logo: #2b3634;
-$theme: #415f44;
+
+$theme: #d23e2f;
 $theme-light: lighten($theme, 14%);
 
-$selection-bg: #eae3da;
+$selection-bg: $theme;
+$selection-color: #fff;
 
 $width: 620px;
 $width-big: 720px;
+
+$line-height: 1.4em;

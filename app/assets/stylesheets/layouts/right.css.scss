@@ -7,18 +7,21 @@
 */
 
 body, textarea, pre, input, li {
-  font: 20px/1.4em 'Helvetica Nueue', Helvetica, Arial, sans-serif;
+  font: 20px 'Helvetica Nueue', Helvetica, Arial, sans-serif;
+  line-height: $line-height;
   font-weight: 300;
 }
 
 h1, h2, h3, h4, #text-title * {
+  line-height: 1.15em;
+  margin: 1.25em 0 .25em 0;
 }
 
 #text-title,
 #text-title pre,
 #text-title textarea,
 h1 {
-  font-size: 28px;
+  font-size: 34px;
   letter-spacing: -1px;
 }
 
@@ -34,11 +37,6 @@ h3 {
   color: rgba(0,0,0,0.8);
 }
 
-h1, h2, h3, h4, #text-title {
-  line-height: 1.2em;
-  margin: 1.25em 0 .25em 0;
-}
-
 /*
   Place things inside #body to not affect the admin
 */
@@ -47,96 +45,112 @@ $header-width: 240px;
 $header-pad: 40px;
 $content-pad: 60px;
 
-#body {
-  header {
-    text-align: right;
-    position: fixed;
+header {
+  text-align: right;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: $header-width;
+  @include linear-gradient(top, #fff 5%, #ddd 50%, #fff 95%);
+
+  .inner {
+    width: auto;
+    position: absolute;
     top: 0;
+    left: 1px;
     right: 0;
     bottom: 0;
-    width: $header-width;
-    @include linear-gradient(top, #fff 0%, #ccc 50%, #fff 100%);
+    background: #fff;
+  }
 
-    .inner {
-      width: auto;
-      position: absolute;
-      top: 0;
-      left: 1px;
-      right: 0;
-      bottom: 0;
-      background: #fff;
-    }
+  #header-content {
+    padding: $content-pad 20px;
+    text-align: center;
+    position: absolute;
+    top: 0;
+  }
 
-    #header-content {
-      padding: $content-pad 20px;
-    }
+  h1 {
+    margin: 0 0 16px 0;
+    position: relative;
+    font-size: 24px;
 
-    h1 {
-      margin-top: 10px;
-      position: relative;
-      font-size: 18px;
+    a {
+      color: #333;
+      vertical-align: middle;
 
-      a {
-        color: $logo;
-        vertical-align: middle;
-
-        &:before {
-          content: "";
-          position: absolute;
-          top: -40px;
-          font-family: FontAwesome;
-        }
+      &:before {
+        content: "";
+        position: absolute;
+        top: -40px;
+        font-family: FontAwesome;
       }
     }
+  }
 
-    p {
-      color: rgba(0,0,0,0.4);
+  p {
+    color: rgba(0,0,0,0.4);
+    margin: 12px 0;
+    font-size: 16px;
+    line-height: 1.4em;
+  }
+
+  .twitter {
+    margin: 20px 0 0;
+  }
+
+  #connect {
+    margin: 12px 0;
+    padding: 0;
+    list-style: none;
+
+    li {
       margin: 0;
-      font-size: 14px;
-      line-height: 1.4em;
-    }
+      display: inline;
 
-    #connect {
-      margin: 15px 0 8px;
-      padding: 0;
-      list-style: none;
+      #connect-email {
+        display: none;
+      }
 
-      li {
-        margin: 0;
-        display: inline;
+      a {
+        margin: 0 3px;
+        color: rgba(0,0,0,0.3);
 
-        #connect-email {
-          display: none;
+        &[class^="icon"],
+        &[class*=" icon-"] {
+          display: inline-block;
+          height: 24px;
+          width: 24px;
+          overflow: hidden;
+          line-height: 1.35em;
+
+          &:before {
+            font-size: 24px;
+          }
         }
 
-        a {
-          margin: 0 3px;
-          color: rgba(0,0,0,0.3);
+        &.icon-github {
+          line-height: 1.2em;
 
-          &[class^="icon"],
-          &[class*=" icon-"] {
-            display: inline-block;
-            height: 20px;
-            width: 28px;
-            overflow: hidden;
-
-            &:before {
-              font-size: 26px;
-            }
+          &:before {
+            font-size: 26px;
           }
+        }
 
-          &.icon-twitter {
-            line-height: 1.2em;
+        &.icon-twitter {
+          line-height: 1.3em;
 
-            &:before {
-              font-size: 30px;
-            }
+          &:before {
+            font-size: 22px;
           }
         }
       }
     }
   }
+}
 
+#body {
   footer {
     display: block;
     font-size: 16px;
@@ -182,21 +196,59 @@ $content-pad: 60px;
       background: #ccc;
     }
   }
+}
 
+#home-link {
+  display: inline-block;
+  width: 32px;
+  height: 36px;
+  overflow: hidden;
+  white-space: nowrap;
+  color: #ccc;
+  position: absolute;
+  top: 50%;
+  margin-top: -18px;
+  left: -20px;
+  line-height: 2em;
+  display: none;
+  @include box-shadow(0 0 40px #fff);
+
+  &:before {
+    background: #fff;
+    padding: 8px;
+    margin: -8px;
+    font-size: 28px;
+  }
+}
+
+.posts.show #home-link {
+  display: block;
+}
+
+#content {
+  article {
+    h1 a {
+      color: #333;
+    }
+
+    time {
+      margin: -8px 0 0;
+      font-size: 16px;
+    }
+  }
 }
 
 /* Medium */
 @media only screen and (max-width: 1024px) {
-  #body {
-    header {
-      width: 180px;
+  header {
+    width: 180px;
 
-      #header-content {
-        padding-left: 10px;
-        padding-right: 10px;
-      }
+    p {
+      font-size: 14px;
     }
+  }
 
+  #body {
     #content .inner {
       margin-right: 180px + $content-pad;
     }
@@ -206,25 +258,37 @@ $content-pad: 60px;
 /* iPhone [portrait + landscape] */
 @media only screen and (max-width: 768px),
 only screen and (-webkit-min-device-pixel-ratio: 2) {
-  #body {
-    header {
+  header {
+    position: relative;
+    top: auto;
+    left: auto;
+    margin: 0 auto -20px;
+    padding: 0 60px;
+    background: none;
+    width: auto;
+
+    #header-content {
+      padding: 40px 0 0;
+    }
+
+    .inner, #header-content {
       position: relative;
       top: auto;
-      left: auto;
-      margin: 0 auto -20px;
-      padding: 0 60px;
-      background: none;
-      width: auto;
+      margin: 0;
+    }
+  }
 
-      .inner, #header-content {
-        position: relative;
-        top: auto;
-        margin: 0;
+  #body {
+    #content {
+      padding: 0;
+
+      .inner {
+        margin: 0 5%;
       }
     }
+  }
 
-    #content .inner {
-      margin-right: 60px;
-    }
+  #body #home-link {
+    display: none;
   }
 }

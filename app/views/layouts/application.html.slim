@@ -23,6 +23,7 @@ html lang="en-US"
       - unless @no_header
         header.clearfix
           .inner
+            = link_to 'Home', root_path, class: 'icon-home', id: 'home-link'
             #header-content
               h1= link_to INFO['name'], root_path
               ul#connect.clearfix
@@ -35,25 +36,19 @@ html lang="en-US"
                 li.right= link_to 'rss', rss_path, class: 'open-external icon-rss', id: 'connect-rss'
               p
                 | Your witty tagline goes here, with #{link_to 'some', '#'} really #{link_to 'cool', '#'} links
+              .twitter
+                a href="https://twitter.com/#{INFO['twitter']}" class="twitter-follow-button" data-show-count="false" data-dnt="true" Follow @#{INFO['twitter']}
+                javascript:
+                  $('#twitter-wjs').remove();
+                  !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
       - if notice
         #dialog.notice.inner= notice
       - if alert
         #dialog.alert.inner= alert
-      section#content
+      #content
         .inner
-          - if notice
-            span.notice= notice
           = yield
       .avgrund-cover
-      footer
-        .inner
-          - if action_name == 'index'
-            = link_to 'Top', '#', :id => 'back-to-top'
-          - else
-            = link_to 'Home', root_path
-          aside
-            | powered by
-            a href="http://github.com/natew/obtvse.git"  obtvse
     - unless logged_in?
       aside#modal-login.avgrund-popup
         - if no_users?

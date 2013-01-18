@@ -3,6 +3,7 @@
 
 ::selection, ::-moz-selection {
   background: $selection-bg;
+  color: $selection-color;
 }
 
 * { @include box-sizing(border-box); }
