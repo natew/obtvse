@@ -68,7 +68,8 @@ header {
     padding: $content-pad 20px;
     text-align: center;
     position: absolute;
-    top: 0;
+    top: 50%;
+    margin-top: -170px;
   }
 
   h1 {
@@ -206,9 +207,9 @@ header {
   white-space: nowrap;
   color: #ccc;
   position: absolute;
-  top: 50%;
-  margin-top: -18px;
-  left: -20px;
+  top: $content-pad;
+  left: 50%;
+  margin-left: -18px;
   line-height: 2em;
   display: none;
   @include box-shadow(0 0 40px #fff);
@@ -218,6 +219,16 @@ header {
     padding: 8px;
     margin: -8px;
     font-size: 28px;
+  }
+}
+
+.index #body article {
+  h1 {
+    font-size: 28px;
+  }
+
+  time {
+    font-size: 14px;
   }
 }
 
@@ -235,6 +246,14 @@ header {
       margin: -8px 0 0;
       font-size: 16px;
     }
+  }
+}
+
+nav.pagination {
+  text-align: left;
+
+  a {
+    margin: 0 20px 0 0;
   }
 }
 
