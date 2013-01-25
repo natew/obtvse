@@ -30,8 +30,12 @@ body {
 
 /*    BASE ELEMENTS    */
 
-p, ol, ul, li {
+p, ol, ul {
   margin: .5em 0 1em;
+}
+
+li {
+  margin: .5em 0;
 }
 
 a,

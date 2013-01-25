@@ -6,14 +6,18 @@
     fonts are overwritten by /fonts css files
 */
 
-body, textarea, pre, input, li {
-  font: 20px 'Helvetica Nueue', Helvetica, Arial, sans-serif;
-  line-height: $line-height;
+$line-height: 1.38em;
+
+body, textarea, pre, input {
+  font-family: 'ff-meta-serif-web-pro', Helvetica, Arial, sans-serif;
+  font-size: 20px;
   font-weight: 300;
+  line-height: $line-height;
 }
 
 h1, h2, h3, h4, #text-title * {
-  line-height: 1.15em;
+  font-family: "ff-meta-web-pro", Helvetica, Arial, sans-serif;
+  line-height: 1.1em;
   margin: 1.25em 0 .25em 0;
 }
 
@@ -43,7 +47,7 @@ h3 {
 
 $header-width: 240px;
 $header-pad: 40px;
-$content-pad: 60px;
+$content-pad: 70px;
 
 header {
   text-align: right;
@@ -105,6 +109,7 @@ header {
     margin: 12px 0;
     padding: 0;
     list-style: none;
+    font-size: 20px;
 
     li {
       margin: 0;
@@ -174,7 +179,7 @@ header {
   #content {
     margin: $content-pad auto;
     padding: 0 0 0 $content-pad;
-    max-width: 1000px;
+    width: 1080px;
 
     .inner {
       margin-right: $header-width + $content-pad;
@@ -243,8 +248,13 @@ header {
     }
 
     time {
-      margin: -8px 0 0;
+      margin: -6px 0 0;
       font-size: 16px;
+    }
+
+    p:first-child {
+      font-size: 24px;
+      line-height: $line-height;
     }
   }
 }
@@ -276,6 +286,10 @@ nav.pagination {
 
 /* Medium */
 @media only screen and (max-width: 1024px) {
+  body, textarea, pre, input {
+    font-size: 16px;
+  }
+
   header {
     width: 180px;
 
@@ -285,8 +299,17 @@ nav.pagination {
   }
 
   #body {
-    #content .inner {
-      margin-right: 180px + $content-pad;
+    #content {
+      width: auto;
+      max-width: 880px;
+
+      article p:first-child {
+        font-size: 20px;
+      }
+
+      .inner {
+        margin-right: 180px + $content-pad;
+      }
     }
   }
 }
@@ -302,6 +325,10 @@ only screen and (-webkit-min-device-pixel-ratio: 2) {
     padding: 0 60px;
     background: none;
     width: auto;
+
+    p {
+      font-size: 16px;
+    }
 
     #header-content {
       padding: 40px 0 0;
