@@ -10,7 +10,7 @@ class Post < ActiveRecord::Base
   end
 
   def external?
-  	!url.blank?
+    url.present?
   end
 
   def has_more_tag
