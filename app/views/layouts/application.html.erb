@@ -13,7 +13,9 @@
   <% unless @no_header %>
   <header>
     <h1><%= link_to CONFIG['title'], root_url %></h1>
-    <span><%= CONFIG['tagline'].html_safe %></span>
+    <% if CONFIG['tagline'] %>
+      <span><%= CONFIG['tagline'].html_safe %></span>
+    <% end %> 
     <ul>
       <% if CONFIG['twitter'] %>
         <li><%= link_to '@' + CONFIG['twitter'], 'http://twitter.com/' + CONFIG['twitter'] %></li>
