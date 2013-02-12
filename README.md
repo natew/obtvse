@@ -13,7 +13,11 @@ Password: password
 Installation
 ============
 
+<<<<<<< HEAD
+Obtvse uses some ruby 1.9 syntax, so please make sure your `ruby -v` shows at least 1.9.
+=======
 **Obtvse uses some ruby 1.9 syntax, so please make sure your `ruby -v` shows at least 1.9, and please use 1.9 on your host as well!**
+>>>>>>> d8fd1974eac3f0cc9d0e7b5937f5f098201b129c
 
 If you are new to Rails development, check out guides for getting your development environment set up for [Mac](http://astonj.com/tech/setting-up-a-ruby-dev-enviroment-on-lion/) and [Windows](http://jelaniharris.com/2011/installing-ruby-on-rails-3-in-windows/).
 

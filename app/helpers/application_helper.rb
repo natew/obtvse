@@ -4,27 +4,28 @@ module ApplicationHelper
   end
 
   def markdown(text)
-    text = youtube_embed(text)
-    text = gist_embed(text)
-    RedcarpetCompat.new(text, :fenced_code, :gh_blockcode)
+    output = text.lines.map do |line|
+      process_line line
+    end.join
+    RedcarpetCompat.new(output, :fenced_code, :gh_blockcode)
   end
 
-  # TODO refactor these filters so they don't each iterate over all the lines
-  def gist_embed(str)
-    output = str.lines.map do |line|
-      match = nil
-      match = line.match(/\{\{gist\s+(.*)\}\}/)
-      match ? "<div id=\"#{match[1]}\" class=\"gist\">Loading gist...</div>" : line
-    end
-    output.join
+  def process_line(line)
+    match = match_gist line
+    return "<div id=\"#{match[1]}\" class=\"gist-files\">Loading gist...</div>" if match
+
+    match = match_youtube line
+    return render(:partial => 'youtube', :locals => { :video => match[1] }) if match
+
+    line
   end
 
-  def youtube_embed(str)
-  	output = str.lines.map do |line|
-  		match = nil
-  		match = line.match(/^http.*(?:youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=)([^#\&\?]*).*/)
-  		match ? render(:partial => 'youtube', :locals => { :video => match[1] }) : line
-  	end
-  	output.join
+  def match_gist(line)
+    line.match(/\{\{gist\s+(.*)\}\}/)
   end
+
+  def match_youtube(line)
+    line.match(/^http.*(?:youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=)([^#\&\?]*).*/)
+  end
+
 end
