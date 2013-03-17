@@ -190,7 +190,7 @@ function savePost(callback) {
 
       // If we just finished creating a new post
       if (!state.post) {
-        setFormAction('/edit/' + data.id);
+        setFormAction('/' + data.id);
         setFormMethod('put');
       }
 
