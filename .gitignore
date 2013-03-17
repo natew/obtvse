@@ -8,6 +8,7 @@
 /.bundle
 /vendor/ruby
 /vendor/cache
+/vendor/bundle
 /bin/
 
 # Ignore the default SQLite database.
