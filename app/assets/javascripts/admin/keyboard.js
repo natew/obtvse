@@ -83,10 +83,9 @@ $(window)
       switch (e.which) {
         // Enter
         case 13:
-          if (!state.beganEditing) {
+          if (el.title.is(':focus'))
             e.preventDefault();
-            el.content.focus();
-          }
+          break;
         // Cmd
         case 91:
           key.cmd = true;

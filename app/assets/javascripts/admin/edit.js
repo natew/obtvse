@@ -88,7 +88,7 @@ function doEditBindings() {
     .click(function publishClick(e) {
       e.preventDefault();
       el.publish.html('...');
-      setDraftInput(!state.post.draft);
+      setDraft(!state.post.draft);
       savePost();
     })
 
@@ -157,7 +157,6 @@ function updatePostState() {
   el.slug.val(state.post.slug);
   el.url.val(state.post.url);
   el.published.val(state.post.published_at);
-  setDraft(state.post.draft);
   el.blog.attr('href', '/' + state.post.slug);
 }
 
@@ -169,7 +168,7 @@ function savePost(callback) {
   state.saving = true;
   state.changed = false;
   el.save.addClass('saving');
-  fn.log('Saving',el.draft);
+  fn.log('Saving', state.changed);
 
   // POST
   $.ajax({
