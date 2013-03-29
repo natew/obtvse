@@ -15,7 +15,7 @@ gem 'turbolinks'
 gem 'bourbon', '~> 2.0.0.rc1'
 
 gem 'redcarpet', require: false
-gem 'kaminari', '~> 0.13'
+gem 'kaminari'
 
 # Ruby Utilities
 gem 'stringex', '~> 1', github: 'rsl/stringex'
