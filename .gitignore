@@ -20,5 +20,8 @@
 
 .DS_Store
 
+# Ignore deploy
+/config/deploy.rb
+
 # Ignore secret_token
 /config/intializers/secret_token.rb
