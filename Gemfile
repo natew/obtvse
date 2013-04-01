@@ -8,6 +8,7 @@ gem 'thin', '~> 1'
 # Rendering engines and vendor libraries
 gem 'jquery-rails', '~> 2'
 gem 'redcarpet'
+gem 'rubypython'
 gem 'pygments.rb'
 
 # Misc libraries
