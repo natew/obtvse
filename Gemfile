@@ -8,7 +8,7 @@ gem 'thin', '~> 1'
 # Rendering engines and vendor libraries
 gem 'jquery-rails', '~> 2'
 gem 'redcarpet'
-gem 'albino'
+gem 'pygments.rb'
 
 # Misc libraries
 # gem 'bcrypt-ruby', '~> 3', require: 'bcrypt'

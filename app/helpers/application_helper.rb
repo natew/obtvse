@@ -3,18 +3,17 @@ module ApplicationHelper
     true if session[:admin] == true
   end
 
-  class HTMLwithAlbino < Redcarpet::Render::HTML
+  class HTMLwithPygments < Redcarpet::Render::HTML
     def block_code code, language
-      Albino.colorize code, language
+      Pygments.highlight( code, lexer: language, options: { encoding: 'utf-8' } )
     end
   end
 
   def markdown(text)
     text = youtube_embed(text)
     text = gist_embed(text)
-    my_render = Redcarpet::Markdown.new(HTMLwithAlbino, :fenced_code_blocks => true)
+    my_render = Redcarpet::Markdown.new(HTMLwithPygments, :fenced_code_blocks => true)
     my_render.render text
-    # RedcarpetCompat.new(text, :fenced_code, :gh_blockcode)
   end
 
   # TODO refactor these filters so they don't each iterate over all the lines
