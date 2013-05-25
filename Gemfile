@@ -5,6 +5,8 @@ gem 'rails', '~> 3'
 # Extention libraries
 gem 'thin', '~> 1'
 
+gem 'therubyracer'
+
 # Rendering engines and vendor libraries
 gem 'jquery-rails', '~> 2'
 gem 'redcarpet'
