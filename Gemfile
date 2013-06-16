@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 gem 'rails', '~> 3'
 
 # Extention libraries
-gem 'thin', '~> 1'
+gem 'thin', '1.2.11'
 
 # Rendering engines and vendor libraries
 gem 'jquery-rails', '~> 2'
@@ -11,7 +11,7 @@ gem 'redcarpet'
 
 # Misc libraries
 # gem 'bcrypt-ruby', '~> 3', require: 'bcrypt'
-gem 'stringex', '~> 1', git: 'git://github.com/rsl/stringex.git'
+gem 'stringex', '~> 2', git: 'git://github.com/rsl/stringex.git'
 gem 'kaminari', '~> 0.13'
 
 group :production do
@@ -21,6 +21,7 @@ group :production do
 end
 
 group :development do
+ gem 'meta_request'
   # gem 'heroku', '~> 2'
   # gem 'capistrano', '~> 2.9'
   # gem 'guard', '~> 1'
