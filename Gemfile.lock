@@ -127,7 +127,7 @@ GEM
     rake (10.0.3)
     rdoc (3.12.2)
       json (~> 1.4)
-    redcarpet (2.1.1)
+    redcarpet (3.5.1)
     rubyzip (0.9.6.1)
     sass (3.1.15)
     sass-rails (3.2.5)
